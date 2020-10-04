@@ -2,30 +2,167 @@
 <html lang="en">
 
 <head>
-    <title>World Conquest</title>
+    <title>Medieval AI World</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="CustomStyle.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+
 </head>
 
 <body>
 
-<div class="row">
-<div class="col">1</div>
-<div class="col">2</div>
+    <div class="container-fluid m-0">
+        <div class="text-light bg-dark rounded-bottom p-2">
+            <div class="row">
+                <div id="days" class="col">1</div>
+                <div id="months" class="col"></div>
+                <div id="years" class="col">500</div>
+            </div>
+        </div>
+    </div>
 
-<div class="col">4</div>
-<div class="col">5</div>
 
-</div>
 
+
+
+    <div id="key_infomation" class="container-fluid badge-info shadow m-2 p-4 d-inline-flex">
+        <p>"W" key adds while the "S" key removes Knights form team 1.</p>
+        <p> "Up" key adds while the "Down" key removes Knights form team 2.</p>
+        <button class="btn btn-outline-light text-center ml-4" onclick="hideIt()">Got it</button>
+    </div>
+
+
+    <!--all-teams controls all of the html of battle scene-->
+    <div class="container-fluid all-teams">
+        <!--First Table-->
+        <div class="row  flex-nowrap">
+            <table class="table table-borderedless table-md table-striped  col-5 ">
+
+                <thead id="table-header-1">
+                    <tr class="">
+                        <th scope="col" class="text-center">ID</th>
+                        <th scope="col" class="text-center">Name</th>
+
+
+
+                        <th scope="col" class="text-center">Health</th>
+                        <th scope="col" class="text-center">Armour</th>
+                        <th scope="col" class="text-center">Attack</th>
+
+                    </tr>
+                </thead>
+
+                <tbody id="create" class="shadow">
+                </tbody>
+            </table>
+
+            <!--Result table-->
+            <div class=" ">
+
+                <div class=" justify-content-center ">
+                    <ul class="pagination  pagination-lg">
+                        <li class="page-item ">
+                            <a id="team1Score" class="page-link ">1</a>
+                        </li>
+                        <li class="page-item w-100 ">
+                            <a class="page-link h-100 " style="cursor: pointer;">
+                                <div class="text-center">Fight</div>
+                            </a>
+                        </li>
+
+                        <li class="page-item ">
+                            <a id="team2Score" class="page-link ">3</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--Second Table-->
+            <table class="table  table-borderedless table-striped  col-5 ">
+
+                <thead id="table-header-2">
+                    <tr>
+                        <th scope="col " class="text-center">Attack</th>
+                        <th scope="col " class="text-center">Armour</th>
+                        <th scope="col " class="text-center">Health</th>
+
+                        <th scope="col " class="text-center">Name</th>
+                        <th scope="col " class="text-center">ID</th>
+                    </tr>
+                </thead>
+                <tbody id="create2" class="shadow ">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <canvas id="myChart"></canvas>
 </body>
 
-<script>
-    var btn = document.createElement("button");
-    btn.innerHTML = "Buy Troop"
+<!--Display Chart-->
+
+
+<script type="module" charset="utf-8" src="World AI/Logic/Battle.js">
 </script>
+<script type="module" charset="utf-8" src="World AI/Logic/Character.js">
+</script>
+<script type="module" charset="utf-8" src="World AI/Logic/Adventure.js">
+</script>
+<script type="module" charset="utf-8" src="World AI/Logic/DataBase.js">
+</script>
+<script type="module" charset="utf-8" src="World AI/Logic/Util.js">
+</script>
+<script type="module" charset="utf-8" src="World AI/Logic/Building.js">
+</script>
+<script type="module" charset="utf-8" src="World AI/Logic/Population.js">
+</script>
+<script type="module" charset="utf-8" src="World AI/Logic/Time.js">
+</script>
+
+
 </html>
+
+
+<!-- 
+        <div class="row ">
+
+            <div class="container one col-6 ">
+
+
+                <div class=" ">
+                    <input type="range " min="0 " max="100 " value="10 " class="slider " id="myRange1 ">
+                    <p><span id="display1 ">10</span></p>
+                </div>
+
+            </div>
+
+
+            <div class="container two col-6 ">
+                <div class=" ">
+                    <input type="range " min="0 " max="100 " value="10 " class="slider " id="myRange2 ">
+                    <p><span id="display2 ">10</span></p>
+                </div>
+            </div>
+
+
+
+
+            <div class="container-fluid result ">
+
+                <p class="p-2 text-center ">Result</p>
+
+                <div class="list-group ">
+
+ -->
