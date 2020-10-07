@@ -54,7 +54,7 @@ for (var i = 0; i < 18; i++) {
 //Makes the attack strength more dynamic by age affecting your attk 
 function simulateAttack(age, atk, risk) {
 
-    console.log("initial atk: " + atk);
+    //console.log("initial atk: " + atk);
 
     if (Number(age) > 39) {
         atk = (atk / 2);
@@ -63,8 +63,8 @@ function simulateAttack(age, atk, risk) {
 
 
 
-        console.log("Lost " + atk + " strength");
-        console.log("'Old Man In Affect:' total " + atk + " Strength");
+        //console.log("Lost " + atk + " strength");
+        //console.log("'Old Man In Affect:' total " + atk + " Strength");
 
         if (atk < 0) {
             risk = Math.abs(atk);
@@ -77,12 +77,12 @@ function simulateAttack(age, atk, risk) {
     } else if (Number(age) > 12 && Number(age) < 39) { // maturing to adulthood. Developing muscules.
         var stronger = (age * 2);
 
-        console.log(age);
-        console.log(atk);
+        //console.log(age);
+        //console.log(atk);
 
         var strength = atk + stronger;
-        console.log(strength);
-        console.log("'Young Man In Affect:'" + stronger + " Strength");
+        //console.log(strength);
+        //console.log("'Young Man In Affect:'" + stronger + " Strength");
 
         if (atk < 0) {
             risk = Math.abs(atk);
@@ -94,9 +94,9 @@ function simulateAttack(age, atk, risk) {
     } else {
         var a = atk - 10;
         atk = a;
-        console.log("'Is only a Child In Affect:' " + atk);
+        //console.log("'Is only a Child In Affect:' " + atk);
     }
-    console.log("Final atk:" + atk);
+    //console.log("Final atk:" + atk);
     return atk;
 }
 
@@ -120,13 +120,13 @@ function simulateHp(age, hp, risk) { //Calculates Risk of catching diseases base
         if (sickness.hasOwnProperty(i)) {
 
             const element = sickness[i];
-            console.log(element);
+            //console.log(element);
 
 
         }
     }
     var keyNames = Object.keys(sickness);
-    console.log(keyNames);
+    //console.log(keyNames);
 
 
 }
@@ -155,8 +155,35 @@ class Character {
     }
 }
 
+var p1 = new Character();
+var p2 = new Character();
+var people = {
+    count: 0,
+};
+
+compare(p1, p2);
+
+function maker(n) {
+    while (n > 0) {
+        people.push(new Character(n));
+        n--;
+    }
+    return people;
+}
+
+function compare(obj, obj2) {
+
+    for (const [key, value] of Object.entries(obj)) {
+        console.log(`1- ${key} ${value}`);
+
+    }
+    for (const [key, value] of Object.entries(obj2)) {
+        console.log(`2- ${key}: ${value}`);
+    }
 
 
+
+}
 
 
 

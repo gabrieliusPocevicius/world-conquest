@@ -1,5 +1,13 @@
 import { Character } from "./Character.js";
 
+
+var group = []; //array for keeping all the knights from one team
+var group2 = [];
+var damage = 0; //damage is the knights atk done to another's hp
+
+
+
+
 function hideIt() {
     return $('#key_infomation').remove();
 };
@@ -102,11 +110,14 @@ function battleScreen() {
     // adds option of troops gathering together to fight
     team_1();
     team_2();
+
 }
 
 battleScreen();
 
-
+$("#fight-btn").on("click", () => {
+    fight();
+})
 
 
 
@@ -179,21 +190,36 @@ var teamTwo = {
 
 }
 
+var personDamaged = {
+
+    id: 0,
+    name: "",
+    hp: 0
 
 
-var group = []; //array for keeping all the knights from one team
-var group2 = [];
+};
+
 //Display Soldier on team 1
 function run() {
 
     var p = new Character();
     group.push(p);
+
+
+
+
+
+
+
     for (let i = 0; i < total; i++) {
 
         teamOne.health.push(p.hp);
         teamOne.attack.push(p.atk);
         teamOne.armour.push(p.armour);
 
+
+        personDamaged.hp = p.hp;
+        console.log(personDamaged.hp);
         //Create a person instant and loop 
         //guy 1 is for all team
         var person =
@@ -202,7 +228,7 @@ function run() {
         <td id='name'>" + p.name + " " + p.age + "</td>\
         <td>\
         <div class='progress'>\
-            <div id='bar-health' style='width:" + p.hp + "%' class='progress-bar bar-health progress-bar-striped progress-bar-animated' role='progressbar'>" + p.hp + "</div>\
+            <div id='bar-health' style='width:" + (p.hp - damage) + "%' class='progress-bar bar-health progress-bar-striped progress-bar-animated' role='progressbar'>" + (p.hp - damage) + "</div>\
         </div>\
     </td>\
         <td>\
@@ -220,21 +246,27 @@ function run() {
         $("#create").append(person);
 
         $("#team1Score").text(teamOne.totalAttack);
-        console.log(group); //how many knights fighting in this team.
-        fight();
+        //console.log(group); //how many knights fighting in this team.
+
     }
+    return personDamaged.hp;
 }
+
+
 
 //Display Soldier on team 2
 function run2() {
     var p = new Character();
+
     group2.push(p);
+
+
     for (let i = 0; i < total; i++) {
+
         //Create a person instant and loop 
         teamTwo.health.push(p.hp);
         teamTwo.attack.push(p.atk);
         teamTwo.armour.push(p.armour);
-
 
         var person =
             "<tr id='guy2'>\
@@ -260,8 +292,8 @@ function run2() {
 
 
         $("#team2Score").text(teamTwo.totalAttack);
-        console.log(group2);
-        fight();
+
+
     }
 }
 //run 2 Team two
@@ -269,20 +301,13 @@ function run2() {
 
 
 
-//wnobattle();
+//nobattle();
 
 
 
 
 
-function maker(n) {
 
-    while (n > 0) {
-        people.push(new Character(n));
-        n--;
-    }
-    return people;
-}
 
 //two knights need to wait for opponent before he arrives
 function waitingFight(opponent, opponent2) {
@@ -292,40 +317,42 @@ function waitingFight(opponent, opponent2) {
     });
 }
 
-function hit(attk) {
-    var leftHp = 0;
-    var target = 0;
-    if (attk == 1) { //first strike
 
-        setTimeout(() => {
-
-            target == group ? leftHp = group2[0].hp - group[0].atk : leftHp = group[0].hp - group2[0].atk;
-            console.log(leftHp);
-            console.warn(group[0].name + " hit " + group2[0].name + " with -" + group[0].atk + ". " + group2[0].name + "'s HP " + leftHp);
-
-        }, 500);
-
-
-    }
-}
 
 
 function fight() {
-    var attk = 0;
-    let flipCoin = random(1);
-    console.log(flipCoin);
-    var wait = true;
+    console.log("hello Fighting System");
+    console.log(group);
+    console.log(group2);
 
-    //see if there is anyone around to attack if not then wait
-    (group.length == 0 && group2.length == 0 || group.length == 0 && group2.length == 1 || group.length == 1 && group2.length == 0) ? wait: attk = 1;
-    (group > 0 && group2 > 0) ? attk = 1: wait;
-
-
-    hit(attk);
+    if (group.length > 0 && group2.length > 0) {
+        console.log("hostility");
 
 
 
+        for (let i = 0; i < group.length; i++) {
+            if (group2[i].atk < 0) {
+                return group2[i].atk = 0;
+            }
 
+            damage = group2[0].atk;
+            console.log("Damage:" + damage);
+            return damage; //damage updates display
+        }
+
+        for (let i = 0; i < group2.length; i++) {
+            damage = group[i].hp - group2[i].atk;
+            console.log(damage);
+            return damage; //damage updates display
+        }
+
+
+
+    } else {
+        console.log("waiting on enemy");
+    }
+
+    return damage;
 
 }
 
