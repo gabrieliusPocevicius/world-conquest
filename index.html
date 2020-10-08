@@ -13,110 +13,126 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-
-
 </head>
 
 <body>
 
-    <div class="container-fluid m-0">
+    <!--     <div id="key_infomation" class="container-fluid badge-info shadow m-2 p-4 d-inline-flex">
+        <p>"W" key adds while the "S" key removes Knights form team 1.</p>
+        <p> "Up" key adds while the "Down" key removes Knights form team 2.</p>
+        <button id="remove-info-btn" class="btn btn-outline-light text-center ml-4">Got it</button>
+    </div> -->
+
+
+    <div id="timer" class="container-fluid m-0">
         <div class="text-light bg-dark rounded-bottom p-2">
             <div class="row">
-                <div id="days" class="col">1</div>
-                <div id="months" class="col"></div>
-                <div id="years" class="col">500</div>
 
+                <div id="days" class="col">1</div>
+                <div id="months" class="col">1</div>
+
+                <div id="years" class="col">500</div>
+                <button id="start-battle-btn" class="btn btn-outline-danger text-center">Battle</button>
 
                 <div id="seconds-counter"></div>
             </div>
         </div>
+
     </div>
 
 
+    <template id="battleScene">
 
 
 
-    <div id="key_infomation" class="container-fluid badge-info shadow m-2 p-4 d-inline-flex">
-        <p>"W" key adds while the "S" key removes Knights form team 1.</p>
-        <p> "Up" key adds while the "Down" key removes Knights form team 2.</p>
-        <button class="btn btn-outline-light text-center ml-4" onclick="hideIt()">Got it</button>
-    </div>
-
-
-    <!--all-teams controls all of the html of battle scene-->
-    <div class="container-fluid all-teams">
-        <!--First Table-->
-        <div class="row  flex-nowrap">
-            <table class="table table-borderedless table-md table-striped  col-5 ">
-
-                <thead id="table-header-1">
-                    <tr class="">
-                        <th scope="col" class="text-center">ID</th>
-                        <th scope="col" class="text-center">Name</th>
-
-
-
-                        <th scope="col" class="text-center">Health</th>
-                        <th scope="col" class="text-center">Armour</th>
-                        <th scope="col" class="text-center">Attack</th>
-
-                    </tr>
-                </thead>
-
-                <tbody id="create" class="shadow">
-                </tbody>
-            </table>
-
-            <!--Result table-->
-            <div class=" ">
-                <div class=" justify-content-center ">
-                    <ul class="pagination  pagination-lg">
-                        <li class="page-item ">
-                            <a id="team1Score" class="page-link ">0</a>
-                        </li>
-                        <li class="page-item w-100 ">
-                            <a id="fight-btn" class="page-link h-100 " style="cursor: pointer;">
-                                <div class="text-center">Fight</div>
-                            </a>
-                        </li>
-
-                        <li class="page-item ">
-                            <a id="team2Score" class="page-link ">0</a>
-                        </li>
-                    </ul>
+    
+        <!--all-teams controls all of the html of battle scene-->
+        <div class="container-fluid all-teams">
+            <!--First Table-->
+            <div class="row  flex-nowrap">
+                <table class="table table-borderedless table-md table-striped  col-5 ">
+    
+                    <thead id="table-header-1">
+                        <tr class="">
+                            <th scope="col" class="text-center">ID</th>
+                            <th scope="col" class="text-center">Name</th>
+    
+    
+    
+                            <th scope="col" class="text-center">Health</th>
+                            <th scope="col" class="text-center">Armour</th>
+                            <th scope="col" class="text-center">Attack</th>
+    
+                        </tr>
+                    </thead>
+    
+                    <tbody id="create" class="shadow">
+                    </tbody>
+                </table>
+    
+                <!--Result table-->
+                <div class=" ">
+                    <div class=" justify-content-center ">
+                        <ul class="pagination  pagination-lg">
+                            <li class="page-item ">
+                                <a id="team1Score" class="page-link ">0</a>
+                            </li>
+                            <li class="page-item w-100 ">
+                                <a id="fight-btn" class="page-link h-100 " style="cursor: pointer;">
+                                    <div class="text-center">Fight</div>
+                                </a>
+                            </li>
+    
+                            <li class="page-item ">
+                                <a id="team2Score" class="page-link ">0</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+    
+                <!--Second Table-->
+                <table class="table  table-borderedless table-striped  col-5 ">
+    
+                    <thead id="table-header-2">
+                        <tr>
+                            <th scope="col " class="text-center">Attack</th>
+                            <th scope="col " class="text-center">Armour</th>
+                            <th scope="col " class="text-center">Health</th>
+    
+                            <th scope="col " class="text-center">Name</th>
+                            <th scope="col " class="text-center">ID</th>
+                        </tr>
+                    </thead>
+                    <tbody id="create2" class="shadow ">
+                    </tbody>
+                </table>
             </div>
-
-            <!--Second Table-->
-            <table class="table  table-borderedless table-striped  col-5 ">
-
-                <thead id="table-header-2">
-                    <tr>
-                        <th scope="col " class="text-center">Attack</th>
-                        <th scope="col " class="text-center">Armour</th>
-                        <th scope="col " class="text-center">Health</th>
-
-                        <th scope="col " class="text-center">Name</th>
-                        <th scope="col " class="text-center">ID</th>
-                    </tr>
-                </thead>
-                <tbody id="create2" class="shadow ">
-                </tbody>
-            </table>
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
+        </div>
+        </div>
+        </div>
 
-    <canvas id="myChart"></canvas>
+    </template>
+
+    <canvas id="myPie" width="400" height="100" aria-label="Pie chart" role="img"></canvas>
+
+    <canvas id="myChart" width="400" height="100" aria-label="Hello ARIA World" role="img"></canvas>
 </body>
+
+
+
+
+
+
+
+
 
 <!--Display Chart-->
 
 
 <script type="module" charset="utf-8" src="World AI/Logic/Battle.js">
+</script>
+<script type="module" charset="utf-8" src="World AI/Logic/Time.js">
 </script>
 <script type="module" charset="utf-8" src="World AI/Logic/Character.js">
 </script>
@@ -130,8 +146,7 @@
 </script>
 <script type="module" charset="utf-8" src="World AI/Logic/Population.js">
 </script>
-<script type="module" charset="utf-8" src="World AI/Logic/Time.js">
-</script>
+
 
 
 </html>

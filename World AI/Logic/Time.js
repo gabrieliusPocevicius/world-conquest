@@ -1,7 +1,18 @@
 "use strict"
+import { battleTrue } from '../Logic/Battle.js';
 import { monthNames } from "./DataBase.js";
 
+
+
+if (battleTrue == true) {
+    time(1000); //slows the time down so the men don't age so fast 
+} else {
+    time(10); //time goes on as normal
+}
+
 export let age = 0;
+
+
 
 export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -94,11 +105,11 @@ function timeStruct() {
 }
 
 
-async function time() {
+async function time(speed) {
     // Time loop 
 
     while (true) {
-        await sleep(10); //wating time for a single day
+        await sleep(speed); //wating time for a single day
 
         calender.dayC++;
 
@@ -128,20 +139,3 @@ async function time() {
     }
 
 }
-
-
-
-
-
-
-var seconds = 0;
-var el = document.getElementById('seconds-counter');
-
-function incrementSeconds() {
-    seconds += 1;
-    el.innerText = "You have been here for " + seconds + " seconds.";
-}
-
-var cancel = setInterval(incrementSeconds, 1000);
-
-time();

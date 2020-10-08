@@ -4,7 +4,7 @@
 export { Character };
 import { names, rawSurnames, sickness } from './DataBase.js';
 import { getRandom } from './Util.js';
-import { sleep, age } from './Time.js';
+import { age } from './Time.js';
 
 /*import {alive, lifeStage, time} from './Time.js';
  */
@@ -134,6 +134,8 @@ function simulateHp(age, hp, risk) { //Calculates Risk of catching diseases base
 
 var id = 0;
 
+
+
 class Character {
     constructor() {
         var snit = getRandom(0, 18);
@@ -148,15 +150,7 @@ class Character {
         this.id = function() {
             return id++;
         }
-        this.age = async function() {
-            // Time loop 
-
-
-            while (true) {
-                await sleep(100);
-                //console.log("Age " + age);
-            }
-        }
+        this.age = age;
     }
     info() {
         console.log("Name: " + this.name + "\n" + "Nationality: " + this.nationality + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
@@ -231,5 +225,7 @@ function compare(obj, obj2) {
 //         }
 //         // class functions here
 // }
+
+
 
 // Would update the first dataset's value of 'March' to be 50

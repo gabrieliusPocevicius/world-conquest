@@ -1,5 +1,5 @@
 import { Character } from "./Character.js";
-
+export var battleTrue = false;
 
 var group = []; //array for keeping all the knights from one team
 var group2 = [];
@@ -7,11 +7,46 @@ var damage = 0; //damage is the knights atk done to another's hp
 
 
 
+//arrows to move ect...
 
-function hideIt() {
-    return $('#key_infomation').remove();
-};
-hideIt(); //arrows to move ect...
+$("#start-battle-btn").on("click", (e) => {
+    e.preventDefault();
+    console.log("Attack");
+    let template = document.getElementById('battleScene');
+    let templateContent = template.content;
+    $(templateContent).appendTo($("#timer").slideDown("fast"));
+});
+
+
+
+
+
+function stopKeysUpDown() {
+    var keys = {};
+    window.addEventListener("keydown",
+        function(e) {
+            keys[e.keyCode] = true;
+            switch (e.keyCode) {
+                case 37:
+                case 39:
+                case 38:
+                case 40: // Arrow keys
+                case 32:
+                    e.preventDefault();
+                    break; // Space
+                default:
+                    break; // do not block other keys
+            }
+        },
+        false);
+    window.addEventListener('keyup',
+        function(e) {
+            keys[e.keyCode] = false;
+        },
+        false);
+
+}
+stopKeysUpDown();
 //no battle at the moment.
 function nobattle() {
     $(".all-teams").hide();
@@ -294,6 +329,11 @@ function run2() {
         $("#team2Score").text(teamTwo.totalAttack);
 
 
+
+
+
+
+
     }
 }
 //run 2 Team two
@@ -304,6 +344,100 @@ function run2() {
 //nobattle();
 
 
+
+var barC = 0;
+
+
+
+
+//Testing Battle Sim with Pie charts
+
+for (var i = 0; i < 100; i++) {
+    var ctx = document.createElement("canvas");
+
+    ctx.getContext('2d');
+    var t1 = 0;
+    var t2 = 0;
+    var update = setTimeout(function() { return i++ }, 100)
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+
+        type: 'pie',
+
+        // The data for our dataset
+        data: {
+            labels: ['Enemy', 'Friendly'],
+            datasets: [{
+                label: "War",
+                backgroundColor: ['rgb(255, 99, 132)', '#007bff'],
+                borderColor: ['rgb(255, 99, 132)', '#007bff'],
+                data: [50, t1],
+            }]
+        },
+    });
+
+
+
+
+
+
+
+
+}
+
+
+
+$("#timer").append(ctx)
+
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
+
+//here is a working module of graphs for each person
+/* for (let i = 0; i < 1; ++i) {
+    var p = new Character();
+    console.log(p.info());
+
+    barC++;
+    console.log(barC);
+
+    var ctx = document.createElement("canvas");
+
+    ctx.getContext('2d');
+
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+
+        type: 'pie',
+
+        // The data for our dataset
+        data: {
+            labels: ['Attack', 'Armour', 'Health', 'Age'],
+            datasets: [{
+                label: p.name,
+                backgroundColor: ['rgb(255, 99, 132)', '#343a40', '#20c997', '#007bff'],
+                borderColor: ['rgb(255, 99, 132)', '#343a40', '#20c997', '#007bff'],
+                data: [p.atk, p.armour, p.hp, p.age],
+            }]
+        },
+    });
+
+    $(ctx).appendTo("#timer");
+} */
 
 
 
@@ -373,48 +507,63 @@ function fight() {
 
 
 
-var ctx = document.getElementById('myChart').getContext('2d');
 
-let p = new Character();
-var chart = new Chart(ctx, {
-
-    // The type of chart we want to create
-
-    type: 'bar',
-
-    // The data for our dataset
-    data: {
-        labels: ['Attack', 'Armour', 'Health', 'Age'],
-        datasets: [{
-
-            label: p.name,
-            backgroundColor: ['rgb(255, 99, 132)', '#343a40', '#20c997', '#007bff'],
-            borderColor: ['rgb(255, 99, 132)', '#343a40', '#20c997', '#007bff'],
-            data: [0, 0, 0, 0],
-
-        }]
-
-    },
-
-    // Configuration options go here
-    options: {
+/* setTimeout(() => {
 
 
-    }
-
-
-
-});
-
-
-
-setTimeout(() => {
     chart.data.datasets[0].data[0] = p.atk;
     chart.data.datasets[0].data[1] = p.armour;
     chart.data.datasets[0].data[2] = p.hp;
-    chart.data.datasets[0].data[3] = p.age();
+    chart.data.datasets[0].data[3] = p.age;
     chart.update();
 }, 500);
+ */
 
 
+/* $("#remove-info-btn").on("click", (e) => {
+    e.preventDefault();
+    $('#key_infomation').remove("slow");
+})
+ */
 // Set line width
+
+
+
+/* 
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+}); */
