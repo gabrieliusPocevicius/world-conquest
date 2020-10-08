@@ -4,6 +4,7 @@
 export { Character };
 import { names, rawSurnames, sickness } from './DataBase.js';
 import { getRandom } from './Util.js';
+import { sleep, age } from './Time.js';
 
 /*import {alive, lifeStage, time} from './Time.js';
  */
@@ -141,15 +142,22 @@ class Character {
         this.nationality = nationality[snit] + " descendant";
         this.hp = 100;
         this.atk = getRandom(0, 100);
-        this.age = getRandom(0, 100);
         this.atk = simulateAttack(this.age, this.atk);
         this.armour = 0;
         this.risk = 0;
         this.id = function() {
             return id++;
         }
-    }
+        this.age = async function() {
+            // Time loop 
 
+
+            while (true) {
+                await sleep(100);
+                //console.log("Age " + age);
+            }
+        }
+    }
     info() {
         console.log("Name: " + this.name + "\n" + "Nationality: " + this.nationality + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
     }
@@ -157,19 +165,43 @@ class Character {
 
 var p1 = new Character();
 var p2 = new Character();
+
+
+
 var people = {
     count: 0,
+    person: []
 };
 
-compare(p1, p2);
+//compare(p1, p2);
 
 function maker(n) {
     while (n > 0) {
-        people.push(new Character(n));
+        ++people.count;
+        people.person.push(new Character(n));
         n--;
     }
     return people;
 }
+maker(10);
+
+
+
+//console.log("Age: " + people.person[0].age());
+
+//console.log(people.person);
+//console.log(people.count);
+
+
+
+
+
+
+
+
+//console.log(people.person[0].age);
+
+
 
 function compare(obj, obj2) {
 

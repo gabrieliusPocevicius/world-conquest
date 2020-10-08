@@ -1,8 +1,9 @@
 "use strict"
 import { monthNames } from "./DataBase.js";
 
+export let age = 0;
 
-function sleep(ms) {
+export function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -28,22 +29,17 @@ var calender = {
 function alive(day, month, year) {
     let alive = true;
     var yearsOld = 0;
-
     //parameters birthday
     if (calender.dayC === day && calender.monthC === month && alive) {
         // person's age
         let age = yearsOld + calender.yearC - year;
-
         lifeStage(age);
-
         return console.log(age + " years old");
-
     }
 }
 
 function lifeStage(age) {
     // everything comes with age
-
     if (age < 2) {
         let baby = "Baby Stage"
             //console.log(baby);
@@ -68,20 +64,46 @@ function lifeStage(age) {
     }
     if (age == 110) {
         console.log("dead");
-
     }
 }
+
+function timeStruct() {
+    if (calender.dayC === calender.days[calender.monthC]) {
+        calender.dayC = 1;
+
+        var mn = monthNames;
+        // console.log( String(mn[calender.monthC]))
+        calender.monthC++;
+
+
+
+
+
+
+
+        if (calender.monthC === 12) {
+
+
+            //  console.log(String(monthNames[11]))
+            calender.monthC = 1;
+            calender.yearC++;
+
+            // console.log('year ' + calender.yearC)
+        }
+    }
+}
+
 
 async function time() {
     // Time loop 
 
     while (true) {
-        await sleep(100); //wating time for a single day
+        await sleep(10); //wating time for a single day
 
         calender.dayC++;
 
 
-        //alive(20, 1, 500);
+        //console.log(alive(20, 1, 500));
 
 
 
@@ -93,39 +115,33 @@ async function time() {
 
         document.getElementById('months').innerHTML = monthNames[calender.monthC];
 
-
         document.getElementById('years').innerHTML = calender.yearC;
+        age = calender.yearC - calender.years;
+
+        //console.log(age);
+        //console.warn(age);
 
 
-        function timeStruct() {
-            if (calender.dayC === calender.days[calender.monthC]) {
-                calender.dayC = 1;
-
-                var mn = monthNames;
-                // console.log( String(mn[calender.monthC]))
-                calender.monthC++;
-
-
-
-
-
-
-
-                if (calender.monthC === 12) {
-
-
-                    //  console.log(String(monthNames[11]))
-                    calender.monthC = 1;
-                    calender.yearC++;
-
-                    // console.log('year ' + calender.yearC)
-                }
-            }
-        }
         timeStruct();
+
+
     }
+
 }
 
 
+
+
+
+
+var seconds = 0;
+var el = document.getElementById('seconds-counter');
+
+function incrementSeconds() {
+    seconds += 1;
+    el.innerText = "You have been here for " + seconds + " seconds.";
+}
+
+var cancel = setInterval(incrementSeconds, 1000);
 
 time();

@@ -19,6 +19,10 @@ var pop = 0;
 
 
 
+var firstPeople = true;
+
+
+
 /*
  Character 
  constructor(name, hp, atk, age, honor)

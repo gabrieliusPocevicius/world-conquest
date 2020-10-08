@@ -11,7 +11,7 @@ var damage = 0; //damage is the knights atk done to another's hp
 function hideIt() {
     return $('#key_infomation').remove();
 };
-hideIt();
+hideIt(); //arrows to move ect...
 //no battle at the moment.
 function nobattle() {
     $(".all-teams").hide();
@@ -373,14 +373,11 @@ function fight() {
 
 
 
-
-
-
-
 var ctx = document.getElementById('myChart').getContext('2d');
 
-let p = new Character;
+let p = new Character();
 var chart = new Chart(ctx, {
+
     // The type of chart we want to create
 
     type: 'bar',
@@ -393,7 +390,7 @@ var chart = new Chart(ctx, {
             label: p.name,
             backgroundColor: ['rgb(255, 99, 132)', '#343a40', '#20c997', '#007bff'],
             borderColor: ['rgb(255, 99, 132)', '#343a40', '#20c997', '#007bff'],
-            data: [0, 0, 0, p.age],
+            data: [0, 0, 0, 0],
 
         }]
 
@@ -412,10 +409,10 @@ var chart = new Chart(ctx, {
 
 
 setTimeout(() => {
-
     chart.data.datasets[0].data[0] = p.atk;
     chart.data.datasets[0].data[1] = p.armour;
     chart.data.datasets[0].data[2] = p.hp;
+    chart.data.datasets[0].data[3] = p.age();
     chart.update();
 }, 500);
 
