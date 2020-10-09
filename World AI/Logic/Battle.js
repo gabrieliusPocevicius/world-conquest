@@ -1,6 +1,15 @@
 import { Character } from "./Character.js";
 export var battleTrue = false;
 
+
+
+
+
+
+
+
+
+
 var group = []; //array for keeping all the knights from one team
 var group2 = [];
 var damage = 0; //damage is the knights atk done to another's hp
@@ -105,7 +114,6 @@ function team_1() {
         });
     }
 }
-
 //Recruits team 2
 function team_2() {
     if (numberCounter2 >= 0) {
@@ -140,15 +148,13 @@ function team_2() {
     }
 }
 
-
 function battleScreen() {
     // adds option of troops gathering together to fight
     team_1();
     team_2();
-
 }
 
-battleScreen();
+battleScreen(); // Display all battle teams 
 
 $("#fight-btn").on("click", () => {
     fight();
@@ -194,7 +200,6 @@ function random(num) {
     return random;
 }
 var teamOne = {
-
     //Single column of indexes indicates one dude
     attack: [],
     health: [],
@@ -224,14 +229,10 @@ var teamTwo = {
 
 
 }
-
 var personDamaged = {
-
     id: 0,
     name: "",
     hp: 0
-
-
 };
 
 //Display Soldier on team 1
@@ -239,11 +240,6 @@ function run() {
 
     var p = new Character();
     group.push(p);
-
-
-
-
-
 
 
     for (let i = 0; i < total; i++) {
@@ -286,9 +282,6 @@ function run() {
     }
     return personDamaged.hp;
 }
-
-
-
 //Display Soldier on team 2
 function run2() {
     var p = new Character();
@@ -351,219 +344,3 @@ var barC = 0;
 
 
 //Testing Battle Sim with Pie charts
-
-for (var i = 0; i < 100; i++) {
-    var ctx = document.createElement("canvas");
-
-    ctx.getContext('2d');
-    var t1 = 0;
-    var t2 = 0;
-    var update = setTimeout(function() { return i++ }, 100)
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-
-        type: 'pie',
-
-        // The data for our dataset
-        data: {
-            labels: ['Enemy', 'Friendly'],
-            datasets: [{
-                label: "War",
-                backgroundColor: ['rgb(255, 99, 132)', '#007bff'],
-                borderColor: ['rgb(255, 99, 132)', '#007bff'],
-                data: [50, t1],
-            }]
-        },
-    });
-
-
-
-
-
-
-
-
-}
-
-
-
-$("#timer").append(ctx)
-
-
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
-}
-
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    chart.update();
-}
-
-
-//here is a working module of graphs for each person
-/* for (let i = 0; i < 1; ++i) {
-    var p = new Character();
-    console.log(p.info());
-
-    barC++;
-    console.log(barC);
-
-    var ctx = document.createElement("canvas");
-
-    ctx.getContext('2d');
-
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-
-        type: 'pie',
-
-        // The data for our dataset
-        data: {
-            labels: ['Attack', 'Armour', 'Health', 'Age'],
-            datasets: [{
-                label: p.name,
-                backgroundColor: ['rgb(255, 99, 132)', '#343a40', '#20c997', '#007bff'],
-                borderColor: ['rgb(255, 99, 132)', '#343a40', '#20c997', '#007bff'],
-                data: [p.atk, p.armour, p.hp, p.age],
-            }]
-        },
-    });
-
-    $(ctx).appendTo("#timer");
-} */
-
-
-
-
-
-//two knights need to wait for opponent before he arrives
-function waitingFight(opponent, opponent2) {
-    console.log("Waiting...opponent");
-    array.forEach(element => {
-
-    });
-}
-
-
-
-
-function fight() {
-    console.log("hello Fighting System");
-    console.log(group);
-    console.log(group2);
-
-    if (group.length > 0 && group2.length > 0) {
-        console.log("hostility");
-
-
-
-        for (let i = 0; i < group.length; i++) {
-            if (group2[i].atk < 0) {
-                return group2[i].atk = 0;
-            }
-
-            damage = group2[0].atk;
-            console.log("Damage:" + damage);
-            return damage; //damage updates display
-        }
-
-        for (let i = 0; i < group2.length; i++) {
-            damage = group[i].hp - group2[i].atk;
-            console.log(damage);
-            return damage; //damage updates display
-        }
-
-
-
-    } else {
-        console.log("waiting on enemy");
-    }
-
-    return damage;
-
-}
-
-
-//var i = 0;
-//len = len.length;
-//while (i < len) {
-
-
-
-//  ++i
-//}
-
-
-
-
-
-
-
-
-
-/* setTimeout(() => {
-
-
-    chart.data.datasets[0].data[0] = p.atk;
-    chart.data.datasets[0].data[1] = p.armour;
-    chart.data.datasets[0].data[2] = p.hp;
-    chart.data.datasets[0].data[3] = p.age;
-    chart.update();
-}, 500);
- */
-
-
-/* $("#remove-info-btn").on("click", (e) => {
-    e.preventDefault();
-    $('#key_infomation').remove("slow");
-})
- */
-// Set line width
-
-
-
-/* 
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-}); */
