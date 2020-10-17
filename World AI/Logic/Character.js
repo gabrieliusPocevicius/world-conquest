@@ -1,69 +1,95 @@
 // Characters are people with skills and attributes with names and habits.
 
 // module of names
-export { Character };
+
 import { names, rawSurnames, sickness } from './DataBase.js';
 import { getRandom } from './Util.js';
-import { age } from './Time.js';
+import { time, age } from './Time.js';
 
 /*import {alive, lifeStage, time} from './Time.js';
  */
+var id = 0; // the id of each object of the Character class
+var nationality = [];
+var surnames = [];
+var it = 0; // separate iterator for NAMES
+var snit = 0; // same iterator for SURNAMES and NATIONALITY
 
-//Util func
+
+
+export class Character {
+    constructor() {
+        var snit = getRandom(0, 18);
+        this.name =
+            names[getRandom(0, 15)] + surnames[snit];
+        this.nationality = nationality[snit] + " descendant";
+        this.hp = 100;
+        this.atk = getRandom(0, 100);
+        this.atk = simulateAttack(this.age, this.atk);
+        this.armour = 0;
+        this.risk = 0;
+        this.age = age;
+        this.id = function() {
+            return id++;
+        }
+
+    }
+    info() {
+        console.log("Name: " + this.name + "\n" + "Nationality: " + this.nationality + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 function randomN(x) {
     return Math.floor(Math.random() * x);
 }
 
+function iterateNameLists() {
+    for (let i = 1; i < rawSurnames.length; i += 2) {
+        nationality.push(rawSurnames[i]);
+    }
 
-
-
-
-
-
-
-
-let nationality = [];
-let surnames = [];
-
-
-
-for (let i = 1; i < rawSurnames.length; i += 2) {
-    nationality.push(rawSurnames[i]);
+    for (var j = 0; j < rawSurnames.length; j += 2) {
+        surnames.push(rawSurnames[j])
+    }
+    //nationality and Surnames joined
+    let ns = [];
+    for (var i = 0; i < 18; i++) {
+        ns = nationality[i] + "," + surnames[i]
+        var str = ns.split(",")
+        var n = str[str.length - 1];
+    }
 }
 
-for (var j = 0; j < rawSurnames.length; j += 2) {
-    surnames.push(rawSurnames[j])
+function compare(obj, obj2) {
+
+    for (const [key, value] of Object.entries(obj)) {
+        console.log(`1- ${key} ${value}`);
+
+    }
+    for (const [key, value] of Object.entries(obj2)) {
+        console.log(`2- ${key}: ${value}`);
+    }
+
 }
 
-// separate iterator for NAMES
-var it = 0;
-// same iterator for SURNAMES and NATIONALITY
-var snit = 0;
-
-//nationality and Surnames joined
-let ns = [];
-for (var i = 0; i < 18; i++) {
-    ns = nationality[i] + "," + surnames[i]
-    var str = ns.split(",")
-    var n = str[str.length - 1];
-}
-
-// making random people attributes
-
-//Makes the attack strength more dynamic by age affecting your attk 
 function simulateAttack(age, atk, risk) {
-
+    //Makes the attack strength more dynamic by age affecting your attk 
     //console.log("initial atk: " + atk);
 
     if (Number(age) > 39) {
         atk = (atk / 2);
 
         //console.log(age);
-
-
-
         //console.log("Lost " + atk + " strength");
         //console.log("'Old Man In Affect:' total " + atk + " Strength");
 
@@ -131,88 +157,74 @@ function simulateHp(age, hp, risk) { //Calculates Risk of catching diseases base
 
 
 }
-
-var id = 0;
-
-
-
-class Character {
-    constructor() {
-        var snit = getRandom(0, 18);
-        this.name =
-            names[getRandom(0, 15)] + surnames[snit];
-        this.nationality = nationality[snit] + " descendant";
-        this.hp = 100;
-        this.atk = getRandom(0, 100);
-        this.atk = simulateAttack(this.age, this.atk);
-        this.armour = 0;
-        this.risk = 0;
-        this.id = function() {
-            return id++;
-        }
-        this.age = age;
-    }
-    info() {
-        console.log("Name: " + this.name + "\n" + "Nationality: " + this.nationality + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
-    }
-}
-
-var p1 = new Character();
-var p2 = new Character();
+// making random people attributes
 
 
 
-var people = {
+
+
+
+
+
+
+
+
+
+export var people = {
+    //compare(p1, p2);
     count: 0,
-    person: []
+    person: [],
+
 };
 
-//compare(p1, p2);
+export var food = {
+    count: 0,
+    food: []
+}
 
-function maker(n) {
+//makes people appear
+export function maker(n) {
+    var displayElement = $("#population");
+    $(displayElement).addClass("text-success");
     while (n > 0) {
         ++people.count;
         people.person.push(new Character(n));
+
         n--;
     }
+
+    displayElement.html("<h1>" + people.count + "</h1>");
+
+
     return people;
 }
-maker(10);
 
+//makes people disappear
+export function loss(n) {
 
-
-//console.log("Age: " + people.person[0].age());
-
-//console.log(people.person);
-//console.log(people.count);
-
-
-
-
-
-
-
-
-//console.log(people.person[0].age);
-
-
-
-function compare(obj, obj2) {
-
-    for (const [key, value] of Object.entries(obj)) {
-        console.log(`1- ${key} ${value}`);
-
-    }
-    for (const [key, value] of Object.entries(obj2)) {
-        console.log(`2- ${key}: ${value}`);
+    var displayElement = $("#population");
+    $(displayElement).removeClass("text-success");
+    while (n > 0) {
+        --people.count;
+        people.person.pop(people.person[n]);
+        n--;
     }
 
-
-
+    displayElement.html("<h1 class='text-danger'>" + people.count + "</h1>");
+    return people;
 }
 
 
 
+
+//console.log(maker(10));
+
+
+
+
+
+
+iterateNameLists();
 // class Enemy extends Character {
 //     constructor(name, hp, atk, age, honor, relations) {
 //             super(name, hp, atk, age, honor)

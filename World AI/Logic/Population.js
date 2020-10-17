@@ -26,7 +26,7 @@ var age = 0;
 var firstPeople = 30; //First generation
 if (firstPeople == 30) {
     age = random(40);
-    console.log(age);
+
 }
 
 

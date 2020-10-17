@@ -42,7 +42,7 @@ var rawSurnames = [
         "Spanish",
 
         "Miller",
-        "English, Scottish, German, French, Italian	",
+        "English, Scottish, German, French, Italian",
 
         "Davis",
         "English, Welsh",

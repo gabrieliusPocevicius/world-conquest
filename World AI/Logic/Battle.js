@@ -1,4 +1,4 @@
-import { Character } from "./Character.js";
+//import { Character } from "./Character.js";
 export var battleTrue = false;
 
 
@@ -17,13 +17,23 @@ var damage = 0; //damage is the knights atk done to another's hp
 
 
 //arrows to move ect...
+let counter = 0;
+$('#battleScene').hide();
+$("#start-battle-btn").on("click", () => {
 
-$("#start-battle-btn").on("click", (e) => {
-    e.preventDefault();
-    console.log("Attack");
-    let template = document.getElementById('battleScene');
-    let templateContent = template.content;
-    $(templateContent).appendTo($("#timer").slideDown("fast"));
+
+    counter++;
+    console.log(counter);
+
+    if (counter == 1) {
+        $("#battleScene").slideDown("fast");
+    }
+
+    if (counter == 2) {
+        $('#battleScene').hide();
+
+        counter = 0;
+    }
 });
 
 
@@ -162,6 +172,9 @@ $("#fight-btn").on("click", () => {
 
 
 
+function fight() {
+    console.log("Fighting");
+}
 // $("body").on("click", function() {
 
 //     $("#guy1").remove();

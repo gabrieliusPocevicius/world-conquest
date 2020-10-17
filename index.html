@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="CustomStyle.css">
 
-    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="stylesheet" href="CustomStyle.css">
+    <!--<script src="https://d3js.org/d3.v5.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -25,6 +25,7 @@
 
 
     <div id="timer" class="container-fluid m-0">
+
         <div class="text-light bg-dark rounded-bottom p-2">
             <div class="row">
 
@@ -32,44 +33,42 @@
                 <div id="months" class="col">1</div>
 
                 <div id="years" class="col">500</div>
-                <button id="start-battle-btn" class="btn btn-outline-danger text-center">Battle</button>
-
+                <button id="pause" class="btn btn-outline-danger text-center">Start</button>
+                <div class="ml-3"></div>
+                <button id="start-battle-btn" class="btn btn-outline-danger text-center mr-4">Battle</button>
                 <div id="seconds-counter"></div>
             </div>
         </div>
 
+
     </div>
 
 
-    <template id="battleScene">
-
-
-
-    
+    <div id="battleScene">
         <!--all-teams controls all of the html of battle scene-->
         <div class="container-fluid all-teams">
             <!--First Table-->
             <div class="row  flex-nowrap">
                 <table class="table table-borderedless table-md table-striped  col-5 ">
-    
+
                     <thead id="table-header-1">
                         <tr class="">
                             <th scope="col" class="text-center">ID</th>
                             <th scope="col" class="text-center">Name</th>
-    
-    
-    
+
+
+
                             <th scope="col" class="text-center">Health</th>
                             <th scope="col" class="text-center">Armour</th>
                             <th scope="col" class="text-center">Attack</th>
-    
+
                         </tr>
                     </thead>
-    
+
                     <tbody id="create" class="shadow">
                     </tbody>
                 </table>
-    
+
                 <!--Result table-->
                 <div class=" ">
                     <div class=" justify-content-center ">
@@ -82,23 +81,23 @@
                                     <div class="text-center">Fight</div>
                                 </a>
                             </li>
-    
+
                             <li class="page-item ">
                                 <a id="team2Score" class="page-link ">0</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-    
+
                 <!--Second Table-->
                 <table class="table  table-borderedless table-striped  col-5 ">
-    
+
                     <thead id="table-header-2">
                         <tr>
                             <th scope="col " class="text-center">Attack</th>
                             <th scope="col " class="text-center">Armour</th>
                             <th scope="col " class="text-center">Health</th>
-    
+
                             <th scope="col " class="text-center">Name</th>
                             <th scope="col " class="text-center">ID</th>
                         </tr>
@@ -108,11 +107,20 @@
                 </table>
             </div>
         </div>
-        </div>
-        </div>
-        </div>
+    </div>
+    </div>
+    </div>
 
-    </template>
+    <div class="container">
+        <h3>Total Population</h3>
+        <h1 id="population">0</h1>
+    </div>
+
+
+    </div>
+
+
+
 
 
 
@@ -130,22 +138,21 @@
 
 <!--Display Chart-->
 
-
-<script type="module" charset="utf-8" src="World AI/Logic/Battle.js">
+<script type="module" charset="utf-8" src="./World AI/Logic/Time.js">
 </script>
-<script type="module" charset="utf-8" src="World AI/Logic/Time.js">
+<script type="module" charset="utf-8" src="./World AI/Logic/Battle.js">
 </script>
-<script type="module" charset="utf-8" src="World AI/Logic/Character.js">
+<script type="module" charset="utf-8" src="./World AI/Logic/Character.js">
 </script>
-<script type="module" charset="utf-8" src="World AI/Logic/Adventure.js">
+<script type="module" charset="utf-8" src="./World AI/Logic/Adventure.js">
 </script>
-<script type="module" charset="utf-8" src="World AI/Logic/DataBase.js">
+<script type="module" charset="utf-8" src="./World AI/Logic/DataBase.js">
 </script>
-<script type="module" charset="utf-8" src="World AI/Logic/Util.js">
+<script type="module" charset="utf-8" src="./World AI/Logic/Util.js">
 </script>
-<script type="module" charset="utf-8" src="World AI/Logic/Building.js">
+<script type="module" charset="utf-8" src="./World AI/Logic/Building.js">
 </script>
-<script type="module" charset="utf-8" src="World AI/Logic/Population.js">
+<script type="module" charset="utf-8" src="./World AI/Logic/Population.js">
 </script>
 
 

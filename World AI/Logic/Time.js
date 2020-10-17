@@ -1,16 +1,31 @@
-"use strict"
 import { battleTrue } from '../Logic/Battle.js';
 import { monthNames } from "./DataBase.js";
 
+import { Character, maker, people, loss } from './Character.js';
 
 
-if (battleTrue == true) {
-    time(1000); //slows the time down so the men don't age so fast 
-} else {
-    time(10); //time goes on as normal
-}
+export var age = 0;
 
-export let age = 0;
+//Util func
+let counter = 0; // Counter variable is used as a switch.
+$("#pause").on("click", () => {
+    $("#pause").text("Pause");
+    ++counter;
+
+    if (counter == 1) {
+        if (battleTrue == true) {
+            time(1000); //slows the time down so the men don't age so fast 
+        } else {
+            time(10); //time goes on as normal
+        }
+
+    }
+
+});
+
+
+
+
 
 
 
@@ -35,7 +50,34 @@ var calender = {
 }
 
 
+//var result = Math.round(result * 100) / 100; 
+//when nature strikes
+function naturalDisaster(affects, lengthOfTime) {
 
+    var triggers = false;
+
+    //0.6 die from disease
+    //1 out of 100 ppl die from natural disasters.
+    //Life expectancy: 80 years
+    //affects  = how many people it affects from total
+    //lengthOfTime = how long it lasts FROM: TO dates.
+    //https://www.cdc.gov/nchs/fastats/deaths.htm
+    lengthOfTime = 1;
+    affects = 0.02; //avarge damage by natural disasters per year
+
+    if (0 == calender.yearC % lengthOfTime) { //every so many years
+        loss(1);
+    }
+
+    /*
+    Geophysical (e.g. Earthquakes, Landslides, Tsunamis and Volcanic Activity)
+    Hydrological (e.g. Avalanches and Floods)
+    Climatological (e.g. Extreme Temperatures, Drought and Wildfires)
+    Meteorological (e.g. Cyclones and Storms/Wave Surges)
+    Biological (e.g. Disease Epidemics and Insect/Animal Plagues) 
+     */
+
+}
 
 function alive(day, month, year) {
     let alive = true;
@@ -78,7 +120,7 @@ function lifeStage(age) {
     }
 }
 
-function timeStruct() {
+export function timeStruct() {
     if (calender.dayC === calender.days[calender.monthC]) {
         calender.dayC = 1;
 
@@ -86,26 +128,16 @@ function timeStruct() {
         // console.log( String(mn[calender.monthC]))
         calender.monthC++;
 
-
-
-
-
-
-
         if (calender.monthC === 12) {
-
-
             //  console.log(String(monthNames[11]))
             calender.monthC = 1;
             calender.yearC++;
-
             // console.log('year ' + calender.yearC)
         }
     }
 }
 
-
-async function time(speed) {
+export async function time(speed) {
     // Time loop 
 
     while (true) {
@@ -118,14 +150,13 @@ async function time(speed) {
 
 
 
+        //Adds one person per day
 
+        maker(1);
 
 
         document.getElementById('days').innerHTML = calender.dayC + ' days';
-
-
         document.getElementById('months').innerHTML = monthNames[calender.monthC];
-
         document.getElementById('years').innerHTML = calender.yearC;
         age = calender.yearC - calender.years;
 
@@ -135,7 +166,11 @@ async function time(speed) {
 
         timeStruct();
 
-
+        if (counter == 2) {
+            $("#pause").text("Start");
+            counter = 0;
+            break
+        }
     }
 
 }
