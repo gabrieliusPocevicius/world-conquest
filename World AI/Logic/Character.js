@@ -2,7 +2,7 @@
 
 // module of names
 
-import { names, sickness } from './DataBase.js';
+import { names, fnames, sickness } from './DataBase.js';
 import { getRandom } from './Util.js';
 import { time, age } from './Time.js';
 
@@ -12,28 +12,49 @@ var id = 0; // the id of each object of the Character class
 var nationality = [];
 var surnames = [];
 var it = 0; // separate iterator for NAMES
-var snit = 0; // same iterator for SURNAMES and NATIONALITY
+var gender = ["Male", "Female"];
+var percent = Math.round(Math.random() * 99 + 1);
+
+
+
+
+
+
+
+
 
 
 
 export class Character {
     constructor() {
-        var snit = getRandom(0, 18);
-        this.name =
-            names[getRandom(0, 15)];
-        this.hp = 100;
-        this.atk = getRandom(0, 100);
-        this.atk = simulateAttack(this.age, this.atk);
-        this.armour = 0;
-        this.risk = 0;
-        this.age = 18;
+        this.gender = percent; //50% change of it being a boy for a girl.
+        this.title = "Baby";
+        if (this.gender <= 60) {
+            this.gender = "#007bff";
+            this.hp = 100;
+            this.atk = getRandom(0, 100);
+            this.armour = 0;
+            this.risk = 0;
+            this.age = 0;
+            this.name =
+                names[getRandom(0, 400)];
+            console.log("Name: " + this.name + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
+            console.log("Boy");
+        } else {
+            this.gender = "rgb(255, 99, 132)";
+            this.name = fnames[getRandom(0, 400)];
+            this.hp = 100;
+            this.atk = getRandom(0, 60);
+            this.armour = 0;
+            this.risk = 0;
+            this.age = 0;
+            console.log("Name: " + this.name + "\n" + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
+            console.log("Girl");
+        }
+
         this.id = function() {
             return id++;
         };
-
-    }
-    info() {
-        console.log("Name: " + this.name + "\n" + "Nationality: " + this.nationality + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
     }
 }
 
@@ -41,8 +62,17 @@ export class Character {
 const p = new Character();
 
 
-$("person").html("<h4>" + p.age + "</h4>");
-$("person").add("<h4>" + p.armour + "</h4>");
+
+
+$("person").append(` <div class="row" style="background-color:${p.gender}">
+    
+    <h5 class="col-12">${p.title}</h5>
+
+
+  <div class="col">Name ${p.name}</div>
+  <div class="col">Age ${p.age}</div>
+
+</div> `);
 
 
 
@@ -61,7 +91,7 @@ $("person").add("<h4>" + p.armour + "</h4>");
 
         */
 
-        var percent = Math.round(Math.random() * 99 + 1); // percent of becoming noble
+        // percent of becoming noble
 
 
         if (percent == 100 && members != 0) {

@@ -80,4 +80,4 @@ function probability(x = 10, item = 5) {
 function getRandom(min, max) {
     var value = Math.floor(Math.random() * (max - min)) + min;
     return value;
-};
+}

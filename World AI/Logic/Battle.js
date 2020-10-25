@@ -8,9 +8,9 @@
 
 export var battleTrue = false;
 
-let armyTemplate =
-
-    `<button class="accordion shadow-sm">Army Name </button>
+(function() {
+    let armyTemplate =
+        `<button class="accordion shadow-sm">Army Name </button>
         <div class="panel ">
             <div class="row">
                 <h5 class="col">Leader
@@ -22,14 +22,13 @@ let armyTemplate =
                 <h5 class="col">Loyalty</h5>
             </div>
         </div>`;
+    $("#parent-of-all-armies").append(armyTemplate);
+}());
 
 
 
 
 
-
-
-$("#parent-of-all-armies").append(armyTemplate);
 
 //Person attribute card
 
