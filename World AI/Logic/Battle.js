@@ -1,6 +1,27 @@
 //import { Character } from "./Character.js";
+
+
+
+
+
+
+
 export var battleTrue = false;
 
+let armyTemplate =
+
+    `<button class="accordion shadow-sm">Army Name </button>
+        <div class="panel ">
+            <div class="row">
+                <h5 class="col">Leader
+                    <p id="open-card">John Doe</p>
+                </h5>
+                <h5 class="col">Treasurer</h5>
+                <h5 class="col">Logistics Manager</h5>
+                <h5 class="col">Strategist training</h5>
+                <h5 class="col">Loyalty</h5>
+            </div>
+        </div>`;
 
 
 
@@ -8,16 +29,25 @@ export var battleTrue = false;
 
 
 
+$("#parent-of-all-armies").append(armyTemplate);
+
+//Person attribute card
 
 
-var group = []; //array for keeping all the knights from one team
-var group2 = [];
-var damage = 0; //damage is the knights atk done to another's hp
+
+$("#open-card").on("click", () => {
+    $("#myNav").css("height", 100 + "%");
+});
+
+$("#closebtn").on("click", () => {
+    $("#myNav").css("height", 0 + "%");
+});
+
 
 
 
 //arrows to move ect...
-let counter = 0;
+var counter = 0;
 $('#battleScene').hide();
 $("#start-battle-btn").on("click", () => {
 
@@ -54,7 +84,7 @@ function stopKeysUpDown() {
                     e.preventDefault();
                     break; // Space
                 default:
-                    break; // do not block other keys
+                    break; // do not block other keys 
             }
         },
         false);
@@ -90,85 +120,10 @@ var total = 1;
 let numberCounter1 = 0;
 let numberCounter2 = 0;
 
-//Recruits team 1 
-function team_1() {
-    if (numberCounter1 >= 0) {
-        $("body").on("keydown", function(event) {
-            //S to remove
-            if (event.which == "83") {
-
-                if (numberCounter1 == 0) {
-                    numberCounter1 = 0;
-
-                } else {
-
-                    teamOne.health.pop();
-                    teamOne.attack.pop();
-                    teamOne.armour.pop();
-                    group.pop();
-                    console.log(group.length);
-                    $("#team1Score").text(teamOne.totalAttack);
-                    numberCounter1--;
-                    $("#guy1:last-child").remove();
-
-
-                }
-
-            }
-            //W to add
-            else if (event.which == "87" && numberCounter1 != 20) {
-                numberCounter1++;
-                run();
-            }
-
-        });
-    }
-}
-//Recruits team 2
-function team_2() {
-    if (numberCounter2 >= 0) {
-        $("body").on("keydown", function(event) {
-            //S to remove
-            if (event.which == "40") {
-
-                if (numberCounter2 == 0) {
-                    numberCounter2 = 0;
-
-
-                } else {
-
-                    teamTwo.health.pop();
-                    teamTwo.attack.pop();
-                    teamTwo.armour.pop();
-                    group.pop();
-                    console.log(group.length);
-                    $("#team2Score").text(teamTwo.totalAttack);
-                    numberCounter2--;
-                    $("#guy2:last-child").remove();
-                }
-
-            }
-            //W to add
-            else if (event.which == "38" && numberCounter2 != 20) {
-                numberCounter2++;
-                run2();
-            }
-
-        });
-    }
-}
-
-function battleScreen() {
-    // adds option of troops gathering together to fight
-    team_1();
-    team_2();
-}
-
-battleScreen(); // Display all battle teams 
 
 $("#fight-btn").on("click", () => {
     fight();
-})
+});
 
 
 
@@ -180,7 +135,6 @@ function fight() {
 //     $("#guy1").remove();
 
 // })
-
 
 
 
@@ -212,148 +166,10 @@ function random(num) {
     var random = Number(Math.round(Math.random() * num) + 1);
     return random;
 }
-var teamOne = {
-    //Single column of indexes indicates one dude
-    attack: [],
-    health: [],
-    armour: [],
 
-    //adds together all of the values to get the army total
-    get totalAttack() { return this.attack.reduce((a, b) => a + b, 0) },
-    get totalHealth() { return this.health.reduce((a, b) => { a + b, 0 }) },
-    get totalArmour() { return this.armour.reduce((a, b) => { a + b, 0 }) }
-
-
-}
-var teamTwo = {
-    /*
-    Function get values of all the knights
-    */
-    //Single column of indexes indicates one dude
-    attack: [],
-    health: [],
-    armour: [],
-
-    //adds together all of the values to get the army total
-    // use the get function to get attributes of this object
-    get totalAttack() { return this.attack.reduce((a, b) => a + b, 0) },
-    get totalHealth() { return this.health.reduce((a, b) => { a + b, 0 }) },
-    get totalArmour() { return this.armour.reduce((a, b) => { a + b, 0 }) }
-
-
-}
-var personDamaged = {
-    id: 0,
-    name: "",
-    hp: 0
-};
-
-//Display Soldier on team 1
-function run() {
-
-    var p = new Character();
-    group.push(p);
-
-
-    for (let i = 0; i < total; i++) {
-
-        teamOne.health.push(p.hp);
-        teamOne.attack.push(p.atk);
-        teamOne.armour.push(p.armour);
-
-
-        personDamaged.hp = p.hp;
-        console.log(personDamaged.hp);
-        //Create a person instant and loop 
-        //guy 1 is for all team
-        var person =
-            "<tr id='guy1'>\
-        <td id=p-" + i + ">" + numberCounter1 + "</td>\
-        <td id='name'>" + p.name + " " + p.age + "</td>\
-        <td>\
-        <div class='progress'>\
-            <div id='bar-health' style='width:" + (p.hp - damage) + "%' class='progress-bar bar-health progress-bar-striped progress-bar-animated' role='progressbar'>" + (p.hp - damage) + "</div>\
-        </div>\
-    </td>\
-        <td>\
-            <div class='progress'>\
-                <div class='progress-bar bar-armour progress-bar-striped progress-bar-animated' style='width:" + p.armour + "%'>" + p.armour + "</div>\
-            </div>\
-        </td>\
-        <td>\
-        <div class='progress'>\
-            <div id='bar-attack' style='width:" + p.atk + "%' class='progress-bar bar-attack progress-bar-striped progress-bar-animated'>" + p.atk + "</div>\
-        </div>\
-    </td>\
-        </tr>"
-
-        $("#create").append(person);
-
-        $("#team1Score").text(teamOne.totalAttack);
-        //console.log(group); //how many knights fighting in this team.
-
-    }
-    return personDamaged.hp;
-}
-//Display Soldier on team 2
-function run2() {
-    var p = new Character();
-
-    group2.push(p);
-
-
-    for (let i = 0; i < total; i++) {
-
-        //Create a person instant and loop 
-        teamTwo.health.push(p.hp);
-        teamTwo.attack.push(p.atk);
-        teamTwo.armour.push(p.armour);
-
-        var person =
-            "<tr id='guy2'>\
-            <td>\
-            <div class='progress'>\
-                <div id='bar-attack' style='width:" + p.atk + "%' class='progress-bar bar-attack progress-bar-striped progress-bar-animated'>" + p.atk + "</div>\
-            </div>\
-        </td>\
-        <td>\
-            <div class='progress'>\
-                <div class='progress-bar bar-armour progress-bar-striped progress-bar-animated' style='width:" + p.armour + "%'>" + p.armour + "</div>\
-            </div>\
-        </td>\
-        <td>\
-        <div class='progress'>\
-            <div id='bar-health' style='width:" + p.hp + "%' class='progress-bar bar-health progress-bar-striped progress-bar-animated' role='progressbar'>" + p.hp + "</div>\
-        </div>\
-    </td>\
-    <td id='name'>" + p.name + " " + p.id() + "</td>\
-    <td id=p-" + i + ">" + numberCounter2 + "</td>\
-        </tr>"
-        $("#create2").append(person);
-
-
-        $("#team2Score").text(teamTwo.totalAttack);
-
-
-
-
-
-
-
-    }
-}
 //run 2 Team two
 //Object.keys(p).length
 
 
 
 //nobattle();
-
-
-
-var barC = 0;
-
-
-
-
-//Testing Battle Sim with Pie charts

@@ -1,3 +1,16 @@
 {
-    "compile-hero.disable-compile-files-on-did-save-code": true
+    "jshint.options": {
+        "esversion": 9
+    },
+    "compile-hero.disable-compile-files-on-did-save-code": false,
+    "workbench.editorAssociations": [
+    
+    ],
+    "editor.autoIndent": "none",
+    "editor.accessibilitySupport": "off",
+    "editor.autoClosingOvertype": "never",
+    "editor.codeLens": false,
+    "editor.autoSurround": "never"
+    
+
 }

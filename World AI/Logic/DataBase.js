@@ -1,83 +1,81 @@
-let names = [
-        "Liam ",
-        "Noah ",
-        "William ",
-        "James ",
-        "Oliver ",
-        "Benjamin ",
-        "Elijah ",
-        "Lucas ",
-        "Mason ",
-        "Logan ",
-        "Gabriel ",
-        "David ",
-        "Alan ",
-        "John ",
-        "Andrew "
-    ]
-    //15 names
+export const names = [
+    "Liam ",
+    "Noah ",
+    "William ",
+    "James ",
+    "Oliver ",
+    "Benjamin ",
+    "Elijah ",
+    "Lucas ",
+    "Mason ",
+    "Logan ",
+    "Gabriel ",
+    "David ",
+    "Alan ",
+    "John ",
+    "Andrew ",
+    "Doe",
+    "Smith",
+    "Johnson",
+    "Williams",
+    "Brown",
+    "Jones",
+    "Garcia",
+    "Miller",
+    "Davis",
+    "Rodriguez",
+    "Martinez",
+    "Hernandez",
+    "Lopez",
+    "Gonzales",
+    "Wilson",
+    "Anderson",
+    "Thomas",
+    "Taylor"
+];
+//15 names
+
+
+export const treasuror = {
+    name: "Treasuror",
+    wage: 100,
+    description: "A treasurer is the person responsible for running the treasury of an Army. The significant core functions of a treasurer include cash and liquidity management, risk management, and corporate finance."
+};
+
+export const farmer = {
+    name: "Farmer",
+    wage: 1,
+    description: "A person who owns or manages a farm."
+};
+export const footSoldier = {
+    name: "Foot Soldier",
+    wage: 2,
+    description: "A soldier who fights on foot."
+};
+export const crossBowMan = {
+    name: "Arbalist",
+    wage: 3,
+    description: "A soldier who shoots a crossbow"
+};
+export const squire = {
+    name: "Squire",
+    wage: 4,
+    description: "A young nobleman acting as an attendant to a knight before becoming a knight himself."
+};
+export const knight = {
+    name: "Knight",
+    wage: 12,
+    description: "A knight is a person granted an honorary title of knighthood by a head of state or representative for service to the monarch"
+};
 
 
 
-var rawSurnames = [
-        "Doe",
-        "English",
 
-        "Smith",
-        "English",
+export const job = [treasuror];
 
-        "Johnson",
-        "English, Scottish",
+//18 surnames
 
-        "Williams",
-        "English, Welsh",
-
-        "Brown",
-        "English, Scottish, Irish",
-
-        "Jones",
-        "English, Welsh",
-
-        "Garcia",
-        "Spanish",
-
-        "Miller",
-        "English, Scottish, German, French, Italian",
-
-        "Davis",
-        "English, Welsh",
-
-        "Rodriguez",
-        "Spanish",
-
-        "Martinez",
-        "Spanish",
-
-        "Hernandez",
-        "Spanish, Portuguese",
-
-        "Lopez",
-        "Spanish",
-
-
-        "Gonzales",
-        "Spanish",
-
-        "Wilson",
-        "English, Scottish",
-
-        "Anderson",
-        "Swedish, Danish, Norwegian, English",
-
-        "Thomas",
-        "English, Welsh",
-
-        "Taylor",
-        "English"
-    ]
-    //18 surnames
-
-var sickness = {
+export const sickness = {
     "Allergies": -10,
     "Conjunctivitis": -5,
     "Diarrhea": -5,
@@ -111,8 +109,4 @@ var sickness = {
     "Liver Disease": -50
 };
 
-var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', "Oct", 'Nov', 'Dec'];
-
-
-
-export { names, rawSurnames, monthNames, sickness };
+export const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', "Oct", 'Nov', 'Dec'];

@@ -2,7 +2,7 @@
 
 // module of names
 
-import { names, rawSurnames, sickness } from './DataBase.js';
+import { names, sickness } from './DataBase.js';
 import { getRandom } from './Util.js';
 import { time, age } from './Time.js';
 
@@ -20,23 +20,64 @@ export class Character {
     constructor() {
         var snit = getRandom(0, 18);
         this.name =
-            names[getRandom(0, 15)] + surnames[snit];
-        this.nationality = nationality[snit] + " descendant";
+            names[getRandom(0, 15)];
         this.hp = 100;
         this.atk = getRandom(0, 100);
         this.atk = simulateAttack(this.age, this.atk);
         this.armour = 0;
         this.risk = 0;
-        this.age = age;
+        this.age = 18;
         this.id = function() {
             return id++;
-        }
+        };
 
     }
     info() {
         console.log("Name: " + this.name + "\n" + "Nationality: " + this.nationality + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
     }
 }
+
+
+const p = new Character();
+
+
+$("person").html("<h4>" + p.age + "</h4>");
+$("person").add("<h4>" + p.armour + "</h4>");
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+(function() {
+
+    var members = 0;
+
+    function becomeNoble() {
+
+        /**
+            @func becomeNoble()
+            Answers the question who is noble
+            Only 1 percent is of noble blood giving them the ability to rule
+            The noble's subjects are the other 99% of iterations that didn't become noble
+
+        */
+
+        var percent = Math.round(Math.random() * 99 + 1); // percent of becoming noble
+
+
+        if (percent == 100 && members != 0) {
+            console.log("Noble");
+            console.log("Peasants under the noble, " + members);
+        } else {
+            ++members;
+
+            becomeNoble();
+        }
+    }
+
+
+    becomeNoble();
+
+}());
 
 
 
@@ -53,22 +94,6 @@ function randomN(x) {
     return Math.floor(Math.random() * x);
 }
 
-function iterateNameLists() {
-    for (let i = 1; i < rawSurnames.length; i += 2) {
-        nationality.push(rawSurnames[i]);
-    }
-
-    for (var j = 0; j < rawSurnames.length; j += 2) {
-        surnames.push(rawSurnames[j])
-    }
-    //nationality and Surnames joined
-    let ns = [];
-    for (var i = 0; i < 18; i++) {
-        ns = nationality[i] + "," + surnames[i]
-        var str = ns.split(",")
-        var n = str[str.length - 1];
-    }
-}
 
 function compare(obj, obj2) {
 
@@ -95,7 +120,7 @@ function simulateAttack(age, atk, risk) {
 
         if (atk < 0) {
             risk = Math.abs(atk);
-            return atk = 0;
+            atk = 0;
         }
 
 
@@ -180,7 +205,7 @@ export var people = {
 export var food = {
     count: 0,
     food: []
-}
+};
 
 //makes people appear
 export function maker(n) {
@@ -196,22 +221,7 @@ export function maker(n) {
     displayElement.html("<h1>" + people.count + "</h1>");
 
 
-    return people;
-}
-
-//makes people disappear
-export function loss(n) {
-
-    var displayElement = $("#population");
-    $(displayElement).removeClass("text-success");
-    while (n > 0) {
-        --people.count;
-        people.person.pop(people.person[n]);
-        n--;
-    }
-
-    displayElement.html("<h1 class='text-danger'>" + people.count + "</h1>");
-    return people;
+    return people.count;
 }
 
 
@@ -224,7 +234,32 @@ export function loss(n) {
 
 
 
-iterateNameLists();
+
+
+
+(function() { //army viewer
+
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+
+
+}());
+
+
+
 // class Enemy extends Character {
 //     constructor(name, hp, atk, age, honor, relations) {
 //             super(name, hp, atk, age, honor)

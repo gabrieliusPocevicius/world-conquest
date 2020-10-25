@@ -1,27 +1,30 @@
 import { battleTrue } from '../Logic/Battle.js';
 import { monthNames } from "./DataBase.js";
 
-import { Character, maker, people, loss } from './Character.js';
+import { Character, maker, people } from './Character.js';
 
 
 export var age = 0;
 
-//Util func
-let counter = 0; // Counter variable is used as a switch.
-$("#pause").on("click", () => {
-    $("#pause").text("Pause");
-    ++counter;
+(function() {
+    $("#pause").on("click", () => {
+        $("#pause").text("Pause");
+        ++counter;
 
-    if (counter == 1) {
-        if (battleTrue == true) {
-            time(1000); //slows the time down so the men don't age so fast 
-        } else {
-            time(10); //time goes on as normal
+        if (counter == 1) {
+            if (battleTrue == true) {
+                time(1000); //slows the time down so the men don't age so fast 
+            } else {
+                time(300); //time goes on as normal
+            }
+
         }
 
-    }
+    });
 
-});
+}());
+//Util func
+let counter = 0; // Counter variable is used as a switch.
 
 
 
@@ -66,7 +69,7 @@ function naturalDisaster(affects, lengthOfTime) {
     affects = 0.02; //avarge damage by natural disasters per year
 
     if (0 == calender.yearC % lengthOfTime) { //every so many years
-        loss(1);
+
     }
 
     /*
@@ -137,7 +140,7 @@ export function timeStruct() {
     }
 }
 
-export async function time(speed) {
+async function time(speed) {
     // Time loop 
 
     while (true) {
@@ -148,11 +151,28 @@ export async function time(speed) {
 
         //console.log(alive(20, 1, 500));
 
+        zingchart.render({
+            id: 'myChart',
+            data: {
+                type: 'radar',
+                series: [
+                    { values: [maker(2)] }
+
+                ],
+                'scale-y': {
+                    values: "0:50:5"
+                },
+                'scale-x': {
+                    values: "Population"
+                }
+
+            }
+        });
+
 
 
         //Adds one person per day
 
-        maker(1);
 
 
         document.getElementById('days').innerHTML = calender.dayC + ' days';
@@ -169,8 +189,9 @@ export async function time(speed) {
         if (counter == 2) {
             $("#pause").text("Start");
             counter = 0;
-            break
+            break;
         }
     }
 
 }
+export { time };

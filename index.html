@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="CustomStyle.css">
     <!--<script src="https://d3js.org/d3.v5.min.js"></script>-->
+    <script src='https://cdn.zingchart.com/zingchart.min.js'></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -31,7 +33,6 @@
 
                 <div id="days" class="col">1</div>
                 <div id="months" class="col">1</div>
-
                 <div id="years" class="col">500</div>
                 <button id="pause" class="btn btn-outline-danger text-center">Start</button>
                 <div class="ml-3"></div>
@@ -42,7 +43,6 @@
 
 
     </div>
-
 
     <div id="battleScene">
         <!--all-teams controls all of the html of battle scene-->
@@ -70,7 +70,7 @@
                 </table>
 
                 <!--Result table-->
-                <div class=" ">
+                <div>
                     <div class=" justify-content-center ">
                         <ul class="pagination  pagination-lg">
                             <li class="page-item ">
@@ -111,19 +111,61 @@
     </div>
     </div>
 
+
+
+    <div id="armyDisplay" class="container-fluid col-6 float-right ">
+        <!--Title Of all the armies in the World-->
+        <h2 class="text-center ">Armies Of the World</h2>
+
+
+
+        <div id="parent-of-all-armies"></div>
+
+
+
+    </div>
+
+
     <div class="container">
-        <h3>Total Population</h3>
-        <h1 id="population">0</h1>
+        <div class="row">
+            <div class="col">
+                <h3>Total Population</h3>
+                <h1 id="population">0</h1>
+            </div>
+            <div class="col">
+                <h3>Deaths</h3>
+                <h1 id="deaths">0</h1>
+            </div>
+        </div>
+    </div>
+    <div>
+
     </div>
 
 
     </div>
 
+    </div>
+
+    <div id="myNav" class="overlay">
+        <span id="closebtn">&times;</span>
+        <div class="person-card">
+            <div class="row">
+                <div class="container  p-5">
+                    <div>
+                        <div class="card card-body shadow rounded-0">
+                            <person></person>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
-
-
+    <div id="myChart"></div>
 
 
 </body>
