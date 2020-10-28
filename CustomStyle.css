@@ -29,6 +29,21 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+svg {
+    cursor: pointer;
+}
+
+body {
+    background-color: #E5E5E5 !important;
+    font-family: var(--font-family-sans-serif);
+    font-style: normal !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    line-height: 30px !important;
+    /* identical to box height, or 167% */
+    letter-spacing: -0.015em !important;
+}
+
 .accordion {
     background-color: #eee;
     color: #444;
@@ -48,7 +63,6 @@
 }
 
 .panel {
-    background-color: rgb(246, 246, 246);
     padding: 0 18px;
     display: none;
     overflow: hidden;
@@ -69,7 +83,7 @@
 
 .person-card {
     position: relative;
-    top: 25%;
+    top: 15%;
     text-align: center;
     margin-top: 30px;
 }

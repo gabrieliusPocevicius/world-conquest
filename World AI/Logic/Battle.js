@@ -1,16 +1,15 @@
+export var battleTrue = false;
+
 //import { Character } from "./Character.js";
 
 
-
-
-
-
-
-export var battleTrue = false;
-
 (function() {
-    let armyTemplate =
-        `<button class="accordion shadow-sm">Army Name </button>
+
+
+
+
+    var armyTemplate =
+        `<button class="accordion shadow-sm">${null}'s Army </button>
         <div class="panel ">
             <div class="row">
                 <h5 class="col">Leader
@@ -33,14 +32,18 @@ export var battleTrue = false;
 //Person attribute card
 
 
+function openPersonDataCard() {
+    $("#open-card").on("click", () => {
+        $("#myNav").css("height", 100 + "%");
+    });
 
-$("#open-card").on("click", () => {
-    $("#myNav").css("height", 100 + "%");
-});
+    $("#closebtn").on("click", () => {
+        $("#myNav").css("height", 0 + "%");
+    });
 
-$("#closebtn").on("click", () => {
-    $("#myNav").css("height", 0 + "%");
-});
+}
+openPersonDataCard();
+
 
 
 

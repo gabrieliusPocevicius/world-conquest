@@ -2,7 +2,7 @@
 
 // module of names
 
-import { names, fnames, sickness } from './DataBase.js';
+import { names, fnames, sickness, militaryRanks } from './DataBase.js';
 import { getRandom } from './Util.js';
 import { time, age } from './Time.js';
 
@@ -18,18 +18,18 @@ var percent = Math.round(Math.random() * 99 + 1);
 
 
 
+/*
+
+    We need Four kingdoms and therefore four kings.
+    North, East, West, and South.
 
 
-
-
-
-
-
+*/
 export class Character {
     constructor() {
         this.gender = percent; //50% change of it being a boy for a girl.
         this.title = "Baby";
-        if (this.gender <= 60) {
+        if (this.gender <= 60) { //MAKE IT 60 TO BE A man
             this.gender = "#007bff";
             this.hp = 100;
             this.atk = getRandom(0, 100);
@@ -40,6 +40,10 @@ export class Character {
                 names[getRandom(0, 400)];
             console.log("Name: " + this.name + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
             console.log("Boy");
+
+
+
+
         } else {
             this.gender = "rgb(255, 99, 132)";
             this.name = fnames[getRandom(0, 400)];
@@ -61,27 +65,69 @@ export class Character {
 
 const p = new Character();
 
+function bio() {
+    let strength;
+    if (age >= 18) {
+        strength = `<div class="col">Can lift ${p.atk * 10.5} kg</div>`;
+        return strength;
+    } else {
+        strength = p.atk;
+    }
+    let armourStrings = ["Doesn't have any armour.", ""]
+
+    switch (p.armour) {
+        case p.armour == 0:
+            "Doesn't wear any armour";
+            break;
+        case p.armour == 1:
+            "Has a"
+        default:
+            break;
+    }
 
 
-
-$("person").append(` <div class="row" style="background-color:${p.gender}">
+    $("person").append(`<div class="row" style="background-color:${p.gender}">
     
-    <h5 class="col-12">${p.title}</h5>
-
-
+  <h5 class="col-12">${p.title}</h5>
   <div class="col">Name ${p.name}</div>
   <div class="col">Age ${p.age}</div>
-
+  <div class="col">Armour${p.armour}</div>
+  <div class="col">${strength}</div>
 </div> `);
 
 
+}
+bio();
 
+
+
+
+
+
+let nobleSlot = 0; // Shows the available slot for a new noble.
+let nobles = []; //Lists all the nobles and their props
+let peasantsUnderNoble = []; //Lists all the peasants under the noble.
 ///////////////////////////////////////////////////////////////////////////////////
 (function() {
 
-    var members = 0;
+    var members = 0; //pwasants the noble is assigned as levies and farmers.
+
+    let p = new Character();
+    console.log(p.armour);
+    console.log(militaryRanks.rank[3].armor += p.armour);
+
+
+
+
+    if (nobleSlot > 0) {
+        becomeNoble();
+    }
+
+
 
     function becomeNoble() {
+
+
 
         /**
             @func becomeNoble()
@@ -90,22 +136,29 @@ $("person").append(` <div class="row" style="background-color:${p.gender}">
             The noble's subjects are the other 99% of iterations that didn't become noble
 
         */
+        for (let i = 0; i < 1000; i++) {
+            var percent = Math.round(Math.random() * 99 + 1);
 
-        // percent of becoming noble
+            // percent of becoming noble
+            if (percent == 100) {
+                console.log("Noble");
 
+                console.log("Peasants under the noble, " + members);
+                break;
 
-        if (percent == 100 && members != 0) {
-            console.log("Noble");
-            console.log("Peasants under the noble, " + members);
-        } else {
-            ++members;
+            } else {
 
-            becomeNoble();
+                ++members;
+
+            }
+
         }
+
+
+
     }
 
 
-    becomeNoble();
 
 }());
 
