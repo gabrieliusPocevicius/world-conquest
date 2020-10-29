@@ -2,9 +2,9 @@
 
 // module of names
 
-import { names, fnames, sickness, militaryRanks } from './DataBase.js';
-import { getRandom } from './Util.js';
-import { time, age } from './Time.js';
+import { names, fnames, sickness, militaryRanks } from "./DataBase.js";
+import { getRandom } from "./Util.js";
+import { time, age } from "./Time.js";
 
 /*import {alive, lifeStage, time} from './Time.js';
  */
@@ -12,11 +12,8 @@ var id = 0; // the id of each object of the Character class
 var nationality = [];
 var surnames = [];
 var it = 0; // separate iterator for NAMES
-var gender = ["Male", "Female"];
+var gen = ["Male", "Female"];
 var percent = Math.round(Math.random() * 99 + 1);
-
-
-
 
 /*
 
@@ -27,23 +24,35 @@ var percent = Math.round(Math.random() * 99 + 1);
 */
 export class Character {
     constructor() {
-        this.gender = percent; //50% change of it being a boy for a girl.
+        var percent = Math.round(Math.random() * 99 + 1);
+        //50% change of it being a boy for a girl.
         this.title = "Baby";
-        if (this.gender <= 60) { //MAKE IT 60 TO BE A man
+        if (percent <= 60) {
+            //MAKE IT 60 TO BE A man
             this.gender = "#007bff";
             this.hp = 100;
             this.atk = getRandom(0, 100);
             this.armour = 0;
             this.risk = 0;
+
             this.age = 0;
-            this.name =
-                names[getRandom(0, 400)];
-            console.log("Name: " + this.name + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
-            console.log("Boy");
 
-
-
-
+            this.name = names[getRandom(0, 400)];
+            console.log(
+                "Name: " +
+                this.name +
+                "\n" +
+                "Health: " +
+                this.hp +
+                "\n" +
+                "Strength: " +
+                this.atk +
+                "\n" +
+                "Age: " +
+                this.age +
+                "\n" +
+                gen[0]
+            );
         } else {
             this.gender = "rgb(255, 99, 132)";
             this.name = fnames[getRandom(0, 400)];
@@ -52,90 +61,64 @@ export class Character {
             this.armour = 0;
             this.risk = 0;
             this.age = 0;
-            console.log("Name: " + this.name + "\n" + "\n" + "Health: " + this.hp + "\n" + "Strength: " + this.atk + "\n" + "Age: " + this.age + "\n");
-            console.log("Girl");
+            console.log(
+                "Name: " +
+                this.name +
+                "\n" +
+                "\n" +
+                "Health: " +
+                this.hp +
+                "\n" +
+                "Strength: " +
+                this.atk +
+                "\n" +
+                "Age: " +
+                this.age +
+                "\n" +
+                gen[1]
+            );
         }
-
         this.id = function() {
             return id++;
         };
+        this.age = age;
     }
 }
 
-
 const p = new Character();
+p.age = 50;
 
 function bio() {
-    let strength;
-    if (age >= 18) {
-        strength = `<div class="col">Can lift ${p.atk * 10.5} kg</div>`;
-        return strength;
-    } else {
-        strength = p.atk;
-    }
-    let armourStrings = ["Doesn't have any armour.", ""]
-
-    switch (p.armour) {
-        case p.armour == 0:
-            "Doesn't wear any armour";
-            break;
-        case p.armour == 1:
-            "Has a"
-        default:
-            break;
-    }
-
-
     $("person").append(`<div class="row" style="background-color:${p.gender}">
     
   <h5 class="col-12">${p.title}</h5>
   <div class="col">Name ${p.name}</div>
-  <div class="col">Age ${p.age}</div>
-  <div class="col">Armour${p.armour}</div>
-  <div class="col">${strength}</div>
+  <div class="col">Armour ${p.armour}</div>
+  <div class="col">Strength ${p.atk}</div>
+<div class="col">Age ${p.age}</div>
 </div> `);
-
-
 }
 bio();
 
-
-
-
-
-
-let nobleSlot = 0; // Shows the available slot for a new noble.
+let nobleSlot = 4; // Shows the available slot for a new noble.
 let nobles = []; //Lists all the nobles and their props
 let peasantsUnderNoble = []; //Lists all the peasants under the noble.
 ///////////////////////////////////////////////////////////////////////////////////
 (function() {
-
     var members = 0; //pwasants the noble is assigned as levies and farmers.
 
-    let p = new Character();
-    console.log(p.armour);
-    console.log(militaryRanks.rank[3].armor += p.armour);
-
-
-
-
-    if (nobleSlot > 0) {
+    if (nobleSlot === 4) {
         becomeNoble();
     }
 
-
-
+    //console.log(p.armour);
+    //console.log((militaryRanks.rank[3].armor += p.armour));
     function becomeNoble() {
-
-
-
         /**
-            @func becomeNoble()
-            Answers the question who is noble
-            Only 1 percent is of noble blood giving them the ability to rule
-            The noble's subjects are the other 99% of iterations that didn't become noble
-
-        */
+                                    @func becomeNoble()
+                                    Answers the question who is noble
+                                    Only 1 percent is of noble blood giving them the ability to rule
+                                   The noble's subjects are the other 99% of iterations that didn't become noble                                                                                                                 */
         for (let i = 0; i < 1000; i++) {
             var percent = Math.round(Math.random() * 99 + 1);
 
@@ -143,59 +126,34 @@ let peasantsUnderNoble = []; //Lists all the peasants under the noble.
             if (percent == 100) {
                 console.log("Noble");
 
-                console.log("Peasants under the noble, " + members);
+                console.log("Peasants under the noble, " + members + " Levies");
                 break;
-
             } else {
-
                 ++members;
-
             }
-
         }
-
-
-
     }
-
-
-
-}());
-
-
-
-
-
-
-
-
-
-
-
+})();
 
 function randomN(x) {
     return Math.floor(Math.random() * x);
 }
 
-
 function compare(obj, obj2) {
-
     for (const [key, value] of Object.entries(obj)) {
         console.log(`1- ${key} ${value}`);
-
     }
     for (const [key, value] of Object.entries(obj2)) {
         console.log(`2- ${key}: ${value}`);
     }
-
 }
 
 function simulateAttack(age, atk, risk) {
-    //Makes the attack strength more dynamic by age affecting your attk 
+    //Makes the attack strength more dynamic by age affecting your attk
     //console.log("initial atk: " + atk);
 
     if (Number(age) > 39) {
-        atk = (atk / 2);
+        atk = atk / 2;
 
         //console.log(age);
         //console.log("Lost " + atk + " strength");
@@ -206,11 +164,10 @@ function simulateAttack(age, atk, risk) {
             atk = 0;
         }
 
-
         return atk;
-
-    } else if (Number(age) > 12 && Number(age) < 39) { // maturing to adulthood. Developing muscules.
-        var stronger = (age * 2);
+    } else if (Number(age) > 12 && Number(age) < 39) {
+        // maturing to adulthood. Developing muscules.
+        var stronger = age * 2;
 
         //console.log(age);
         //console.log(atk);
@@ -221,11 +178,10 @@ function simulateAttack(age, atk, risk) {
 
         if (atk < 0) {
             risk = Math.abs(atk);
-            return strength, atk = 0;
+            return strength, (atk = 0);
         }
 
         return strength;
-
     } else {
         var a = atk - 10;
         atk = a;
@@ -235,59 +191,38 @@ function simulateAttack(age, atk, risk) {
     return atk;
 }
 
-function simulateHp(age, hp, risk) { //Calculates Risk of catching diseases based on age and life chosen path
+function simulateHp(age, hp, risk) {
+    //Calculates Risk of catching diseases based on age and life chosen path
     risk = 0;
 
     if (Number(age) > 39) {
         risk += 5;
-
     }
 
-
-
-    if (age > 50 || age > 40 && "Alcoholic") {
-        return risk += 15;
+    if (age > 50 || (age > 40 && "Alcoholic")) {
+        return (risk += 15);
     }
-
-
 
     for (const i in sickness) {
         if (sickness.hasOwnProperty(i)) {
-
             const element = sickness[i];
             //console.log(element);
-
-
         }
     }
     var keyNames = Object.keys(sickness);
     //console.log(keyNames);
-
-
 }
 // making random people attributes
-
-
-
-
-
-
-
-
-
-
-
 
 export var people = {
     //compare(p1, p2);
     count: 0,
     person: [],
-
 };
 
 export var food = {
     count: 0,
-    food: []
+    food: [],
 };
 
 //makes people appear
@@ -303,25 +238,13 @@ export function maker(n) {
 
     displayElement.html("<h1>" + people.count + "</h1>");
 
-
     return people.count;
 }
 
-
-
-
 //console.log(maker(10));
 
-
-
-
-
-
-
-
-
-(function() { //army viewer
-
+(function() {
+    //army viewer
 
     var acc = document.getElementsByClassName("accordion");
     var i;
@@ -337,11 +260,7 @@ export function maker(n) {
             }
         });
     }
-
-
-}());
-
-
+})();
 
 // class Enemy extends Character {
 //     constructor(name, hp, atk, age, honor, relations) {
@@ -355,7 +274,5 @@ export function maker(n) {
 //         }
 //         // class functions here
 // }
-
-
 
 // Would update the first dataset's value of 'March' to be 50

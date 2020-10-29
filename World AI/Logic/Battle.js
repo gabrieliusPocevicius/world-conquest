@@ -2,35 +2,38 @@ export var battleTrue = false;
 
 //import { Character } from "./Character.js";
 
-
 (function() {
+    /* The rules for creating an army
+    The people can't have an organized group like the army
+    Without Leaders
+    There are four main leader positions available
+    if there is no one to lead the army disbands.
+    To qualify to become a general of an army one 
+    
 
+ */
 
-
-
-    var armyTemplate =
-        `<button class="accordion shadow-sm">${null}'s Army </button>
+    var armyLeaders = [];
+    if (armyLeaders.length != 0) {
+        var armyTemplate = `<button class="accordion shadow-sm">${
+      armyLeaders[0]
+    }'s Army </button>
         <div class="panel ">
             <div class="row">
                 <h5 class="col">Leader
-                    <p id="open-card">John Doe</p>
+                    <p id="open-card">${null}</p>
                 </h5>
-                <h5 class="col">Treasurer</h5>
-                <h5 class="col">Logistics Manager</h5>
-                <h5 class="col">Strategist training</h5>
+                <h5 class="col">Treasurer <p>Incharge of the funds</p></h5>
+                <h5 class="col">Logistics <p>Incharge of supply</p></h5>
+                <h5 class="col">Strategist <p>highest ranking officer</p></h5>
                 <h5 class="col">Loyalty</h5>
             </div>
         </div>`;
-    $("#parent-of-all-armies").append(armyTemplate);
-}());
-
-
-
-
-
+        $("#parent-of-all-armies").append(armyTemplate);
+    }
+})();
 
 //Person attribute card
-
 
 function openPersonDataCard() {
     $("#open-card").on("click", () => {
@@ -40,20 +43,13 @@ function openPersonDataCard() {
     $("#closebtn").on("click", () => {
         $("#myNav").css("height", 0 + "%");
     });
-
 }
 openPersonDataCard();
 
-
-
-
-
 //arrows to move ect...
 var counter = 0;
-$('#battleScene').hide();
+$("#battleScene").hide();
 $("#start-battle-btn").on("click", () => {
-
-
     counter++;
     console.log(counter);
 
@@ -62,22 +58,19 @@ $("#start-battle-btn").on("click", () => {
     }
 
     if (counter == 2) {
-        $('#battleScene').hide();
+        $("#battleScene").hide();
 
         counter = 0;
     }
 });
 
-
-
-
-
 function stopKeysUpDown() {
     var keys = {};
-    window.addEventListener("keydown",
+    window.addEventListener(
+        "keydown",
         function(e) {
-            keys[e.keyCode] = true;
-            switch (e.keyCode) {
+            keys[e.key] = true;
+            switch (e.key) {
                 case 37:
                 case 39:
                 case 38:
@@ -86,16 +79,18 @@ function stopKeysUpDown() {
                     e.preventDefault();
                     break; // Space
                 default:
-                    break; // do not block other keys 
+                    break; // do not block other keys
             }
         },
-        false);
-    window.addEventListener('keyup',
+        false
+    );
+    window.addEventListener(
+        "keyup",
         function(e) {
-            keys[e.keyCode] = false;
+            keys[e.key] = false;
         },
-        false);
-
+        false
+    );
 }
 stopKeysUpDown();
 //no battle at the moment.
@@ -122,12 +117,9 @@ var total = 1;
 let numberCounter1 = 0;
 let numberCounter2 = 0;
 
-
 $("#fight-btn").on("click", () => {
     fight();
 });
-
-
 
 function fight() {
     console.log("Fighting");
@@ -138,18 +130,11 @@ function fight() {
 
 // })
 
-
-
-
-
 // var slidecontainer = document.querySelector(".slidecontainer");
 // var slider1 = document.getElementById("myRange1");
 // var slider2 = document.getElementById("myRange2");
 // var output1 = document.getElementById("display1");
 // var output2 = document.getElementById("display2");
-
-
-
 
 // slider1.oninput = function() {
 //     var v1 = output1.innerHTML = this.value;
@@ -161,8 +146,6 @@ function fight() {
 
 // }
 
-
-
 //generate r number
 function random(num) {
     var random = Number(Math.round(Math.random() * num) + 1);
@@ -171,7 +154,5 @@ function random(num) {
 
 //run 2 Team two
 //Object.keys(p).length
-
-
 
 //nobattle();

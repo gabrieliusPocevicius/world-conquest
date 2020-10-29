@@ -1,14 +1,14 @@
-import { battleTrue } from '../Logic/Battle.js';
+import { battleTrue } from "../Logic/Battle.js";
 import { monthNames } from "./DataBase.js";
 
-import { Character, maker, people } from './Character.js';
-
+import { Character, maker, people } from "./Character.js";
 
 export var age = 0;
 
 (function() {
     $("#pause").on("click", () => {
-        $("#pause").html(`<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        $("#pause")
+            .html(`<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d)">
 <path d="M14.5 20C15.1875 20 15.75 19.4375 15.75 18.75V11.25C15.75 10.5625 15.1875 10 14.5 10C13.8125 10 13.25 10.5625 13.25 11.25V18.75C13.25 19.4375 13.8125 20 14.5 20ZM17 2.5C10.1 2.5 4.5 8.1 4.5 15C4.5 21.9 10.1 27.5 17 27.5C23.9 27.5 29.5 21.9 29.5 15C29.5 8.1 23.9 2.5 17 2.5ZM17 25C11.4875 25 7 20.5125 7 15C7 9.4875 11.4875 5 17 5C22.5125 5 27 9.4875 27 15C27 20.5125 22.5125 25 17 25ZM19.5 20C20.1875 20 20.75 19.4375 20.75 18.75V11.25C20.75 10.5625 20.1875 10 19.5 10C18.8125 10 18.25 10.5625 18.25 11.25V18.75C18.25 19.4375 18.8125 20 19.5 20Z" fill="#FAFAFA"/>
 </g>
@@ -26,37 +26,26 @@ export var age = 0;
 </svg>
 `);
         ++counter;
-
+        play = true;
         if (counter == 1) {
             if (battleTrue == true) {
-                time(1000); //slows the time down so the men don't age so fast 
+                time(1000); //slows the time down so the men don't age so fast
             } else {
-                time(300); //time goes on as normal
+                time(1000); //time goes on as normal
             }
-
         }
-
     });
-
-}());
+})();
 //Util func
 let counter = 0; // Counter variable is used as a switch.
 
-
-
-
-
-
-
 export function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function getRandom(min, max) {
     console.log(Math.floor(Math.random() * (max - min)) + min);
 }
-
-
 
 // year 500 and first month and days
 var calender = {
@@ -68,11 +57,9 @@ var calender = {
     yearC: 500,
 };
 
-
-//var result = Math.round(result * 100) / 100; 
+//var result = Math.round(result * 100) / 100;
 //when nature strikes
 function naturalDisaster(affects, lengthOfTime) {
-
     var triggers = false;
 
     //0.6 die from disease
@@ -84,18 +71,17 @@ function naturalDisaster(affects, lengthOfTime) {
     lengthOfTime = 1;
     affects = 0.02; //avarge damage by natural disasters per year
 
-    if (0 == calender.yearC % lengthOfTime) { //every so many years
-
+    if (0 == calender.yearC % lengthOfTime) {
+        //every so many years
     }
 
     /*
-    Geophysical (e.g. Earthquakes, Landslides, Tsunamis and Volcanic Activity)
-    Hydrological (e.g. Avalanches and Floods)
-    Climatological (e.g. Extreme Temperatures, Drought and Wildfires)
-    Meteorological (e.g. Cyclones and Storms/Wave Surges)
-    Biological (e.g. Disease Epidemics and Insect/Animal Plagues) 
-     */
-
+                              Geophysical (e.g. Earthquakes, Landslides, Tsunamis and Volcanic Activity)
+                              Hydrological (e.g. Avalanches and Floods)
+                              Climatological (e.g. Extreme Temperatures, Drought and Wildfires)
+                              Meteorological (e.g. Cyclones and Storms/Wave Surges)
+                              Biological (e.g. Disease Epidemics and Insect/Animal Plagues) 
+                               */
 }
 
 function alive(day, month, year) {
@@ -104,14 +90,11 @@ function alive(day, month, year) {
     //parameters birthday
     if (calender.dayC === day && calender.monthC === month && alive) {
         // person's age
-        let age = yearsOld + calender.yearC - year;
+        age = yearsOld + calender.yearC - year;
         lifeStage(age);
         return console.log(age + " years old");
     }
 }
-
-
-
 
 function lifeStage(age) {
     var stage = "";
@@ -159,9 +142,6 @@ export function timeStruct() {
     lays out the structure of the calender
 
  */
-
-
-
     if (calender.dayC === calender.days[calender.monthC]) {
         calender.dayC = 1;
 
@@ -178,25 +158,21 @@ export function timeStruct() {
     }
 }
 
-
 function renderChart() {
     zingchart.render({
-        id: 'myChart',
+        id: "myChart",
         data: {
-            type: 'bar',
+            type: "bar",
             series: [{
-                "values": [maker(2)]
-            }],
-            'scale-y': {
-                values: "0:50:5"
+                values: [maker(1)],
+            }, ],
+            "scale-y": {
+                values: "0:50:5",
             },
             "scale-x": {
-                "values": [
-                    "Population"
-                ]
-            }
-
-        }
+                values: ["Population"],
+            },
+        },
     });
 }
 
@@ -204,50 +180,44 @@ let playIcon = `
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z" fill="#FAFAFA"/>
             </svg>
-`
+`;
 
+function displayDate() {
+    calender.dayC++;
+    document.getElementById("days").innerHTML = calender.dayC + " days";
+    document.getElementById("months").innerHTML = monthNames[calender.monthC];
+    document.getElementById("years").innerHTML = calender.yearC;
+    age = calender.yearC - calender.years;
+}
+
+var play = true;
 
 async function time(speed) {
-    // Time loop 
+    // Time loop
 
-    while (true) {
+    while (play) {
         await sleep(speed); //wating time for a single day
 
-        calender.dayC++;
-
+        displayDate();
 
         //console.log(alive(20, 1, 500));
 
-
-
-
-
-
         //Adds one person per day
-
-
-
-        document.getElementById('days').innerHTML = calender.dayC + ' days';
-        document.getElementById('months').innerHTML = monthNames[calender.monthC];
-        document.getElementById('years').innerHTML = calender.yearC;
-        age = calender.yearC - calender.years;
 
         //console.log(age);
         //console.warn(age);
-
-
         timeStruct();
-
-        if (counter == 2) {
-            $("#pause").html(playIcon);
-            counter = 0;
-            break;
-        }
-
-
         renderChart();
-
+        pauseTime();
     }
-
 }
+
+function pauseTime() {
+    if (counter == 2) {
+        $("#pause").html(playIcon);
+        counter = 0;
+        play = false;
+    }
+}
+
 export { time };

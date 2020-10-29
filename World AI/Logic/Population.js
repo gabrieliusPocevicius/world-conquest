@@ -10,14 +10,15 @@ function random(num) {
     return random;
 }
 
-let r, births, deaths, population = 0;
-
+let r,
+    births,
+    deaths,
+    population = 0;
 
 /* 
 var rate = function(births, deaths, population) {
     return r = (births - deaths) / population;
 } */
-
 
 var pop = 0;
 var age = 0;
@@ -26,10 +27,7 @@ var age = 0;
 var firstPeople = 30; //First generation
 if (firstPeople == 30) {
     age = random(40);
-
 }
-
-
 
 /*
  Character 
@@ -38,10 +36,49 @@ if (firstPeople == 30) {
 
 //relative to the person object
 
+/**
+ * 
+    To replaced with the Character class
+ */
+var john = "John";
+var mary = "Mary";
+var son = "James";
 
+//family unit
+const family = {
+    parent: [],
+    child: [],
+};
 
+function marriage(male, female) {
+    //assume 18 is the year of adulthood
+    family.parent.push([male, female]); //will remove when Character class imported
+    if (family.parent.length == 1) {
+        haveChild(female);
+    }
+    if (male.age >= 18 && female.age >= 18 && male.age <= 50 && female <= 38) {
+        family.parent.push([male, female]);
+    }
+    //remove line below after done testing
+}
 
+function haveChild(mother) {
+    /**
+                                   *@param mother 
+                                      the one giving birth to child.
+                                   */
+    //One in three women died in pregnancies //Medieval setting
+    let fertileTime = setInterval(() => {
+        var risk = Math.round(Math.random() * 2);
+        // the outcome is determined by random chance out of 3
+        //console.log(family);
+        return risk == 1 ? clearInterval(fertileTime) : family.child.push(son);
+    }, 1000);
 
+    return family;
+}
+
+setInterval(marriage(john, mary), 100);
 
 /**
   Population growth rate is the percentage change in the size of the population in a year.
