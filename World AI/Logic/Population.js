@@ -38,44 +38,45 @@ if (firstPeople == 30) {
 
 /**
  * 
-    To replaced with the Character class
+    To replace with the Character class
  */
 var john = "John";
 var mary = "Mary";
 var son = "James";
 
-//family unit
-const family = {
-    parent: [],
-    child: [],
-};
+export function marriage(male, female) {
+    //family unit
+    const family = {
+        parent: [],
+        child: [], //stores the family's children
+    };
 
-function marriage(male, female) {
+    //function that adds another family member
+    function haveChild(mother) {
+        /**
+                                                                                   *@param mother 
+                                                                                      the one giving birth to child.
+                                                                                   */
+        //One in three women died in pregnancies //Medieval setting
+        let fertileTime = setInterval(() => {
+            var risk = Math.round(Math.random() * 2);
+            // the outcome is determined by random chance out of 3
+            //console.log(family);
+            return risk == 1 ? clearInterval(fertileTime) : family.child.push(son);
+        }, 1000);
+
+        return family;
+    }
+
     //assume 18 is the year of adulthood
-    family.parent.push([male, female]); //will remove when Character class imported
-    if (family.parent.length == 1) {
+    family.parent.push([male, female]);
+    if (family.parent.length === 1) {
         haveChild(female);
     }
     if (male.age >= 18 && female.age >= 18 && male.age <= 50 && female <= 38) {
         family.parent.push([male, female]);
     }
-    //remove line below after done testing
-}
-
-function haveChild(mother) {
-    /**
-                                   *@param mother 
-                                      the one giving birth to child.
-                                   */
-    //One in three women died in pregnancies //Medieval setting
-    let fertileTime = setInterval(() => {
-        var risk = Math.round(Math.random() * 2);
-        // the outcome is determined by random chance out of 3
-        //console.log(family);
-        return risk == 1 ? clearInterval(fertileTime) : family.child.push(son);
-    }, 1000);
-
-    return family;
+    //console.log(family);
 }
 
 setInterval(marriage(john, mary), 100);

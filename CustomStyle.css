@@ -33,8 +33,18 @@ svg {
     cursor: pointer;
 }
 
+.bg-gray {
+    background: #C4C4C4;
+    box-shadow: 0px 8px 24px rgba(25, 32, 56, 0.04);
+}
+
+.armySlots {
+    border: #C4C4C4 1px solid;
+}
+
 body {
-    background-color: #E5E5E5 !important;
+    color: whitesmoke !important;
+    background-color: #353535 !important;
     font-family: var(--font-family-sans-serif);
     font-style: normal !important;
     font-weight: bold !important;
@@ -213,4 +223,8 @@ tbody {
     height: 100%;
     width: 50%;
     min-height: 150px;
+}
+
+.hide {
+    display: none;
 }
