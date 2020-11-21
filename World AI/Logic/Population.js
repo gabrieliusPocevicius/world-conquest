@@ -54,9 +54,9 @@ export function marriage(male, female) {
     //function that adds another family member
     function haveChild(mother) {
         /**
-                                                                                   *@param mother 
-                                                                                      the one giving birth to child.
-                                                                                   */
+                                                                                       *@param mother 
+                                                                                          the one giving birth to child.
+                                                                                       */
         //One in three women died in pregnancies //Medieval setting
         let fertileTime = setInterval(() => {
             var risk = Math.round(Math.random() * 2);

@@ -1,173 +1,247 @@
+/////////////Shorthand Function/////////////////
+
+/**
+ * Short Cut for displaying html
+ * @param
+ */
+export function displayHTML(value, parent = "", tag = "div") {
+    return $(`${parent}`).html("<" + tag + ">" + value + "</" + tag + ">");
+}
+
+/**
+ * Short Cut for console.log()
+ * @param
+ */
+export function log(value) {
+    console.log(value);
+}
+
+/**
+ *Creates a cookie
+ * @param  name
+ * @param  value
+ * @param  days
+ */
+function createCookie(name, value, days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        var expires = "; expires=" + date.toGMTString();
+    }
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(";");
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
+}
+//JOBS ///////////////////////////////////////
+
 export const farmer = {
     name: "Farmer",
     wage: 1,
-    description: "A person who owns or manages a farm."
+    description: "A person who owns or manages a farm.",
 };
 export const footSoldier = {
     name: "Foot Soldier",
     wage: 2,
-    description: "A soldier who fights on foot."
+    description: "A soldier who fights on foot.",
 };
 export const crossBowMan = {
     name: "Arbalist",
     wage: 3,
-    description: "A soldier who shoots a crossbow"
+    description: "A soldier who shoots a crossbow",
 };
 export const squire = {
     name: "Squire",
     wage: 4,
-    description: "A young nobleman acting as an attendant to a knight before becoming a knight himself."
+    description: "A young nobleman acting as an attendant to a knight before becoming a knight himself.",
 };
 export const knight = {
     name: "Knight",
     wage: 12,
 
-    description: "A knight is a person granted an honorary title of knighthood by a head of state or representative for service to the monarch"
+    description: "A knight is a person granted an honorary title of knighthood by a head of state or representative for service to the monarch",
 };
 export const drillMaster = {
     name: "Drill Master",
     wage: 34,
-    description: "A noble in charge of training."
+    description: "A noble in charge of training.",
 };
 export const treasuror = {
     name: "Treasuror",
     wage: 100,
-    description: "A treasurer is the person responsible for running the treasury of an Army. The significant core functions of a treasurer include cash and liquidity management, risk management, and corporate finance."
+    description: "A treasurer is the person responsible for running the treasury of an Army. The significant core functions of a treasurer include cash and liquidity management, risk management, and corporate finance.",
 };
 export const trainer = {
     name: "Trainer",
     wage: 5,
-    description: "A master of fighting tasked with training the troops."
+    description: "A master of fighting tasked with training the troops.",
 };
 export const vassal = {
     name: "Vassal",
     wage: 60,
-    description: "A holder of land by feudal tenure on conditions of homage and allegiance."
+    description: "A holder of land by feudal tenure on conditions of homage and allegiance.",
 };
 export const guardCaptain = {
     name: "",
     wage: 60,
-    description: "A holder of land by feudal tenure on conditions of homage and allegiance."
+    description: "A holder of land by feudal tenure on conditions of homage and allegiance.",
 };
-
 
 export const militaryRanks = {
-
     rank: [{
-        rank: "Levy",
-        atk: 5,
-        armor: 5,
-        wage: 0.01
-    }, {
-        rank: "Men-At-Arms",
-        atk: 10,
-        armor: 10,
-        wage: 0.05
-    }, {
-        rank: "Sergeant",
-        atk: 24,
-        armor: 15,
-        wage: 0.3,
-        commands: 5
-    }, {
-        rank: "Corporal",
-        atk: 15,
-        armor: 30,
-        wage: 1,
-        commands: 7
-    }, {
-        rank: "Knight",
-        atk: 32,
-        armor: 60,
-        wage: 5,
-        commands: 65
-    }, {
-        rank: "Knight Lieutenant",
-        atk: 42,
-        armor: 100,
-        wage: 8,
-        commands: 100
-    }, {
-        rank: "Knight Captain",
-        atk: 50,
-        armor: 120,
-        wage: 14,
-        commands: 120
-    }, {
-        rank: "Knight Commander",
-        atk: 65,
-        armor: 180,
-        wage: 25,
-        commands: 150
-    }, {
-        rank: "Lord Commander",
-        atk: 80,
-        armor: 200,
-        wage: 35,
-        commands: 1000
-    }, {
-        rank: "Lord Marshal",
-        atk: 120,
-        armor: 250,
-        wage: 50,
-        commands: Infinity
-    }, {
-        rank: "Lord High Marshal",
-        atk: 150,
-        armor: 300,
-        wage: 60,
-        commands: Infinity
-    }, {
-        rank: "Lord Sovereign Marshal",
-        atk: 300,
-        armor: 350,
-        wage: 100,
-        commands: Infinity
-    }],
-
+            rank: "Levy",
+            atk: 5,
+            armor: 5,
+            wage: 0.01,
+        },
+        {
+            rank: "Men-At-Arms",
+            atk: 10,
+            armor: 10,
+            wage: 0.05,
+        },
+        {
+            rank: "Sergeant",
+            atk: 24,
+            armor: 15,
+            wage: 0.3,
+            commands: 5,
+        },
+        {
+            rank: "Corporal",
+            atk: 15,
+            armor: 30,
+            wage: 1,
+            commands: 7,
+        },
+        {
+            rank: "Knight",
+            atk: 32,
+            armor: 60,
+            wage: 5,
+            commands: 65,
+        },
+        {
+            rank: "Knight Lieutenant",
+            atk: 42,
+            armor: 100,
+            wage: 8,
+            commands: 100,
+        },
+        {
+            rank: "Knight Captain",
+            atk: 50,
+            armor: 120,
+            wage: 14,
+            commands: 120,
+        },
+        {
+            rank: "Knight Commander",
+            atk: 65,
+            armor: 180,
+            wage: 25,
+            commands: 150,
+        },
+        {
+            rank: "Lord Commander",
+            atk: 80,
+            armor: 200,
+            wage: 35,
+            commands: 1000,
+        },
+        {
+            rank: "Lord Marshal",
+            atk: 120,
+            armor: 250,
+            wage: 50,
+            commands: Infinity,
+        },
+        {
+            rank: "Lord High Marshal",
+            atk: 150,
+            armor: 300,
+            wage: 60,
+            commands: Infinity,
+        },
+        {
+            rank: "Lord Sovereign Marshal",
+            atk: 300,
+            armor: 350,
+            wage: 100,
+            commands: Infinity,
+        },
+    ],
 };
 
-
-
-
-
-export const job = [farmer, footSoldier, crossBowMan, squire, knight, drillMaster, treasuror];
+export const job = [
+    farmer,
+    footSoldier,
+    crossBowMan,
+    squire,
+    knight,
+    drillMaster,
+    treasuror,
+];
 
 //18 surnames
 export const sickness = {
-    "Allergies": -10,
-    "Conjunctivitis": -5,
-    "Diarrhea": -5,
-    "Headaches": -5,
-    "Mononucleosis": -10,
+    Allergies: -10,
+    Conjunctivitis: -5,
+    Diarrhea: -5,
+    Headaches: -5,
+    Mononucleosis: -10,
     "Stomach Aches": -5,
 
-    "Cancer": [-50,
-        { "Lung": 15.5 },
-        { "Prostate": 14.5 },
-        { "Colorectal": 11.4 },
-        { "Stomach": 7.8 },
-        { "Liver": 6.8 },
-        { "Bladder": 4.8 },
-        { "Oesophagus": 4.5 },
-        { "Non-Hodgkin lymphoma": 3.2 } //8
+    Cancer: [-50,
+        { Lung: 15.5 },
+        { Prostate: 14.5 },
+        { Colorectal: 11.4 },
+        { Stomach: 7.8 },
+        { Liver: 6.8 },
+        { Bladder: 4.8 },
+        { Oesophagus: 4.5 },
+        { "Non-Hodgkin lymphoma": 3.2 }, //8
     ],
     "Celiac Disease": -10,
     "Heart Disease": -50,
 
-
-    "Infectious Diseases": [-25, "Chickenpox",
+    "Infectious Diseases": [-25,
+        "Chickenpox",
         "Common cold",
         "Diphtheria",
         "E. coli",
         "Giardiasis",
         "HIV/AIDS",
         "Infectious mononucleosis",
-        "Influenza"
+        "Influenza",
     ],
-    "Liver Disease": -50
+    "Liver Disease": -50,
 };
-export const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', "Oct", 'Nov', 'Dec'];
+export const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+];
 
 export const names = [
     "Noah",
@@ -569,8 +643,7 @@ export const names = [
     "Pedro",
     "Sulli",
     "Trevo",
-    "Reed"
-
+    "Reed",
 ];
 export const fnames = [
     "Olivia",
@@ -972,7 +1045,7 @@ export const fnames = [
     "Hall",
     "Ryan",
     "Camryn",
-    "Skye"
+    "Skye",
 ];
 export const titles = [];
 

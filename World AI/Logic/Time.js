@@ -31,7 +31,7 @@ export var age = 0;
             if (battleTrue == true) {
                 time(1000); //slows the time down so the men don't age so fast
             } else {
-                time(1000); //time goes on as normal
+                time(100); //time goes on as normal
             }
         }
     });
@@ -76,12 +76,12 @@ function naturalDisaster(affects, lengthOfTime) {
     }
 
     /*
-                              Geophysical (e.g. Earthquakes, Landslides, Tsunamis and Volcanic Activity)
-                              Hydrological (e.g. Avalanches and Floods)
-                              Climatological (e.g. Extreme Temperatures, Drought and Wildfires)
-                              Meteorological (e.g. Cyclones and Storms/Wave Surges)
-                              Biological (e.g. Disease Epidemics and Insect/Animal Plagues) 
-                               */
+                                                  Geophysical (e.g. Earthquakes, Landslides, Tsunamis and Volcanic Activity)
+                                                  Hydrological (e.g. Avalanches and Floods)
+                                                  Climatological (e.g. Extreme Temperatures, Drought and Wildfires)
+                                                  Meteorological (e.g. Cyclones and Storms/Wave Surges)
+                                                  Biological (e.g. Disease Epidemics and Insect/Animal Plagues) 
+                                                   */
 }
 
 function alive(day, month, year) {
@@ -158,24 +158,6 @@ export function timeStruct() {
     }
 }
 
-function renderChart() {
-    zingchart.render({
-        id: "myChart",
-        data: {
-            type: "bar",
-            series: [{
-                values: [maker(1)],
-            }, ],
-            "scale-y": {
-                values: "0:50:5",
-            },
-            "scale-x": {
-                values: ["Population"],
-            },
-        },
-    });
-}
-
 let playIcon = `
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z" fill="#FAFAFA"/>
@@ -184,7 +166,7 @@ let playIcon = `
 
 function displayDate() {
     calender.dayC++;
-    document.getElementById("days").innerHTML = calender.dayC + " days";
+    document.getElementById("days").innerHTML = "day " + calender.dayC;
     document.getElementById("months").innerHTML = monthNames[calender.monthC];
     document.getElementById("years").innerHTML = calender.yearC;
     age = calender.yearC - calender.years;
@@ -201,13 +183,12 @@ async function time(speed) {
         displayDate();
 
         //console.log(alive(20, 1, 500));
-
         //Adds one person per day
-
         //console.log(age);
         //console.warn(age);
+
         timeStruct();
-        renderChart();
+        maker(1);
         pauseTime();
     }
 }

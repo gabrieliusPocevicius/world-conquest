@@ -29,8 +29,23 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+#days {
+    white-space: nowrap;
+}
+
 svg {
     cursor: pointer;
+}
+
+#pause:hover {
+    transition: all cubic-bezier(0.895, 0.03, 0.685, 0.22) 0.1s;
+    padding: 4px;
 }
 
 .bg-gray {
@@ -40,18 +55,6 @@ svg {
 
 .armySlots {
     border: #C4C4C4 1px solid;
-}
-
-body {
-    color: whitesmoke !important;
-    background-color: #353535 !important;
-    font-family: var(--font-family-sans-serif);
-    font-style: normal !important;
-    font-weight: bold !important;
-    font-size: 18px !important;
-    line-height: 30px !important;
-    /* identical to box height, or 167% */
-    letter-spacing: -0.015em !important;
 }
 
 .accordion {
@@ -141,12 +144,6 @@ body {
 }
  */
 
-p {
-    position: relative;
-    top: 0;
-    font-size: small;
-}
-
 .slider {
     -webkit-appearance: none;
     /* Override default CSS styles */
@@ -198,11 +195,6 @@ p {
     background-color: var(--red);
 }
 
-tbody {
-    font-size: 12px;
-    text-align: center;
-}
-
 .progress {
     font-size: 12px;
 }
@@ -217,12 +209,6 @@ tbody {
 
 .bar-armour {
     background-color: var(--info);
-}
-
-#myChart {
-    height: 100%;
-    width: 50%;
-    min-height: 150px;
 }
 
 .hide {

@@ -10,7 +10,9 @@
     "editor.accessibilitySupport": "off",
     "editor.autoClosingOvertype": "never",
     "editor.codeLens": false,
-    "editor.autoSurround": "never"
+    "editor.autoSurround": "never",
+    "jupyter.jupyterServerType": "local",
+    "python.pythonPath": "C:\\Users\\Gabrielius\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe"
     
 
 }
