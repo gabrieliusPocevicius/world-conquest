@@ -8,20 +8,40 @@
     <meta name="viewport" content="A modern trader platform with statistical trading graphs and trading strategy tools.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="CustomStyle.css">
+    <link rel="stylesheet" charset="utf-8" type="text/css" href="/CustomStyle.css">
     <!--<script src="https://d3js.org/d3.v5.min.js"> <script src='https://cdn.zingchart.com/zingchart.min.js'></script></script>-->
-    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
-
+    <!-- <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+ -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <!-- data-main attribute tells require.js to load
              scripts/main.js after require.js loads. -->
-    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+<!--     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+ -->
+
+    <!--Display Chart-->
+
+<script type="module" charset="utf-8"  src="./Logic/Time.js">
+</script>
+<script type="module" charset="utf-8" src="./Logic/Battle.js">
+</script>
+<script type="module" charset="utf-8" src="./Logic/Character.js">
+</script>
+<script type="module" charset="utf-8" src="./Logic/Adventure.js">
+</script>
+<script type="module" charset="utf-8" src="./Logic/DataBase.js">
+</script>
+<script type="module" charset="utf-8" src="./Logic/Util.js">
+</script>
+<script type="module" charset="utf-8" src="./Logic/Building.js">
+</script>
+<script type="module" charset="utf-8" src="./Logic/Population.js">
+</script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="icon" type="image/png" href="resources\icons8-shield-100.png" />
+    <link rel="icon" type="image/png" href="/World AI/resource/icons8-shield-100.png" />
 
 
 
@@ -83,12 +103,6 @@
 
     </div>
     </div>
-
-
-
-
-
-
     <div id="myNav" class="overlay">
         <span id="closebtn"><svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M18.3 5.71C17.91 5.32 17.28 5.32 16.89 5.71L12 10.59L7.10997 5.7C6.71997 5.31 6.08997 5.31 5.69997 5.7C5.30997 6.09 5.30997 6.72 5.69997 7.11L10.59 12L5.69997 16.89C5.30997 17.28 5.30997 17.91 5.69997 18.3C6.08997 18.69 6.71997 18.69 7.10997 18.3L12 13.41L16.89 18.3C17.28 18.69 17.91 18.69 18.3 18.3C18.69 17.91 18.69 17.28 18.3 16.89L13.41 12L18.3 7.11C18.68 6.73 18.68 6.09 18.3 5.71Z" fill="#E5E5E5"/>
@@ -136,26 +150,9 @@
 
 
 
-<!--Display Chart-->
 
-<script type="module" charset="utf-8" src="./World AI/Logic/Time.js">
-</script>
-<script type="module" charset="utf-8" src="./World AI/Logic/Battle.js">
-</script>
-<script type="module" charset="utf-8" src="./World AI/Logic/Character.js">
-</script>
-<script type="module" charset="utf-8" src="./World AI/Logic/Adventure.js">
-</script>
-<script type="module" charset="utf-8" src="./World AI/Logic/DataBase.js">
-</script>
-<script type="module" charset="utf-8" src="./World AI/Logic/Util.js">
-</script>
-<script type="module" charset="utf-8" src="./World AI/Logic/Building.js">
-</script>
-<script type="module" charset="utf-8" src="./World AI/Logic/Population.js">
-</script>
 
-<script>
+<!-- <script>
     async function listModels() {
         // Lists all existing models in the dataset using streaming method.
 
@@ -176,7 +173,7 @@
                 console.log("All models have been retrieved.");
             });
     }
-</script>
+</script> -->
 
 </html>
 
