@@ -35,14 +35,27 @@ export var people = {
 
 
 */
+export let deaths = 0;
+    let male = 0;
+    let female = 0;
+
+
+
+            
+            
+
+            
+       
 
 export class Character {
     constructor() {
-        var percent = Math.round(Math.random() * 99 + 1);
+        let percent = Math.round(Math.random() * 99 + 1);
+        
         //50% change of it being a boy for a girl.
         this.id = id += 1;
 
         this.title = `${job[0].name}`;
+
         if (percent <= 60) {
             //MAKE IT 60 TO BE A man
             this.name = names[getRandom(0, 400)];
@@ -52,6 +65,8 @@ export class Character {
             this.armour = 0;
             this.age = log("age" + setInterval(() => age, 1000));
             this.risk = 0;
+            ++male;
+            $('#male-count').text(male);
         } else {
             this.name = fnames[getRandom(0, 400)];
             this.gender = "rgb(255, 99, 132)";
@@ -60,7 +75,9 @@ export class Character {
             this.armour = 0;
             this.age = 0;
             this.risk = 0;
-        }
+            ++female;
+            $('#female-count').text(female)
+        };
 
         bio(
             this.gender,
@@ -71,24 +88,41 @@ export class Character {
             this.age,
             this.id
         );
-        var pplSelector = this.id;
 
-        try {
-            let person = document.getElementById(`person_` + pplSelector);
 
-            person.addEventListener("click", deathClick, false);
-        } catch (e) {
+        let person = document.getElementById(`person_${this.id}`);
+        person.addEventListener("click", deathClick, false);
+
+/*             try {
+            
+            } catch (e) {
             console.log(e);
-        }
+            }
+ */
+        
     }
 }
 
 function deathClick(e) {
     e = e || window.event;
+/*     if( e.currentTarget.indexOf('m') !== '`m_person_`'){
+        male--;
+        $('#male-count').text(female);
+    }
+    if( e.currentTarget.indexOf('w') !== '`w_person_`'){
+        female--;
+        $('#female-count').text(female);
+    } */
+    
+    
     e.currentTarget.remove();
     log(e.currentTarget);
     people.count--;
+
+    
+    
     displayHTML(people.count, "#population", "h5");
+    displayHTML(++deaths, "#deaths", "h5");
     //$("#population").html("<h5>" + people.count-- + "</h5>");
 }
 
@@ -322,6 +356,7 @@ export function maker(n) {
     displayElement.html("<h5>" + people.count + "</h5>");
     return people.count;
 }
+
 
 //console.log(maker(10));
 

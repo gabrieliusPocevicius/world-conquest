@@ -3,7 +3,7 @@ import { monthNames } from "./DataBase.js";
 
 import { Character, maker, people } from "./Character.js";
 
-export var age = 0;
+export let age = 0;
 
 (function() {
     $("#pause").on("click", () => {
@@ -29,7 +29,7 @@ export var age = 0;
         play = true;
         if (counter == 1) {
             if (battleTrue == true) {
-                time(1000); //slows the time down so the men don't age so fast
+                time(1000); //slows the time down so the people don't age so fast
             } else {
                 time(100); //time goes on as normal
             }
