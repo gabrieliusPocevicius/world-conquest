@@ -95,6 +95,14 @@ export class Character {
 
 
         let person = document.getElementById(`person_${this.id}`);
+        
+
+
+   
+
+
+
+
         person.addEventListener("click", deathClick, false);
 
 /*             try {
@@ -107,6 +115,7 @@ export class Character {
     }
 }
 
+   
 let promise = new Promise((resolve, reject)=>{
     let x = 1;
     if(x == 0){
@@ -123,37 +132,28 @@ promise.then(
 
 
 
+
+
+
 function deathClick(e) {
     e = e || window.event;
-/*      if( e.currentTarget.indexOf('m') !== '`m_person_`'){
-        male--;
-        $('#male-count').text(female);
-    }
-    if( e.currentTarget.indexOf('w') !== '`w_person_`'){
-        female--;
-        $('#female-count').text(female);
-    } */
     e.currentTarget.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
     e.currentTarget.remove();
-   
-
-    
-
     people.count--;
-    
-    
-    
     displayHTML(people.count, "#population", "h5");
     displayHTML(++deaths, "#deaths", "h5");
-    //$("#population").html("<h5>" + people.count-- + "</h5>");
-}
+};
 
 export function bio(gender, title, name, armour, atk, age, id) {
+
+    
+move();
     let person_icon = `
 <div id="person_${id}" class='${gender}'>
     <svg  width="24" height="24" viewBox="0 0 24 24" fill="none">
         <path  d="M9.53524 21V14.5H9.02349C8.46057 14.5 8 14.05 8 13.5V9C8 7.9 8.92114 7 10.047 7H13.1175C14.2433 7 15.1644 7.9 15.1644 9V13.5C15.1644 14.05 14.7039 14.5 14.1409 14.5H13.6292V21C13.6292 21.55 13.1686 22 12.6057 22H10.5587C9.99581 22 9.53524 21.55 9.53524 21ZM11.5822 6C12.7183 6 13.6292 5.11 13.6292 4C13.6292 2.89 12.7183 2 11.5822 2C10.4461 2 9.53524 2.89 9.53524 4C9.53524 5.11 10.4461 6 11.5822 6Z" fill="#007bff"/>
     </svg>
+    <div >
 </div>
 `;
     //var person_ID = document.getElementById(`person_${id}`);
@@ -195,6 +195,12 @@ export function bio(gender, title, name, armour, atk, age, id) {
 </person>`);
     }
 }
+
+
+
+
+
+
 
 let nobles = []; //Lists all the nobles and their props
 let peasantsUnderNoble = []; //Lists all the peasants under the noble.
