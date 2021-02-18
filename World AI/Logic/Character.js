@@ -57,29 +57,33 @@ export class Character {
         this.title = `${job[0].name}`;
 
         if (percent <= 60) {
-            //MAKE IT 60 TO BE A man
+            // 60 to be A man
             this.name = names[getRandom(0, 400)];
-            this.gender = "#007bff";
+            this.gender = "male";
             this.hp = 100;
             this.atk = getRandom(0, 100);
             this.armour = 0;
             this.age = log("age" + setInterval(() => age, 1000));
             this.risk = 0;
+            this.alive = true;
             ++male;
             $('#male-count').text(male);
+
         } else {
             this.name = fnames[getRandom(0, 400)];
-            this.gender = "rgb(255, 99, 132)";
+            this.gender = "female";
             this.hp = 100;
             this.atk = getRandom(0, 60);
             this.armour = 0;
             this.age = 0;
             this.risk = 0;
+            this.alive = true;
             ++female;
             $('#female-count').text(female)
+
         };
 
-        bio(
+            bio(
             this.gender,
             this.title,
             this.name,
@@ -87,7 +91,7 @@ export class Character {
             this.atk,
             this.age,
             this.id
-        );
+            );
 
 
         let person = document.getElementById(`person_${this.id}`);
@@ -103,9 +107,25 @@ export class Character {
     }
 }
 
+let promise = new Promise((resolve, reject)=>{
+    let x = 1;
+    if(x == 0){
+        resolve('Ok');
+    }else{
+        reject('Error');
+    };
+
+});
+promise.then(
+    (value)=>{return value},
+    (reject)=>{return reject}
+);
+
+
+
 function deathClick(e) {
     e = e || window.event;
-/*     if( e.currentTarget.indexOf('m') !== '`m_person_`'){
+/*      if( e.currentTarget.indexOf('m') !== '`m_person_`'){
         male--;
         $('#male-count').text(female);
     }
@@ -113,12 +133,14 @@ function deathClick(e) {
         female--;
         $('#female-count').text(female);
     } */
-    
-    
+    e.currentTarget.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
     e.currentTarget.remove();
-    log(e.currentTarget);
-    people.count--;
+   
 
+    
+
+    people.count--;
+    
     
     
     displayHTML(people.count, "#population", "h5");
@@ -128,30 +150,25 @@ function deathClick(e) {
 
 export function bio(gender, title, name, armour, atk, age, id) {
     let person_icon = `
-<div id="person_${id}">
-<svg  width="24" height="24" viewBox="0 0 24 24" fill="none">
-
-<path  d="M9.53524 21V14.5H9.02349C8.46057 14.5 8 14.05 8 13.5V9C8 7.9 8.92114 7 10.047 7H13.1175C14.2433 7 15.1644 7.9 15.1644 9V13.5C15.1644 14.05 14.7039 14.5 14.1409 14.5H13.6292V21C13.6292 21.55 13.1686 22 12.6057 22H10.5587C9.99581 22 9.53524 21.55 9.53524 21ZM11.5822 6C12.7183 6 13.6292 5.11 13.6292 4C13.6292 2.89 12.7183 2 11.5822 2C10.4461 2 9.53524 2.89 9.53524 4C9.53524 5.11 10.4461 6 11.5822 6Z" fill="${gender}"/>
-</svg>
+<div id="person_${id}" class='${gender}'>
+    <svg  width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path  d="M9.53524 21V14.5H9.02349C8.46057 14.5 8 14.05 8 13.5V9C8 7.9 8.92114 7 10.047 7H13.1175C14.2433 7 15.1644 7.9 15.1644 9V13.5C15.1644 14.05 14.7039 14.5 14.1409 14.5H13.6292V21C13.6292 21.55 13.1686 22 12.6057 22H10.5587C9.99581 22 9.53524 21.55 9.53524 21ZM11.5822 6C12.7183 6 13.6292 5.11 13.6292 4C13.6292 2.89 12.7183 2 11.5822 2C10.4461 2 9.53524 2.89 9.53524 4C9.53524 5.11 10.4461 6 11.5822 6Z" fill="#007bff"/>
+    </svg>
 </div>
 `;
-
     //var person_ID = document.getElementById(`person_${id}`);
     //console.log((person_ID.innerText = ""));
-
     let f_person_icon = `
-<div id="person_${id}">
+<div id="person_${id}" class='female'>
     <svg  width="24" height="24" viewBox="0 0 24 24" fill="none">
-
-<path  d="M13.7458 21V16H15.3936C16.0896 16 16.5809 15.33 16.3659 14.68L14.2166 8.37C13.93 7.55 13.1522 7 12.272 7H12.1492C11.269 7 10.4809 7.55 10.2045 8.37L8.0552 14.68C7.83003 15.33 8.32131 16 9.02752 16H10.6753V21C10.6753 21.55 11.1359 22 11.6988 22H12.7223C13.2852 22 13.7458 21.55 13.7458 21ZM12.2106 6C13.3467 6 14.2576 5.11 14.2576 4C14.2576 2.89 13.3467 2 12.2106 2C11.0745 2 10.1636 2.89 10.1636 4C10.1636 5.11 11.0745 6 12.2106 6Z" fill="${gender}"/>
-
-</svg>
+        <path  d="M13.7458 21V16H15.3936C16.0896 16 16.5809 15.33 16.3659 14.68L14.2166 8.37C13.93 7.55 13.1522 7 12.272 7H12.1492C11.269 7 10.4809 7.55 10.2045 8.37L8.0552 14.68C7.83003 15.33 8.32131 16 9.02752 16H10.6753V21C10.6753 21.55 11.1359 22 11.6988 22H12.7223C13.2852 22 13.7458 21.55 13.7458 21ZM12.2106 6C13.3467 6 14.2576 5.11 14.2576 4C14.2576 2.89 13.3467 2 12.2106 2C11.0745 2 10.1636 2.89 10.1636 4C10.1636 5.11 11.0745 6 12.2106 6Z" fill="rgb(255, 99, 132)"/>
+    </svg>
 </div>
 `;
-
-    if (gender == "rgb(255, 99, 132)") {
+    if (gender == "female") {
         person_icon = f_person_icon;
     }
+    
 
     let t = `<div class="col text-center">${title}</div>`;
     let na = `<div class="col ">${name}</div>`;
@@ -159,6 +176,7 @@ export function bio(gender, title, name, armour, atk, age, id) {
     let at = `<div class="col ">Strength ${atk}</div>`;
     let ag = `<div class="col ">Age ${age}</div>`;
     let ids = `<div class="col ">Identity ${id}</div> `;
+    let gen = `<div class='' class="col"></div>`;
     //console.log(ag);
     if (armour === 0) {
         ar = "";
@@ -167,12 +185,13 @@ export function bio(gender, title, name, armour, atk, age, id) {
     $("people").append(`${person_icon}`); //Creates the icon figure of a person to the screen
 
     function displayAttr() {
-        $("people").append(`<person  class="d-flex m-2 text-center">
+        $("people").append(`<person class="d-flex m-2 text-center">
     ${t}
     ${ar}
     ${at}
     ${ag}
     ${ids}
+    ${gen}
 </person>`);
     }
 }
@@ -183,16 +202,16 @@ let peasantsUnderNoble = []; //Lists all the peasants under the noble.
 function befriend(person, person1) {
     person.friend = person1;
     person1.friend = person;
-    if (person.friend.gender == "rgb(255, 99, 132)") {
+    if (person.friend.gender == "female") {
         person.friend.gender = "Female";
     }
-    if (person1.friend.gender == "rgb(255, 99, 132)") {
+    if (person1.friend.gender == "female") {
         person1.friend.gender = "Female";
     }
-    if (person.friend.gender == "#007bff") {
+    if (person.friend.gender == "male") {
         person.friend.gender = "Male";
     }
-    if (person1.friend.gender == "#007bff") {
+    if (person1.friend.gender == "male") {
         person1.friend.gender = "Male";
     }
 
@@ -222,7 +241,7 @@ function befriend(person, person1) {
 
 var members = 0; //peasants the noble is assigned as levies and farmers.
 
-becomeNoble();
+//becomeNoble();
 
 function becomeNoble() {
     let theNoble = {};
