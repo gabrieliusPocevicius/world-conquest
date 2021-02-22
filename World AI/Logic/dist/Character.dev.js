@@ -90,22 +90,6 @@ var Character = function Character() {
   var person = document.getElementById("person_".concat(this.id));
   person.addEventListener("click", deathClick, false);
 };
-/* let promise = new Promise((resolve, reject)=>{
-    let x = 1;
-    if(x == 0){
-        resolve('Ok');
-    }else{
-        reject('Error');
-    };
-
-});
-promise.then(
-    (value)=>{return value},
-    (reject)=>{return reject}
-);
- */
-//call promise
-
 
 exports.Character = Character;
 

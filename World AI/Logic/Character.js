@@ -94,24 +94,6 @@ export class Character {
 }
 
 
-/* let promise = new Promise((resolve, reject)=>{
-    let x = 1;
-    if(x == 0){
-        resolve('Ok');
-    }else{
-        reject('Error');
-    };
-
-});
-promise.then(
-    (value)=>{return value},
-    (reject)=>{return reject}
-);
- */
-
-
-//call promise
-
 
 
 function deathClick(e) {
@@ -194,6 +176,9 @@ let onePersonAge = document.querySelector('#person_1');
 if(onePersonAge !== null){
     log(onePersonAge)    
 }
+
+
+
 
 
 let nobles = []; //Lists all the nobles and their props
