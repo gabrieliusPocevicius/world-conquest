@@ -1,4 +1,4 @@
-export var battleTrue = false;
+export let battleTrue = false;
 
 import { Character, people } from "./Character.js";
 

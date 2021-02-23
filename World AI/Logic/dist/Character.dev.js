@@ -89,9 +89,30 @@ var Character = function Character() {
   bio(this.gender, this.title, this.name, this.armour, this.atk, this.age, this.id);
   var person = document.getElementById("person_".concat(this.id));
   person.addEventListener("click", deathClick, false);
+  var live = console.log(Math.floor(Math.random() * 5000) + 1000);
+  console.log('people', people.count);
+  setTimeout(function () {
+    deathFunction(person);
+  }, 5000);
 };
 
 exports.Character = Character;
+
+function deathFunction(id) {
+  //e parameter
+
+  /* e = e || window.event; */
+  //console.log(id);    
+  //changed e to id
+  //.currentTarget
+  id.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
+  id.remove();
+  people.count--;
+  (0, _DataBase.displayHTML)(people.count, "#population", "h5");
+  (0, _DataBase.displayHTML)(exports.deaths = deaths = +deaths + 1, "#deaths", "h5");
+}
+
+;
 
 function deathClick(e) {
   e = e || window.event;
@@ -105,16 +126,11 @@ function deathClick(e) {
 ;
 
 function bio(gender, title, name, armour, atk, age, id) {
-  age = setInterval(function () {
-    return $("#male-age".concat(id)).text(++age);
-  }, 1000);
+  //age = setInterval(() => $(`#male-age${id}`).text(console.log(++age)) , 1000);
   var person_icon = "\n    <div id=\"person_".concat(id, "\" class='").concat(gender, "'>\n        <div id='male-age_").concat(id, "'>").concat(age, "</div>\n        <svg  width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\">\n            <path  d=\"M9.53524 21V14.5H9.02349C8.46057 14.5 8 14.05 8 13.5V9C8 7.9 8.92114 7 10.047 7H13.1175C14.2433 7 15.1644 7.9 15.1644 9V13.5C15.1644 14.05 14.7039 14.5 14.1409 14.5H13.6292V21C13.6292 21.55 13.1686 22 12.6057 22H10.5587C9.99581 22 9.53524 21.55 9.53524 21ZM11.5822 6C12.7183 6 13.6292 5.11 13.6292 4C13.6292 2.89 12.7183 2 11.5822 2C10.4461 2 9.53524 2.89 9.53524 4C9.53524 5.11 10.4461 6 11.5822 6Z\" fill=\"#007bff\"/>\n        </svg>\n        <div >\n    </div>\n    "); //var person_ID = document.getElementById(`person_${id}`);
   //console.log((person_ID.innerText = ""));
 
   var f_person_icon = "\n    <div id=\"person_".concat(id, "\" class='female'>\n    <div id='female-age_").concat(id, "'>").concat(age, "</div>\n        <svg  width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\">\n            <path  d=\"M13.7458 21V16H15.3936C16.0896 16 16.5809 15.33 16.3659 14.68L14.2166 8.37C13.93 7.55 13.1522 7 12.272 7H12.1492C11.269 7 10.4809 7.55 10.2045 8.37L8.0552 14.68C7.83003 15.33 8.32131 16 9.02752 16H10.6753V21C10.6753 21.55 11.1359 22 11.6988 22H12.7223C13.2852 22 13.7458 21.55 13.7458 21ZM12.2106 6C13.3467 6 14.2576 5.11 14.2576 4C14.2576 2.89 13.3467 2 12.2106 2C11.0745 2 10.1636 2.89 10.1636 4C10.1636 5.11 11.0745 6 12.2106 6Z\" fill=\"rgb(255, 99, 132)\"/>\n        </svg>\n    </div>\n    ");
-  /*     setInterval(function() {
-      this.tick();
-  }.bind(this), 1000); */
 
   if (gender == "female") {
     person_icon = f_person_icon;
@@ -297,9 +313,12 @@ var food = {
 
 exports.food = food;
 
-function maker(n) {
+function displayPopulationCount() {
   var displayElement = $("#population");
+  displayElement.html("<h5>" + people.count + "</h5>");
+}
 
+function maker(n) {
   while (n > 0) {
     ++people.count;
     people.person.push(new Character(n)); //console.log(people.person);
@@ -307,29 +326,29 @@ function maker(n) {
     n--;
   }
 
-  displayElement.html("<h5>" + people.count + "</h5>");
+  displayPopulationCount();
   return people.count;
 } //console.log(maker(10));
+//army viewer
 
+/* (function() {
+  
+    var acc = document.getElementsByClassName("accordion");
+    var i;
 
-(function () {
-  //army viewer
-  var acc = document.getElementsByClassName("accordion");
-  var i;
-
-  for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-      this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-      } else {
-        panel.style.display = "block";
-      }
-    });
-  }
-})(); // class Enemy extends Character {
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    }
+})(); */
+// class Enemy extends Character {
 //     constructor(name, hp, atk, age, honor, relations) {
 //             super(name, hp, atk, age, honor)
 //             this.name = name;

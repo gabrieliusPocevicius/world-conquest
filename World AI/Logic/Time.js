@@ -1,10 +1,18 @@
 import { battleTrue } from "../Logic/Battle.js";
 import { monthNames } from "./DataBase.js";
-
 import { Character, maker, people } from "./Character.js";
 
 export let age = 0;
 
+let playIcon = `
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z" fill="#FAFAFA"/>
+            </svg>
+`;
+
+
+let speed = 100;
+let pausedSpeed = 1000;
 (function() {
     $("#pause").on("click", () => {
         $("#pause")
@@ -29,9 +37,9 @@ export let age = 0;
         play = true;
         if (counter == 1) {
             if (battleTrue == true) {
-                time(1000); //slows the time down so the people don't age so fast
+                time(pausedSpeed); //slows the time down so the people don't age so fast
             } else {
-                time(100); //time goes on as normal
+                time(speed); //time goes on as normal
             }
         }
     });
@@ -57,6 +65,15 @@ var calender = {
     yearC: 500,
 };
 
+
+
+
+/*     calender.months.forEach((_, index) => {
+    let monthindex = index;
+    console.log('Month', monthindex, 'days: ',calender.days[index]);
+    });
+ */
+
 //var result = Math.round(result * 100) / 100;
 //when nature strikes
 function naturalDisaster(affects, lengthOfTime) {
@@ -70,11 +87,9 @@ function naturalDisaster(affects, lengthOfTime) {
     //https://www.cdc.gov/nchs/fastats/deaths.htm
     lengthOfTime = 1;
     affects = 0.02; //avarge damage by natural disasters per year
-
     if (0 == calender.yearC % lengthOfTime) {
         //every so many years
     }
-
     /*
                                                   Geophysical (e.g. Earthquakes, Landslides, Tsunamis and Volcanic Activity)
                                                   Hydrological (e.g. Avalanches and Floods)
@@ -140,53 +155,41 @@ export function timeStruct() {
     /**
     @func timeStruct()
     lays out the structure of the calender
-
  */
+    //if the current day is equal to the month day then current day plus 1
     if (calender.dayC === calender.days[calender.monthC]) {
         calender.dayC = 1;
-
-        var mn = monthNames;
-        // console.log( String(mn[calender.monthC]))
+         //let mn = monthNames;
+         //console.log( String(mn[calender.monthC]))
         calender.monthC++;
-
         if (calender.monthC === 12) {
             //  console.log(String(monthNames[11]))
             calender.monthC = 1;
             calender.yearC++;
-            // console.log('year ' + calender.yearC)
-        }
-    }
-}
+             //console.log('year ' + calender.yearC)
+        };
+    };
+};
 
-let playIcon = `
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z" fill="#FAFAFA"/>
-            </svg>
-`;
 
-function displayDate() {
+function displayDate(){
     calender.dayC++;
     document.getElementById("days").innerHTML = "day " + calender.dayC;
     document.getElementById("months").innerHTML = monthNames[calender.monthC];
     document.getElementById("years").innerHTML = calender.yearC;
     age = calender.yearC - calender.years;
-}
+};
 
-var play = true;
-
+let play = true;
 async function time(speed) {
     // Time loop
-
     while (play) {
         await sleep(speed); //wating time for a single day
-
         displayDate();
-
         //console.log(alive(20, 1, 500));
         //Adds one person per day
         //console.log(age);
         //console.warn(age);
-
         timeStruct();
         maker(1);
         pauseTime();
@@ -194,10 +197,11 @@ async function time(speed) {
 }
 
 function pauseTime() {
-    if (counter == 2) {
-        $("#pause").html(playIcon);
+    let paused = (counter === 2);
+    if (paused) {
         counter = 0;
         play = false;
+        $("#pause").html(playIcon);
     }
 }
 

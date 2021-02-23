@@ -16,6 +16,9 @@ var _Character = require("./Character.js");
 
 var age = 0;
 exports.age = age;
+var playIcon = "\n            <svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z\" fill=\"#FAFAFA\"/>\n            </svg>\n";
+var speed = 100;
+var pausedSpeed = 1000;
 
 (function () {
   $("#pause").on("click", function () {
@@ -25,9 +28,9 @@ exports.age = age;
 
     if (counter == 1) {
       if (_Battle.battleTrue == true) {
-        time(1000); //slows the time down so the people don't age so fast
+        time(pausedSpeed); //slows the time down so the people don't age so fast
       } else {
-        time(100); //time goes on as normal
+        time(speed); //time goes on as normal
       }
     }
   });
@@ -54,7 +57,13 @@ var calender = {
   dayC: 1,
   monthC: 1,
   yearC: 500
-}; //var result = Math.round(result * 100) / 100;
+};
+/*     calender.months.forEach((_, index) => {
+    let monthindex = index;
+    console.log('Month', monthindex, 'days: ',calender.days[index]);
+    });
+ */
+//var result = Math.round(result * 100) / 100;
 //when nature strikes
 
 function naturalDisaster(affects, lengthOfTime) {
@@ -138,21 +147,26 @@ function timeStruct() {
   @func timeStruct()
   lays out the structure of the calender
   */
+  //if the current day is equal to the month day then current day plus 1
   if (calender.dayC === calender.days[calender.monthC]) {
-    calender.dayC = 1;
-    var mn = _DataBase.monthNames; // console.log( String(mn[calender.monthC]))
+    calender.dayC = 1; //let mn = monthNames;
+    //console.log( String(mn[calender.monthC]))
 
     calender.monthC++;
 
     if (calender.monthC === 12) {
       //  console.log(String(monthNames[11]))
       calender.monthC = 1;
-      calender.yearC++; // console.log('year ' + calender.yearC)
+      calender.yearC++; //console.log('year ' + calender.yearC)
     }
+
+    ;
   }
+
+  ;
 }
 
-var playIcon = "\n            <svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z\" fill=\"#FAFAFA\"/>\n            </svg>\n";
+;
 
 function displayDate() {
   calender.dayC++;
@@ -162,6 +176,7 @@ function displayDate() {
   exports.age = age = calender.yearC - calender.years;
 }
 
+;
 var play = true;
 
 function time(speed) {
@@ -199,9 +214,11 @@ function time(speed) {
 }
 
 function pauseTime() {
-  if (counter == 2) {
-    $("#pause").html(playIcon);
+  var paused = counter === 2;
+
+  if (paused) {
     counter = 0;
     play = false;
+    $("#pause").html(playIcon);
   }
 }

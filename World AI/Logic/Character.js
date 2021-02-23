@@ -41,12 +41,7 @@ export let deaths = 0;
 
 
 
-            
-            
-
-            
-       
-
+        
 export class Character {
     constructor() {
         let percent = Math.round(Math.random() * 99 + 1);
@@ -88,25 +83,43 @@ export class Character {
             this.age,
             this.id
             );
-    let person = document.getElementById(`person_${this.id}`);
-        person.addEventListener("click", deathClick, false);
+     let person = document.getElementById(`person_${this.id}`);
+    person.addEventListener("click", deathClick, false); 
+    let live = console.log(Math.floor(Math.random() * 5000) + 1000);
+console.log('people', people.count);
+     setTimeout(()=>{deathFunction(person)},5000); 
     }
 }
 
-
-
-
-function deathClick(e) {
-    e = e || window.event;
-    e.currentTarget.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
-    e.currentTarget.remove();
+function deathFunction(id) {
+    //e parameter
+    /* e = e || window.event; */
+    //console.log(id);    
+    //changed e to id
+    //.currentTarget
+     id.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
+    id.remove(); 
     people.count--;
     displayHTML(people.count, "#population", "h5");
     displayHTML(++deaths, "#deaths", "h5");
 };
 
+function deathClick(e) {
+    
+     e = e || window.event; 
+    e.currentTarget.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
+    e.currentTarget.remove(); 
+
+   
+    people.count--;
+    displayHTML(people.count, "#population", "h5");
+    displayHTML(++deaths, "#deaths", "h5");
+};
+
+
+
 export function bio(gender, title, name, armour, atk, age, id) {
-    age = setInterval(() => $(`#male-age${id}`).text(++age) , 1000);
+    //age = setInterval(() => $(`#male-age${id}`).text(console.log(++age)) , 1000);
     
     let person_icon =`
     <div id="person_${id}" class='${gender}'>
@@ -119,7 +132,7 @@ export function bio(gender, title, name, armour, atk, age, id) {
     `;
     //var person_ID = document.getElementById(`person_${id}`);
     //console.log((person_ID.innerText = ""));
-    let f_person_icon =`
+        let f_person_icon =`
     <div id="person_${id}" class='female'>
     <div id='female-age_${id}'>${age}</div>
         <svg  width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -128,15 +141,7 @@ export function bio(gender, title, name, armour, atk, age, id) {
     </div>
     `;
 
-    
-    
-
-
-/*     setInterval(function() {
-    this.tick();
-}.bind(this), 1000); */
-    
-
+ 
 
 
     if (gender == "female") {
@@ -224,10 +229,8 @@ function befriend(person, person1) {
 //var c2 = new Character();
 //befriend(c, c2);
 
-var members = 0; //peasants the noble is assigned as levies and farmers.
-
+let members = 0; //peasants the noble is assigned as levies and farmers.
 //becomeNoble();
-
 function becomeNoble() {
     let theNoble = {};
 
@@ -257,14 +260,12 @@ function becomeNoble() {
 
     //console.log(people);
 }
-
 //console.log(p.armour);
 //console.log((militaryRanks.rank[3].armor += p.armour));
 
 function randomN(x) {
     return Math.floor(Math.random() * x);
 }
-
 function compare(obj, obj2) {
     for (const [key, value] of Object.entries(obj)) {
         console.log(`1- ${key} ${value}`);
@@ -273,7 +274,6 @@ function compare(obj, obj2) {
         console.log(`2- ${key}: ${value}`);
     }
 }
-
 function simulateAttack(age, atk, risk) {
     //Makes the attack strength more dynamic by age affecting your attk
     //console.log("initial atk: " + atk);
@@ -316,7 +316,6 @@ function simulateAttack(age, atk, risk) {
     //console.log("Final atk:" + atk);
     return atk;
 }
-
 function simulateHp(age, hp, risk) {
     //Calculates Risk of catching diseases based on age and life chosen path
     risk = 0;
@@ -346,8 +345,16 @@ export var food = {
 };
 
 //makes people appear
+
+function displayPopulationCount() {
+    let displayElement = $("#population");
+    displayElement.html("<h5>" + people.count + "</h5>");
+}
+
+
+
 export function maker(n) {
-    var displayElement = $("#population");
+    
 
     while (n > 0) {
         ++people.count;
@@ -357,16 +364,18 @@ export function maker(n) {
         n--;
     }
 
-    displayElement.html("<h5>" + people.count + "</h5>");
+    displayPopulationCount();
     return people.count;
 }
 
 
+
+
 //console.log(maker(10));
+  //army viewer
 
-(function() {
-    //army viewer
-
+/* (function() {
+  
     var acc = document.getElementsByClassName("accordion");
     var i;
 
@@ -381,7 +390,7 @@ export function maker(n) {
             }
         });
     }
-})();
+})(); */
 
 // class Enemy extends Character {
 //     constructor(name, hp, atk, age, honor, relations) {
