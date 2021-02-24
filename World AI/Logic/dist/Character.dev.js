@@ -54,48 +54,86 @@ var male = 0;
 var female = 0;
 
 var Character = function Character() {
+  var _this = this;
+
   _classCallCheck(this, Character);
 
-  var percent = Math.round(Math.random() * 99 + 1); //50% change of it being a boy for a girl.
+  var percent = Math.floor(Math.random() * 99 + 1); //50% change of it being a boy for a girl.
 
   this.id = id += 1;
   this.title = "".concat(_DataBase.job[0].name);
   this.alive = true;
 
-  if (percent <= 60) {
-    // 60 to be A man
-    this.name = _DataBase.names[(0, _Util.getRandom)(0, 400)];
-    this.gender = "male";
-    this.hp = 100;
-    this.atk = (0, _Util.getRandom)(0, 100);
-    this.armour = 0;
-    this.age = 0;
-    this.risk = 0;
-    ++male;
-    $('#male-count').text(male);
+  if (percent <= 50) {
+    var maleTemplate = function maleTemplate() {
+      // 60 to be A man
+      _this.name = _DataBase.names[(0, _Util.getRandom)(0, 400)];
+      _this.gender = "male";
+      _this.age = 0;
+      _this.hp = 100;
+      _this.atk = (0, _Util.getRandom)(0, 100);
+      _this.armour = 0;
+      _this.risk = 0;
+      ++male;
+      $('#male-count').text(male);
+      var info = {
+        name: _this.name,
+        gender: _this.gender,
+        age: _this.age,
+        hp: _this.hp,
+        atk: _this.atk,
+        armour: _this.armour,
+        id: _this.id
+      };
+      bio(info.gender, info.title, info.name, info.armour, info.atk, info.age, info.id); //let displayBio = `Name ${info.name}, Gender ${info.gender}, Age ${info.age}, Health ${info.hp}, Attack ${info.atk}, Armour ${info.armour} `
+      //console.table(info);
+
+      var person = document.getElementById("person_".concat(info.id));
+      person.addEventListener("click", function (e) {
+        e.preventDefault();
+        console.log('hello', info.name);
+      });
+    };
+
+    maleTemplate();
   } else {
-    this.name = _DataBase.fnames[(0, _Util.getRandom)(0, 400)];
-    this.gender = "female";
-    this.hp = 100;
-    this.atk = (0, _Util.getRandom)(0, 60);
-    this.armour = 0;
-    this.age = 0;
-    this.risk = 0;
-    ++female;
-    $('#female-count').text(female);
+    var femaleTemplate = function femaleTemplate() {
+      _this.name = _DataBase.fnames[(0, _Util.getRandom)(0, 400)];
+      _this.gender = "female";
+      _this.hp = 100;
+      _this.age = 0;
+      _this.atk = (0, _Util.getRandom)(0, 60);
+      _this.armour = 0;
+      _this.risk = 0;
+      ++female;
+      $('#female-count').text(female);
+      var info = {
+        name: _this.name,
+        gender: _this.gender,
+        age: _this.age,
+        hp: _this.hp,
+        atk: _this.atk,
+        armour: _this.armour,
+        id: _this.id
+      }; //let displayBio = `Name ${info.name}, Gender ${info.gender}, Age ${info.age}, Health ${info.hp}, Attack ${info.atk}, Armour ${info.armour} `
+      //console.table(info);
+
+      bio(info.gender, info.title, info.name, info.armour, info.atk, info.age, info.id);
+      var person = document.getElementById("person_".concat(info.id));
+      person.addEventListener("click", function (e) {
+        e.preventDefault();
+        console.log('hello', info.name);
+      });
+    };
+
+    femaleTemplate();
   }
 
-  ;
-  bio(this.gender, this.title, this.name, this.armour, this.atk, this.age, this.id);
-  var person = document.getElementById("person_".concat(this.id));
-  /*     person.addEventListener("click", deathClick, false);  */
+  ; //let live = console.log(Math.floor(Math.random() * 5000) + 1000);
 
-  var live = console.log(Math.floor(Math.random() * 5000) + 1000);
   /* console.log('people', people.count); */
 
-  setTimeout(function () {
-    deathFunction(person), 5000;
-  });
+  /*  setTimeout(()=>{deathFunction(person)},5000);  */
 };
 
 exports.Character = Character;
@@ -119,6 +157,16 @@ function deathClick(e) {
   people.count--;
   (0, _DataBase.displayHTML)(people.count, "#population", "h5");
   (0, _DataBase.displayHTML)(exports.deaths = deaths = +deaths + 1, "#deaths", "h5");
+}
+
+;
+
+function showBio(e) {
+  e = e || window.event;
+  e.currentTarget.classList[0] === 'male' ? console.log(e.currentTarget) : console.log(e.currentTarget);
+  /*     people.count--;
+      displayHTML(people.count, "#population", "h5");
+      displayHTML(++deaths, "#deaths", "h5"); */
 }
 
 ;
@@ -155,9 +203,16 @@ function bio(gender, title, name, armour, atk, age, id) {
 
   $("people").append("".concat(person_icon)); //Creates the icon figure of a person to the screen
 
-  function displayAttr() {
+  var displayAttr = function displayAttr(_ref) {
+    var t = _ref.t,
+        ar = _ref.ar,
+        at = _ref.at,
+        ag = _ref.ag,
+        ids = _ref.ids,
+        gen = _ref.gen;
     $("people").append("<person class=\"d-flex m-2 text-center\">\n    ".concat(t, "\n    ").concat(ar, "\n    ").concat(at, "\n    ").concat(ag, "\n    ").concat(ids, "\n    ").concat(gen, "\n</person>"));
-  }
+    console.log(displayAttr);
+  };
 }
 
 var onePersonAge = document.querySelector('#person_1');

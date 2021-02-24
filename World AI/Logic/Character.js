@@ -44,51 +44,101 @@ export let deaths = 0;
         
 export class Character {
     constructor() {
-        let percent = Math.round(Math.random() * 99 + 1);
+        let percent = Math.floor(Math.random() * 99 + 1);
         //50% change of it being a boy for a girl.
         this.id = id += 1;
         this.title = `${job[0].name}`;
         this.alive = true;
-        if (percent <= 60) {
-            // 60 to be A man
+
+
+        if (percent <= 50) {
+            let maleTemplate =()=>{
+               // 60 to be A man
             this.name = names[getRandom(0, 400)];
             this.gender = "male";
+            this.age = 0
             this.hp = 100;
             this.atk = getRandom(0, 100);
             this.armour = 0;
-             this.age = 0
             this.risk = 0;
             ++male;
             $('#male-count').text(male);
+            let info = {
+                name: this.name,
+                gender: this.gender,
+                age:this.age,
+                hp: this.hp, 
+                atk: this.atk,
+                armour: this.armour,
+                id: this.id
+                }               
+            bio(
+            info.gender,
+            info.title,
+            info.name,
+            info.armour,
+            info.atk,
+            info.age,
+            info.id
+            );
+                //let displayBio = `Name ${info.name}, Gender ${info.gender}, Age ${info.age}, Health ${info.hp}, Attack ${info.atk}, Armour ${info.armour} `
+                //console.table(info);
+
+                let person = document.getElementById(`person_${info.id}`);
+                person.addEventListener("click", (e)=>{e.preventDefault(); console.log('hello', info.name)});  
+            }          
+            maleTemplate();
+
 
         } else {
+
+        let femaleTemplate = () => {
             this.name = fnames[getRandom(0, 400)];
             this.gender = "female";
             this.hp = 100;
+            this.age = 0;
             this.atk = getRandom(0, 60);
             this.armour = 0;
-            this.age = 0;
             this.risk = 0;
-            
             ++female;
             $('#female-count').text(female)
-        };
-            bio(
-            this.gender,
-            this.title,
-            this.name,
-            this.armour,
-            this.atk,
-            this.age,
-            this.id
-            );
+                let info = {
+                    name: this.name,
+                    gender: this.gender,
+                    age:this.age,
+                    hp: this.hp, 
+                    atk: this.atk,
+                    armour: this.armour,
+                    id: this.id  
+                }
+                //let displayBio = `Name ${info.name}, Gender ${info.gender}, Age ${info.age}, Health ${info.hp}, Attack ${info.atk}, Armour ${info.armour} `
+                //console.table(info);
+                bio(
+                info.gender,
+                info.title,
+                info.name,
+                info.armour,
+                info.atk,
+                info.age,
+                info.id
+                );
+                let person = document.getElementById(`person_${info.id}`);
+                person.addEventListener("click", (e)=>{e.preventDefault(); console.log('hello', info.name)});  
+            }
+        femaleTemplate();
+};
 
-     let person = document.getElementById(`person_${this.id}`);
-/*     person.addEventListener("click", deathClick, false);  */
 
-    let live = console.log(Math.floor(Math.random() * 5000) + 1000);
+
+
+
+            
+
+     
+
+    //let live = console.log(Math.floor(Math.random() * 5000) + 1000);
 /* console.log('people', people.count); */
-     setTimeout(()=>{deathFunction(person), 5000}); 
+   /*  setTimeout(()=>{deathFunction(person)},5000);  */
     }
 }
 
@@ -112,6 +162,17 @@ function deathClick(e) {
     displayHTML(people.count, "#population", "h5");
     displayHTML(++deaths, "#deaths", "h5");
 };
+
+function showBio(e) {
+    
+     e = e || window.event; 
+    e.currentTarget.classList[0] === 'male' ? console.log( e.currentTarget) : console.log(e.currentTarget);
+
+/*     people.count--;
+    displayHTML(people.count, "#population", "h5");
+    displayHTML(++deaths, "#deaths", "h5"); */
+};
+
 
 
 
@@ -169,7 +230,7 @@ export function bio(gender, title, name, armour, atk, age, id) {
 
     $("people").append(`${person_icon}`); //Creates the icon figure of a person to the screen
 
-    function displayAttr() {
+    const displayAttr = ({t, ar, at, ag, ids, gen}) => {
         $("people").append(`<person class="d-flex m-2 text-center">
     ${t}
     ${ar}
@@ -178,6 +239,8 @@ export function bio(gender, title, name, armour, atk, age, id) {
     ${ids}
     ${gen}
 </person>`);
+    console.log(displayAttr);
+    
     }
 }
 
