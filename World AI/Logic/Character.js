@@ -58,7 +58,6 @@ export class Character {
             this.armour = 0;
              this.age = 0
             this.risk = 0;
-           
             ++male;
             $('#male-count').text(male);
 
@@ -83,29 +82,27 @@ export class Character {
             this.age,
             this.id
             );
+
      let person = document.getElementById(`person_${this.id}`);
-    person.addEventListener("click", deathClick, false); 
+/*     person.addEventListener("click", deathClick, false);  */
+
     let live = console.log(Math.floor(Math.random() * 5000) + 1000);
-console.log('people', people.count);
-     setTimeout(()=>{deathFunction(person)},5000); 
+/* console.log('people', people.count); */
+     setTimeout(()=>{deathFunction(person), 5000}); 
     }
 }
 
 function deathFunction(id) {
-    //e parameter
-    /* e = e || window.event; */
-    //console.log(id);    
-    //changed e to id
-    //.currentTarget
-     id.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
-    id.remove(); 
-    people.count--;
-    displayHTML(people.count, "#population", "h5");
-    displayHTML(++deaths, "#deaths", "h5");
+    if(people.count > 0){
+        id.classList[id.classList.length - 1] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
+        id.remove(); 
+        people.count--;
+        displayHTML(people.count, "#population", "h5");
+        displayHTML(++deaths, "#deaths", "h5");
+    }
 };
 
 function deathClick(e) {
-    
      e = e || window.event; 
     e.currentTarget.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
     e.currentTarget.remove(); 
@@ -116,6 +113,15 @@ function deathClick(e) {
     displayHTML(++deaths, "#deaths", "h5");
 };
 
+
+
+const sum = (a, b)=>{
+return a + b;
+}
+const arrayAdd = (data)=>{
+    return [].push(data);
+
+}
 
 
 export function bio(gender, title, name, armour, atk, age, id) {

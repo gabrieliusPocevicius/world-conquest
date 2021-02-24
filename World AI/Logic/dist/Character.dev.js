@@ -88,28 +88,26 @@ var Character = function Character() {
   ;
   bio(this.gender, this.title, this.name, this.armour, this.atk, this.age, this.id);
   var person = document.getElementById("person_".concat(this.id));
-  person.addEventListener("click", deathClick, false);
+  /*     person.addEventListener("click", deathClick, false);  */
+
   var live = console.log(Math.floor(Math.random() * 5000) + 1000);
-  console.log('people', people.count);
+  /* console.log('people', people.count); */
+
   setTimeout(function () {
-    deathFunction(person);
-  }, 5000);
+    deathFunction(person), 5000;
+  });
 };
 
 exports.Character = Character;
 
 function deathFunction(id) {
-  //e parameter
-
-  /* e = e || window.event; */
-  //console.log(id);    
-  //changed e to id
-  //.currentTarget
-  id.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
-  id.remove();
-  people.count--;
-  (0, _DataBase.displayHTML)(people.count, "#population", "h5");
-  (0, _DataBase.displayHTML)(exports.deaths = deaths = +deaths + 1, "#deaths", "h5");
+  if (people.count > 0) {
+    id.classList[id.classList.length - 1] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
+    id.remove();
+    people.count--;
+    (0, _DataBase.displayHTML)(people.count, "#population", "h5");
+    (0, _DataBase.displayHTML)(exports.deaths = deaths = +deaths + 1, "#deaths", "h5");
+  }
 }
 
 ;
@@ -124,6 +122,14 @@ function deathClick(e) {
 }
 
 ;
+
+var sum = function sum(a, b) {
+  return a + b;
+};
+
+var arrayAdd = function arrayAdd(data) {
+  return [].push(data);
+};
 
 function bio(gender, title, name, armour, atk, age, id) {
   //age = setInterval(() => $(`#male-age${id}`).text(console.log(++age)) , 1000);
