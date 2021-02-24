@@ -66,7 +66,6 @@ var Character = function Character() {
 
   if (percent <= 50) {
     var maleTemplate = function maleTemplate() {
-      // 60 to be A man
       _this.name = _DataBase.names[(0, _Util.getRandom)(0, 400)];
       _this.gender = "male";
       _this.age = 0;
@@ -85,13 +84,15 @@ var Character = function Character() {
         armour: _this.armour,
         id: _this.id
       };
-      bio(info.gender, info.title, info.name, info.armour, info.atk, info.age, info.id); //let displayBio = `Name ${info.name}, Gender ${info.gender}, Age ${info.age}, Health ${info.hp}, Attack ${info.atk}, Armour ${info.armour} `
-      //console.table(info);
+      bio(info.gender, info.title, info.name, info.armour, info.atk, info.age, info.id);
+      var displayBio = "Name ".concat(info.name, ", Gender ").concat(info.gender, ", Age ").concat(info.age, ", Health ").concat(info.hp, ", Attack ").concat(info.atk, ", Armour ").concat(info.armour, " "); //console.table(info);
 
-      var person = document.getElementById("person_".concat(info.id));
-      person.addEventListener("click", function (e) {
+      var person = document.getElementById("person_".concat(info.id)); //person.addEventListener("click", (e)=>{e.preventDefault(); console.log('hello', info.name)});
+
+      var displayInformation = "#information-display";
+      person.addEventListener('mouseover', function (e) {
         e.preventDefault();
-        console.log('hello', info.name);
+        (0, _DataBase.displayHTML)(displayBio, displayInformation, "h5");
       });
     };
 

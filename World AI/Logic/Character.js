@@ -53,7 +53,6 @@ export class Character {
 
         if (percent <= 50) {
             let maleTemplate =()=>{
-               // 60 to be A man
             this.name = names[getRandom(0, 400)];
             this.gender = "male";
             this.age = 0
@@ -81,17 +80,19 @@ export class Character {
             info.age,
             info.id
             );
-                //let displayBio = `Name ${info.name}, Gender ${info.gender}, Age ${info.age}, Health ${info.hp}, Attack ${info.atk}, Armour ${info.armour} `
+                let displayBio = `Name ${info.name}, Gender ${info.gender}, Age ${info.age}, Health ${info.hp}, Attack ${info.atk}, Armour ${info.armour} `
                 //console.table(info);
 
                 let person = document.getElementById(`person_${info.id}`);
-                person.addEventListener("click", (e)=>{e.preventDefault(); console.log('hello', info.name)});  
+                //person.addEventListener("click", (e)=>{e.preventDefault(); console.log('hello', info.name)});
+                let displayInformation = "#information-display";
+                
+                person.addEventListener('mouseover', (e)=>{e.preventDefault();displayHTML(displayBio, displayInformation, "h5");});
             }          
             maleTemplate();
 
 
         } else {
-
         let femaleTemplate = () => {
             this.name = fnames[getRandom(0, 400)];
             this.gender = "female";
@@ -130,9 +131,6 @@ export class Character {
 
 
 
-
-
-            
 
      
 
