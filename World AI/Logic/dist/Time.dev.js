@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.sleep = sleep;
 exports.timeStruct = timeStruct;
 exports.time = time;
-exports.age = void 0;
+exports.speed = void 0;
 
 var _Battle = require("../Logic/Battle.js");
 
@@ -14,10 +14,10 @@ var _DataBase = require("./DataBase.js");
 
 var _Character = require("./Character.js");
 
-var age = 0;
-exports.age = age;
 var playIcon = "\n            <svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z\" fill=\"#FAFAFA\"/>\n            </svg>\n";
-var speed = 1000; //birth speed
+var speed = 100; //birth speed
+
+exports.speed = speed;
 
 (function () {
   $("#pause").on("click", function (e) {
@@ -85,58 +85,7 @@ function naturalDisaster(affects, lengthOfTime) {
 
 }
 
-function alive(day, month, year) {
-  var alive = true;
-  var yearsOld = 0; //parameters birthday
-
-  if (calender.dayC === day && calender.monthC === month && alive) {
-    // person's age
-    exports.age = age = yearsOld + calender.yearC - year;
-    lifeStage(age);
-    return console.log(age + " years old");
-  }
-}
-
-function lifeStage(age) {
-  var stage = ""; // everything comes with age
-
-  if (age < 2) {
-    var baby = "Baby Stage";
-    stage = baby;
-    return stage; //console.log(baby);
-  }
-
-  if (age < 12 && age >= 2) {
-    var child = "Child Stage ";
-    stage = stage;
-    return stage; //console.log(child);
-  }
-
-  if (age <= 18 && age >= 12) {
-    var teen = "Teen Stage  ";
-    stage = teen;
-    return stage; //console.log(teen);
-  }
-
-  if (age > 18 && age < 60) {
-    var adult = "Adult Stage ";
-    stage = adult;
-    return stage; //console.log(adult);
-  }
-
-  if (age >= 60) {
-    var old = "Elder Stage ";
-    stage = old;
-    return stage;
-  }
-
-  if (age == 120) {
-    var dead = "Dead";
-    stage = age;
-    console.log("dead");
-    return stage;
-  }
-}
+var start = Date.now();
 
 function timeStruct() {
   /**
@@ -154,6 +103,9 @@ function timeStruct() {
       //  console.log(String(monthNames[11]))
       calender.monthC = 1;
       calender.yearC++; //console.log('year ' + calender.yearC)
+
+      var oneYear = Math.floor((Date.now() - start) / 1000);
+      console.log('One Year in seconds : ', oneYear);
     }
 
     ;
@@ -169,7 +121,6 @@ function displayDate() {
   document.getElementById("days").innerHTML = "day " + calender.dayC;
   document.getElementById("months").innerHTML = _DataBase.monthNames[calender.monthC];
   document.getElementById("years").innerHTML = calender.yearC;
-  exports.age = age = calender.yearC - calender.years;
 }
 
 ;

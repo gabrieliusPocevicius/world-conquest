@@ -23,8 +23,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/*import {alive, lifeStage, time} from './Time.js';
- */
 var id = 0; // the id of each object of the Character class
 
 var nationality = [];
@@ -111,7 +109,7 @@ var Character = function Character() {
       person.addEventListener('mouseover', function (e) {
         e.preventDefault();
         displayUserInfo.style.opacity = '1';
-        info.age = Math.floor((Date.now() - birthday) / 1000);
+        info.age = Math.floor((Date.now() - birthday) / (_Time.speed * 360));
         displayInfoIds["info-age"] = info.age;
         var keys = Object.keys(displayInfoIds);
         var props = Object.values(displayInfoIds);

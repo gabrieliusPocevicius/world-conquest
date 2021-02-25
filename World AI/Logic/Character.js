@@ -12,10 +12,9 @@ import {
     log,
 } from "./DataBase.js";
 import { getRandom } from "./Util.js";
-import { time, age } from "./Time.js";
+import { speed } from "./Time.js";
 
-/*import {alive, lifeStage, time} from './Time.js';
- */
+
 var id = 0; // the id of each object of the Character class
 var nationality = [];
 var surnames = [];
@@ -111,7 +110,7 @@ export class Character {
                 person.addEventListener('mouseover', (e)=>{
                     e.preventDefault();
                     displayUserInfo.style.opacity = '1';  
-                    info.age = Math.floor((Date.now() - birthday)/ 1000);
+                    info.age = Math.floor((Date.now() - birthday) / (speed * 360));
                     displayInfoIds["info-age"] = info.age;
                             
                     const keys = Object.keys(displayInfoIds);

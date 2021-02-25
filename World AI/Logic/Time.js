@@ -2,7 +2,7 @@ import { battleTrue } from "../Logic/Battle.js";
 import { monthNames } from "./DataBase.js";
 import { Character, maker, people } from "./Character.js";
 
-export let age = 0;
+
 
 let playIcon = `
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,7 +11,7 @@ let playIcon = `
 `;
 
 
-let speed = 1000; //birth speed
+export const speed = 100; //birth speed
 
 (function() {
     $("#pause").on("click", (e) => {
@@ -53,7 +53,7 @@ function getRandom(min, max) {
 }
 
 // year 500 and first month and days
-var calender = {
+let calender = {
     years: 500,
     months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     days: [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
@@ -96,59 +96,13 @@ function naturalDisaster(affects, lengthOfTime) {
                                                    */
 }
 
-function alive(day, month, year) {
-    let alive = true;
-    var yearsOld = 0;
-    //parameters birthday
-    if (calender.dayC === day && calender.monthC === month && alive) {
-        // person's age
-        age = yearsOld + calender.yearC - year;
-        lifeStage(age);
-        return console.log(age + " years old");
-    }
-}
 
-function lifeStage(age) {
-    var stage = "";
-    // everything comes with age
-    if (age < 2) {
-        let baby = "Baby Stage";
-        stage = baby;
-        return stage;
-        //console.log(baby);
-    }
-    if (age < 12 && age >= 2) {
-        let child = "Child Stage ";
-        stage = stage;
-        return stage;
-        //console.log(child);
-    }
-    if (age <= 18 && age >= 12) {
-        let teen = "Teen Stage  ";
-        stage = teen;
-        return stage;
-        //console.log(teen);
-    }
-    if (age > 18 && age < 60) {
-        let adult = "Adult Stage ";
-        stage = adult;
-        return stage;
-        //console.log(adult);
-    }
-    if (age >= 60) {
-        let old = "Elder Stage ";
-        stage = old;
-        return stage;
-    }
-    if (age == 120) {
-        let dead = "Dead";
-        stage = age;
-        console.log("dead");
-        return stage;
-    }
-}
 
+let start = Date.now();
 export function timeStruct() {
+
+
+    
     /**
     @func timeStruct()
     lays out the structure of the calender
@@ -164,6 +118,8 @@ export function timeStruct() {
             calender.monthC = 1;
             calender.yearC++;
              //console.log('year ' + calender.yearC)
+        let oneYear = Math.floor((Date.now() - start) / 1000); 
+            console.log('One Year in seconds : ', oneYear);
         };
     };
 };
@@ -174,7 +130,7 @@ function displayDate(){
     document.getElementById("days").innerHTML = "day " + calender.dayC;
     document.getElementById("months").innerHTML = monthNames[calender.monthC];
     document.getElementById("years").innerHTML = calender.yearC;
-    age = calender.yearC - calender.years;
+    
 };
 
 let play = true;
