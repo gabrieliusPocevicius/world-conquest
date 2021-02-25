@@ -27,8 +27,6 @@ var id = 0; // the id of each object of the Character class
 
 var nationality = [];
 var surnames = [];
-var it = 0; // separate iterator for NAMES
-
 var gen = ["Male", "Female"];
 var percent = Math.round(Math.random() * 99 + 1);
 var people = {
@@ -50,9 +48,9 @@ var deaths = 0;
 exports.deaths = deaths;
 var male = 0;
 var female = 0;
-var displayUserInfo = document.getElementById('information-display');
-displayUserInfo.style.opacity = '0';
 var getAttributes = {};
+var displayUserInfo = document.getElementById("information-display");
+displayUserInfo.style.opacity = "0";
 
 var Character = function Character() {
   var _this = this;
@@ -76,7 +74,7 @@ var Character = function Character() {
       _this.risk = 0;
       ++male;
       var birthday = Date.now();
-      $('#male-count').text(male);
+      $("#male-count").text(male);
       var info = {
         name: _this.name,
         gender: _this.gender,
@@ -90,7 +88,7 @@ var Character = function Character() {
       var person = document.getElementById("person_".concat(info.id));
       person.addEventListener("click", function (e) {
         e.preventDefault();
-        console.log('hello', info.name);
+        console.log("hello", info.name);
       });
       var displayInfoIds = {
         "info-name": info.name,
@@ -102,13 +100,13 @@ var Character = function Character() {
         "info-id": info.id
       };
       getAttributes = displayInfoIds;
-      person.addEventListener('mouseout', function (e) {
+      person.addEventListener("mouseout", function (e) {
         e.preventDefault();
-        displayUserInfo.style.opacity = '0';
+        displayUserInfo.style.opacity = "0";
       });
-      person.addEventListener('mouseover', function (e) {
+      person.addEventListener("mouseover", function (e) {
         e.preventDefault();
-        displayUserInfo.style.opacity = '1';
+        displayUserInfo.style.opacity = "1";
         info.age = Math.floor((Date.now() - birthday) / (_Time.speed * 360));
         displayInfoIds["info-age"] = info.age;
         var keys = Object.keys(displayInfoIds);
@@ -117,8 +115,6 @@ var Character = function Character() {
         for (var i = 0; i < keys.length; i++) {
           document.getElementById(keys[i]).innerHTML = props[i];
         }
-
-        ;
       });
     };
 
@@ -133,7 +129,8 @@ var Character = function Character() {
       _this.armour = 0;
       _this.risk = 0;
       ++female;
-      $('#female-count').text(female);
+      var birthday = Date.now();
+      $("#female-count").text(female);
       var info = {
         name: _this.name,
         gender: _this.gender,
@@ -147,7 +144,7 @@ var Character = function Character() {
       var person = document.getElementById("person_".concat(info.id));
       person.addEventListener("click", function (e) {
         e.preventDefault();
-        console.log('hello', info.name);
+        console.log("hello", info.name);
       });
       var displayInfoIds = {
         "info-name": info.name,
@@ -158,40 +155,38 @@ var Character = function Character() {
         "info-armour": info.armour,
         "info-id": info.id
       };
-      person.addEventListener('mouseout', function (e) {
+      person.addEventListener("mouseout", function (e) {
         e.preventDefault();
-        displayUserInfo.style.opacity = '0';
+        displayUserInfo.style.opacity = "0";
       });
-      person.addEventListener('mouseover', function (e) {
+      person.addEventListener("mouseover", function (e) {
         e.preventDefault();
-        displayUserInfo.style.opacity = '1';
+        displayUserInfo.style.opacity = "1";
+        info.age = Math.floor((Date.now() - birthday) / (_Time.speed * 360));
+        displayInfoIds["info-age"] = info.age;
         var keys = Object.keys(displayInfoIds);
         var props = Object.values(displayInfoIds);
 
         for (var i = 0; i < keys.length; i++) {
           document.getElementById("".concat(keys[i])).innerHTML = props[i];
         }
-
-        ;
       });
     };
 
     femaleTemplate();
-  }
-
-  ; //let live = console.log(Math.floor(Math.random() * 5000) + 1000);
+  } //let live = console.log(Math.floor(Math.random() * 5000) + 1000);
 
   /* console.log('people', people.count); */
 
   /*  setTimeout(()=>{deathFunction(person)},5000);  */
+
 };
 
 exports.Character = Character;
-var ages = 0;
 
 function deathFunction(id) {
   if (people.count > 0) {
-    id.classList[id.classList.length - 1] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
+    id.classList[id.classList.length - 1] === "male" ? $("#male-count").text(--male) : $("#female-count").text(--female);
     id.remove();
     people.count--;
     (0, _DataBase.displayHTML)(people.count, "#population", "h5");
@@ -199,28 +194,22 @@ function deathFunction(id) {
   }
 }
 
-;
-
 function deathClick(e) {
   e = e || window.event;
-  e.currentTarget.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
+  e.currentTarget.classList[0] === "male" ? $("#male-count").text(--male) : $("#female-count").text(--female);
   e.currentTarget.remove();
   people.count--;
   (0, _DataBase.displayHTML)(people.count, "#population", "h5");
   (0, _DataBase.displayHTML)(exports.deaths = deaths = +deaths + 1, "#deaths", "h5");
 }
 
-;
-
 function showbio(e) {
   e = e || window.event;
-  e.currentTarget.classList[0] === 'male' ? console.log(e.currentTarget) : console.log(e.currentTarget);
+  e.currentTarget.classList[0] === "male" ? console.log(e.currentTarget) : console.log(e.currentTarget);
   /*     people.count--;
-      displayHTML(people.count, "#population", "h5");
-      displayHTML(++deaths, "#deaths", "h5"); */
+    displayHTML(people.count, "#population", "h5");
+    displayHTML(++deaths, "#deaths", "h5"); */
 }
-
-;
 
 var sum = function sum(a, b) {
   return a + b;
@@ -245,7 +234,7 @@ function displayPerson(gender, id) {
   $("people").append("".concat(person_icon)); //Creates the icon figure of a person to the screen
 }
 
-var onePersonAge = document.querySelector('#person_1');
+var onePersonAge = document.querySelector("#person_1");
 
 if (onePersonAge !== null) {
   (0, _DataBase.log)(onePersonAge);

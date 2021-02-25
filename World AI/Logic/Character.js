@@ -3,29 +3,28 @@
 // module of names
 
 import {
-    names,
-    fnames,
-    sickness,
-    militaryRanks,
-    job,
-    displayHTML,
-    log,
+  names,
+  fnames,
+  sickness,
+  militaryRanks,
+  job,
+  displayHTML,
+  log,
 } from "./DataBase.js";
 import { getRandom } from "./Util.js";
 import { speed } from "./Time.js";
 
+let id = 0; // the id of each object of the Character class
+let nationality = [];
+let surnames = [];
 
-var id = 0; // the id of each object of the Character class
-var nationality = [];
-var surnames = [];
-var it = 0; // separate iterator for NAMES
-var gen = ["Male", "Female"];
-var percent = Math.round(Math.random() * 99 + 1);
-export var people = {
-    // contains all the people of the world
-    //compare(p1, p2);
-    count: 0,
-    person: [],
+const gen = ["Male", "Female"];
+let percent = Math.round(Math.random() * 99 + 1);
+export let people = {
+  // contains all the people of the world
+  //compare(p1, p2);
+  count: 0,
+  person: [],
 };
 /*
 
@@ -35,220 +34,201 @@ export var people = {
 
 */
 export let deaths = 0;
-    let male = 0;
-    let female = 0;
-
-
-
-const displayUserInfo = document.getElementById('information-display');  
-displayUserInfo.style.opacity = '0';
-
-
-
+let male = 0;
+let female = 0;
 let getAttributes = {};
 
+const displayUserInfo = document.getElementById("information-display");
+displayUserInfo.style.opacity = "0";
+
 export class Character {
-    constructor() {
-        let percent = Math.floor(Math.random() * 99 + 1);
-        //50% change of it being a boy for a girl.
-        this.id = id += 1;
-        this.title = `${job[0].name}`;
-        this.alive = true;
+
+  constructor() {
+
+    let percent = Math.floor(Math.random() * 99 + 1);
+    //50% change of it being a boy for a girl.
+    this.id = id += 1;
+    this.title = `${job[0].name}`;
+    this.alive = true;
+
+    if (percent <= 50) {
+      let maleTemplate = () => {
+        this.name = names[getRandom(0, 400)];
+        this.gender = "male";
+        this.age = 0;
+        this.hp = 100;
+        this.atk = getRandom(0, 100);
+        this.armour = 0;
+        this.risk = 0;
+        ++male;
+        let birthday = Date.now();
+
+        $("#male-count").text(male);
         
+        let info = {
+          name: this.name,
+          gender: this.gender,
+          age: this.age,
+          hp: this.hp,
+          atk: this.atk,
+          armour: this.armour,
+          id: this.id,
+        };
+        displayPerson(info.gender, info.id);
+        let person = document.getElementById(`person_${info.id}`);
+        person.addEventListener("click", (e) => {
+          e.preventDefault();
+          console.log("hello", info.name);
+        });
 
-        if (percent <= 50) {
-            
-            let maleTemplate =()=>{
-            this.name = names[getRandom(0, 400)];
-            this.gender = "male";
-            this.age = 0;
-            this.hp = 100;
-            this.atk = getRandom(0, 100);
-            this.armour = 0;
-            this.risk = 0;
-            ++male;
-            let birthday = Date.now();
-            
-          
-            $('#male-count').text(male);
-            let info = {
-                name: this.name,
-                gender: this.gender,
-                age:this.age,
-                hp: this.hp, 
-                atk: this.atk,
-                armour: this.armour,
-                id: this.id
-                }               
-            displayPerson(
-            info.gender,
-            info.id
-            );
-                let person = document.getElementById(`person_${info.id}`);
-                person.addEventListener("click", (e)=>{e.preventDefault(); console.log('hello', info.name)});
+        let displayInfoIds = {
+          "info-name": info.name,
+          "info-gender": info.gender,
+          "info-age": info.age,
+          "info-health": info.hp,
+          "info-attack": info.atk,
+          "info-armour": info.armour,
+          "info-id": info.id,
+        };
+        getAttributes = displayInfoIds;
 
-                
+        person.addEventListener("mouseout", (e) => {
+          e.preventDefault();
+          displayUserInfo.style.opacity = "0";
+        });
+        person.addEventListener("mouseover", (e) => {
+          e.preventDefault();
+          displayUserInfo.style.opacity = "1";
+          info.age = Math.floor((Date.now() - birthday) / (speed * 360));
+          displayInfoIds["info-age"] = info.age;
 
-               
-                let displayInfoIds = {
-                "info-name":info.name,
-                "info-gender":info.gender,
-                "info-age": info.age,
-                "info-health": info.hp,
-                "info-attack":info.atk,
-                "info-armour":info.armour,
-                 "info-id": info.id
-                };
+          const keys = Object.keys(displayInfoIds);
+          const props = Object.values(displayInfoIds);
 
-                
-                getAttributes = displayInfoIds;
+          for (let i = 0; i < keys.length; i++) {
+            document.getElementById(keys[i]).innerHTML = props[i];
+          }
+        });
+      };
+      maleTemplate();
+    } else {
+      let femaleTemplate = () => {
+        this.name = fnames[getRandom(0, 400)];
+        this.gender = "female";
+        this.hp = 100;
+        this.age = 0;
+        this.atk = getRandom(0, 60);
+        this.armour = 0;
+        this.risk = 0;
+        ++female;
+        let birthday = Date.now();
+        $("#female-count").text(female);
+        let info = {
+          name: this.name,
+          gender: this.gender,
+          age: this.age,
+          hp: this.hp,
+          atk: this.atk,
+          armour: this.armour,
+          id: this.id,
+        };
+        displayPerson(info.gender, info.id);
+        let person = document.getElementById(`person_${info.id}`);
+        person.addEventListener("click", (e) => {
+          e.preventDefault();
+          console.log("hello", info.name);
+        });
 
-                person.addEventListener('mouseout', (e)=>{
-                    e.preventDefault();
-                    displayUserInfo.style.opacity = '0';    
-                })
-                person.addEventListener('mouseover', (e)=>{
-                    e.preventDefault();
-                    displayUserInfo.style.opacity = '1';  
-                    info.age = Math.floor((Date.now() - birthday) / (speed * 360));
-                    displayInfoIds["info-age"] = info.age;
-                            
-                    const keys = Object.keys(displayInfoIds);
-                    const props = Object.values(displayInfoIds);
-                        
-
-                    for(let i = 0; i < keys.length; i++){
-                        document.getElementById(keys[i]).innerHTML = props[i];
-                    };
-               });
-            }          
-            maleTemplate();
-        } else {
-        let femaleTemplate = () => {
-            this.name = fnames[getRandom(0, 400)];
-            this.gender = "female";
-            this.hp = 100;
-            this.age = 0;
-            this.atk = getRandom(0, 60);
-            this.armour = 0;
-            this.risk = 0;
-            ++female;
-            $('#female-count').text(female)
-                let info = {
-                    name: this.name,
-                    gender: this.gender,
-                    age:this.age,
-                    hp: this.hp, 
-                    atk: this.atk,
-                    armour: this.armour,
-                    id: this.id  
-                }
-                displayPerson(
-                info.gender,
-                info.id
-                );
-                let person = document.getElementById(`person_${info.id}`);
-                person.addEventListener("click", (e)=>{e.preventDefault();
-                     console.log('hello', info.name)
-                });  
-
-                let displayInfoIds = {"info-name":info.name,
-                "info-gender":info.gender,
-                "info-age":info.age,
-                "info-health": info.hp,
-                "info-attack":info.atk,
-                "info-armour":info.armour,
-                 "info-id": info.id
-                };
-
-                person.addEventListener('mouseout', (e)=>{
-                    e.preventDefault();
-                    displayUserInfo.style.opacity = '0';    
-                })
-                person.addEventListener('mouseover', (e)=>{
-                    e.preventDefault();
-                    
-                    displayUserInfo.style.opacity = '1';    
-
-                    const keys = Object.keys(displayInfoIds);
-                    const props = Object.values(displayInfoIds);
-
-
-                    for(let i = 0; i < keys.length; i++){
-                        document.getElementById(`${keys[i]}`).innerHTML = props[i];
-                    };
-               });
-            }
-
-            femaleTemplate();
-     
-            
+        let displayInfoIds = {
+          "info-name": info.name,
+          "info-gender": info.gender,
+          "info-age": info.age,
+          "info-health": info.hp,
+          "info-attack": info.atk,
+          "info-armour": info.armour,
+          "info-id": info.id,
         };
 
+        person.addEventListener("mouseout", (e) => {
+          e.preventDefault();
+          displayUserInfo.style.opacity = "0";
+        });
+        person.addEventListener("mouseover", (e) => {
+          e.preventDefault();
+          displayUserInfo.style.opacity = "1";
+          info.age = Math.floor((Date.now() - birthday) / (speed * 360));
+          displayInfoIds["info-age"] = info.age;
 
+          const keys = Object.keys(displayInfoIds);
+          const props = Object.values(displayInfoIds);
 
+          for (let i = 0; i < keys.length; i++) {
+            document.getElementById(`${keys[i]}`).innerHTML = props[i];
+          }
+        });
+      };
 
-     
+      femaleTemplate();
+    }
 
     //let live = console.log(Math.floor(Math.random() * 5000) + 1000);
-/* console.log('people', people.count); */
-   /*  setTimeout(()=>{deathFunction(person)},5000);  */
-    }
+    /* console.log('people', people.count); */
+    /*  setTimeout(()=>{deathFunction(person)},5000);  */
+  }
 }
-let ages = 0;
-
-
 
 
 
 
 
 function deathFunction(id) {
-    if(people.count > 0){
-        id.classList[id.classList.length - 1] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
-        id.remove(); 
-        people.count--;
-        displayHTML(people.count, "#population", "h5");
-        displayHTML(++deaths, "#deaths", "h5");
-    }
-};
-
-function deathClick(e) {
-     e = e || window.event; 
-    e.currentTarget.classList[0] === 'male' ? $('#male-count').text(--male) : $('#female-count').text(--female);
-    e.currentTarget.remove(); 
+  if (people.count > 0) {
+    id.classList[id.classList.length - 1] === "male"
+      ? $("#male-count").text(--male)
+      : $("#female-count").text(--female);
+    id.remove();
     people.count--;
     displayHTML(people.count, "#population", "h5");
     displayHTML(++deaths, "#deaths", "h5");
-};
+  }
+}
+
+function deathClick(e) {
+  e = e || window.event;
+  e.currentTarget.classList[0] === "male"
+    ? $("#male-count").text(--male)
+    : $("#female-count").text(--female);
+  e.currentTarget.remove();
+  people.count--;
+  displayHTML(people.count, "#population", "h5");
+  displayHTML(++deaths, "#deaths", "h5");
+}
 
 function showbio(e) {
-     e = e || window.event; 
-    e.currentTarget.classList[0] === 'male' ? console.log( e.currentTarget) : console.log(e.currentTarget);
+  e = e || window.event;
+  e.currentTarget.classList[0] === "male"
+    ? console.log(e.currentTarget)
+    : console.log(e.currentTarget);
 
-/*     people.count--;
+  /*     people.count--;
     displayHTML(people.count, "#population", "h5");
     displayHTML(++deaths, "#deaths", "h5"); */
+}
+
+
+
+const sum = (a, b) => {
+  return a + b;
+};
+const arrayAdd = (data) => {
+  return [].push(data);
 };
 
+export function displayPerson(gender, id) {
+  //age = setInterval(() => $(`#male-age${id}`).text(console.log(++age)) , 1000);
+  let color = [52, 58, 64, 1];
 
-
-
-const sum = (a, b)=>{
-return a + b;
-}
-const arrayAdd = (data)=>{
-    return [].push(data);
-
-}
-
-
-export function displayPerson(gender,id) {
-    //age = setInterval(() => $(`#male-age${id}`).text(console.log(++age)) , 1000);
-    let color = [52, 58, 64, 1];    
- 
-
-    let person_icon =`
+  let person_icon = `
     <div id="person_${id}" class='d-block ${gender}'>
        <div class="rounded p-1 m-1" style='background-color:rgba(${color[0]},${color[1]},${color[2]},${color[3]});'>
             <svg  width="28" height="28" viewBox="0 0 24 24" fill="none">
@@ -257,9 +237,9 @@ export function displayPerson(gender,id) {
         <div>
     </div>
     `;
-    //var person_ID = document.getElementById(`person_${id}`);
-    //console.log((person_ID.innerText = ""));
-        let f_person_icon =`
+  //var person_ID = document.getElementById(`person_${id}`);
+  //console.log((person_ID.innerText = ""));
+  let f_person_icon = `
     <div id="person_${id}" class='d-block female'>
         <div class="rounded p-1 m-1" style='background-color:rgba(${color[0]},${color[1]},${color[2]},${color[3]});'>
             <svg  width="28" height="28" viewBox="0 0 24 24" fill="none">
@@ -269,66 +249,55 @@ export function displayPerson(gender,id) {
     </div>
     `;
 
- 
-    if (gender == "female") {
-        person_icon = f_person_icon;
-    }
-    
-    $("people").append(`${person_icon}`); //Creates the icon figure of a person to the screen
+  if (gender == "female") {
+    person_icon = f_person_icon;
+  }
 
-
-    
-    
+  $("people").append(`${person_icon}`); //Creates the icon figure of a person to the screen
 }
 
-
-
-let onePersonAge = document.querySelector('#person_1');
-if(onePersonAge !== null){
-    log(onePersonAge)    
+let onePersonAge = document.querySelector("#person_1");
+if (onePersonAge !== null) {
+  log(onePersonAge);
 }
-
-
-
-
 
 let nobles = []; //Lists all the nobles and their props
 let peasantsUnderNoble = []; //Lists all the peasants under the noble.
 ///////////////////////////////////////////////////////////////////////////////////
 function befriend(person, person1) {
-    person.friend = person1;
-    person1.friend = person;
-    if (person.friend.gender == "female") {
-        person.friend.gender = "Female";
-    }
-    if (person1.friend.gender == "female") {
-        person1.friend.gender = "Female";
-    }
-    if (person.friend.gender == "male") {
-        person.friend.gender = "Male";
-    }
-    if (person1.friend.gender == "male") {
-        person1.friend.gender = "Male";
-    }
+  person.friend = person1;
+  person1.friend = person;
+  if (person.friend.gender == "female") {
+    person.friend.gender = "Female";
+  }
+  if (person1.friend.gender == "female") {
+    person1.friend.gender = "Female";
+  }
+  if (person.friend.gender == "male") {
+    person.friend.gender = "Male";
+  }
+  if (person1.friend.gender == "male") {
+    person1.friend.gender = "Male";
+  }
 
-    console.log(
-        person.name +
-        ", friends with " +
-        person.friend.name +
-        " is " +
-        person.friend.gender
-    );
-    console.log(
-        person1.name +
-        ", friends with " +
-        person1.friend.name +
-        " is " +
-        person1.friend.gender
-    );
+  console.log(
+    person.name +
+      ", friends with " +
+      person.friend.name +
+      " is " +
+      person.friend.gender
+  );
+  console.log(
+    person1.name +
+      ", friends with " +
+      person1.friend.name +
+      " is " +
+      person1.friend.gender
+  );
 
-    if (person.friend.gender != person1.friend.gender) {
-        console.log("Married");
-    }
+  if (person.friend.gender != person1.friend.gender) {
+    console.log("Married");
+  }
 }
 
 //var c = new Character();
@@ -338,147 +307,140 @@ function befriend(person, person1) {
 let members = 0; //peasants the noble is assigned as levies and farmers.
 //becomeNoble();
 function becomeNoble() {
-    let theNoble = {};
+  let theNoble = {};
 
-    for (let i = 0; i < 100; i++) {
-        var percent = Math.round(Math.random() * 99 + 1);
+  for (let i = 0; i < 100; i++) {
+    var percent = Math.round(Math.random() * 99 + 1);
 
-        // percent of becoming noble
-        if (percent === 100) {
-            theNoble = new Character();
-            people.person.push(theNoble);
-            console.log(
-                "Peasants under the noble " + theNoble.name + " " + members + " Levies"
-            );
-            break;
-        } else {
-            //var peasants = people.person.push(new Character());
+    // percent of becoming noble
+    if (percent === 100) {
+      theNoble = new Character();
+      people.person.push(theNoble);
+      console.log(
+        "Peasants under the noble " + theNoble.name + " " + members + " Levies"
+      );
+      break;
+    } else {
+      //var peasants = people.person.push(new Character());
 
-            ++members;
-        }
+      ++members;
     }
+  }
 
-    nobles.push(theNoble);
-    //console.log(theNoble);
-    nobles.forEach((_element, i) => {
-        nobles[i].title = "Noble";
-    });
+  nobles.push(theNoble);
+  //console.log(theNoble);
+  nobles.forEach((_element, i) => {
+    nobles[i].title = "Noble";
+  });
 
-    //console.log(people);
+  //console.log(people);
 }
 //console.log(p.armour);
 //console.log((militaryRanks.rank[3].armor += p.armour));
 
 function randomN(x) {
-    return Math.floor(Math.random() * x);
+  return Math.floor(Math.random() * x);
 }
 function compare(obj, obj2) {
-    for (const [key, value] of Object.entries(obj)) {
-        console.log(`1- ${key} ${value}`);
-    }
-    for (const [key, value] of Object.entries(obj2)) {
-        console.log(`2- ${key}: ${value}`);
-    }
+  for (const [key, value] of Object.entries(obj)) {
+    console.log(`1- ${key} ${value}`);
+  }
+  for (const [key, value] of Object.entries(obj2)) {
+    console.log(`2- ${key}: ${value}`);
+  }
 }
 function simulateAttack(age, atk, risk) {
-    //Makes the attack strength more dynamic by age affecting your attk
-    //console.log("initial atk: " + atk);
+  //Makes the attack strength more dynamic by age affecting your attk
+  //console.log("initial atk: " + atk);
 
-    if (Number(age) > 39) {
-        atk = atk / 2;
+  if (Number(age) > 39) {
+    atk = atk / 2;
 
-        //console.log(age);
-        //console.log("Lost " + atk + " strength");
-        //console.log("'Old Man In Affect:' total " + atk + " Strength");
+    //console.log(age);
+    //console.log("Lost " + atk + " strength");
+    //console.log("'Old Man In Affect:' total " + atk + " Strength");
 
-        if (atk < 0) {
-            risk = Math.abs(atk);
-            atk = 0;
-        }
-
-        return atk;
-    } else if (Number(age) > 12 && Number(age) < 39) {
-        // maturing to adulthood. Developing muscules.
-        var stronger = age * 2;
-
-        //console.log(age);
-        //console.log(atk);
-
-        var strength = atk + stronger;
-        //console.log(strength);
-        //console.log("'Young Man In Affect:'" + stronger + " Strength");
-
-        if (atk < 0) {
-            risk = Math.abs(atk);
-            return strength, (atk = 0);
-        }
-
-        return strength;
-    } else {
-        var a = atk - 10;
-        atk = a;
-        //console.log("'Is only a Child In Affect:' " + atk);
+    if (atk < 0) {
+      risk = Math.abs(atk);
+      atk = 0;
     }
-    //console.log("Final atk:" + atk);
+
     return atk;
+  } else if (Number(age) > 12 && Number(age) < 39) {
+    // maturing to adulthood. Developing muscules.
+    var stronger = age * 2;
+
+    //console.log(age);
+    //console.log(atk);
+
+    var strength = atk + stronger;
+    //console.log(strength);
+    //console.log("'Young Man In Affect:'" + stronger + " Strength");
+
+    if (atk < 0) {
+      risk = Math.abs(atk);
+      return strength, (atk = 0);
+    }
+
+    return strength;
+  } else {
+    var a = atk - 10;
+    atk = a;
+    //console.log("'Is only a Child In Affect:' " + atk);
+  }
+  //console.log("Final atk:" + atk);
+  return atk;
 }
 function simulateHp(age, hp, risk) {
-    //Calculates Risk of catching diseases based on age and life chosen path
-    risk = 0;
+  //Calculates Risk of catching diseases based on age and life chosen path
+  risk = 0;
 
-    if (Number(age) > 39) {
-        risk += 5;
-    }
+  if (Number(age) > 39) {
+    risk += 5;
+  }
 
-    if (age > 50 || (age > 40 && "Alcoholic")) {
-        return (risk += 15);
-    }
+  if (age > 50 || (age > 40 && "Alcoholic")) {
+    return (risk += 15);
+  }
 
-    for (const i in sickness) {
-        if (sickness.hasOwnProperty(i)) {
-            const element = sickness[i];
-            //console.log(element);
-        }
+  for (const i in sickness) {
+    if (sickness.hasOwnProperty(i)) {
+      const element = sickness[i];
+      //console.log(element);
     }
-    var keyNames = Object.keys(sickness);
-    //console.log(keyNames);
+  }
+  var keyNames = Object.keys(sickness);
+  //console.log(keyNames);
 }
 // making random people attributes
 
 export var food = {
-    count: 0,
-    food: [],
+  count: 0,
+  food: [],
 };
 
 //makes people appear
 
 function displayPopulationCount() {
-    let displayElement = $("#population");
-    displayElement.html("<h5>" + people.count + "</h5>");
+  let displayElement = $("#population");
+  displayElement.html("<h5>" + people.count + "</h5>");
 }
-
-
 
 export function maker(n) {
-    
+  while (n > 0) {
+    ++people.count;
+    people.person.push(new Character(n));
+    //console.log(people.person);
 
-    while (n > 0) {
-        ++people.count;
-        people.person.push(new Character(n));
-        //console.log(people.person);
+    n--;
+  }
 
-        n--;
-    }
-
-    displayPopulationCount();
-    return people.count;
+  displayPopulationCount();
+  return people.count;
 }
 
-
-
-
 //console.log(maker(10));
-  //army viewer
+//army viewer
 
 /* (function() {
   
