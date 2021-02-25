@@ -20,6 +20,7 @@
     --danger: #dc3545;
     --light: #f8f9fa;
     --dark: #343a40;
+    --darker:#2c3035;
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
     --breakpoint-md: 768px;
@@ -29,6 +30,11 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+
+
+.bg-darker{
+    background-color: var(--darker);
+}
 /* people{
   animation-name: example;
   animation-duration: 4s;

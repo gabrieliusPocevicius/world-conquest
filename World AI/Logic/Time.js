@@ -14,7 +14,8 @@ let playIcon = `
 let speed = 100;
 let pausedSpeed = 1000;
 (function() {
-    $("#pause").on("click", () => {
+    $("#pause").on("click", (e) => {
+        e.preventDefault();
         $("#pause")
             .html(`<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_d)">
