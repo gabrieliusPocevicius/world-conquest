@@ -11,8 +11,8 @@ let playIcon = `
 `;
 
 
-let speed = 100;
-let pausedSpeed = 1000;
+let speed = 1000; //birth speed
+
 (function() {
     $("#pause").on("click", (e) => {
         e.preventDefault();
@@ -36,12 +36,8 @@ let pausedSpeed = 1000;
 `);
         ++counter;
         play = true;
-        if (counter == 1) {
-            if (battleTrue == true) {
-                time(pausedSpeed); //slows the time down so the people don't age so fast
-            } else {
+        if (counter === 1) {
                 time(speed); //time goes on as normal
-            }
         }
     });
 })();

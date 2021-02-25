@@ -4,9 +4,12 @@ import { avg, add } from "/World AI/Logic/Util.js";
 // map definition
 class Map {
     constructor() {
-
+        
     }
 }
+
+
+
 
 class Interaction {
     constructor(trade, besiege, recruit, train) {
@@ -14,8 +17,6 @@ class Interaction {
         this.besiege = besiege;
         this.recruit = recruit;
         this.train = train;
-
-
         function trade(whoWith) {
             whoWith = { name: "", items: {} };
             trading = false;
