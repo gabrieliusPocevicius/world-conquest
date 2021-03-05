@@ -13,7 +13,7 @@ let playIcon = `
 
 export const speed = 100; //birth speed
 
-(function() {
+
     $("#pause").on("click", (e) => {
         e.preventDefault();
         $("#pause")
@@ -37,10 +37,10 @@ export const speed = 100; //birth speed
         ++counter;
         play = true;
         if (counter === 1) {
-                time(speed); //time goes on as normal
+            time(speed); //time goes on as normal
         }
     });
-})();
+
 //Util func
 let counter = 0; // Counter variable is used as a switch.
 

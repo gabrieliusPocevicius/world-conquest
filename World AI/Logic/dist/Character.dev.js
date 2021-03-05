@@ -13,14 +13,6 @@ var _Util = require("./Util.js");
 
 var _Time = require("./Time.js");
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var id = 0; // the id of each object of the Character class
@@ -207,22 +199,6 @@ function deathClick(e) {
   (0, _DataBase.displayHTML)(exports.deaths = deaths = +deaths + 1, "#deaths", "h5");
 }
 
-function showbio(e) {
-  e = e || window.event;
-  e.currentTarget.classList[0] === "male" ? console.log(e.currentTarget) : console.log(e.currentTarget);
-  /*     people.count--;
-    displayHTML(people.count, "#population", "h5");
-    displayHTML(++deaths, "#deaths", "h5"); */
-}
-
-var sum = function sum(a, b) {
-  return a + b;
-};
-
-var arrayAdd = function arrayAdd(data) {
-  return [].push(data);
-};
-
 function displayPerson(gender, id) {
   //age = setInterval(() => $(`#male-age${id}`).text(console.log(++age)) , 1000);
   var color = [52, 58, 64, 1];
@@ -238,47 +214,13 @@ function displayPerson(gender, id) {
   $("people").append("".concat(person_icon)); //Creates the icon figure of a person to the screen
 }
 
-var onePersonAge = document.querySelector("#person_1");
-
-if (onePersonAge !== null) {
-  (0, _DataBase.log)(onePersonAge);
-}
-
 var nobles = []; //Lists all the nobles and their props
 
 var peasantsUnderNoble = []; //Lists all the peasants under the noble.
 ///////////////////////////////////////////////////////////////////////////////////
-
-function befriend(person, person1) {
-  person.friend = person1;
-  person1.friend = person;
-
-  if (person.friend.gender == "female") {
-    person.friend.gender = "Female";
-  }
-
-  if (person1.friend.gender == "female") {
-    person1.friend.gender = "Female";
-  }
-
-  if (person.friend.gender == "male") {
-    person.friend.gender = "Male";
-  }
-
-  if (person1.friend.gender == "male") {
-    person1.friend.gender = "Male";
-  }
-
-  console.log(person.name + ", friends with " + person.friend.name + " is " + person.friend.gender);
-  console.log(person1.name + ", friends with " + person1.friend.name + " is " + person1.friend.gender);
-
-  if (person.friend.gender != person1.friend.gender) {
-    console.log("Married");
-  }
-} //var c = new Character();
+//var c = new Character();
 //var c2 = new Character();
 //befriend(c, c2);
-
 
 var members = 0; //peasants the noble is assigned as levies and farmers.
 //becomeNoble();
@@ -313,88 +255,10 @@ function randomN(x) {
   return Math.floor(Math.random() * x);
 }
 
-function compare(obj, obj2) {
-  for (var _i = 0, _Object$entries = Object.entries(obj); _i < _Object$entries.length; _i++) {
-    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-        key = _Object$entries$_i[0],
-        value = _Object$entries$_i[1];
-
-    console.log("1- ".concat(key, " ").concat(value));
-  }
-
-  for (var _i2 = 0, _Object$entries2 = Object.entries(obj2); _i2 < _Object$entries2.length; _i2++) {
-    var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
-        _key = _Object$entries2$_i[0],
-        _value = _Object$entries2$_i[1];
-
-    console.log("2- ".concat(_key, ": ").concat(_value));
-  }
-}
-
-function simulateAttack(age, atk, risk) {
-  //Makes the attack strength more dynamic by age affecting your attk
-  //console.log("initial atk: " + atk);
-  if (Number(age) > 39) {
-    atk = atk / 2; //console.log(age);
-    //console.log("Lost " + atk + " strength");
-    //console.log("'Old Man In Affect:' total " + atk + " Strength");
-
-    if (atk < 0) {
-      risk = Math.abs(atk);
-      atk = 0;
-    }
-
-    return atk;
-  } else if (Number(age) > 12 && Number(age) < 39) {
-    // maturing to adulthood. Developing muscules.
-    var stronger = age * 2; //console.log(age);
-    //console.log(atk);
-
-    var strength = atk + stronger; //console.log(strength);
-    //console.log("'Young Man In Affect:'" + stronger + " Strength");
-
-    if (atk < 0) {
-      risk = Math.abs(atk);
-      return strength, atk = 0;
-    }
-
-    return strength;
-  } else {
-    var a = atk - 10;
-    atk = a; //console.log("'Is only a Child In Affect:' " + atk);
-  } //console.log("Final atk:" + atk);
-
-
-  return atk;
-}
-
-function simulateHp(age, hp, risk) {
-  //Calculates Risk of catching diseases based on age and life chosen path
-  risk = 0;
-
-  if (Number(age) > 39) {
-    risk += 5;
-  }
-
-  if (age > 50 || age > 40 && "Alcoholic") {
-    return risk += 15;
-  }
-
-  for (var i in _DataBase.sickness) {
-    if (_DataBase.sickness.hasOwnProperty(i)) {
-      var element = _DataBase.sickness[i]; //console.log(element);
-    }
-  }
-
-  var keyNames = Object.keys(_DataBase.sickness); //console.log(keyNames);
-} // making random people attributes
-
-
 var food = {
   count: 0,
   food: []
-}; //makes people appear
-
+};
 exports.food = food;
 
 function displayPopulationCount() {
@@ -402,46 +266,37 @@ function displayPopulationCount() {
   displayElement.html("<h5>" + people.count + "</h5>");
 }
 
-function maker(n) {
-  while (n > 0) {
-    ++people.count;
-    people.person.push(new Character(n)); //console.log(people.person);
+function spawn() {
+  ++people.count;
+  people.person.push(new Character());
+  displayPopulationCount();
+  return people.count;
+}
 
+var adam = new spawn();
+var eve = spawn(); //makes people appear
+
+var c = 0;
+var pairs = [];
+
+function maker(n) {
+  for (var i = 1; i < people.count; i++) {
+    var x = $("#person_".concat(i)).attr('id');
+
+    if ($('#people').children().length % 2 === 0) {
+      /* console.log('group', c++); */
+      $("#".concat(x)).remove();
+    }
+
+    ;
+  }
+
+  while (n > 0) {
+    spawn();
     n--;
   }
 
-  displayPopulationCount();
-  return people.count;
-} //console.log(maker(10));
-//army viewer
+  ;
+}
 
-/* (function() {
-  
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-        });
-    }
-})(); */
-// class Enemy extends Character {
-//     constructor(name, hp, atk, age, honor, relations) {
-//             super(name, hp, atk, age, honor)
-//             this.name = name;
-//             this.hp = hp;
-//             this.atk = atk;
-//             this.age = age;
-//             this.honor = honor;
-//             this.relations = relations;
-//         }
-//         // class functions here
-// }
-// Would update the first dataset's value of 'March' to be 50
+;
