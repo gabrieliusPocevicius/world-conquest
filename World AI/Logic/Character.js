@@ -75,6 +75,7 @@ export class Character {
           id: this.id,
         };
         displayPerson(info.gender, info.id);
+       
         let person = document.getElementById(`person_${info.id}`);
         person.addEventListener("click", (e) => {
           e.preventDefault();
@@ -132,6 +133,7 @@ export class Character {
           armour: this.armour,
           id: this.id,
         };
+       
         displayPerson(info.gender, info.id);
         let person = document.getElementById(`person_${info.id}`);
         person.addEventListener("click", (e) => {
@@ -178,8 +180,13 @@ export class Character {
 }
 
 
+    $( "#people" ).sortable({
+            revert: true
+        });
+    $( "#people" ).disableSelection();
 
 
+  
 
 function deathFunction(id) {
   if (people.count > 0) {

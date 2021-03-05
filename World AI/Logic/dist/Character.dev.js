@@ -183,6 +183,10 @@ var Character = function Character() {
 };
 
 exports.Character = Character;
+$("#people").sortable({
+  revert: true
+});
+$("#people").disableSelection();
 
 function deathFunction(id) {
   if (people.count > 0) {
