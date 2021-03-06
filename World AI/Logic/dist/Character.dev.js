@@ -283,7 +283,7 @@ function maker(n) {
   for (var i = 1; i < people.count; i++) {
     var x = $("#person_".concat(i)).attr('id');
 
-    if ($('#people').children().length % 2 === 0) {
+    if ($('#people').children().length % 2 === 3) {
       /* console.log('group', c++); */
       $("#".concat(x)).remove();
     }
