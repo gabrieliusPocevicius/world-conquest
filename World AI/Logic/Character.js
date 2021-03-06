@@ -323,7 +323,7 @@ export function maker(n) {
 for(let i = 1; i < people.count;i++){
   let x = $(`#person_${i}`).attr('id');
 
-   if($('#people').children().length % 2 === 3){
+   if($('#people').children().length % 2 === 0){
       /* console.log('group', c++); */
       $(`#${x}`).remove();
   }; 
