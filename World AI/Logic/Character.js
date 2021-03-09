@@ -247,6 +247,7 @@ export function displayPerson(gender, id) {
 let nobles = []; //Lists all the nobles and their props
 let peasantsUnderNoble = []; //Lists all the peasants under the noble.
 ///////////////////////////////////////////////////////////////////////////////////
+let skills = [];
 
 //var c = new Character();
 //var c2 = new Character();
@@ -329,13 +330,10 @@ for(let i = 1; i < people.count;i++){
   }; 
   
 }
-
-  
-
-
   while (n > 0) {
     spawn();
     n--;
   };
 };
 
+let re = /dfds/

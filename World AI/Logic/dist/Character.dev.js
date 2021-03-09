@@ -218,7 +218,8 @@ var nobles = []; //Lists all the nobles and their props
 
 var peasantsUnderNoble = []; //Lists all the peasants under the noble.
 ///////////////////////////////////////////////////////////////////////////////////
-//var c = new Character();
+
+var skills = []; //var c = new Character();
 //var c2 = new Character();
 //befriend(c, c2);
 
@@ -300,3 +301,4 @@ function maker(n) {
 }
 
 ;
+var re = /dfds/;
