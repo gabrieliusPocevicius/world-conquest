@@ -44,7 +44,7 @@ var getAttributes = {};
 var displayUserInfo = document.getElementById("information-display");
 displayUserInfo.style.opacity = "0";
 
-var Character = function Character() {
+var Character = function Character(age) {
   var _this = this;
 
   _classCallCheck(this, Character);
@@ -59,7 +59,7 @@ var Character = function Character() {
     var maleTemplate = function maleTemplate() {
       _this.name = _DataBase.names[(0, _Util.getRandom)(0, 400)];
       _this.gender = "male";
-      _this.age = 0;
+      _this.age = age;
       _this.hp = 100;
       _this.atk = (0, _Util.getRandom)(0, 100);
       _this.armour = 0;
@@ -85,7 +85,7 @@ var Character = function Character() {
       var displayInfoIds = {
         "info-name": info.name,
         "info-gender": info.gender,
-        "info-age": info.age,
+        "info-age": age,
         "info-health": info.hp,
         "info-attack": info.atk,
         "info-armour": info.armour,
@@ -116,7 +116,7 @@ var Character = function Character() {
       _this.name = _DataBase.fnames[(0, _Util.getRandom)(0, 400)];
       _this.gender = "female";
       _this.hp = 100;
-      _this.age = 0;
+      _this.age = age;
       _this.atk = (0, _Util.getRandom)(0, 60);
       _this.armour = 0;
       _this.risk = 0;
@@ -141,7 +141,7 @@ var Character = function Character() {
       var displayInfoIds = {
         "info-name": info.name,
         "info-gender": info.gender,
-        "info-age": info.age,
+        "info-age": age,
         "info-health": info.hp,
         "info-attack": info.atk,
         "info-armour": info.armour,
@@ -274,10 +274,16 @@ function spawn() {
   return people.count;
 }
 
-var adam = new spawn();
-var eve = spawn(); //makes people appear
+function createPerson(age) {
+  ++people.count;
+  people.person.push(new Character(age));
+  displayPopulationCount();
+  return people.count;
+}
 
-var c = 0;
+var adam = createPerson(25);
+var eve = createPerson(18); //makes people appear
+
 var pairs = [];
 
 function maker(n) {

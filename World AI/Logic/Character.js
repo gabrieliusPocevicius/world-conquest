@@ -43,7 +43,7 @@ displayUserInfo.style.opacity = "0";
 
 export class Character {
 
-  constructor() {
+  constructor(age) {
 
     let percent = Math.floor(Math.random() * 99 + 1);
     //50% change of it being a boy for a girl.
@@ -55,7 +55,7 @@ export class Character {
       let maleTemplate = () => {
         this.name = names[getRandom(0, 400)];
         this.gender = "male";
-        this.age = 0;
+        this.age = age;
         this.hp = 100;
         this.atk = getRandom(0, 100);
         this.armour = 0;
@@ -85,7 +85,7 @@ export class Character {
         let displayInfoIds = {
           "info-name": info.name,
           "info-gender": info.gender,
-          "info-age": info.age,
+          "info-age": age,
           "info-health": info.hp,
           "info-attack": info.atk,
           "info-armour": info.armour,
@@ -117,7 +117,7 @@ export class Character {
         this.name = fnames[getRandom(0, 400)];
         this.gender = "female";
         this.hp = 100;
-        this.age = 0;
+        this.age = age;
         this.atk = getRandom(0, 60);
         this.armour = 0;
         this.risk = 0;
@@ -144,7 +144,7 @@ export class Character {
         let displayInfoIds = {
           "info-name": info.name,
           "info-gender": info.gender,
-          "info-age": info.age,
+          "info-age": age,
           "info-health": info.hp,
           "info-attack": info.atk,
           "info-armour": info.armour,
@@ -309,16 +309,25 @@ function spawn() {
   return people.count;
 }
 
+function createPerson(age) {
+    ++people.count;
+  people.person.push(new Character(age));
+  displayPopulationCount()
+  return people.count;
+}
 
-let adam = new spawn();
-let eve = spawn();
+
+let adam = createPerson(25);
+let eve = createPerson(18);
+
+
 
 
 
   
 
 //makes people appear
-let c = 0;
+
 let pairs = [];
 export function maker(n) {
 for(let i = 1; i < people.count;i++){
