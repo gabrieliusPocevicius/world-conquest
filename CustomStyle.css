@@ -240,4 +240,10 @@ svg {
     display: none;
 }
 
+.grid{
+    display: grid;
+    height: 100%;
+}
+
+
 

@@ -54,6 +54,7 @@ var Character = function Character(age) {
   this.id = id += 1;
   this.title = "".concat(_DataBase.job[0].name);
   this.alive = true;
+  console.log(this.title);
 
   if (percent <= 50) {
     var maleTemplate = function maleTemplate() {
@@ -85,7 +86,7 @@ var Character = function Character(age) {
       var displayInfoIds = {
         "info-name": info.name,
         "info-gender": info.gender,
-        "info-age": age,
+        "info-age": info.age,
         "info-health": info.hp,
         "info-attack": info.atk,
         "info-armour": info.armour,
@@ -116,7 +117,7 @@ var Character = function Character(age) {
       _this.name = _DataBase.fnames[(0, _Util.getRandom)(0, 400)];
       _this.gender = "female";
       _this.hp = 100;
-      _this.age = age;
+      _this.age = 0;
       _this.atk = (0, _Util.getRandom)(0, 60);
       _this.armour = 0;
       _this.risk = 0;
@@ -141,7 +142,7 @@ var Character = function Character(age) {
       var displayInfoIds = {
         "info-name": info.name,
         "info-gender": info.gender,
-        "info-age": age,
+        "info-age": info.age,
         "info-health": info.hp,
         "info-attack": info.atk,
         "info-armour": info.armour,
@@ -175,10 +176,16 @@ var Character = function Character(age) {
 };
 
 exports.Character = Character;
-$("#people").sortable({
-  revert: true
-});
-$("#people").disableSelection();
+
+function moveablePeople() {
+  $("#people").sortable({
+    revert: true
+  });
+  $("#people").disableSelection();
+}
+
+;
+moveablePeople();
 
 function deathFunction(id) {
   if (people.count > 0) {
@@ -289,13 +296,10 @@ var pairs = [];
 function maker(n) {
   for (var i = 1; i < people.count; i++) {
     var x = $("#person_".concat(i)).attr('id');
-
-    if ($('#people').children().length % 2 === 0) {
-      /* console.log('group', c++); */
-      $("#".concat(x)).remove();
-    }
-
-    ;
+    /* if($('#people').children().length % 2 === 0){
+       
+       $(`#${x}`).remove();
+    };  */
   }
 
   while (n > 0) {

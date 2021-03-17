@@ -14,22 +14,26 @@ var _DataBase = require("./DataBase.js");
 
 var _Character = require("./Character.js");
 
-var playIcon = "\n            <svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z\" fill=\"#FAFAFA\"/>\n            </svg>\n";
+var playIcon = "\n            <svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" \">\n            <path d=\"M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z\" fill=\"#FAFAFA\"/>\n            </svg>\n";
+var pauseIcon = "\n<svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" \">\n<g filter=\"url(#filter0_d)\">\n<path d=\"M14.5 20C15.1875 20 15.75 19.4375 15.75 18.75V11.25C15.75 10.5625 15.1875 10 14.5 10C13.8125 10 13.25 10.5625 13.25 11.25V18.75C13.25 19.4375 13.8125 20 14.5 20ZM17 2.5C10.1 2.5 4.5 8.1 4.5 15C4.5 21.9 10.1 27.5 17 27.5C23.9 27.5 29.5 21.9 29.5 15C29.5 8.1 23.9 2.5 17 2.5ZM17 25C11.4875 25 7 20.5125 7 15C7 9.4875 11.4875 5 17 5C22.5125 5 27 9.4875 27 15C27 20.5125 22.5125 25 17 25ZM19.5 20C20.1875 20 20.75 19.4375 20.75 18.75V11.25C20.75 10.5625 20.1875 10 19.5 10C18.8125 10 18.25 10.5625 18.25 11.25V18.75C18.25 19.4375 18.8125 20 19.5 20Z\" fill=\"#FAFAFA\"/>\n</g>\n<defs>\n<filter id=\"filter0_d\" x=\"-2\" y=\"0\" width=\"38\" height=\"38\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">\n<feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>\n<feColorMatrix in=\"SourceAlpha\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\"/>\n<feOffset dy=\"4\"/>\n<feGaussianBlur stdDeviation=\"2\"/>\n<feColorMatrix type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0\"/>\n<feBlend mode=\"normal\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow\"/>\n<feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"effect1_dropShadow\" result=\"shape\"/>\n</filter>\n</defs>\n</svg>\n";
 var speed = 100; //birth speed
 
 exports.speed = speed;
-$("#pause").on("click", function (e) {
-  e.preventDefault();
-  $("#pause").html("<svg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<g filter=\"url(#filter0_d)\">\n<path d=\"M14.5 20C15.1875 20 15.75 19.4375 15.75 18.75V11.25C15.75 10.5625 15.1875 10 14.5 10C13.8125 10 13.25 10.5625 13.25 11.25V18.75C13.25 19.4375 13.8125 20 14.5 20ZM17 2.5C10.1 2.5 4.5 8.1 4.5 15C4.5 21.9 10.1 27.5 17 27.5C23.9 27.5 29.5 21.9 29.5 15C29.5 8.1 23.9 2.5 17 2.5ZM17 25C11.4875 25 7 20.5125 7 15C7 9.4875 11.4875 5 17 5C22.5125 5 27 9.4875 27 15C27 20.5125 22.5125 25 17 25ZM19.5 20C20.1875 20 20.75 19.4375 20.75 18.75V11.25C20.75 10.5625 20.1875 10 19.5 10C18.8125 10 18.25 10.5625 18.25 11.25V18.75C18.25 19.4375 18.8125 20 19.5 20Z\" fill=\"#FAFAFA\"/>\n</g>\n<defs>\n<filter id=\"filter0_d\" x=\"-2\" y=\"0\" width=\"38\" height=\"38\" filterUnits=\"userSpaceOnUse\" color-interpolation-filters=\"sRGB\">\n<feFlood flood-opacity=\"0\" result=\"BackgroundImageFix\"/>\n<feColorMatrix in=\"SourceAlpha\" type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0\"/>\n<feOffset dy=\"4\"/>\n<feGaussianBlur stdDeviation=\"2\"/>\n<feColorMatrix type=\"matrix\" values=\"0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0\"/>\n<feBlend mode=\"normal\" in2=\"BackgroundImageFix\" result=\"effect1_dropShadow\"/>\n<feBlend mode=\"normal\" in=\"SourceGraphic\" in2=\"effect1_dropShadow\" result=\"shape\"/>\n</filter>\n</defs>\n</svg>\n");
-  ++counter;
-  play = true;
+var pauseSwitch = 0; // Counter variable is used as a switch.
 
-  if (counter === 1) {
-    time(speed); //time goes on as normal
-  }
-}); //Util func
+function pause() {
+  $("#pause").on("click", function (e) {
+    e.preventDefault();
+    $("#pause").html(pauseIcon);
+    ++pauseSwitch;
+    play = true;
 
-var counter = 0; // Counter variable is used as a switch.
+    if (pauseSwitch === 1) {
+      time(speed); //time goes on as normal
+    }
+  });
+} //Util func
+
 
 function sleep(ms) {
   return new Promise(function (resolve) {
@@ -137,11 +141,7 @@ function time(speed) {
 
         case 3:
           //wating time for a single day
-          displayDate(); //console.log(alive(20, 1, 500));
-          //Adds one person per day
-          //console.log(age);
-          //console.warn(age);
-
+          displayDate();
           timeStruct();
           (0, _Character.maker)(1);
           pauseTime();
@@ -157,11 +157,13 @@ function time(speed) {
 }
 
 function pauseTime() {
-  var paused = counter === 2;
+  var paused = pauseSwitch === 2;
 
   if (paused) {
-    counter = 0;
+    pauseSwitch = 0;
     play = false;
     $("#pause").html(playIcon);
   }
 }
+
+pause();

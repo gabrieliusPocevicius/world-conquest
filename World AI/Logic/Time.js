@@ -5,19 +5,12 @@ import { Character, maker, people } from "./Character.js";
 
 
 let playIcon = `
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" ">
             <path d="M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z" fill="#FAFAFA"/>
             </svg>
 `;
-
-
-export const speed = 100; //birth speed
-
-
-    $("#pause").on("click", (e) => {
-        e.preventDefault();
-        $("#pause")
-            .html(`<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+let pauseIcon = `
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" ">
 <g filter="url(#filter0_d)">
 <path d="M14.5 20C15.1875 20 15.75 19.4375 15.75 18.75V11.25C15.75 10.5625 15.1875 10 14.5 10C13.8125 10 13.25 10.5625 13.25 11.25V18.75C13.25 19.4375 13.8125 20 14.5 20ZM17 2.5C10.1 2.5 4.5 8.1 4.5 15C4.5 21.9 10.1 27.5 17 27.5C23.9 27.5 29.5 21.9 29.5 15C29.5 8.1 23.9 2.5 17 2.5ZM17 25C11.4875 25 7 20.5125 7 15C7 9.4875 11.4875 5 17 5C22.5125 5 27 9.4875 27 15C27 20.5125 22.5125 25 17 25ZM19.5 20C20.1875 20 20.75 19.4375 20.75 18.75V11.25C20.75 10.5625 20.1875 10 19.5 10C18.8125 10 18.25 10.5625 18.25 11.25V18.75C18.25 19.4375 18.8125 20 19.5 20Z" fill="#FAFAFA"/>
 </g>
@@ -33,25 +26,31 @@ export const speed = 100; //birth speed
 </filter>
 </defs>
 </svg>
-`);
-        ++counter;
+`
+export const speed = 100; //birth speed
+let pauseSwitch = 0;// Counter variable is used as a switch.
+
+function pause() {
+    $("#pause").on("click", (e) => {
+        e.preventDefault();
+                    $("#pause")
+            .html(pauseIcon);
+        ++pauseSwitch;
         play = true;
-        if (counter === 1) {
+        if (pauseSwitch === 1) {
             time(speed); //time goes on as normal
         }
     });
+}
+
 
 //Util func
-let counter = 0; // Counter variable is used as a switch.
-
 export function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
 function getRandom(min, max) {
     console.log(Math.floor(Math.random() * (max - min)) + min);
 }
-
 // year 500 and first month and days
 let calender = {
     years: 500,
@@ -61,9 +60,6 @@ let calender = {
     monthC: 1,
     yearC: 500,
 };
-
-
-
 
 /*     calender.months.forEach((_, index) => {
     let monthindex = index;
@@ -95,14 +91,8 @@ function naturalDisaster(affects, lengthOfTime) {
                                                   Biological (e.g. Disease Epidemics and Insect/Animal Plagues) 
                                                    */
 }
-
-
-
 let start = Date.now();
 export function timeStruct() {
-
-
-    
     /**
     @func timeStruct()
     lays out the structure of the calender
@@ -123,8 +113,6 @@ export function timeStruct() {
         };
     };
 };
-
-
 function displayDate(){
     calender.dayC++;
     document.getElementById("days").innerHTML = "day " + calender.dayC;
@@ -132,17 +120,12 @@ function displayDate(){
     document.getElementById("years").innerHTML = calender.yearC;
     
 };
-
 let play = true;
 async function time(speed) {
     // Time loop
     while (play) {
         await sleep(speed); //wating time for a single day
         displayDate();
-        //console.log(alive(20, 1, 500));
-        //Adds one person per day
-        //console.log(age);
-        //console.warn(age);
         timeStruct();
         maker(1);
         pauseTime();
@@ -150,12 +133,12 @@ async function time(speed) {
 }
 
 function pauseTime() {
-    let paused = (counter === 2);
+    let paused = (pauseSwitch === 2);
     if (paused) {
-        counter = 0;
+        pauseSwitch = 0;
         play = false;
         $("#pause").html(playIcon);
     }
 }
-
+pause();
 export { time };

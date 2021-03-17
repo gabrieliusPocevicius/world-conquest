@@ -50,7 +50,7 @@ export class Character {
     this.id = id += 1;
     this.title = `${job[0].name}`;
     this.alive = true;
-
+  console.log(this.title);
     if (percent <= 50) {
       let maleTemplate = () => {
         this.name = names[getRandom(0, 400)];
@@ -83,14 +83,16 @@ export class Character {
         });
 
         let displayInfoIds = {
+          
           "info-name": info.name,
           "info-gender": info.gender,
-          "info-age": age,
+          "info-age": info.age,
           "info-health": info.hp,
           "info-attack": info.atk,
           "info-armour": info.armour,
           "info-id": info.id,
         };
+
         getAttributes = displayInfoIds;
 
         person.addEventListener("mouseout", (e) => {
@@ -112,12 +114,14 @@ export class Character {
         });
       };
       maleTemplate();
+
+
     } else {
       let femaleTemplate = () => {
         this.name = fnames[getRandom(0, 400)];
         this.gender = "female";
         this.hp = 100;
-        this.age = age;
+        this.age = 0;
         this.atk = getRandom(0, 60);
         this.armour = 0;
         this.risk = 0;
@@ -144,7 +148,7 @@ export class Character {
         let displayInfoIds = {
           "info-name": info.name,
           "info-gender": info.gender,
-          "info-age": age,
+          "info-age": info.age,
           "info-health": info.hp,
           "info-attack": info.atk,
           "info-armour": info.armour,
@@ -155,6 +159,7 @@ export class Character {
           e.preventDefault();
           displayUserInfo.style.opacity = "0";
         });
+
         person.addEventListener("mouseover", (e) => {
           e.preventDefault();
           displayUserInfo.style.opacity = "1";
@@ -179,11 +184,14 @@ export class Character {
   }
 }
 
-
-    $( "#people" ).sortable({
+function moveablePeople() {
+      $( "#people" ).sortable({
             revert: true
         });
     $( "#people" ).disableSelection();
+};
+
+moveablePeople();
 
 
 function deathFunction(id) {
@@ -333,10 +341,10 @@ export function maker(n) {
 for(let i = 1; i < people.count;i++){
   let x = $(`#person_${i}`).attr('id');
 
-   if($('#people').children().length % 2 === 0){
-      /* console.log('group', c++); */
+   /* if($('#people').children().length % 2 === 0){
+      
       $(`#${x}`).remove();
-  }; 
+  };  */
   
 }
   while (n > 0) {
