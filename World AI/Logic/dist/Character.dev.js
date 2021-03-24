@@ -49,14 +49,34 @@ var Character = function Character(age) {
 
   _classCallCheck(this, Character);
 
+  var skill = 0;
+
+  function qaulities() {
+    var work = (0, _Util.getRandom)(0, 100);
+
+    if (work > 1) {
+      skill++;
+      qaulities();
+    }
+
+    ;
+    console.log('skills ', skill);
+  }
+
+  ;
   var percent = Math.floor(Math.random() * 99 + 1); //50% change of it being a boy for a girl.
 
+  var random = (0, _Util.getRandom)(0, 6);
+  /* let dna = getRandom(0,1000);*/
+
   this.id = id += 1;
-  this.title = "".concat(_DataBase.job[0].name);
+  this.title = "".concat(_DataBase.job[random].name);
   this.alive = true;
-  console.log(this.title);
+  /* console.log(this.title); */
 
   if (percent <= 50) {
+    qaulities();
+
     var maleTemplate = function maleTemplate() {
       _this.name = _DataBase.names[(0, _Util.getRandom)(0, 400)];
       _this.gender = "male";
@@ -100,8 +120,28 @@ var Character = function Character(age) {
       person.addEventListener("mouseover", function (e) {
         e.preventDefault();
         displayUserInfo.style.opacity = "1";
-        info.age = Math.floor((Date.now() - birthday) / (_Time.speed * 360));
-        displayInfoIds["info-age"] = info.age;
+        var timePaused = 0;
+
+        if (_Time.play) {
+          console.log('time paused', timePaused);
+          info.age = Math.floor((Date.now() - birthday - timePaused) / (_Time.speed * 360));
+          displayInfoIds["info-age"] = info.age;
+          console.log("%c ".concat((Date.now() - birthday) / (_Time.speed * 360)), 'color:green;', "running");
+        }
+
+        if (!_Time.play) {
+          timePaused = 0;
+          console.log('pause');
+          var start = Date.now();
+          setTimeout(function () {
+            console.log('Age', info.age);
+            var millis = Date.now() - start;
+            timePaused = Math.floor(millis / 1000);
+            console.log("%c ".concat(timePaused), 'color:orange;', "paused"); // expected output: seconds elapsed = 2
+          }, 1000);
+        }
+
+        ;
         var keys = Object.keys(displayInfoIds);
         var props = Object.values(displayInfoIds);
 
@@ -114,6 +154,7 @@ var Character = function Character(age) {
     maleTemplate();
   } else {
     var femaleTemplate = function femaleTemplate() {
+      qaulities();
       _this.name = _DataBase.fnames[(0, _Util.getRandom)(0, 400)];
       _this.gender = "female";
       _this.hp = 100;
@@ -163,29 +204,73 @@ var Character = function Character(age) {
         for (var i = 0; i < keys.length; i++) {
           document.getElementById("".concat(keys[i])).innerHTML = props[i];
         }
+
+        ;
       });
     };
 
     femaleTemplate();
-  } //let live = console.log(Math.floor(Math.random() * 5000) + 1000);
-
-  /* console.log('people', people.count); */
-
-  /*  setTimeout(()=>{deathFunction(person)},5000);  */
-
+  }
 };
 
 exports.Character = Character;
+var timeGoes = false;
+var age = 0;
 
-function moveablePeople() {
-  $("#people").sortable({
-    revert: true
-  });
-  $("#people").disableSelection();
+function startTimer() {
+  var btn = document.getElementById('start');
+  var timer = document.getElementById('timer-test');
+
+  if (!timeGoes) {
+    btn.onclick = function (e) {
+      var timePaused = 0;
+      var birthday = Date.now();
+      e.preventDefault();
+      setInterval(function () {
+        console.log('time paused', timePaused);
+        age = Math.floor((Date.now() - birthday - timePaused) / 1000);
+        console.log("%c ".concat(age), 'color:green;', "Age");
+        timer.innerHTML = age.toFixed(2);
+        timeGoes = true;
+        return console.log('returned age : ', age);
+      }, 1000);
+    };
+  }
 }
 
 ;
-moveablePeople();
+
+function pauseTimer() {
+  var btn = document.getElementById('paused');
+  var timer = document.getElementById('timer-pause');
+  var trueAge = document.getElementById('true-age');
+
+  btn.onclick = function (e) {
+    var timePaused = 0;
+    /* let birthday = Date.now(); */
+
+    if (timeGoes) {
+      e.preventDefault();
+      timePaused = 0;
+      console.log('pause');
+      var start = Date.now();
+      setInterval(function () {
+        var millis = Date.now() - start;
+        timePaused = Math.floor(millis / 1000);
+        age = age - timePaused;
+        console.log('Age', age, 'should not increase');
+        trueAge.innerHTML = age;
+        /* console.log(`%c ${}`, 'color:orange;', "paused"); */
+
+        document.getElementById('timer-pause').innerHTML = "<div class='text-danger'>".concat(timePaused, "</div>"); // expected output: seconds elapsed = 2
+      }, 1000);
+    }
+  };
+}
+
+;
+/* startTimer();
+pauseTimer(); */
 
 function deathFunction(id) {
   if (people.count > 0) {
@@ -221,6 +306,15 @@ function displayPerson(gender, id) {
   $("people").append("".concat(person_icon)); //Creates the icon figure of a person to the screen
 }
 
+function moveablePeople() {
+  $("#people").sortable({
+    revert: true
+  });
+  $("#people").disableSelection();
+}
+
+;
+moveablePeople();
 var nobles = []; //Lists all the nobles and their props
 
 var peasantsUnderNoble = []; //Lists all the peasants under the noble.

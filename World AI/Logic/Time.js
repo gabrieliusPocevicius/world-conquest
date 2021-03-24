@@ -91,6 +91,8 @@ function naturalDisaster(affects, lengthOfTime) {
                                                   Biological (e.g. Disease Epidemics and Insect/Animal Plagues) 
                                                    */
 }
+
+
 let start = Date.now();
 export function timeStruct() {
     /**
@@ -107,12 +109,13 @@ export function timeStruct() {
             //  console.log(String(monthNames[11]))
             calender.monthC = 1;
             calender.yearC++;
-             //console.log('year ' + calender.yearC)
+            //console.log('year ' + calender.yearC)
         let oneYear = Math.floor((Date.now() - start) / 1000); 
             console.log('One Year in seconds : ', oneYear);
         };
     };
 };
+
 function displayDate(){
     calender.dayC++;
     document.getElementById("days").innerHTML = "day " + calender.dayC;
@@ -120,7 +123,8 @@ function displayDate(){
     document.getElementById("years").innerHTML = calender.yearC;
     
 };
-let play = true;
+
+export let play = false;
 async function time(speed) {
     // Time loop
     while (play) {
@@ -133,8 +137,8 @@ async function time(speed) {
 }
 
 function pauseTime() {
-    let paused = (pauseSwitch === 2);
-    if (paused) {
+        let paused = (pauseSwitch === 2);
+    if (paused){
         pauseSwitch = 0;
         play = false;
         $("#pause").html(playIcon);

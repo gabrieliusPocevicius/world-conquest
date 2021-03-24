@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.sleep = sleep;
 exports.timeStruct = timeStruct;
 exports.time = time;
-exports.speed = void 0;
+exports.play = exports.speed = void 0;
 
 var _Battle = require("../Logic/Battle.js");
 
@@ -26,7 +26,7 @@ function pause() {
     e.preventDefault();
     $("#pause").html(pauseIcon);
     ++pauseSwitch;
-    play = true;
+    exports.play = play = true;
 
     if (pauseSwitch === 1) {
       time(speed); //time goes on as normal
@@ -124,7 +124,8 @@ function displayDate() {
 }
 
 ;
-var play = true;
+var play = false;
+exports.play = play;
 
 function time(speed) {
   return regeneratorRuntime.async(function time$(_context) {
@@ -161,7 +162,7 @@ function pauseTime() {
 
   if (paused) {
     pauseSwitch = 0;
-    play = false;
+    exports.play = play = false;
     $("#pause").html(playIcon);
   }
 }

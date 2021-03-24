@@ -1,7 +1,6 @@
 // Characters are people with skills and attributes with names and habits.
 
 // module of names
-
 import {
   names,
   fnames,
@@ -12,7 +11,7 @@ import {
   log,
 } from "./DataBase.js";
 import { getRandom } from "./Util.js";
-import { speed } from "./Time.js";
+import { speed,play, time } from "./Time.js";
 
 let id = 0; // the id of each object of the Character class
 let nationality = [];
@@ -42,17 +41,28 @@ const displayUserInfo = document.getElementById("information-display");
 displayUserInfo.style.opacity = "0";
 
 export class Character {
-
   constructor(age) {
+    let skill = 0;
+    function qaulities(){
+      let work = getRandom(0, 100);
+      if(work > 1){
+        skill++;
+        qaulities();
+      };
+      console.log('skills ', skill);
+    };
 
     let percent = Math.floor(Math.random() * 99 + 1);
     //50% change of it being a boy for a girl.
+    let random = getRandom(0,6);
+    /* let dna = getRandom(0,1000);*/
     this.id = id += 1;
-    this.title = `${job[0].name}`;
+    this.title = `${job[random].name}`;
     this.alive = true;
-  console.log(this.title);
-    if (percent <= 50) {
-      let maleTemplate = () => {
+    /* console.log(this.title); */
+    if(percent <= 50){
+      qaulities();
+      let maleTemplate = () =>{
         this.name = names[getRandom(0, 400)];
         this.gender = "male";
         this.age = age;
@@ -74,14 +84,13 @@ export class Character {
           armour: this.armour,
           id: this.id,
         };
+
         displayPerson(info.gender, info.id);
-       
         let person = document.getElementById(`person_${info.id}`);
         person.addEventListener("click", (e) => {
           e.preventDefault();
           console.log("hello", info.name);
         });
-
         let displayInfoIds = {
           
           "info-name": info.name,
@@ -102,22 +111,39 @@ export class Character {
         person.addEventListener("mouseover", (e) => {
           e.preventDefault();
           displayUserInfo.style.opacity = "1";
-          info.age = Math.floor((Date.now() - birthday) / (speed * 360));
-          displayInfoIds["info-age"] = info.age;
 
+
+  let timePaused = 0;
+
+  if(play){
+    console.log('time paused', timePaused);
+    info.age = Math.floor((Date.now() - birthday - timePaused) / (speed * 360));
+    displayInfoIds["info-age"] = info.age;
+    console.log(`%c ${(Date.now() - birthday) / (speed * 360)}`, 'color:green;', "running");
+  }
+  if(!play){
+    timePaused = 0;
+    console.log('pause');
+    const start = Date.now();
+    setTimeout(() => {
+      console.log('Age',info.age);
+      const millis = Date.now() - start;
+      timePaused =  Math.floor(millis / 1000);
+      console.log(`%c ${timePaused}`, 'color:orange;', "paused");
+  // expected output: seconds elapsed = 2
+      }, 1000);
+  };    
           const keys = Object.keys(displayInfoIds);
           const props = Object.values(displayInfoIds);
-
           for (let i = 0; i < keys.length; i++) {
             document.getElementById(keys[i]).innerHTML = props[i];
           }
         });
       };
       maleTemplate();
-
-
-    } else {
+    }else{
       let femaleTemplate = () => {
+        qaulities();
         this.name = fnames[getRandom(0, 400)];
         this.gender = "female";
         this.hp = 100;
@@ -171,27 +197,68 @@ export class Character {
 
           for (let i = 0; i < keys.length; i++) {
             document.getElementById(`${keys[i]}`).innerHTML = props[i];
-          }
+          };
         });
-      };
-
+    };
       femaleTemplate();
     }
-
-    //let live = console.log(Math.floor(Math.random() * 5000) + 1000);
-    /* console.log('people', people.count); */
-    /*  setTimeout(()=>{deathFunction(person)},5000);  */
   }
 }
 
-function moveablePeople() {
-      $( "#people" ).sortable({
-            revert: true
-        });
-    $( "#people" ).disableSelection();
-};
 
-moveablePeople();
+
+
+let timeGoes = false;
+let age = 0;
+
+function startTimer() {
+  let btn = document.getElementById('start');
+  let timer = document.getElementById('timer-test');
+  if(!timeGoes){
+      btn.onclick = (e)=>{
+      let timePaused = 0;
+      let birthday = Date.now();
+
+      e.preventDefault();
+      setInterval(()=>{
+        console.log('time paused', timePaused);
+        age = Math.floor((Date.now() - birthday - timePaused)  / (1000) );
+        console.log(`%c ${age}`, 'color:green;', "Age");
+        timer.innerHTML = age.toFixed(2);
+        timeGoes = true;
+        return console.log('returned age : ', age);
+        },1000);
+      }
+    }
+};
+function pauseTimer() {
+let btn = document.getElementById('paused');
+let timer = document.getElementById('timer-pause');
+let trueAge = document.getElementById('true-age');
+  btn.onclick = (e)=>{
+  let timePaused = 0;
+  /* let birthday = Date.now(); */
+  if(timeGoes){
+      e.preventDefault();
+      timePaused = 0;
+      console.log('pause');
+      const start = Date.now();
+      setInterval(() => {
+        const millis = Date.now() - start;
+        timePaused =  Math.floor(millis / 1000);
+        age = age - timePaused;
+        console.log('Age',age, 'should not increase');
+        trueAge.innerHTML = age;
+        /* console.log(`%c ${}`, 'color:orange;', "paused"); */
+        document.getElementById('timer-pause').innerHTML = `<div class='text-danger'>${timePaused}</div>`;
+      // expected output: seconds elapsed = 2
+        }, 1000);
+    }
+  }
+};
+/* startTimer();
+pauseTimer(); */
+
 
 
 function deathFunction(id) {
@@ -215,8 +282,6 @@ function deathClick(e) {
   displayHTML(people.count, "#population", "h5");
   displayHTML(++deaths, "#deaths", "h5");
 }
-
-
 export function displayPerson(gender, id) {
   //age = setInterval(() => $(`#male-age${id}`).text(console.log(++age)) , 1000);
   let color = [52, 58, 64, 1];
@@ -248,6 +313,13 @@ export function displayPerson(gender, id) {
 
   $("people").append(`${person_icon}`); //Creates the icon figure of a person to the screen
 }
+function moveablePeople() {
+      $( "#people" ).sortable({
+            revert: true
+        });
+    $( "#people" ).disableSelection();
+};
+moveablePeople();
 
 
 
@@ -294,6 +366,7 @@ function becomeNoble() {
 }
 //console.log(p.armour);
 //console.log((militaryRanks.rank[3].armor += p.armour));
+
 
 function randomN(x) {
   return Math.floor(Math.random() * x);

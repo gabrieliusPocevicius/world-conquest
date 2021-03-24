@@ -41,6 +41,8 @@
 </script>
 <script type="module" charset="utf-8" src="./Logic/Population.js">
 </script>
+<script type="module" charset="utf-8" src="./Logic/Economics.js">
+</script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="icon" type="image/png" href="/World AI/resource/icons8-shield-100.png" />
@@ -137,10 +139,8 @@
     <!--
    <div class="d-flex bg-light">
         <div id="people-container" class="row shadow-sm rounded">
-            
         </div>
-    </div>
-        
+    </div>    
 -->
         <div id="information-display" class="bg-dark rounded shadow row m-2 p-2 sticky-top">
             <div class="text-white d-flex bg-darker rounded text-nowrap text-left p-2">
@@ -176,9 +176,18 @@
 
         <world class="grid">
         
+            
+
             <people id="people" class="d-inline-flex flex-wrap ">
             </people>
 
+<!-- <div class="d-block">
+        <div  class="text-info" id="true-age">0</div>
+        <div  class="text-warning" id="timer-test">0</div>
+        <div class="text-danger" id="timer-pause">0</div>
+            <button id="start" class=" btn btn-light" ">Start</button>
+             <button id="paused" class=" btn btn-light" ">pause</button>
+    </div> -->
         </world>
         </div>
     </body>
