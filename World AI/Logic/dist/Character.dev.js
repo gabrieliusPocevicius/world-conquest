@@ -41,6 +41,7 @@ exports.deaths = deaths;
 var male = 0;
 var female = 0;
 var getAttributes = {};
+var timeGoes = false;
 var displayUserInfo = document.getElementById("information-display");
 displayUserInfo.style.opacity = "0";
 
@@ -49,6 +50,7 @@ var Character = function Character(age) {
 
   _classCallCheck(this, Character);
 
+  Object.create(null);
   var skill = 0;
 
   function qaulities() {
@@ -75,8 +77,6 @@ var Character = function Character(age) {
   /* console.log(this.title); */
 
   if (percent <= 50) {
-    qaulities();
-
     var maleTemplate = function maleTemplate() {
       _this.name = _DataBase.names[(0, _Util.getRandom)(0, 400)];
       _this.gender = "male";
@@ -84,6 +84,12 @@ var Character = function Character(age) {
       _this.hp = 100;
       _this.atk = (0, _Util.getRandom)(0, 100);
       _this.armour = 0;
+      _this.wealth = 0;
+
+      function wallet() {
+        console.log(this.name, 'has', this.wealth);
+      }
+
       _this.risk = 0;
       ++male;
       var birthday = Date.now();
@@ -95,7 +101,8 @@ var Character = function Character(age) {
         hp: _this.hp,
         atk: _this.atk,
         armour: _this.armour,
-        id: _this.id
+        id: _this.id,
+        wealth: _this.wealth
       };
       displayPerson(info.gender, info.id);
       var person = document.getElementById("person_".concat(info.id));
@@ -110,13 +117,18 @@ var Character = function Character(age) {
         "info-health": info.hp,
         "info-attack": info.atk,
         "info-armour": info.armour,
-        "info-id": info.id
+        "info-id": info.id,
+        "info-wealth": info.wealth
       };
       getAttributes = displayInfoIds;
-      person.addEventListener("mouseout", function (e) {
+      /* person.addEventListener("mouseout", (e) => {
         e.preventDefault();
-        displayUserInfo.style.opacity = "0";
-      });
+        if(!displayInfo){
+          displayUserInfo.style.opacity = "0";
+        }
+        
+      }); */
+
       person.addEventListener("mouseover", function (e) {
         e.preventDefault();
         displayUserInfo.style.opacity = "1";
@@ -151,10 +163,10 @@ var Character = function Character(age) {
       });
     };
 
+    qaulities();
     maleTemplate();
   } else {
     var femaleTemplate = function femaleTemplate() {
-      qaulities();
       _this.name = _DataBase.fnames[(0, _Util.getRandom)(0, 400)];
       _this.gender = "female";
       _this.hp = 100;
@@ -162,6 +174,12 @@ var Character = function Character(age) {
       _this.atk = (0, _Util.getRandom)(0, 60);
       _this.armour = 0;
       _this.risk = 0;
+      _this.wealth = 0;
+
+      function wallet() {
+        console.log(this.name, 'has', this.wealth);
+      }
+
       ++female;
       var birthday = Date.now();
       $("#female-count").text(female);
@@ -172,7 +190,8 @@ var Character = function Character(age) {
         hp: _this.hp,
         atk: _this.atk,
         armour: _this.armour,
-        id: _this.id
+        id: _this.id,
+        wealth: _this.wealth
       };
       displayPerson(info.gender, info.id);
       var person = document.getElementById("person_".concat(info.id));
@@ -187,12 +206,17 @@ var Character = function Character(age) {
         "info-health": info.hp,
         "info-attack": info.atk,
         "info-armour": info.armour,
-        "info-id": info.id
+        "info-id": info.id,
+        "info-wealth": info.wealth
       };
-      person.addEventListener("mouseout", function (e) {
+      /* person.addEventListener("mouseout", (e) => {
         e.preventDefault();
-        displayUserInfo.style.opacity = "0";
-      });
+        if(!displayInfo){
+            displayUserInfo.style.opacity = "0";
+        };
+        
+      }); */
+
       person.addEventListener("mouseover", function (e) {
         e.preventDefault();
         displayUserInfo.style.opacity = "1";
@@ -209,13 +233,12 @@ var Character = function Character(age) {
       });
     };
 
+    qaulities();
     femaleTemplate();
   }
 };
 
 exports.Character = Character;
-var timeGoes = false;
-var age = 0;
 
 function startTimer() {
   var btn = document.getElementById('start');

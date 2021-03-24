@@ -3,43 +3,63 @@ console.log('wealth', worldWealth);
 
 
 
-
-
-
 let person = {
     name:'John Doe',
-    wealth: 0
+    wealth: 0,
+    wallet(){
+        console.log(this.name, 'has', this.wealth)
+    }
 }
 
 let person1 = {
     name:'James Johnson',
-    wealth: 0
+    wealth: 0,
+    wallet(){
+        console.log(this.name, 'has', this.wealth)
+    }
 }
 
 
-class Economics{
+/* class Economics{
     constructor(){
 
     }
-
     createJob(){
-        
     }
+}; */
 
-    addWealth(takenWealth, person){
+//get the resource 
+function mine(takenWealth, person){
+        person.wealth += takenWealth;
         worldWealth -= takenWealth;
-        person.wealth = takenWealth;
-        (worldWealth >= takenWealth)?console.log(takenWealth, 'wealth to', person.name, 'Global Wealth left:', worldWealth):console.log('No more wealth left for ', person);
-        
-    };
-    transfer(wealth, from, to){
-        (wealth <= from.wealth)?console.log(from,' payed ', to):console.log(from, 'cant afford to pay to ', to);
-    };
+        (worldWealth >= takenWealth)? console.log(person.wealth, 'wealth to', person.name, 'Global Wealth left:', worldWealth):console.log('No more wealth left for ', person);
+        return person.wealth;
 };
 
+/* function imployment(payee, employee){
+   //bussines
+} */
 
-person.wealth = new Economics().addWealth(10, person);
-person.wealth = new Economics().transfer(5, person, person1);
+function transfer(wealth, from, to){
+        if(wealth <= from.wealth){
+            from.wealth -= wealth;
+            to.wealth += wealth;
+            console.log(from.name,'payed', wealth,'to', to.name);
+        }
+        else{
+            console.log(from.name, 'cant afford to pay', to.name);
+        };
+};
+//simple transaction
+
+mine(10, person);//mine gold
+transfer(7, person, person1);// pay wages to someone
+
+
+
+person.wallet();
+person1.wallet();
+
 
 
 

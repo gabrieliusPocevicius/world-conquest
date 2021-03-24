@@ -36,12 +36,15 @@ export let deaths = 0;
 let male = 0;
 let female = 0;
 let getAttributes = {};
-
+let timeGoes = false;
 const displayUserInfo = document.getElementById("information-display");
 displayUserInfo.style.opacity = "0";
 
 export class Character {
+  
   constructor(age) {
+    Object.create(null);
+    
     let skill = 0;
     function qaulities(){
       let work = getRandom(0, 100);
@@ -61,7 +64,7 @@ export class Character {
     this.alive = true;
     /* console.log(this.title); */
     if(percent <= 50){
-      qaulities();
+      
       let maleTemplate = () =>{
         this.name = names[getRandom(0, 400)];
         this.gender = "male";
@@ -69,6 +72,10 @@ export class Character {
         this.hp = 100;
         this.atk = getRandom(0, 100);
         this.armour = 0;
+        this.wealth = 0;
+        function wallet(){
+        console.log(this.name, 'has', this.wealth)
+        }
         this.risk = 0;
         ++male;
         let birthday = Date.now();
@@ -83,16 +90,17 @@ export class Character {
           atk: this.atk,
           armour: this.armour,
           id: this.id,
+          wealth: this.wealth
         };
 
         displayPerson(info.gender, info.id);
         let person = document.getElementById(`person_${info.id}`);
+        
         person.addEventListener("click", (e) => {
           e.preventDefault();
           console.log("hello", info.name);
         });
         let displayInfoIds = {
-          
           "info-name": info.name,
           "info-gender": info.gender,
           "info-age": info.age,
@@ -100,14 +108,18 @@ export class Character {
           "info-attack": info.atk,
           "info-armour": info.armour,
           "info-id": info.id,
+          "info-wealth":info.wealth
         };
 
         getAttributes = displayInfoIds;
 
-        person.addEventListener("mouseout", (e) => {
+        /* person.addEventListener("mouseout", (e) => {
           e.preventDefault();
-          displayUserInfo.style.opacity = "0";
-        });
+          if(!displayInfo){
+            displayUserInfo.style.opacity = "0";
+          }
+          
+        }); */
         person.addEventListener("mouseover", (e) => {
           e.preventDefault();
           displayUserInfo.style.opacity = "1";
@@ -140,10 +152,11 @@ export class Character {
           }
         });
       };
+      qaulities();
       maleTemplate();
     }else{
       let femaleTemplate = () => {
-        qaulities();
+        
         this.name = fnames[getRandom(0, 400)];
         this.gender = "female";
         this.hp = 100;
@@ -151,6 +164,10 @@ export class Character {
         this.atk = getRandom(0, 60);
         this.armour = 0;
         this.risk = 0;
+        this.wealth = 0;
+        function wallet(){
+        console.log(this.name, 'has', this.wealth)
+        }
         ++female;
         let birthday = Date.now();
         $("#female-count").text(female);
@@ -162,10 +179,12 @@ export class Character {
           atk: this.atk,
           armour: this.armour,
           id: this.id,
+          wealth: this.wealth
         };
        
         displayPerson(info.gender, info.id);
         let person = document.getElementById(`person_${info.id}`);
+        
         person.addEventListener("click", (e) => {
           e.preventDefault();
           console.log("hello", info.name);
@@ -179,12 +198,16 @@ export class Character {
           "info-attack": info.atk,
           "info-armour": info.armour,
           "info-id": info.id,
+          "info-wealth":info.wealth
         };
 
-        person.addEventListener("mouseout", (e) => {
+        /* person.addEventListener("mouseout", (e) => {
           e.preventDefault();
-          displayUserInfo.style.opacity = "0";
-        });
+          if(!displayInfo){
+              displayUserInfo.style.opacity = "0";
+          };
+          
+        }); */
 
         person.addEventListener("mouseover", (e) => {
           e.preventDefault();
@@ -200,6 +223,7 @@ export class Character {
           };
         });
     };
+      qaulities();
       femaleTemplate();
     }
   }
@@ -208,8 +232,7 @@ export class Character {
 
 
 
-let timeGoes = false;
-let age = 0;
+
 
 function startTimer() {
   let btn = document.getElementById('start');
