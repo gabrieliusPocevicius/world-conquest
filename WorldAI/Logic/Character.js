@@ -13,11 +13,12 @@ import {
 import { getRandom } from "./Util.js";
 import { speed,play, time } from "./Time.js";
 
+
 let id = 0; // the id of each object of the Character class
 let nationality = [];
 let surnames = [];
 
-const gen = ["Male", "Female"];
+
 let percent = Math.round(Math.random() * 99 + 1);
 export let people = {
   // contains all the people of the world
@@ -40,6 +41,20 @@ let timeGoes = false;
 const displayUserInfo = document.getElementById("information-display");
 displayUserInfo.style.opacity = "0";
 
+
+// removes the time from the people's age
+/*  let timePaused = 0; 
+
+        const start = Date.now();
+        setInterval(() => {
+            
+            const millis = Date.now() - start;
+            timePaused =  Math.floor(millis / 1000);
+            console.log(`%c ${timePaused}`, 'color:orange;', "paused");
+ }, 1000);  */
+  // expected output: seconds elapsed = 2
+     
+
 export class Character {
   
   constructor(age) {
@@ -54,17 +69,16 @@ export class Character {
       };
       console.log('skills ', skill);
     };
-
     let percent = Math.floor(Math.random() * 99 + 1);
     //50% change of it being a boy for a girl.
-    let random = getRandom(0,6);
+    
     /* let dna = getRandom(0,1000);*/
     this.id = id += 1;
-    this.title = `${job[random].name}`;
-    this.alive = true;
+    /* let random = getRandom(0,6); */
+    /* this.title = `${job[random].name}`; */
+    
     /* console.log(this.title); */
     if(percent <= 50){
-      
       let maleTemplate = () =>{
         this.name = names[getRandom(0, 400)];
         this.gender = "male";
@@ -123,28 +137,10 @@ export class Character {
         person.addEventListener("mouseover", (e) => {
           e.preventDefault();
           displayUserInfo.style.opacity = "1";
+          info.age = Math.floor((Date.now() - birthday  - timePaused) / (speed * 360));
+          displayInfoIds["info-age"] = info.age;
 
-
-  let timePaused = 0;
-
-  if(play){
-    console.log('time paused', timePaused);
-    info.age = Math.floor((Date.now() - birthday - timePaused) / (speed * 360));
-    displayInfoIds["info-age"] = info.age;
-    console.log(`%c ${(Date.now() - birthday) / (speed * 360)}`, 'color:green;', "running");
-  }
-  if(!play){
-    timePaused = 0;
-    console.log('pause');
-    const start = Date.now();
-    setTimeout(() => {
-      console.log('Age',info.age);
-      const millis = Date.now() - start;
-      timePaused =  Math.floor(millis / 1000);
-      console.log(`%c ${timePaused}`, 'color:orange;', "paused");
-  // expected output: seconds elapsed = 2
-      }, 1000);
-  };    
+   
           const keys = Object.keys(displayInfoIds);
           const props = Object.values(displayInfoIds);
           for (let i = 0; i < keys.length; i++) {

@@ -1,7 +1,5 @@
 "use strict";
 
-var _Util = require("/World AI/Logic/Util.js");
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // map definition

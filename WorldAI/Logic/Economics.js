@@ -1,12 +1,12 @@
+
 let worldWealth = 1000;
 console.log('wealth', worldWealth);
-
 
 
 let person = {
     name:'John Doe',
     wealth: 0,
-    wallet(){
+    get wallet(){
         console.log(this.name, 'has', this.wealth)
     }
 }
@@ -14,7 +14,7 @@ let person = {
 let person1 = {
     name:'James Johnson',
     wealth: 0,
-    wallet(){
+    get wallet(){
         console.log(this.name, 'has', this.wealth)
     }
 }
@@ -57,8 +57,8 @@ transfer(7, person, person1);// pay wages to someone
 
 
 
-person.wallet();
-person1.wallet();
+person.wallet;
+person1.wallet;
 
 
 

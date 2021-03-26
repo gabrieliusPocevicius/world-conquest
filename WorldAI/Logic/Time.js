@@ -1,4 +1,4 @@
-import { battleTrue } from "../Logic/Battle.js";
+
 import { monthNames } from "./DataBase.js";
 import { Character, maker, people } from "./Character.js";
 
@@ -29,6 +29,7 @@ let pauseIcon = `
 `
 export const speed = 100; //birth speed
 let pauseSwitch = 0;// Counter variable is used as a switch.
+   
 
 function pause() {
     $("#pause").on("click", (e) => {
@@ -36,12 +37,21 @@ function pause() {
                     $("#pause")
             .html(pauseIcon);
         ++pauseSwitch;
+        timePaused = 0;
+        console.log('pause');
+    
+
+
         play = true;
         if (pauseSwitch === 1) {
             time(speed); //time goes on as normal
         }
     });
 }
+
+
+
+
 
 
 //Util func

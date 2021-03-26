@@ -8,8 +8,6 @@ exports.timeStruct = timeStruct;
 exports.time = time;
 exports.play = exports.speed = void 0;
 
-var _Battle = require("../Logic/Battle.js");
-
 var _DataBase = require("./DataBase.js");
 
 var _Character = require("./Character.js");
@@ -26,6 +24,8 @@ function pause() {
     e.preventDefault();
     $("#pause").html(pauseIcon);
     ++pauseSwitch;
+    timePaused = 0;
+    console.log('pause');
     exports.play = play = true;
 
     if (pauseSwitch === 1) {

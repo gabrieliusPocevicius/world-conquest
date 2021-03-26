@@ -19,7 +19,6 @@ var id = 0; // the id of each object of the Character class
 
 var nationality = [];
 var surnames = [];
-var gen = ["Male", "Female"];
 var percent = Math.round(Math.random() * 99 + 1);
 var people = {
   // contains all the people of the world
@@ -43,7 +42,18 @@ var female = 0;
 var getAttributes = {};
 var timeGoes = false;
 var displayUserInfo = document.getElementById("information-display");
-displayUserInfo.style.opacity = "0";
+displayUserInfo.style.opacity = "0"; // removes the time from the people's age
+
+/*  let timePaused = 0; 
+
+        const start = Date.now();
+        setInterval(() => {
+            
+            const millis = Date.now() - start;
+            timePaused =  Math.floor(millis / 1000);
+            console.log(`%c ${timePaused}`, 'color:orange;', "paused");
+ }, 1000);  */
+// expected output: seconds elapsed = 2
 
 var Character = function Character(age) {
   var _this = this;
@@ -68,12 +78,13 @@ var Character = function Character(age) {
   ;
   var percent = Math.floor(Math.random() * 99 + 1); //50% change of it being a boy for a girl.
 
-  var random = (0, _Util.getRandom)(0, 6);
   /* let dna = getRandom(0,1000);*/
 
   this.id = id += 1;
-  this.title = "".concat(_DataBase.job[random].name);
-  this.alive = true;
+  /* let random = getRandom(0,6); */
+
+  /* this.title = `${job[random].name}`; */
+
   /* console.log(this.title); */
 
   if (percent <= 50) {
@@ -132,28 +143,8 @@ var Character = function Character(age) {
       person.addEventListener("mouseover", function (e) {
         e.preventDefault();
         displayUserInfo.style.opacity = "1";
-        var timePaused = 0;
-
-        if (_Time.play) {
-          console.log('time paused', timePaused);
-          info.age = Math.floor((Date.now() - birthday - timePaused) / (_Time.speed * 360));
-          displayInfoIds["info-age"] = info.age;
-          console.log("%c ".concat((Date.now() - birthday) / (_Time.speed * 360)), 'color:green;', "running");
-        }
-
-        if (!_Time.play) {
-          timePaused = 0;
-          console.log('pause');
-          var start = Date.now();
-          setTimeout(function () {
-            console.log('Age', info.age);
-            var millis = Date.now() - start;
-            timePaused = Math.floor(millis / 1000);
-            console.log("%c ".concat(timePaused), 'color:orange;', "paused"); // expected output: seconds elapsed = 2
-          }, 1000);
-        }
-
-        ;
+        info.age = Math.floor((Date.now() - birthday - timePaused) / (_Time.speed * 360));
+        displayInfoIds["info-age"] = info.age;
         var keys = Object.keys(displayInfoIds);
         var props = Object.values(displayInfoIds);
 

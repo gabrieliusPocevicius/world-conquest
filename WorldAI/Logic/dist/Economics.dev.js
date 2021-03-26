@@ -5,16 +5,20 @@ console.log('wealth', worldWealth);
 var person = {
   name: 'John Doe',
   wealth: 0,
-  wallet: function wallet() {
+
+  get wallet() {
     console.log(this.name, 'has', this.wealth);
   }
+
 };
 var person1 = {
   name: 'James Johnson',
   wealth: 0,
-  wallet: function wallet() {
+
+  get wallet() {
     console.log(this.name, 'has', this.wealth);
   }
+
 };
 /* class Economics{
     constructor(){
@@ -55,5 +59,5 @@ mine(10, person); //mine gold
 
 transfer(7, person, person1); // pay wages to someone
 
-person.wallet();
-person1.wallet();
+person.wallet;
+person1.wallet;
