@@ -24,7 +24,8 @@ function pause() {
     e.preventDefault();
     $("#pause").html(pauseIcon);
     ++pauseSwitch;
-    timePaused = 0;
+    /* timePaused = 0; */
+
     console.log('pause');
     exports.play = play = true;
 

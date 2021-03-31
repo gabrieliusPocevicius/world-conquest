@@ -143,7 +143,7 @@ var Character = function Character(age) {
       person.addEventListener("mouseover", function (e) {
         e.preventDefault();
         displayUserInfo.style.opacity = "1";
-        info.age = Math.floor((Date.now() - birthday - timePaused) / (_Time.speed * 360));
+        info.age = Math.floor((Date.now() - birthday) / (_Time.speed * 360));
         displayInfoIds["info-age"] = info.age;
         var keys = Object.keys(displayInfoIds);
         var props = Object.values(displayInfoIds);

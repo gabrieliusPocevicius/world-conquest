@@ -37,7 +37,7 @@ function pause() {
                     $("#pause")
             .html(pauseIcon);
         ++pauseSwitch;
-        timePaused = 0;
+        /* timePaused = 0; */
         console.log('pause');
     
 

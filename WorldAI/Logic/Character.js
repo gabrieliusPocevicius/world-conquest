@@ -137,7 +137,7 @@ export class Character {
         person.addEventListener("mouseover", (e) => {
           e.preventDefault();
           displayUserInfo.style.opacity = "1";
-          info.age = Math.floor((Date.now() - birthday  - timePaused) / (speed * 360));
+          info.age = Math.floor((Date.now() - birthday ) / (speed * 360));
           displayInfoIds["info-age"] = info.age;
 
    
@@ -446,3 +446,6 @@ for(let i = 1; i < people.count;i++){
 };
 
 let re = /dfds/
+
+
+
