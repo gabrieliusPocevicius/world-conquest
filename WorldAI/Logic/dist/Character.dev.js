@@ -55,7 +55,7 @@ displayUserInfo.style.opacity = "0"; // removes the time from the people's age
  }, 1000);  */
 // expected output: seconds elapsed = 2
 
-var Character = function Character(age) {
+var Character = function Character(agePassed, gender) {
   var _this = this;
 
   _classCallCheck(this, Character);
@@ -76,7 +76,15 @@ var Character = function Character(age) {
   }
 
   ;
-  var percent = Math.floor(Math.random() * 99 + 1); //50% change of it being a boy for a girl.
+  var percent = 0;
+
+  if (!gender) {
+    percent = Math.floor(Math.random() * 99 + 1);
+  } else {
+    percent = gender;
+  }
+
+  ; //50% change of it being a boy for a girl.
 
   /* let dna = getRandom(0,1000);*/
 
@@ -91,7 +99,7 @@ var Character = function Character(age) {
     var maleTemplate = function maleTemplate() {
       _this.name = _DataBase.names[(0, _Util.getRandom)(0, 400)];
       _this.gender = "male";
-      _this.age = age;
+      _this.age = 0 + agePassed;
       _this.hp = 100;
       _this.atk = (0, _Util.getRandom)(0, 100);
       _this.armour = 0;
@@ -389,21 +397,27 @@ function spawn() {
   return people.count;
 }
 
-function createPerson(age) {
+function createPerson(age, gender) {
   ++people.count;
-  people.person.push(new Character(age));
+  people.person.push(new Character(age, gender));
   displayPopulationCount();
   return people.count;
 }
 
-var adam = createPerson(25);
-var eve = createPerson(18); //makes people appear
+var adam = createPerson(50, 40);
+var eve = createPerson(30, 60);
+
+for (var i = 0; i < 10; i++) {
+  console.log(people.person[i]);
+}
+
+; //makes people appear
 
 var pairs = [];
 
 function maker(n) {
-  for (var i = 1; i < people.count; i++) {
-    var x = $("#person_".concat(i)).attr('id');
+  for (var _i = 1; _i < people.count; _i++) {
+    var x = $("#person_".concat(_i)).attr('id');
     /* if($('#people').children().length % 2 === 0){
        
        $(`#${x}`).remove();
@@ -419,4 +433,3 @@ function maker(n) {
 }
 
 ;
-var re = /dfds/;

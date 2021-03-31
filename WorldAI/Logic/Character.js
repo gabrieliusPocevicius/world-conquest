@@ -57,7 +57,7 @@ displayUserInfo.style.opacity = "0";
 
 export class Character {
   
-  constructor(age) {
+  constructor(agePassed, gender) {
     Object.create(null);
     
     let skill = 0;
@@ -69,7 +69,14 @@ export class Character {
       };
       console.log('skills ', skill);
     };
-    let percent = Math.floor(Math.random() * 99 + 1);
+    let percent = 0;
+
+    if(!gender){
+      percent = Math.floor(Math.random() * 99 + 1);
+    }else{
+      percent = gender;
+    };
+
     //50% change of it being a boy for a girl.
     
     /* let dna = getRandom(0,1000);*/
@@ -82,7 +89,7 @@ export class Character {
       let maleTemplate = () =>{
         this.name = names[getRandom(0, 400)];
         this.gender = "male";
-        this.age = age;
+        this.age = 0 + agePassed;
         this.hp = 100;
         this.atk = getRandom(0, 100);
         this.armour = 0;
@@ -409,18 +416,22 @@ function spawn() {
   return people.count;
 }
 
-function createPerson(age) {
+function createPerson(age, gender) {
     ++people.count;
-  people.person.push(new Character(age));
-  displayPopulationCount()
+  people.person.push(new Character(age, gender));
+  displayPopulationCount();
   return people.count;
 }
 
 
-let adam = createPerson(25);
-let eve = createPerson(18);
+
+let adam = createPerson(50,40);
+let eve = createPerson(30,60);
 
 
+for(let i = 0;i<10;i++){
+  console.log(people.person[i]);
+};
 
 
 
@@ -445,7 +456,7 @@ for(let i = 1; i < people.count;i++){
   };
 };
 
-let re = /dfds/
+
 
 
 
