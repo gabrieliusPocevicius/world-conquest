@@ -34,6 +34,7 @@ export let play = false;
 function pause() {
     $("#pause").on("click", (e) => {
         e.preventDefault();
+        
             $("#pause")
             .html(pauseIcon);
         ++pauseSwitch;

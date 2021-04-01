@@ -96,10 +96,12 @@ var Character = function Character(agePassed, gender) {
   /* console.log(this.title); */
 
   function displayAge(age, birthTime) {
+    var date = 0 + age;
     displayUserInfo.style.opacity = "1";
 
     if (_Time.play) {
       birthTime = Date.now();
+      date = birthTime;
 
       if (!age) {
         return Math.floor((Date.now() - birthTime) / (_Time.speed * 360));
@@ -109,7 +111,7 @@ var Character = function Character(agePassed, gender) {
 
       ;
     } else {
-      return age;
+      return date;
     }
   }
 
@@ -185,7 +187,7 @@ var Character = function Character(agePassed, gender) {
       _this.name = _DataBase.fnames[(0, _Util.getRandom)(0, 400)];
       _this.gender = "female";
       _this.hp = 100;
-      _this.age = 0;
+      _this.age = 0 + agePassed;
       _this.atk = (0, _Util.getRandom)(0, 60);
       _this.armour = 0;
       _this.risk = 0;
@@ -196,7 +198,7 @@ var Character = function Character(agePassed, gender) {
       }
 
       ++female;
-      var birthday = Date.now();
+      var birthday = 0;
       $("#female-count").text(female);
       var info = {
         name: _this.name,
@@ -235,8 +237,7 @@ var Character = function Character(agePassed, gender) {
       person.addEventListener("mouseover", function (e) {
         e.preventDefault();
         displayUserInfo.style.opacity = "1";
-        info.age = Math.floor((Date.now() - birthday) / (_Time.speed * 360));
-        displayInfoIds["info-age"] = info.age;
+        displayInfoIds["info-age"] = displayAge(_this.age, birthday);
         var keys = Object.keys(displayInfoIds);
         var props = Object.values(displayInfoIds);
 

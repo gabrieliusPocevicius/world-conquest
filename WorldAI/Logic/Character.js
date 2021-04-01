@@ -86,17 +86,18 @@ export class Character {
     
     /* console.log(this.title); */
     function displayAge(age, birthTime){
-            displayUserInfo.style.opacity = "1";
-          
+        let date = 0 + age;
+            displayUserInfo.style.opacity = "1";          
           if(play){
            birthTime = Date.now();
+           date = birthTime;
             if(!age){
               return Math.floor((Date.now() - birthTime) / (speed * 360))
             }else{
               return Math.floor((Date.now() - birthTime) / (speed * 360)) + age;
           };
         }else{
-          return age;
+          return date;
         } 
     }
 
@@ -114,17 +115,8 @@ export class Character {
         }
         this.risk = 0;
         ++male;
-
-       
         let birthday = 0;
-        
-        
-        
-        
-
         $("#male-count").text(male);
-               
-
         let info = {
           name: this.name,
           gender: this.gender,
@@ -154,9 +146,7 @@ export class Character {
           "info-id": info.id,
           "info-wealth":info.wealth
         };
-        
-        getAttributes = displayInfoIds;
-       
+        getAttributes = displayInfoIds;    
         /* person.addEventListener("mouseout", (e) => {
           e.preventDefault();
           if(!displayInfo){
@@ -165,15 +155,8 @@ export class Character {
           
         }); */
         person.addEventListener("mouseover", (e) => {
-          e.preventDefault();
-
-        
+          e.preventDefault();  
          displayInfoIds["info-age"] = displayAge(this.age, birthday);
-
-
-
-
-   
           const keys = Object.keys(displayInfoIds);
           const props = Object.values(displayInfoIds);
           for (let i = 0; i < keys.length; i++) {
@@ -184,12 +167,11 @@ export class Character {
       qaulities();
       maleTemplate();
     }else{
-      let femaleTemplate = () => {
-        
+      let femaleTemplate = () => {    
         this.name = fnames[getRandom(0, 400)];
         this.gender = "female";
         this.hp = 100;
-        this.age = 0;
+        this.age = 0 + agePassed;
         this.atk = getRandom(0, 60);
         this.armour = 0;
         this.risk = 0;
@@ -198,7 +180,7 @@ export class Character {
         console.log(this.name, 'has', this.wealth)
         }
         ++female;
-        let birthday = Date.now();
+        let birthday = 0;
         $("#female-count").text(female);
         let info = {
           name: this.name,
@@ -212,12 +194,10 @@ export class Character {
         };
         displayPerson(info.gender, info.id);
         let person = document.getElementById(`person_${info.id}`);
-        
         person.addEventListener("click", (e) => {
           e.preventDefault();
           console.log("hello", info.name);
         });
-
         let displayInfoIds = {
           "info-name": info.name,
           "info-gender": info.gender,
@@ -228,8 +208,6 @@ export class Character {
           "info-id": info.id,
           "info-wealth":info.wealth
         };
-
-
         /* person.addEventListener("mouseout", (e) => {
           e.preventDefault();
           if(!displayInfo){
@@ -241,9 +219,7 @@ export class Character {
         person.addEventListener("mouseover", (e) => {
           e.preventDefault();
           displayUserInfo.style.opacity = "1";
-          info.age = Math.floor((Date.now() - birthday) / (speed * 360));
-          displayInfoIds["info-age"] = info.age;
-
+          displayInfoIds["info-age"] = displayAge(this.age, birthday);
           const keys = Object.keys(displayInfoIds);
           const props = Object.values(displayInfoIds);
 
