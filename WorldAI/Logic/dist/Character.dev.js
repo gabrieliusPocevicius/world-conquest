@@ -51,7 +51,7 @@ displayUserInfo.style.opacity = "0"; // removes the time from the people's age
             
             const millis = Date.now() - start;
             timePaused =  Math.floor(millis / 1000);
-            console.log(`%c ${timePaused}`, 'color:orange;', "paused");
+            
  }, 1000);  */
 // expected output: seconds elapsed = 2
 
@@ -72,7 +72,7 @@ var Character = function Character(agePassed, gender) {
     }
 
     ;
-    console.log('skills ', skill);
+    /* console.log('skills ', skill); */
   }
 
   ;
@@ -95,6 +95,24 @@ var Character = function Character(agePassed, gender) {
 
   /* console.log(this.title); */
 
+  function displayAge(age, birthTime) {
+    displayUserInfo.style.opacity = "1";
+
+    if (_Time.play) {
+      birthTime = Date.now();
+
+      if (!age) {
+        return Math.floor((Date.now() - birthTime) / (_Time.speed * 360));
+      } else {
+        return Math.floor((Date.now() - birthTime) / (_Time.speed * 360)) + age;
+      }
+
+      ;
+    } else {
+      return age;
+    }
+  }
+
   if (percent <= 50) {
     var maleTemplate = function maleTemplate() {
       _this.name = _DataBase.names[(0, _Util.getRandom)(0, 400)];
@@ -111,7 +129,7 @@ var Character = function Character(agePassed, gender) {
 
       _this.risk = 0;
       ++male;
-      var birthday = Date.now();
+      var birthday = 0;
       $("#male-count").text(male);
       var info = {
         name: _this.name,
@@ -150,9 +168,7 @@ var Character = function Character(agePassed, gender) {
 
       person.addEventListener("mouseover", function (e) {
         e.preventDefault();
-        displayUserInfo.style.opacity = "1";
-        info.age = Math.floor((Date.now() - birthday) / (_Time.speed * 360));
-        displayInfoIds["info-age"] = info.age;
+        displayInfoIds["info-age"] = displayAge(_this.age, birthday);
         var keys = Object.keys(displayInfoIds);
         var props = Object.values(displayInfoIds);
 
@@ -406,18 +422,18 @@ function createPerson(age, gender) {
 
 var adam = createPerson(50, 40);
 var eve = createPerson(30, 60);
-
-for (var i = 0; i < 10; i++) {
+/* 
+for(let i = 0;i<10;i++){
   console.log(people.person[i]);
-}
-
-; //makes people appear
+};
+ */
+//makes people appear
 
 var pairs = [];
 
 function maker(n) {
-  for (var _i = 1; _i < people.count; _i++) {
-    var x = $("#person_".concat(_i)).attr('id');
+  for (var i = 1; i < people.count; i++) {
+    var x = $("#person_".concat(i)).attr('id');
     /* if($('#people').children().length % 2 === 0){
        
        $(`#${x}`).remove();

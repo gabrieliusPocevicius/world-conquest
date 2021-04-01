@@ -19,6 +19,9 @@ var speed = 100; //birth speed
 exports.speed = speed;
 var pauseSwitch = 0; // Counter variable is used as a switch.
 
+var play = false;
+exports.play = play;
+
 function pause() {
   $("#pause").on("click", function (e) {
     e.preventDefault();
@@ -26,13 +29,13 @@ function pause() {
     ++pauseSwitch;
     /* timePaused = 0; */
 
-    console.log('pause');
     exports.play = play = true;
 
     if (pauseSwitch === 1) {
       time(speed); //time goes on as normal
     }
   });
+  console.log('is playing?', play);
 } //Util func
 
 
@@ -90,7 +93,7 @@ var start = Date.now();
 
 function timeStruct() {
   /**
-  @func timeStruct()
+  @func timeStruct
   lays out the structure of the calender
   */
   //if the current day is equal to the month day then current day plus 1
@@ -118,6 +121,7 @@ function timeStruct() {
 ;
 
 function displayDate() {
+  timeStruct();
   calender.dayC++;
   document.getElementById("days").innerHTML = "day " + calender.dayC;
   document.getElementById("months").innerHTML = _DataBase.monthNames[calender.monthC];
@@ -125,8 +129,6 @@ function displayDate() {
 }
 
 ;
-var play = false;
-exports.play = play;
 
 function time(speed) {
   return regeneratorRuntime.async(function time$(_context) {
@@ -134,7 +136,7 @@ function time(speed) {
       switch (_context.prev = _context.next) {
         case 0:
           if (!play) {
-            _context.next = 9;
+            _context.next = 8;
             break;
           }
 
@@ -144,13 +146,12 @@ function time(speed) {
         case 3:
           //wating time for a single day
           displayDate();
-          timeStruct();
           (0, _Character.maker)(1);
           pauseTime();
           _context.next = 0;
           break;
 
-        case 9:
+        case 8:
         case "end":
           return _context.stop();
       }
@@ -166,6 +167,8 @@ function pauseTime() {
     exports.play = play = false;
     $("#pause").html(playIcon);
   }
+
+  console.log('is playing?', play);
 }
 
 pause();

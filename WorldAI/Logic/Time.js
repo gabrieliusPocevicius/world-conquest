@@ -29,24 +29,24 @@ let pauseIcon = `
 `
 export const speed = 100; //birth speed
 let pauseSwitch = 0;// Counter variable is used as a switch.
-   
+export let play = false;
 
 function pause() {
     $("#pause").on("click", (e) => {
         e.preventDefault();
-                    $("#pause")
+            $("#pause")
             .html(pauseIcon);
         ++pauseSwitch;
         /* timePaused = 0; */
-        console.log('pause');
-    
-
-
+     
         play = true;
+        
         if (pauseSwitch === 1) {
+            
             time(speed); //time goes on as normal
         }
     });
+      console.log('is playing?', play);
 }
 
 
@@ -106,7 +106,7 @@ function naturalDisaster(affects, lengthOfTime) {
 let start = Date.now();
 export function timeStruct() {
     /**
-    @func timeStruct()
+    @func timeStruct
     lays out the structure of the calender
  */
     //if the current day is equal to the month day then current day plus 1
@@ -127,20 +127,23 @@ export function timeStruct() {
 };
 
 function displayDate(){
+    timeStruct();
     calender.dayC++;
     document.getElementById("days").innerHTML = "day " + calender.dayC;
     document.getElementById("months").innerHTML = monthNames[calender.monthC];
     document.getElementById("years").innerHTML = calender.yearC;
-    
 };
 
-export let play = false;
+
+
+
 async function time(speed) {
     // Time loop
+    
     while (play) {
         await sleep(speed); //wating time for a single day
         displayDate();
-        timeStruct();
+        
         maker(1);
         pauseTime();
     }
@@ -148,11 +151,12 @@ async function time(speed) {
 
 function pauseTime() {
         let paused = (pauseSwitch === 2);
-    if (paused){
-        pauseSwitch = 0;
-        play = false;
-        $("#pause").html(playIcon);
-    }
+            if (paused){
+                pauseSwitch = 0;
+                play = false;
+                $("#pause").html(playIcon);
+            }
+console.log('is playing?', play);
 }
 pause();
 export { time };

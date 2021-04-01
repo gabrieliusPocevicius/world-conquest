@@ -11,7 +11,7 @@ import {
   log,
 } from "./DataBase.js";
 import { getRandom } from "./Util.js";
-import { speed,play, time } from "./Time.js";
+import { speed, play, time } from "./Time.js";
 
 
 let id = 0; // the id of each object of the Character class
@@ -50,7 +50,7 @@ displayUserInfo.style.opacity = "0";
             
             const millis = Date.now() - start;
             timePaused =  Math.floor(millis / 1000);
-            console.log(`%c ${timePaused}`, 'color:orange;', "paused");
+            
  }, 1000);  */
   // expected output: seconds elapsed = 2
      
@@ -67,7 +67,7 @@ export class Character {
         skill++;
         qaulities();
       };
-      console.log('skills ', skill);
+      /* console.log('skills ', skill); */
     };
     let percent = 0;
 
@@ -85,6 +85,21 @@ export class Character {
     /* this.title = `${job[random].name}`; */
     
     /* console.log(this.title); */
+    function displayAge(age, birthTime){
+            displayUserInfo.style.opacity = "1";
+          
+          if(play){
+           birthTime = Date.now();
+            if(!age){
+              return Math.floor((Date.now() - birthTime) / (speed * 360))
+            }else{
+              return Math.floor((Date.now() - birthTime) / (speed * 360)) + age;
+          };
+        }else{
+          return age;
+        } 
+    }
+
     if(percent <= 50){
       let maleTemplate = () =>{
         this.name = names[getRandom(0, 400)];
@@ -99,10 +114,17 @@ export class Character {
         }
         this.risk = 0;
         ++male;
-        let birthday = Date.now();
+
+       
+        let birthday = 0;
+        
+        
+        
+        
 
         $("#male-count").text(male);
-        
+               
+
         let info = {
           name: this.name,
           gender: this.gender,
@@ -113,6 +135,7 @@ export class Character {
           id: this.id,
           wealth: this.wealth
         };
+      
 
         displayPerson(info.gender, info.id);
         let person = document.getElementById(`person_${info.id}`);
@@ -131,9 +154,9 @@ export class Character {
           "info-id": info.id,
           "info-wealth":info.wealth
         };
-
+        
         getAttributes = displayInfoIds;
-
+       
         /* person.addEventListener("mouseout", (e) => {
           e.preventDefault();
           if(!displayInfo){
@@ -143,9 +166,12 @@ export class Character {
         }); */
         person.addEventListener("mouseover", (e) => {
           e.preventDefault();
-          displayUserInfo.style.opacity = "1";
-          info.age = Math.floor((Date.now() - birthday ) / (speed * 360));
-          displayInfoIds["info-age"] = info.age;
+
+        
+         displayInfoIds["info-age"] = displayAge(this.age, birthday);
+
+
+
 
    
           const keys = Object.keys(displayInfoIds);
@@ -184,7 +210,6 @@ export class Character {
           id: this.id,
           wealth: this.wealth
         };
-       
         displayPerson(info.gender, info.id);
         let person = document.getElementById(`person_${info.id}`);
         
@@ -203,6 +228,7 @@ export class Character {
           "info-id": info.id,
           "info-wealth":info.wealth
         };
+
 
         /* person.addEventListener("mouseout", (e) => {
           e.preventDefault();
@@ -428,11 +454,11 @@ function createPerson(age, gender) {
 let adam = createPerson(50,40);
 let eve = createPerson(30,60);
 
-
+/* 
 for(let i = 0;i<10;i++){
   console.log(people.person[i]);
 };
-
+ */
 
 
   

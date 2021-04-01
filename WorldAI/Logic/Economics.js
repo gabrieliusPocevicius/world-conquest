@@ -1,6 +1,6 @@
 
 let worldWealth = 1000;
-console.log('wealth', worldWealth);
+//console.log('wealth', worldWealth);
 
 
 let person = {
@@ -52,13 +52,13 @@ function transfer(wealth, from, to){
 };
 //simple transaction
 
-mine(10, person);//mine gold
-transfer(7, person, person1);// pay wages to someone
+//mine(10, person);//mine gold
+//transfer(7, person, person1);// pay wages to someone
 
 
 
-person.wallet;
-person1.wallet;
+//person.wallet;
+//person1.wallet;
 
 
 

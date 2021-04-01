@@ -1,7 +1,7 @@
 "use strict";
 
-var worldWealth = 1000;
-console.log('wealth', worldWealth);
+var worldWealth = 1000; //console.log('wealth', worldWealth);
+
 var person = {
   name: 'John Doe',
   wealth: 0,
@@ -54,10 +54,7 @@ function transfer(wealth, from, to) {
 }
 
 ; //simple transaction
-
-mine(10, person); //mine gold
-
-transfer(7, person, person1); // pay wages to someone
-
-person.wallet;
-person1.wallet;
+//mine(10, person);//mine gold
+//transfer(7, person, person1);// pay wages to someone
+//person.wallet;
+//person1.wallet;
