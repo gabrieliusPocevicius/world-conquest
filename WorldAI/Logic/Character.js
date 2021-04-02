@@ -452,6 +452,7 @@ for(let i = 1; i < people.count;i++){
   };  */
   
 }
+//spawns peeps
   while (n > 0) {
     spawn();
     n--;
