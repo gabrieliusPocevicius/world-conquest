@@ -97,7 +97,8 @@ var Character = function Character(agePassed, gender) {
 
   function displayAge(age, birthTime) {
     displayUserInfo.style.opacity = "1";
-    birthTime = _Time.calender.yearC - _Time.calender.years;
+    var currentAge = _Time.calender.yearC - _Time.calender.years;
+    birthTime += currentAge;
 
     if (!age) {
       return birthTime;
@@ -108,201 +109,99 @@ var Character = function Character(agePassed, gender) {
     ;
   }
 
+  ;
+
   if (percent <= 50) {
-    var maleTemplate = function maleTemplate() {
-      _this.name = _DataBase.names[(0, _Util.getRandom)(0, 400)];
-      _this.gender = "male";
-      _this.age = 0 + agePassed;
-      _this.hp = 100;
-      _this.atk = (0, _Util.getRandom)(0, 100);
-      _this.armour = 0;
-      _this.wealth = 0;
-
-      function wallet() {
-        console.log(this.name, 'has', this.wealth);
-      }
-
-      _this.risk = 0;
-      ++male;
-      var birthday = 0;
-      $("#male-count").text(male);
-      var info = {
-        name: _this.name,
-        gender: _this.gender,
-        age: _this.age,
-        hp: _this.hp,
-        atk: _this.atk,
-        armour: _this.armour,
-        id: _this.id,
-        wealth: _this.wealth
-      };
-      displayPerson(info.gender, info.id);
-      var person = document.getElementById("person_".concat(info.id));
-      person.addEventListener("click", function (e) {
-        e.preventDefault();
-        console.log("hello", info.name);
-      });
-      var displayInfoIds = {
-        "info-name": info.name,
-        "info-gender": info.gender,
-        "info-age": info.age,
-        "info-health": info.hp,
-        "info-attack": info.atk,
-        "info-armour": info.armour,
-        "info-id": info.id,
-        "info-wealth": info.wealth
-      };
-      getAttributes = displayInfoIds;
-      /* person.addEventListener("mouseout", (e) => {
-        e.preventDefault();
-        if(!displayInfo){
-          displayUserInfo.style.opacity = "0";
-        }
-        
-      }); */
-
-      person.addEventListener("mouseover", function (e) {
-        e.preventDefault();
-        displayInfoIds["info-age"] = displayAge(_this.age, birthday);
-        var keys = Object.keys(displayInfoIds);
-        var props = Object.values(displayInfoIds);
-
-        for (var i = 0; i < keys.length; i++) {
-          document.getElementById(keys[i]).innerHTML = props[i];
-        }
-      });
+    var wallet = function wallet() {
+      console.log(man.name, 'has', man.wealth);
     };
 
+    var birthday = 0;
+    ++male;
+    $("#male-count").text(male);
+    var man = {
+      id: this.id,
+      name: _DataBase.names[(0, _Util.getRandom)(0, 400)],
+      gender: "male",
+      age: 0 + agePassed,
+      hp: 100,
+      atk: (0, _Util.getRandom)(0, 100),
+      armour: 0,
+      wealth: 0
+    };
+    displayPerson(man.gender, man.id);
+    console.log(man.id);
+    var person = document.getElementById("person_".concat(man.id));
+    person.addEventListener("click", function (e) {
+      e.preventDefault();
+      console.log("hello", man.name);
+      man.age = displayAge(_this.age, birthday);
+      var keys = Object.keys(man);
+      var props = Object.values(man);
+
+      for (var i = 0; i < keys.length; i++) {
+        document.getElementById(keys[i]).innerHTML = props[i];
+      }
+    });
+    getAttributes = man;
+    console.log(getAttributes);
+    person.addEventListener("mouseover", function (e) {
+      e.preventDefault();
+      man.age = displayAge(male.age, birthday);
+      var keys = Object.keys(man);
+      var props = Object.values(man);
+
+      for (var i = 0; i < keys.length; i++) {
+        document.getElementById(keys[i]).innerHTML = props[i];
+      }
+    });
     qaulities();
-    maleTemplate();
   } else {
-    var femaleTemplate = function femaleTemplate() {
-      _this.name = _DataBase.fnames[(0, _Util.getRandom)(0, 400)];
-      _this.gender = "female";
-      _this.hp = 100;
-      _this.age = 0 + agePassed;
-      _this.atk = (0, _Util.getRandom)(0, 60);
-      _this.armour = 0;
-      _this.risk = 0;
-      _this.wealth = 0;
-
-      function wallet() {
-        console.log(this.name, 'has', this.wealth);
-      }
-
-      ++female;
-      var birthday = 0;
-      $("#female-count").text(female);
-      var info = {
-        name: _this.name,
-        gender: _this.gender,
-        age: _this.age,
-        hp: _this.hp,
-        atk: _this.atk,
-        armour: _this.armour,
-        id: _this.id,
-        wealth: _this.wealth
-      };
-      displayPerson(info.gender, info.id);
-      var person = document.getElementById("person_".concat(info.id));
-      person.addEventListener("click", function (e) {
-        e.preventDefault();
-        console.log("hello", info.name);
-      });
-      var displayInfoIds = {
-        "info-name": info.name,
-        "info-gender": info.gender,
-        "info-age": info.age,
-        "info-health": info.hp,
-        "info-attack": info.atk,
-        "info-armour": info.armour,
-        "info-id": info.id,
-        "info-wealth": info.wealth
-      };
-      /* person.addEventListener("mouseout", (e) => {
-        e.preventDefault();
-        if(!displayInfo){
-            displayUserInfo.style.opacity = "0";
-        };
-        
-      }); */
-
-      person.addEventListener("mouseover", function (e) {
-        e.preventDefault();
-        displayUserInfo.style.opacity = "1";
-        displayInfoIds["info-age"] = displayAge(_this.age, birthday);
-        var keys = Object.keys(displayInfoIds);
-        var props = Object.values(displayInfoIds);
-
-        for (var i = 0; i < keys.length; i++) {
-          document.getElementById("".concat(keys[i])).innerHTML = props[i];
-        }
-
-        ;
-      });
+    var _wallet = function _wallet() {
+      console.log(female.name, 'has', female.wealth);
     };
 
+    var _birthday = 0;
+    ++female;
+    var woman = {
+      id: this.id,
+      name: _DataBase.fnames[(0, _Util.getRandom)(0, 400)],
+      gender: "female",
+      hp: 100,
+      age: 0 + agePassed,
+      atk: (0, _Util.getRandom)(0, 60),
+      armour: 0,
+      wealth: 0
+    };
+    displayPerson(woman.gender, woman.id);
+
+    var _person = document.getElementById("person_".concat(woman.id));
+
+    _person.addEventListener("click", function (e) {
+      e.preventDefault();
+      console.log("hello", woman.name);
+    });
+
+    _person.addEventListener("mouseover", function (e) {
+      e.preventDefault();
+      displayUserInfo.style.opacity = "1";
+      woman.age = displayAge(woman.age, _birthday);
+      var keys = Object.keys(woman);
+      var props = Object.values(woman);
+
+      for (var i = 0; i < keys.length; i++) {
+        document.getElementById("".concat(keys[i])).innerHTML = props[i];
+      }
+
+      ;
+      return woman.age;
+    });
+
     qaulities();
-    femaleTemplate();
   }
 };
 
 exports.Character = Character;
-
-function startTimer() {
-  var btn = document.getElementById('start');
-  var timer = document.getElementById('timer-test');
-
-  if (!timeGoes) {
-    btn.onclick = function (e) {
-      var timePaused = 0;
-      var birthday = Date.now();
-      e.preventDefault();
-      setInterval(function () {
-        console.log('time paused', timePaused);
-        age = Math.floor((Date.now() - birthday - timePaused) / 1000);
-        console.log("%c ".concat(age), 'color:green;', "Age");
-        timer.innerHTML = age.toFixed(2);
-        timeGoes = true;
-        return console.log('returned age : ', age);
-      }, 1000);
-    };
-  }
-}
-
-;
-
-function pauseTimer() {
-  var btn = document.getElementById('paused');
-  var timer = document.getElementById('timer-pause');
-  var trueAge = document.getElementById('true-age');
-
-  btn.onclick = function (e) {
-    var timePaused = 0;
-    /* let birthday = Date.now(); */
-
-    if (timeGoes) {
-      e.preventDefault();
-      timePaused = 0;
-      console.log('pause');
-      var start = Date.now();
-      setInterval(function () {
-        var millis = Date.now() - start;
-        timePaused = Math.floor(millis / 1000);
-        age = age - timePaused;
-        console.log('Age', age, 'should not increase');
-        trueAge.innerHTML = age;
-        /* console.log(`%c ${}`, 'color:orange;', "paused"); */
-
-        document.getElementById('timer-pause').innerHTML = "<div class='text-danger'>".concat(timePaused, "</div>"); // expected output: seconds elapsed = 2
-      }, 1000);
-    }
-  };
-}
-
-;
-/* startTimer();
-pauseTimer(); */
 
 function deathFunction(id) {
   if (people.count > 0) {
@@ -421,7 +320,18 @@ for(let i = 0;i<10;i++){
   console.log(people.person[i]);
 };
  */
-//makes people appear
+
+function reproduction(age) {
+  if (age > 17 && age < 37) {
+    console.log('called');
+    var chance = Math.round(Math.random() * 99 + 1);
+
+    if (chance <= 25) {
+      spawn();
+    }
+  }
+} //makes people appear
+
 
 var pairs = [];
 

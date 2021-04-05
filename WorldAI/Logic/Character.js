@@ -11,7 +11,8 @@ import {
   log,
 } from "./DataBase.js";
 import { getRandom } from "./Util.js";
-import { speed, play, time, calender } from "./Time.js";
+import {calender} from "./Time.js"; 
+
 
 
 let id = 0; // the id of each object of the Character class
@@ -70,7 +71,6 @@ export class Character {
       /* console.log('skills ', skill); */
     };
     let percent = 0;
-
     if(!gender){
       percent = Math.floor(Math.random() * 99 + 1);
     }else{
@@ -88,145 +88,109 @@ export class Character {
     function displayAge(age, birthTime){
         
             displayUserInfo.style.opacity = "1";          
-  
-           birthTime = calender.yearC - calender.years;
+           let currentAge = calender.yearC - calender.years;
+           birthTime += currentAge;
             if(!age){
               return birthTime;
             }else{
               return birthTime + age;
           };
-        
-    }
+    };
 
     if(percent <= 50){
-      let maleTemplate = () =>{
-        this.name = names[getRandom(0, 400)];
-        this.gender = "male";
-        this.age = 0 + agePassed;
-        this.hp = 100;
-        this.atk = getRandom(0, 100);
-        this.armour = 0;
-        this.wealth = 0;
-        function wallet(){
-        console.log(this.name, 'has', this.wealth)
-        }
-        this.risk = 0;
-        ++male;
-        let birthday = 0;
-        $("#male-count").text(male);
-        let info = {
-          name: this.name,
-          gender: this.gender,
-          age: this.age,
-          hp: this.hp,
-          atk: this.atk,
-          armour: this.armour,
-          id: this.id,
-          wealth: this.wealth
-        };
-      
+      let birthday = 0; 
+      ++male;
+      $("#male-count").text(male);
 
-        displayPerson(info.gender, info.id);
-        let person = document.getElementById(`person_${info.id}`);
+      let man = {
+        id: this.id,
+        name: names[getRandom(0, 400)],
+        gender:"male",
+        age: 0 + agePassed,
+        hp:100,
+        atk:getRandom(0, 100),
+        armour:0,
+        wealth:0,
+      }
+  
+       function wallet(){
+        console.log(man.name, 'has', man.wealth);
+        } 
+        
+        displayPerson(man.gender, man.id);
+        console.log(man.id);
+        let person = document.getElementById(`person_${man.id}`);
         
         person.addEventListener("click", (e) => {
           e.preventDefault();
-          console.log("hello", info.name);
-        });
-        let displayInfoIds = {
-          "info-name": info.name,
-          "info-gender": info.gender,
-          "info-age": info.age,
-          "info-health": info.hp,
-          "info-attack": info.atk,
-          "info-armour": info.armour,
-          "info-id": info.id,
-          "info-wealth":info.wealth
-        };
-        getAttributes = displayInfoIds;    
-        /* person.addEventListener("mouseout", (e) => {
-          e.preventDefault();
-          if(!displayInfo){
-            displayUserInfo.style.opacity = "0";
-          }
-          
-        }); */
-        person.addEventListener("mouseover", (e) => {
-          e.preventDefault();  
-         displayInfoIds["info-age"] = displayAge(this.age, birthday);
-          const keys = Object.keys(displayInfoIds);
-          const props = Object.values(displayInfoIds);
+          console.log("hello", man.name);
+          man.age = displayAge(this.age, birthday);
+          const keys = Object.keys(man);
+       
+          const props = Object.values(man);
+
           for (let i = 0; i < keys.length; i++) {
+
             document.getElementById(keys[i]).innerHTML = props[i];
           }
         });
-      };
+
+        getAttributes = man;    
+        console.log(getAttributes);
+
+         person.addEventListener("mouseover", (e) => {
+          e.preventDefault();  
+          man.age = displayAge(male.age, birthday);
+          const keys = Object.keys(man);
+       
+          const props = Object.values(man);
+
+          for (let i = 0; i < keys.length; i++) {
+            document.getElementById(keys[i]).innerHTML = props[i];
+          }
+        }); 
       qaulities();
-      maleTemplate();
+      
     }else{
-      let femaleTemplate = () => {    
-        this.name = fnames[getRandom(0, 400)];
-        this.gender = "female";
-        this.hp = 100;
-        this.age = 0 + agePassed;
-        this.atk = getRandom(0, 60);
-        this.armour = 0;
-        this.risk = 0;
-        this.wealth = 0;
-        function wallet(){
-        console.log(this.name, 'has', this.wealth)
-        }
+       let birthday = 0;
         ++female;
-        let birthday = 0;
-        $("#female-count").text(female);
-        let info = {
-          name: this.name,
-          gender: this.gender,
-          age: this.age,
-          hp: this.hp,
-          atk: this.atk,
-          armour: this.armour,
+        let woman = {    
           id: this.id,
-          wealth: this.wealth
+          name: fnames[getRandom(0, 400)],
+          gender:"female",
+          hp:100,
+          age: 0 + agePassed,
+          atk: getRandom(0, 60),
+          armour: 0,
+          wealth:0
         };
-        displayPerson(info.gender, info.id);
-        let person = document.getElementById(`person_${info.id}`);
+        function wallet(){
+        console.log(female.name, 'has', female.wealth)
+        }
+       
+        displayPerson(woman.gender, woman.id);
+        let person = document.getElementById(`person_${woman.id}`);
         person.addEventListener("click", (e) => {
           e.preventDefault();
-          console.log("hello", info.name);
-        });
-        let displayInfoIds = {
-          "info-name": info.name,
-          "info-gender": info.gender,
-          "info-age": info.age,
-          "info-health": info.hp,
-          "info-attack": info.atk,
-          "info-armour": info.armour,
-          "info-id": info.id,
-          "info-wealth":info.wealth
-        };
-        /* person.addEventListener("mouseout", (e) => {
-          e.preventDefault();
-          if(!displayInfo){
-              displayUserInfo.style.opacity = "0";
-          };
-          
-        }); */
+          console.log("hello", woman.name);
+        });    
 
         person.addEventListener("mouseover", (e) => {
           e.preventDefault();
           displayUserInfo.style.opacity = "1";
-          displayInfoIds["info-age"] = displayAge(this.age, birthday);
-          const keys = Object.keys(displayInfoIds);
-          const props = Object.values(displayInfoIds);
+
+          woman.age = displayAge(woman.age, birthday);
+          const keys = Object.keys(woman);
+          const props = Object.values(woman);
 
           for (let i = 0; i < keys.length; i++) {
             document.getElementById(`${keys[i]}`).innerHTML = props[i];
           };
+          return woman.age;
         });
-    };
+    
       qaulities();
-      femaleTemplate();
+      
     }
   }
 }
@@ -236,53 +200,9 @@ export class Character {
 
 
 
-function startTimer() {
-  let btn = document.getElementById('start');
-  let timer = document.getElementById('timer-test');
-  if(!timeGoes){
-      btn.onclick = (e)=>{
-      let timePaused = 0;
-      let birthday = Date.now();
 
-      e.preventDefault();
-      setInterval(()=>{
-        console.log('time paused', timePaused);
-        age = Math.floor((Date.now() - birthday - timePaused)  / (1000) );
-        console.log(`%c ${age}`, 'color:green;', "Age");
-        timer.innerHTML = age.toFixed(2);
-        timeGoes = true;
-        return console.log('returned age : ', age);
-        },1000);
-      }
-    }
-};
-function pauseTimer() {
-let btn = document.getElementById('paused');
-let timer = document.getElementById('timer-pause');
-let trueAge = document.getElementById('true-age');
-  btn.onclick = (e)=>{
-  let timePaused = 0;
-  /* let birthday = Date.now(); */
-  if(timeGoes){
-      e.preventDefault();
-      timePaused = 0;
-      console.log('pause');
-      const start = Date.now();
-      setInterval(() => {
-        const millis = Date.now() - start;
-        timePaused =  Math.floor(millis / 1000);
-        age = age - timePaused;
-        console.log('Age',age, 'should not increase');
-        trueAge.innerHTML = age;
-        /* console.log(`%c ${}`, 'color:orange;', "paused"); */
-        document.getElementById('timer-pause').innerHTML = `<div class='text-danger'>${timePaused}</div>`;
-      // expected output: seconds elapsed = 2
-        }, 1000);
-    }
-  }
-};
-/* startTimer();
-pauseTimer(); */
+
+
 
 
 
@@ -434,7 +354,15 @@ for(let i = 0;i<10;i++){
 };
  */
 
-
+function reproduction(age){
+    if(age > 17 && age < 37){
+      console.log('called');
+      let chance = Math.round(Math.random() * 99 + 1);
+      if(chance <= 25){
+        spawn();
+      }
+    }
+}
   
 
 //makes people appear
