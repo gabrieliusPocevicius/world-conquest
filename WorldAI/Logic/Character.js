@@ -11,7 +11,7 @@ import {
   log,
 } from "./DataBase.js";
 import { getRandom } from "./Util.js";
-import { speed, play, time } from "./Time.js";
+import { speed, play, time, calender } from "./Time.js";
 
 
 let id = 0; // the id of each object of the Character class
@@ -86,19 +86,16 @@ export class Character {
     
     /* console.log(this.title); */
     function displayAge(age, birthTime){
-        let date = 0 + age;
+        
             displayUserInfo.style.opacity = "1";          
-          if(play){
-           birthTime = Date.now();
-           date = birthTime;
+  
+           birthTime = calender.yearC - calender.years;
             if(!age){
-              return Math.floor((Date.now() - birthTime) / (speed * 360))
+              return birthTime;
             }else{
-              return Math.floor((Date.now() - birthTime) / (speed * 360)) + age;
+              return birthTime + age;
           };
-        }else{
-          return date;
-        } 
+        
     }
 
     if(percent <= 50){
@@ -427,8 +424,9 @@ function createPerson(age, gender) {
 
 
 
-let adam = createPerson(50,40);
+let adam = createPerson(40,10);
 let eve = createPerson(30,60);
+
 
 /* 
 for(let i = 0;i<10;i++){

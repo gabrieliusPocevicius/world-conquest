@@ -96,23 +96,16 @@ var Character = function Character(agePassed, gender) {
   /* console.log(this.title); */
 
   function displayAge(age, birthTime) {
-    var date = 0 + age;
     displayUserInfo.style.opacity = "1";
+    birthTime = _Time.calender.yearC - _Time.calender.years;
 
-    if (_Time.play) {
-      birthTime = Date.now();
-      date = birthTime;
-
-      if (!age) {
-        return Math.floor((Date.now() - birthTime) / (_Time.speed * 360));
-      } else {
-        return Math.floor((Date.now() - birthTime) / (_Time.speed * 360)) + age;
-      }
-
-      ;
+    if (!age) {
+      return birthTime;
     } else {
-      return date;
+      return birthTime + age;
     }
+
+    ;
   }
 
   if (percent <= 50) {
@@ -421,7 +414,7 @@ function createPerson(age, gender) {
   return people.count;
 }
 
-var adam = createPerson(50, 40);
+var adam = createPerson(40, 10);
 var eve = createPerson(30, 60);
 /* 
 for(let i = 0;i<10;i++){
@@ -439,7 +432,8 @@ function maker(n) {
        
        $(`#${x}`).remove();
     };  */
-  }
+  } //spawns peeps
+
 
   while (n > 0) {
     spawn();

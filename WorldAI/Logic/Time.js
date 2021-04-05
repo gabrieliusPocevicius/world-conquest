@@ -27,7 +27,7 @@ let pauseIcon = `
 </defs>
 </svg>
 `
-export const speed = 100; //birth speed
+export const speed = 1; //birth speed
 let pauseSwitch = 0;// Counter variable is used as a switch.
 export let play = false;
 
@@ -63,7 +63,7 @@ function getRandom(min, max) {
     console.log(Math.floor(Math.random() * (max - min)) + min);
 }
 // year 500 and first month and days
-let calender = {
+export let calender = {
     years: 500,
     months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     days: [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
@@ -145,7 +145,7 @@ async function time(speed) {
         await sleep(speed); //wating time for a single day
         displayDate();
         
-        maker(1);
+        //maker(1);
         pauseTime();
     }
 }
