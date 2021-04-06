@@ -10,9 +10,9 @@ import {
   displayHTML,
   log,
 } from "./DataBase.js";
-import { play } from "./Time.js";
+import { calender, play } from "./Time.js";
 import { getRandom } from "./Util.js";
-/* import {calender} from "./Time.js";  */
+
 
 
 
@@ -60,17 +60,35 @@ displayUserInfo.style.opacity = "0";
 export class Character {
   
   constructor(agePassed, gender) {
-    Object.create(null);
+    
+    let birthYear = 
+      setTimeout(()=>{
+        return calender.yearC;
+      },0);
+    birthYear -= 4;
+    
+    
     let age = 0 + agePassed;
-    let birthYear;
 
     
+
+    //time going by 
+    //  
    setInterval(() => {
+
         if(play){
-        age += 1;
-        console.log(age);
+         let time = (calender.yearC  - calender.years) - birthYear;
+         let storeTime = 0;
+         console.log('Time ',time)
+          storeTime = time + agePassed;
+          age = storeTime;
+          return age; 
         }
-  }, 3650); 
+         
+  }, 2000); 
+    
+  
+
 
     let skill = 0;
     function qaulities(){
@@ -81,42 +99,38 @@ export class Character {
       };
       /* console.log('skills ', skill); */
     };
+
+
+
+
     let percent = 0;
     if(!gender){
       percent = Math.floor(Math.random() * 99 + 1);
     }else{
       percent = gender;
     };
-
     //50% change of it being a boy for a girl.
-    
     /* let dna = getRandom(0,1000);*/
     this.id = id += 1;
     /* let random = getRandom(0,6); */
     /* this.title = `${job[random].name}`; */
-    
     /* console.log(this.title); */
-    function displayAge(age){
-        
-            displayUserInfo.style.opacity = "1";          
-
-    };
-
     if(percent <= 50){
-       
       ++male;
       $("#male-count").text(male);
       let man = {
         id: this.id,
         name: names[getRandom(0, 400)],
         gender:"male",
-        age: 0 + agePassed,
+        age: age,
         hp:100,
         atk:getRandom(0, 100),
         armour:0,
         wealth:0,
       }
-  
+
+    
+
        function wallet(){
         console.log(man.name, 'has', man.wealth);
         } 
@@ -131,7 +145,10 @@ export class Character {
         });
 
          person.addEventListener("mouseover", (e) => {
+          /* e.stopPropagation(); */
           e.preventDefault();  
+          man.age = age;
+          
           displayUserInfo.style.opacity = "1";
           const keys = Object.keys(man);
           const props = Object.values(man);
@@ -139,11 +156,10 @@ export class Character {
           for (let i = 0; i < keys.length; i++) {
             document.getElementById(keys[i]).innerHTML = props[i];
           }
-         
-        }); 
+        });
+
       qaulities();
     }else{
-       
         ++female;
         $("#female-count").text(female);
         let woman = {    
@@ -164,22 +180,23 @@ export class Character {
 
         getAttributes = woman;    
         let person = document.getElementById(`person_${woman.id}`);
+
         person.addEventListener("click", (e) => {
+         /*  e.stopPropagation(); */
           e.preventDefault();
           console.log("hello", woman.name);
         });    
 
         person.addEventListener("mouseover", (e) => {
+          /* e.stopPropagation(); */
           e.preventDefault();
+          woman.age = age;
           displayUserInfo.style.opacity = "1";
-
-          
           const keys = Object.keys(woman);
           const props = Object.values(woman);
           for (let i = 0; i < keys.length; i++) {
             document.getElementById(`${keys[i]}`).innerHTML = props[i];
           };
-          
         });
     
       qaulities();
@@ -332,7 +349,7 @@ function createPerson(age, gender) {
 
 
 let adam = createPerson(40,10);
-let eve = createPerson(30,60);
+let eve = createPerson(30,60); 
 
 
 /* 

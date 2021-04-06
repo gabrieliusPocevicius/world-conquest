@@ -15,7 +15,6 @@ var _Util = require("./Util.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/* import {calender} from "./Time.js";  */
 var id = 0; // the id of each object of the Character class
 
 var nationality = [];
@@ -59,15 +58,23 @@ displayUserInfo.style.opacity = "0"; // removes the time from the people's age
 var Character = function Character(agePassed, gender) {
   _classCallCheck(this, Character);
 
-  Object.create(null);
-  var age = 0 + agePassed;
-  var birthYear;
+  var birthYear = setTimeout(function () {
+    return _Time.calender.yearC;
+  }, 0);
+  birthYear -= 4;
+  var age = 0 + agePassed; //time going by 
+  //  
+
   setInterval(function () {
     if (_Time.play) {
-      age += 1;
-      console.log(age);
+      var time = _Time.calender.yearC - _Time.calender.years - birthYear;
+      var storeTime = 0;
+      console.log('Time ', time);
+      storeTime = time + agePassed;
+      age = storeTime;
+      return age;
     }
-  }, 3650);
+  }, 2000);
   var skill = 0;
 
   function qaulities() {
@@ -102,12 +109,6 @@ var Character = function Character(agePassed, gender) {
 
   /* console.log(this.title); */
 
-  function displayAge(age) {
-    displayUserInfo.style.opacity = "1";
-  }
-
-  ;
-
   if (percent <= 50) {
     var wallet = function wallet() {
       console.log(man.name, 'has', man.wealth);
@@ -119,7 +120,7 @@ var Character = function Character(agePassed, gender) {
       id: this.id,
       name: _DataBase.names[(0, _Util.getRandom)(0, 400)],
       gender: "male",
-      age: 0 + agePassed,
+      age: age,
       hp: 100,
       atk: (0, _Util.getRandom)(0, 100),
       armour: 0,
@@ -133,7 +134,9 @@ var Character = function Character(agePassed, gender) {
       console.log("hello", man.name);
     });
     person.addEventListener("mouseover", function (e) {
+      /* e.stopPropagation(); */
       e.preventDefault();
+      man.age = age;
       displayUserInfo.style.opacity = "1";
       var keys = Object.keys(man);
       var props = Object.values(man);
@@ -166,12 +169,15 @@ var Character = function Character(agePassed, gender) {
     var _person = document.getElementById("person_".concat(woman.id));
 
     _person.addEventListener("click", function (e) {
+      /*  e.stopPropagation(); */
       e.preventDefault();
       console.log("hello", woman.name);
     });
 
     _person.addEventListener("mouseover", function (e) {
+      /* e.stopPropagation(); */
       e.preventDefault();
+      woman.age = age;
       displayUserInfo.style.opacity = "1";
       var keys = Object.keys(woman);
       var props = Object.values(woman);

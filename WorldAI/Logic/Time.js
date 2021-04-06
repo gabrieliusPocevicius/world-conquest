@@ -41,6 +41,7 @@ export let play = false;
 
 function pause() {
     $("#pause").on("click", (e) => {
+        e.stopPropagation();
         e.preventDefault();
         
             $("#pause")
@@ -55,7 +56,7 @@ function pause() {
             time(speed); //time goes on as normal
         }
     });
-      console.log('is playing?', play);
+      /* console.log('is playing?', play); */
 }
 
 
@@ -125,27 +126,40 @@ export function timeStruct() {
             calender.yearC++;
             //console.log('year ' + calender.yearC)
         let oneYear = Math.floor((Date.now() - start) / 1000); 
-            console.log('One Year in seconds : ', oneYear);
+           
         };
     };
 };
 
+let days = document.getElementById("days")
+let months = document.getElementById("months")
+let years = document.getElementById("years")
 function displayDate(){
+     
+   
     timeStruct();
-    calender.dayC++;
-    document.getElementById("days").innerHTML = "day " + calender.dayC;
-    document.getElementById("months").innerHTML = monthNames[calender.monthC];
-    document.getElementById("years").innerHTML = calender.yearC;
+    ++calender.dayC;
+     days.textContent = "day " + calender.dayC;
+     months.textContent = monthNames[calender.monthC];
+     years.textContent = calender.yearC;
+   
 };
 
 
 
 
+
+
+/* ... do things for a while ... */
+    
+
+
 async function time(speed) {
     // Time loop
-    
+
     while (play) {
         await sleep(speed); //wating time for a single day
+        
         displayDate();
         
         //maker(1);
@@ -160,7 +174,7 @@ function pauseTime() {
                 play = false;
                 $("#pause").html(playIcon);
             }
-console.log('is playing?', play);
+/* console.log('is playing?', play); */
 }
 pause();
 export { time };

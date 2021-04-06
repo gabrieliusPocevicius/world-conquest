@@ -33,6 +33,7 @@ exports.play = play;
 
 function pause() {
   $("#pause").on("click", function (e) {
+    e.stopPropagation();
     e.preventDefault();
     $("#pause").html(pauseIcon);
     ++pauseSwitch;
@@ -44,7 +45,7 @@ function pause() {
       time(speed); //time goes on as normal
     }
   });
-  console.log('is playing?', play);
+  /* console.log('is playing?', play); */
 } //Util func
 
 
@@ -110,7 +111,6 @@ function timeStruct() {
       calender.yearC++; //console.log('year ' + calender.yearC)
 
       var oneYear = Math.floor((Date.now() - start) / 1000);
-      console.log('One Year in seconds : ', oneYear);
     }
 
     ;
@@ -120,16 +120,20 @@ function timeStruct() {
 }
 
 ;
+var days = document.getElementById("days");
+var months = document.getElementById("months");
+var years = document.getElementById("years");
 
 function displayDate() {
   timeStruct();
-  calender.dayC++;
-  document.getElementById("days").innerHTML = "day " + calender.dayC;
-  document.getElementById("months").innerHTML = _DataBase.monthNames[calender.monthC];
-  document.getElementById("years").innerHTML = calender.yearC;
+  ++calender.dayC;
+  days.textContent = "day " + calender.dayC;
+  months.textContent = _DataBase.monthNames[calender.monthC];
+  years.textContent = calender.yearC;
 }
 
 ;
+/* ... do things for a while ... */
 
 function time(speed) {
   return regeneratorRuntime.async(function time$(_context) {
@@ -168,8 +172,8 @@ function pauseTime() {
     exports.play = play = false;
     $("#pause").html(playIcon);
   }
+  /* console.log('is playing?', play); */
 
-  console.log('is playing?', play);
 }
 
 pause();
