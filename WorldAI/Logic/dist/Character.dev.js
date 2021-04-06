@@ -62,13 +62,12 @@ var Character = function Character(agePassed, gender) {
   Object.create(null);
   var age = 0 + agePassed;
   var birthYear;
-  /*   setInterval(() => {
-          if(play){
-          age += 1;
-          console.log(age);
-          }
-    }, 3650); */
-
+  setInterval(function () {
+    if (_Time.play) {
+      age += 1;
+      console.log(age);
+    }
+  }, 3650);
   var skill = 0;
 
   function qaulities() {

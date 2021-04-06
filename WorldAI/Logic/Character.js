@@ -64,12 +64,13 @@ export class Character {
     let age = 0 + agePassed;
     let birthYear;
 
-/*   setInterval(() => {
+    
+   setInterval(() => {
         if(play){
         age += 1;
         console.log(age);
         }
-  }, 3650); */
+  }, 3650); 
 
     let skill = 0;
     function qaulities(){

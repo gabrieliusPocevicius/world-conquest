@@ -68,6 +68,7 @@ function pause() {
 export function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
 function getRandom(min, max) {
     console.log(Math.floor(Math.random() * (max - min)) + min);
 }
