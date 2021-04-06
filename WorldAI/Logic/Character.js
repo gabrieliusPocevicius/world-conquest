@@ -10,8 +10,9 @@ import {
   displayHTML,
   log,
 } from "./DataBase.js";
+import { play } from "./Time.js";
 import { getRandom } from "./Util.js";
-import {calender} from "./Time.js"; 
+/* import {calender} from "./Time.js";  */
 
 
 
@@ -60,7 +61,16 @@ export class Character {
   
   constructor(agePassed, gender) {
     Object.create(null);
-    
+    let age = 0 + agePassed;
+    let birthYear;
+
+/*   setInterval(() => {
+        if(play){
+        age += 1;
+        console.log(age);
+        }
+  }, 3650); */
+
     let skill = 0;
     function qaulities(){
       let work = getRandom(0, 100);
@@ -85,23 +95,16 @@ export class Character {
     /* this.title = `${job[random].name}`; */
     
     /* console.log(this.title); */
-    function displayAge(age, birthTime){
+    function displayAge(age){
         
             displayUserInfo.style.opacity = "1";          
-           let currentAge = calender.yearC - calender.years;
-           birthTime += currentAge;
-            if(!age){
-              return birthTime;
-            }else{
-              return birthTime + age;
-          };
+
     };
 
     if(percent <= 50){
-      let birthday = 0; 
+       
       ++male;
       $("#male-count").text(male);
-
       let man = {
         id: this.id,
         name: names[getRandom(0, 400)],
@@ -118,42 +121,30 @@ export class Character {
         } 
         
         displayPerson(man.gender, man.id);
-        console.log(man.id);
-        let person = document.getElementById(`person_${man.id}`);
         
+         getAttributes = man; 
+        let person = document.getElementById(`person_${man.id}`);
         person.addEventListener("click", (e) => {
           e.preventDefault();
           console.log("hello", man.name);
-          man.age = displayAge(this.age, birthday);
-          const keys = Object.keys(man);
-       
-          const props = Object.values(man);
-
-          for (let i = 0; i < keys.length; i++) {
-
-            document.getElementById(keys[i]).innerHTML = props[i];
-          }
         });
-
-        getAttributes = man;    
-        console.log(getAttributes);
 
          person.addEventListener("mouseover", (e) => {
           e.preventDefault();  
-          man.age = displayAge(male.age, birthday);
+          displayUserInfo.style.opacity = "1";
           const keys = Object.keys(man);
-       
           const props = Object.values(man);
 
           for (let i = 0; i < keys.length; i++) {
             document.getElementById(keys[i]).innerHTML = props[i];
           }
+         
         }); 
       qaulities();
-      
     }else{
-       let birthday = 0;
+       
         ++female;
+        $("#female-count").text(female);
         let woman = {    
           id: this.id,
           name: fnames[getRandom(0, 400)],
@@ -165,10 +156,12 @@ export class Character {
           wealth:0
         };
         function wallet(){
-        console.log(female.name, 'has', female.wealth)
+        console.log(woman.name, 'has', woman.wealth)
         }
        
         displayPerson(woman.gender, woman.id);
+
+        getAttributes = woman;    
         let person = document.getElementById(`person_${woman.id}`);
         person.addEventListener("click", (e) => {
           e.preventDefault();
@@ -179,14 +172,13 @@ export class Character {
           e.preventDefault();
           displayUserInfo.style.opacity = "1";
 
-          woman.age = displayAge(woman.age, birthday);
+          
           const keys = Object.keys(woman);
           const props = Object.values(woman);
-
           for (let i = 0; i < keys.length; i++) {
             document.getElementById(`${keys[i]}`).innerHTML = props[i];
           };
-          return woman.age;
+          
         });
     
       qaulities();
@@ -228,7 +220,7 @@ function deathClick(e) {
   displayHTML(++deaths, "#deaths", "h5");
 }
 export function displayPerson(gender, id) {
-  //age = setInterval(() => $(`#male-age${id}`).text(console.log(++age)) , 1000);
+
   let color = [52, 58, 64, 1];
 
   let person_icon = `
@@ -240,8 +232,7 @@ export function displayPerson(gender, id) {
         <div>
     </div>
     `;
-  //var person_ID = document.getElementById(`person_${id}`);
-  //console.log((person_ID.innerText = ""));
+
   let f_person_icon = `
     <div id="person_${id}" class='d-block female'>
         <div class="rounded p-1 m-1" style='background-color:rgba(${color[0]},${color[1]},${color[2]},${color[3]});'>
@@ -311,17 +302,12 @@ function becomeNoble() {
 }
 //console.log(p.armour);
 //console.log((militaryRanks.rank[3].armor += p.armour));
-
-
 function randomN(x) {
   return Math.floor(Math.random() * x);
 }
 
 
-export var food = {
-  count: 0,
-  food: [],
-};
+
 
 function displayPopulationCount() {
   let displayElement = $("#population");
