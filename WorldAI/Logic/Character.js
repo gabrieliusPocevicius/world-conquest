@@ -175,12 +175,9 @@ export class Character {
         function wallet(){
         console.log(woman.name, 'has', woman.wealth)
         }
-       
         displayPerson(woman.gender, woman.id);
-
         getAttributes = woman;    
         let person = document.getElementById(`person_${woman.id}`);
-
         person.addEventListener("click", (e) => {
          /*  e.stopPropagation(); */
           e.preventDefault();
