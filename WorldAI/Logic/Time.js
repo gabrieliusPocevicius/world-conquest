@@ -178,3 +178,19 @@ function pauseTime() {
 }
 pause();
 export { time };
+
+
+
+function sum(num, callback) {
+    let addition = num + 5;
+    callback(addition);
+}
+
+function log(num) {
+    console.log(num);
+}
+
+sum(10, log);
+
+// Result in console after 5 second delay:
+// Response from the server: The glass is half full!
