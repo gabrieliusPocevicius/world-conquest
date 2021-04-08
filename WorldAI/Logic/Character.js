@@ -45,49 +45,38 @@ displayUserInfo.style.opacity = "0";
 
 
 // removes the time from the people's age
-/*  let timePaused = 0; 
+/*  let timePaused = 0;
 
         const start = Date.now();
         setInterval(() => {
-            
+
             const millis = Date.now() - start;
             timePaused =  Math.floor(millis / 1000);
-            
+
  }, 1000);  */
   // expected output: seconds elapsed = 2
-     
+
+
+
+
+
 
 export class Character {
-  
   constructor(agePassed, gender) {
-    
-    let birthYear = 
-      setTimeout(()=>{
-        return calender.yearC;
-      },0);
-    birthYear -= 4;
-    
-    
-    let age = 0 + agePassed;
+      const birthYear = calender.yearC - calender.years;
+      let age = 0 + agePassed;
 
-    
-
-    //time going by 
-    //  
-   setInterval(() => {
-
+      setInterval(() => {
         if(play){
-         let time = (calender.yearC  - calender.years) - birthYear;
+         console.log('birth Year: ', birthYear);
+         let time = (calender.yearC - calender.years - birthYear);
          let storeTime = 0;
-         console.log('Time ',time)
+         console.log('Time ',time);
           storeTime = time + agePassed;
           age = storeTime;
-          return age; 
+          return age;
         }
-         
-  }, 2000); 
-    
-  
+  }, 2000);
 
 
     let skill = 0;
@@ -100,10 +89,8 @@ export class Character {
       /* console.log('skills ', skill); */
     };
 
-
-
-
     let percent = 0;
+
     if(!gender){
       percent = Math.floor(Math.random() * 99 + 1);
     }else{
@@ -129,15 +116,15 @@ export class Character {
         wealth:0,
       }
 
-    
+
 
        function wallet(){
         console.log(man.name, 'has', man.wealth);
-        } 
-        
+        }
+
         displayPerson(man.gender, man.id);
-        
-         getAttributes = man; 
+
+         getAttributes = man;
         let person = document.getElementById(`person_${man.id}`);
         person.addEventListener("click", (e) => {
           e.preventDefault();
@@ -146,9 +133,9 @@ export class Character {
 
          person.addEventListener("mouseover", (e) => {
           /* e.stopPropagation(); */
-          e.preventDefault();  
+          e.preventDefault();
           man.age = age;
-          
+
           displayUserInfo.style.opacity = "1";
           const keys = Object.keys(man);
           const props = Object.values(man);
@@ -162,7 +149,7 @@ export class Character {
     }else{
         ++female;
         $("#female-count").text(female);
-        let woman = {    
+        let woman = {
           id: this.id,
           name: fnames[getRandom(0, 400)],
           gender:"female",
@@ -172,18 +159,24 @@ export class Character {
           armour: 0,
           wealth:0
         };
+        
         function wallet(){
-        console.log(woman.name, 'has', woman.wealth)
+        console.log(woman.name, 'has', woman.wealth);
         }
         displayPerson(woman.gender, woman.id);
-        getAttributes = woman;    
+        getAttributes = woman;
+
+        setInterval(() => {
+             reproduction(age);
+        }, 3000);
+
         let person = document.getElementById(`person_${woman.id}`);
         person.addEventListener("click", (e) => {
          /*  e.stopPropagation(); */
           e.preventDefault();
           console.log("hello", woman.name);
-        });    
 
+        });
         person.addEventListener("mouseover", (e) => {
           /* e.stopPropagation(); */
           e.preventDefault();
@@ -195,22 +188,12 @@ export class Character {
             document.getElementById(`${keys[i]}`).innerHTML = props[i];
           };
         });
-    
+
       qaulities();
-      
+
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 function deathFunction(id) {
@@ -224,6 +207,8 @@ function deathFunction(id) {
     displayHTML(++deaths, "#deaths", "h5");
   }
 }
+
+
 function deathClick(e) {
   e = e || window.event;
   e.currentTarget.classList[0] === "male"
@@ -237,7 +222,6 @@ function deathClick(e) {
 export function displayPerson(gender, id) {
 
   let color = [52, 58, 64, 1];
-
   let person_icon = `
     <div id="person_${id}" class='d-block ${gender}'>
        <div class="rounded p-1 m-1" style='background-color:rgba(${color[0]},${color[1]},${color[2]},${color[3]});'>
@@ -247,17 +231,15 @@ export function displayPerson(gender, id) {
         <div>
     </div>
     `;
-
   let f_person_icon = `
     <div id="person_${id}" class='d-block female'>
         <div class="rounded p-1 m-1" style='background-color:rgba(${color[0]},${color[1]},${color[2]},${color[3]});'>
             <svg  width="28" height="28" viewBox="0 0 24 24" fill="none">
             <path  d="M13.7458 21V16H15.3936C16.0896 16 16.5809 15.33 16.3659 14.68L14.2166 8.37C13.93 7.55 13.1522 7 12.272 7H12.1492C11.269 7 10.4809 7.55 10.2045 8.37L8.0552 14.68C7.83003 15.33 8.32131 16 9.02752 16H10.6753V21C10.6753 21.55 11.1359 22 11.6988 22H12.7223C13.2852 22 13.7458 21.55 13.7458 21ZM12.2106 6C13.3467 6 14.2576 5.11 14.2576 4C14.2576 2.89 13.3467 2 12.2106 2C11.0745 2 10.1636 2.89 10.1636 4C10.1636 5.11 11.0745 6 12.2106 6Z" fill="rgb(255, 99, 132)"/>
             </svg>
-        </div>       
+        </div>
     </div>
     `;
-
   if (gender == "female") {
     person_icon = f_person_icon;
   }
@@ -321,9 +303,6 @@ function randomN(x) {
   return Math.floor(Math.random() * x);
 }
 
-
-
-
 function displayPopulationCount() {
   let displayElement = $("#population");
   displayElement.html("<h5>" + people.count + "</h5>");
@@ -345,11 +324,19 @@ function createPerson(age, gender) {
 
 
 
+
+
+
+
+
 let adam = createPerson(40,10);
-let eve = createPerson(30,60); 
+let eve = createPerson(30,60);
 
 
-/* 
+
+
+
+/*
 for(let i = 0;i<10;i++){
   console.log(people.person[i]);
 };
@@ -364,7 +351,7 @@ function reproduction(age){
       }
     }
 }
-  
+
 
 //makes people appear
 
@@ -374,10 +361,10 @@ for(let i = 1; i < people.count;i++){
   let x = $(`#person_${i}`).attr('id');
 
    /* if($('#people').children().length % 2 === 0){
-      
+
       $(`#${x}`).remove();
   };  */
-  
+
 }
 //spawns peeps
   while (n > 0) {
