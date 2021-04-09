@@ -63,35 +63,32 @@ var Character = function Character(agePassed, gender) {
   var adult = false;
   var life = setInterval(function () {
     if (_Time.play) {
-      var grownUp = function grownUp(age) {
-        console.log(agePassed);
-
-        if (age >= 18 && !adult) {
-          $('#children-count').text(people.children--);
-          adult = true;
-        }
-
-        ;
-      };
-
       /* console.log('birth Year: ', birthYear); */
       var time = _Time.calender.yearC - _Time.calender.years - birthYear;
       var storeTime = 0;
       /* console.log('Time ',time); */
 
       storeTime = time + agePassed;
-      age = storeTime;
-      grownUp(age); //remove from child catagory
+      age = storeTime; //remove from child catagory
 
       return age;
     }
   }, 2000);
 
   if (age == null) {
-    console.log('stopped process');
+    console.log("stopped process");
     clearInterval(life);
   }
 
+  var aging = setInterval(function () {
+    console.log('ages  now : ', age);
+
+    if (age === 18) {
+      adult = true;
+      displayNoLongerChild();
+      clearInterval(aging);
+    }
+  }, 1000);
   var skill = 0;
 
   function qaulities() {
@@ -101,23 +98,20 @@ var Character = function Character(agePassed, gender) {
       skill++;
       qaulities();
     }
-
-    ;
     /* console.log('skills ', skill); */
+
   }
 
-  ;
   var percent = 0;
 
   if (!gender) {
     percent = Math.floor(Math.random() * 99 + 1);
   } else {
     percent = gender;
-  }
-
-  ; //50% change of it being a boy for a girl.
+  } //50% change of it being a boy for a girl.
 
   /* let dna = getRandom(0,1000);*/
+
 
   this.id = id += 1;
   /* let random = getRandom(0,6); */
@@ -128,7 +122,7 @@ var Character = function Character(agePassed, gender) {
 
   if (percent <= 50) {
     var wallet = function wallet() {
-      console.log(man.name, 'has', man.wealth);
+      console.log(man.name, "has", man.wealth);
     };
 
     ++male;
@@ -150,13 +144,13 @@ var Character = function Character(agePassed, gender) {
     var lifeInterval = setInterval(function () {
       var dead = new Promise(function (resolve, reject) {
         if (man.age >= Math.floor(Math.random() * 28 + 1) + 72) {
-          resolve('died');
+          resolve("died");
         }
       });
       dead.then(function () {
-        deathFunction('male');
+        deathFunction("male");
         person.remove();
-        console.log('person Dead ', man.name, 'at the age of ', man.age);
+        console.log("person Dead ", man.name, "at the age of ", man.age);
         delete man.id;
         delete man.name;
         delete man.gender;
@@ -191,7 +185,7 @@ var Character = function Character(agePassed, gender) {
     qaulities();
   } else {
     var _wallet = function _wallet() {
-      console.log(woman.name, 'has', woman.wealth);
+      console.log(woman.name, "has", woman.wealth);
     };
 
     ++female;
@@ -213,7 +207,7 @@ var Character = function Character(agePassed, gender) {
 
       if (age > 37) {
         clearInterval(fertile);
-        console.log('sterile Once');
+        console.log("sterile Once");
       }
     }, 3000);
 
@@ -222,15 +216,15 @@ var Character = function Character(agePassed, gender) {
     var _lifeInterval = setInterval(function () {
       var dead = new Promise(function (resolve, reject) {
         if (woman.age >= Math.floor(Math.random() * 28 + 1) + 72) {
-          resolve('died');
+          resolve("died");
         }
       });
       dead.then(function () {
-        deathFunction('female');
+        deathFunction("female");
 
         _person.remove();
 
-        console.log('person Dead ', woman.name, 'at the age of ', woman.age);
+        console.log("person Dead ", woman.name, "at the age of ", woman.age);
         delete woman.id;
         delete woman.name;
         delete woman.gender;
@@ -238,7 +232,7 @@ var Character = function Character(agePassed, gender) {
         delete woman.hp;
         delete woman.atk;
         delete woman.children;
-        console.log("wealth left behind:", woman.wealth, 'children:', woman.children);
+        console.log("wealth left behind:", woman.wealth, "children:", woman.children);
         clearInterval(_lifeInterval);
       });
     }, 5000);
@@ -260,8 +254,6 @@ var Character = function Character(agePassed, gender) {
       for (var i = 0; i < keys.length; i++) {
         document.getElementById("".concat(keys[i])).innerHTML = props[i];
       }
-
-      ;
     });
 
     qaulities();
@@ -307,7 +299,6 @@ function moveablePeople() {
   $("#people").disableSelection();
 }
 
-;
 moveablePeople();
 var nobles = []; //Lists all the nobles and their props
 
@@ -361,6 +352,11 @@ function displayChildrenCount() {
   displayElement.html("<h5>" + ++people.children + "</h5>");
 }
 
+function displayNoLongerChild() {
+  var displayElement = $("#children-count");
+  displayElement.html("<h5>" + --people.children + "</h5>");
+}
+
 function spawn() {
   ++people.count;
   people.person.push(new Character(0, Math.floor(Math.random() * 99 + 1)));
@@ -368,8 +364,6 @@ function spawn() {
   displayChildrenCount();
   return people.count;
 }
-
-;
 
 function createPerson(age, gender) {
   ++people.count;
@@ -397,16 +391,16 @@ function reproduction(age) {
   var childrenCount = 0;
 
   if (_Time.play) {
-    console.log('her age: ', age);
+    console.log("her age: ", age);
 
     if (age > 17 && age < 37) {
-      console.log('called');
+      console.log("called");
       var chance = Math.round(Math.random() * 99 + 1);
 
       if (chance <= 25) {
         ++childrenCount;
         spawn();
-        console.log('had child', childrenCount);
+        console.log("had child", childrenCount);
       } else {
         return childrenCount;
       }
@@ -419,9 +413,9 @@ var pairs = [];
 
 function maker(n) {
   for (var i = 1; i < people.count; i++) {
-    var x = $("#person_".concat(i)).attr('id');
+    var x = $("#person_".concat(i)).attr("id");
     /* if($('#people').children().length % 2 === 0){
-         $(`#${x}`).remove();
+        $(`#${x}`).remove();
     };  */
   } //spawns peeps
 
@@ -430,8 +424,4 @@ function maker(n) {
     spawn();
     n--;
   }
-
-  ;
 }
-
-;

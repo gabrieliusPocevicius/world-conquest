@@ -14,20 +14,16 @@ import {
 import { calender, play } from "./Time.js";
 import { getRandom } from "./Util.js";
 
-
-
-
 let id = 0; // the id of each object of the Character class
 let nationality = [];
 let surnames = [];
-
 
 let percent = Math.round(Math.random() * 99 + 1);
 export let people = {
   // contains all the people of the world
   //compare(p1, p2);
   count: 0,
-  children:0,
+  children: 0,
   person: [],
 };
 /*
@@ -45,7 +41,6 @@ let timeGoes = false;
 const displayUserInfo = document.getElementById("information-display");
 displayUserInfo.style.opacity = "0";
 
-
 // removes the time from the people's age
 /*  let timePaused = 0;
 
@@ -56,244 +51,231 @@ displayUserInfo.style.opacity = "0";
             timePaused =  Math.floor(millis / 1000);
 
  }, 1000);  */
-  // expected output: seconds elapsed = 2
-
-
-
-
-
+// expected output: seconds elapsed = 2
 
 export class Character {
   constructor(agePassed, gender) {
-      const birthYear = calender.yearC - calender.years;
-      let age = 0 + agePassed;
-      let adult = false;
-  let life = setInterval(() => {
-        if(play){
-         /* console.log('birth Year: ', birthYear); */
-         let time = (calender.yearC - calender.years - birthYear);
-         let storeTime = 0;
-         /* console.log('Time ',time); */
-          storeTime = time + agePassed;
-          age = storeTime;
+    const birthYear = calender.yearC - calender.years;
+    let age = 0 + agePassed;
+    let adult = false;
+    let life = setInterval(() => {
+      if (play) {
+        /* console.log('birth Year: ', birthYear); */
+        let time = calender.yearC - calender.years - birthYear;
+        let storeTime = 0;
+        /* console.log('Time ',time); */
+        storeTime = time + agePassed;
+        age = storeTime;
 
-          function grownUp(age){
-            console.log(agePassed);
+        //remove from child catagory
 
-            if(age >= 18 && !adult){
-              $('#children-count').text(people.children--);
-                adult = true;
-            };
+        return age;
       }
-      grownUp(age);
-          //remove from child catagory
+    }, 2000);
 
-          return age;
-        }
-  }, 2000);
-
-
-
-
-    if(age == null){
-      console.log('stopped process');
+    if (age == null) {
+      console.log("stopped process");
       clearInterval(life);
     }
 
 
+    let aging =
+      setInterval(()=>{
+      console.log('ages  now : ',age);
+      if (age === 18) {
+        adult = true;
+        displayNoLongerChild();
+        clearInterval(aging);
+      }
+    },1000);
+
+
+
+    
+
+  
+
     let skill = 0;
-    function qaulities(){
+    function qaulities() {
       let work = getRandom(0, 100);
-      if(work > 1){
+      if (work > 1) {
         skill++;
         qaulities();
-      };
+      }
       /* console.log('skills ', skill); */
-    };
+    }
 
     let percent = 0;
-    if(!gender){
+    if (!gender) {
       percent = Math.floor(Math.random() * 99 + 1);
-    }else{
+    } else {
       percent = gender;
-    };
+    }
     //50% change of it being a boy for a girl.
     /* let dna = getRandom(0,1000);*/
     this.id = id += 1;
     /* let random = getRandom(0,6); */
     /* this.title = `${job[random].name}`; */
     /* console.log(this.title); */
-    if(percent <= 50){
+    if (percent <= 50) {
       ++male;
       $("#male-count").text(male);
       let man = {
         id: this.id,
         name: names[getRandom(0, 400)],
-        gender:"male",
+        gender: "male",
         age: age,
-        hp:100,
-        atk:getRandom(50, 100),//TODO not limit to a 100
-        children:0, 
-        wealth:0,
+        hp: 100,
+        atk: getRandom(50, 100), //TODO not limit to a 100
+        children: 0,
+        wealth: 0,
+      };
+
+      function wallet() {
+        console.log(man.name, "has", man.wealth);
       }
 
-       function wallet(){
-        console.log(man.name, 'has', man.wealth);
-        }
+      displayPerson(man.gender, man.id);
 
-        displayPerson(man.gender, man.id);
+      getAttributes = man;
 
-         getAttributes = man;
+      let person = document.getElementById(`person_${man.id}`);
 
-        
-
-        let person = document.getElementById(`person_${man.id}`);
-
-        let lifeInterval = setInterval(()=>{
-          let dead = new Promise((resolve, reject)=>{
-              if(man.age >=  Math.floor(Math.random() * 28 + 1) + 72){
-                resolve('died');
-              }
-          });
-          dead.then(()=>{
-                deathFunction('male');
-                person.remove();
-                console.log('person Dead ', man.name , 'at the age of ', man.age);
-                delete man.id
-                delete man.name
-                delete man.gender
-                delete man.age
-                delete man.hp
-                delete man.atk
-                delete man.children
-                console.log("wealth left behind:", man.wealth);
-                clearInterval(lifeInterval);
-          });
-        },5000);
-
-
-    
-
-        
-
-        person.addEventListener("click", (e) => {
-          e.preventDefault();
-          console.log("Name:", man.name);
-          console.log("gender:", man.gender);
-          console.log("age:", man.age);
-          console.log("hp:", man.hp);
-          console.log("Strength:", man.atk);
-        });
-
-         person.addEventListener("mouseover", (e) => {
-          /* e.stopPropagation(); */
-          e.preventDefault();
-          man.age = age;
-
-          displayUserInfo.style.opacity = "1";
-          const keys = Object.keys(man);
-          const props = Object.values(man);
-
-          for (let i = 0; i < keys.length; i++) {
-            document.getElementById(keys[i]).innerHTML = props[i];
+      let lifeInterval = setInterval(() => {
+        let dead = new Promise((resolve, reject) => {
+          if (man.age >= Math.floor(Math.random() * 28 + 1) + 72) {
+            resolve("died");
           }
         });
+        dead.then(() => {
+          deathFunction("male");
+          person.remove();
+          console.log("person Dead ", man.name, "at the age of ", man.age);
+          delete man.id;
+          delete man.name;
+          delete man.gender;
+          delete man.age;
+          delete man.hp;
+          delete man.atk;
+          delete man.children;
+          console.log("wealth left behind:", man.wealth);
+          clearInterval(lifeInterval);
+        });
+      }, 5000);
 
-      qaulities();
-    }else{
-        ++female;
-        $("#female-count").text(female);
-        let woman = {
-          id: this.id,
-          name: fnames[getRandom(0, 400)],
-          gender:"female",
-          hp:100,
-          age: age,
-          atk: getRandom(25, 60),
-          children: 0,
-          wealth:0
-        };
-        function wallet(){
-        console.log(woman.name, 'has', woman.wealth);
+      person.addEventListener("click", (e) => {
+        e.preventDefault();
+        console.log("Name:", man.name);
+        console.log("gender:", man.gender);
+        console.log("age:", man.age);
+        console.log("hp:", man.hp);
+        console.log("Strength:", man.atk);
+      });
+
+      person.addEventListener("mouseover", (e) => {
+        /* e.stopPropagation(); */
+        e.preventDefault();
+        man.age = age;
+
+        displayUserInfo.style.opacity = "1";
+        const keys = Object.keys(man);
+        const props = Object.values(man);
+
+        for (let i = 0; i < keys.length; i++) {
+          document.getElementById(keys[i]).innerHTML = props[i];
         }
-        displayPerson(woman.gender, woman.id);
-        getAttributes = woman;
-
-        
-
-         const fertile = setInterval(() => {
-             reproduction(age);
-             if(age > 37){
-                clearInterval(fertile);
-                console.log('sterile Once');
-            }
-        }, 3000); 
-
-        let person = document.getElementById(`person_${woman.id}`);
-
-        let lifeInterval = setInterval(()=>{
-          let dead = new Promise((resolve, reject)=>{
-              if(woman.age >=  Math.floor(Math.random() * 28 + 1) + 72){
-                resolve('died');
-              }
-          });
-          dead.then(()=>{
-                 deathFunction('female');
-                person.remove();
-                console.log('person Dead ', woman.name , 'at the age of ', woman.age);
-                delete woman.id
-                delete woman.name
-                delete woman.gender
-                delete woman.age
-                delete woman.hp
-                delete woman.atk
-                delete woman.children
-                console.log("wealth left behind:", woman.wealth, 'children:', woman.children);
-                clearInterval(lifeInterval);
-          });
-        },5000);
-
-        person.addEventListener("click", (e) => {
-         /*  e.stopPropagation(); */
-          e.preventDefault();
-          console.log("hello", woman.name);
-        });
-
-        person.addEventListener("mouseover", (e) => {
-          /* e.stopPropagation(); */
-          e.preventDefault();
-          woman.age = age;
-          displayUserInfo.style.opacity = "1";
-          const keys = Object.keys(woman);
-          const props = Object.values(woman);
-          for (let i = 0; i < keys.length; i++) {
-            document.getElementById(`${keys[i]}`).innerHTML = props[i];
-          };
-        });
+      });
 
       qaulities();
+    } else {
+      ++female;
+      $("#female-count").text(female);
+      let woman = {
+        id: this.id,
+        name: fnames[getRandom(0, 400)],
+        gender: "female",
+        hp: 100,
+        age: age,
+        atk: getRandom(25, 60),
+        children: 0,
+        wealth: 0,
+      };
+      function wallet() {
+        console.log(woman.name, "has", woman.wealth);
+      }
+      displayPerson(woman.gender, woman.id);
+      getAttributes = woman;
 
+      const fertile = setInterval(() => {
+        reproduction(age);
+        if (age > 37) {
+          clearInterval(fertile);
+          console.log("sterile Once");
+        }
+      }, 3000);
+
+      let person = document.getElementById(`person_${woman.id}`);
+
+      let lifeInterval = setInterval(() => {
+        let dead = new Promise((resolve, reject) => {
+          if (woman.age >= Math.floor(Math.random() * 28 + 1) + 72) {
+            resolve("died");
+          }
+        });
+        dead.then(() => {
+          deathFunction("female");
+          person.remove();
+          console.log("person Dead ", woman.name, "at the age of ", woman.age);
+          delete woman.id;
+          delete woman.name;
+          delete woman.gender;
+          delete woman.age;
+          delete woman.hp;
+          delete woman.atk;
+          delete woman.children;
+          console.log(
+            "wealth left behind:",
+            woman.wealth,
+            "children:",
+            woman.children
+          );
+          clearInterval(lifeInterval);
+        });
+      }, 5000);
+
+      person.addEventListener("click", (e) => {
+        /*  e.stopPropagation(); */
+        e.preventDefault();
+        console.log("hello", woman.name);
+      });
+
+      person.addEventListener("mouseover", (e) => {
+        /* e.stopPropagation(); */
+        e.preventDefault();
+        woman.age = age;
+        displayUserInfo.style.opacity = "1";
+        const keys = Object.keys(woman);
+        const props = Object.values(woman);
+        for (let i = 0; i < keys.length; i++) {
+          document.getElementById(`${keys[i]}`).innerHTML = props[i];
+        }
+      });
+      qaulities();
     }
-
-    
-
-
   }
 }
-
 
 function deathFunction(gender) {
   if (people.count > 0) {
     gender === "male"
       ? $("#male-count").text(--male)
       : $("#female-count").text(--female);
-    
+
     people.count--;
     displayHTML(people.count, "#population", "h5");
     displayHTML(++deaths, "#deaths", "h5");
   }
 }
-
 
 function deathClick(e) {
   e = e || window.event;
@@ -306,7 +288,6 @@ function deathClick(e) {
   displayHTML(++deaths, "#deaths", "h5");
 }
 export function displayPerson(gender, id) {
-
   let color = [52, 58, 64, 1];
   let person_icon = `
     <div id="person_${id}" class='d-block ${gender}'>
@@ -330,19 +311,15 @@ export function displayPerson(gender, id) {
   if (gender == "female") {
     person_icon = f_person_icon;
   }
-
   $("people").append(`${person_icon}`); //Creates the icon figure of a person to the screen
 }
 function moveablePeople() {
-      $( "#people" ).sortable({
-            revert: true
-        });
-    $( "#people" ).disableSelection();
-};
+  $("#people").sortable({
+    revert: true,
+  });
+  $("#people").disableSelection();
+}
 moveablePeople();
-
-
-
 
 let nobles = []; //Lists all the nobles and their props
 let peasantsUnderNoble = []; //Lists all the peasants under the noble.
@@ -399,6 +376,10 @@ function displayChildrenCount() {
   let displayElement = $("#children-count");
   displayElement.html("<h5>" + ++people.children + "</h5>");
 }
+function displayNoLongerChild() {
+  let displayElement = $("#children-count");
+  displayElement.html("<h5>" + --people.children + "</h5>");
+}
 
 function spawn() {
   ++people.count;
@@ -406,34 +387,22 @@ function spawn() {
   displayPopulationCount();
   displayChildrenCount();
   return people.count;
-};
+}
 
 function createPerson(age, gender) {
-    ++people.count;
-  if(age < 18){
+  ++people.count;
+  if (age < 18) {
     people.person.push(new Character(age, gender));
     displayChildrenCount();
-  }else{
+  } else {
     people.person.push(new Character(age, gender));
     displayPopulationCount();
   }
-
   return people.count;
 }
 
-
-
-
-
-
-
-
-let adam = createPerson(17,10);
-let eve = createPerson(30,60);
-
-
-
-
+let adam = createPerson(17, 10);
+let eve = createPerson(30, 60);
 
 /*
 for(let i = 0;i<10;i++){
@@ -441,46 +410,39 @@ for(let i = 0;i<10;i++){
 };
  */
 
-function reproduction(age){
-    let childrenCount = 0;
-    if(play){
-      console.log('her age: ',age);
-      if(age > 17 && age < 37){
-        console.log('called');
-        let chance = Math.round(Math.random() * 99 + 1);
-        if(chance <= 25){
-          ++childrenCount;
-          spawn();
-          console.log('had child', childrenCount);
-        }else{
-          return childrenCount;
-        }
+function reproduction(age) {
+  let childrenCount = 0;
+  if (play) {
+    console.log("her age: ", age);
+    if (age > 17 && age < 37) {
+      console.log("called");
+      let chance = Math.round(Math.random() * 99 + 1);
+      if (chance <= 25) {
+        ++childrenCount;
+        spawn();
+        console.log("had child", childrenCount);
+      } else {
+        return childrenCount;
+      }
     }
   }
 }
-
 
 //makes people appear
 
 let pairs = [];
 export function maker(n) {
-for(let i = 1; i < people.count;i++){
-  let x = $(`#person_${i}`).attr('id');
+  for (let i = 1; i < people.count; i++) {
+    let x = $(`#person_${i}`).attr("id");
 
-   /* if($('#people').children().length % 2 === 0){
+    /* if($('#people').children().length % 2 === 0){
 
       $(`#${x}`).remove();
   };  */
-
-}
-//spawns peeps
+  }
+  //spawns peeps
   while (n > 0) {
     spawn();
     n--;
-  };
-};
-
-
-
-
-
+  }
+}
