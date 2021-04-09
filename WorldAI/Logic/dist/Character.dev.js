@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.displayPerson = displayPerson;
 exports.maker = maker;
-exports.Character = exports.deaths = exports.people = void 0;
+exports.Character = exports.people = void 0;
 
 var _DataBase = require("./DataBase.js");
 
@@ -37,7 +37,6 @@ var people = {
 
 exports.people = people;
 var deaths = 0;
-exports.deaths = deaths;
 var male = 0;
 var female = 0;
 var getAttributes = {};
@@ -61,10 +60,19 @@ var Character = function Character(agePassed, gender) {
 
   var birthYear = _Time.calender.yearC - _Time.calender.years;
   var age = 0 + agePassed;
-  setInterval(function () {
+  var adult = false;
+  var life = setInterval(function () {
     if (_Time.play) {
-      //remove from child catagory
-      var grownUp = function grownUp() {};
+      var grownUp = function grownUp(age) {
+        console.log(agePassed);
+
+        if (age >= 18 && !adult) {
+          $('#children-count').text(people.children--);
+          adult = true;
+        }
+
+        ;
+      };
 
       /* console.log('birth Year: ', birthYear); */
       var time = _Time.calender.yearC - _Time.calender.years - birthYear;
@@ -73,13 +81,15 @@ var Character = function Character(agePassed, gender) {
 
       storeTime = time + agePassed;
       age = storeTime;
+      grownUp(age); //remove from child catagory
+
       return age;
     }
   }, 2000);
 
   if (age == null) {
     console.log('stopped process');
-    clearInterval();
+    clearInterval(life);
   }
 
   var skill = 0;
@@ -144,6 +154,7 @@ var Character = function Character(agePassed, gender) {
         }
       });
       dead.then(function () {
+        deathFunction('male');
         person.remove();
         console.log('person Dead ', man.name, 'at the age of ', man.age);
         delete man.id;
@@ -183,8 +194,6 @@ var Character = function Character(agePassed, gender) {
       console.log(woman.name, 'has', woman.wealth);
     };
 
-    var sterile = function sterile(age) {};
-
     ++female;
     $("#female-count").text(female);
     var woman = {
@@ -209,6 +218,30 @@ var Character = function Character(agePassed, gender) {
     }, 3000);
 
     var _person = document.getElementById("person_".concat(woman.id));
+
+    var _lifeInterval = setInterval(function () {
+      var dead = new Promise(function (resolve, reject) {
+        if (woman.age >= Math.floor(Math.random() * 28 + 1) + 72) {
+          resolve('died');
+        }
+      });
+      dead.then(function () {
+        deathFunction('female');
+
+        _person.remove();
+
+        console.log('person Dead ', woman.name, 'at the age of ', woman.age);
+        delete woman.id;
+        delete woman.name;
+        delete woman.gender;
+        delete woman.age;
+        delete woman.hp;
+        delete woman.atk;
+        delete woman.children;
+        console.log("wealth left behind:", woman.wealth, 'children:', woman.children);
+        clearInterval(_lifeInterval);
+      });
+    }, 5000);
 
     _person.addEventListener("click", function (e) {
       /*  e.stopPropagation(); */
@@ -237,13 +270,12 @@ var Character = function Character(agePassed, gender) {
 
 exports.Character = Character;
 
-function deathFunction(id) {
+function deathFunction(gender) {
   if (people.count > 0) {
-    id.classList[id.classList.length - 1] === "male" ? $("#male-count").text(--male) : $("#female-count").text(--female);
-    id.remove();
+    gender === "male" ? $("#male-count").text(--male) : $("#female-count").text(--female);
     people.count--;
     (0, _DataBase.displayHTML)(people.count, "#population", "h5");
-    (0, _DataBase.displayHTML)(exports.deaths = deaths = +deaths + 1, "#deaths", "h5");
+    (0, _DataBase.displayHTML)(++deaths, "#deaths", "h5");
   }
 }
 
@@ -253,7 +285,7 @@ function deathClick(e) {
   e.currentTarget.remove();
   people.count--;
   (0, _DataBase.displayHTML)(people.count, "#population", "h5");
-  (0, _DataBase.displayHTML)(exports.deaths = deaths = +deaths + 1, "#deaths", "h5");
+  (0, _DataBase.displayHTML)(++deaths, "#deaths", "h5");
 }
 
 function displayPerson(gender, id) {
@@ -353,7 +385,7 @@ function createPerson(age, gender) {
   return people.count;
 }
 
-var adam = createPerson(70, 10);
+var adam = createPerson(17, 10);
 var eve = createPerson(30, 60);
 /*
 for(let i = 0;i<10;i++){

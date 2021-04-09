@@ -1,6 +1,7 @@
 // Characters are people with skills and attributes with names and habits.
 
 // module of names
+
 import {
   names,
   fnames,
@@ -36,7 +37,7 @@ export let people = {
 
 
 */
-export let deaths = 0;
+let deaths = 0;
 let male = 0;
 let female = 0;
 let getAttributes = {};
@@ -66,8 +67,8 @@ export class Character {
   constructor(agePassed, gender) {
       const birthYear = calender.yearC - calender.years;
       let age = 0 + agePassed;
-
-      setInterval(() => {
+      let adult = false;
+  let life = setInterval(() => {
         if(play){
          /* console.log('birth Year: ', birthYear); */
          let time = (calender.yearC - calender.years - birthYear);
@@ -76,18 +77,27 @@ export class Character {
           storeTime = time + agePassed;
           age = storeTime;
 
+          function grownUp(age){
+            console.log(agePassed);
+
+            if(age >= 18 && !adult){
+              $('#children-count').text(people.children--);
+                adult = true;
+            };
+      }
+      grownUp(age);
           //remove from child catagory
-          function grownUp(){
-            
-          }
 
           return age;
         }
   }, 2000);
 
+
+
+
     if(age == null){
       console.log('stopped process');
-      clearInterval();
+      clearInterval(life);
     }
 
 
@@ -102,7 +112,6 @@ export class Character {
     };
 
     let percent = 0;
-
     if(!gender){
       percent = Math.floor(Math.random() * 99 + 1);
     }else{
@@ -140,7 +149,6 @@ export class Character {
 
         let person = document.getElementById(`person_${man.id}`);
 
-
         let lifeInterval = setInterval(()=>{
           let dead = new Promise((resolve, reject)=>{
               if(man.age >=  Math.floor(Math.random() * 28 + 1) + 72){
@@ -148,6 +156,7 @@ export class Character {
               }
           });
           dead.then(()=>{
+                deathFunction('male');
                 person.remove();
                 console.log('person Dead ', man.name , 'at the age of ', man.age);
                 delete man.id
@@ -211,19 +220,39 @@ export class Character {
         getAttributes = woman;
 
         
-        function sterile(age){
-          
-        }
-        
-        const fertile = setInterval(() => {
+
+         const fertile = setInterval(() => {
              reproduction(age);
              if(age > 37){
                 clearInterval(fertile);
                 console.log('sterile Once');
             }
-        }, 3000);
+        }, 3000); 
 
         let person = document.getElementById(`person_${woman.id}`);
+
+        let lifeInterval = setInterval(()=>{
+          let dead = new Promise((resolve, reject)=>{
+              if(woman.age >=  Math.floor(Math.random() * 28 + 1) + 72){
+                resolve('died');
+              }
+          });
+          dead.then(()=>{
+                 deathFunction('female');
+                person.remove();
+                console.log('person Dead ', woman.name , 'at the age of ', woman.age);
+                delete woman.id
+                delete woman.name
+                delete woman.gender
+                delete woman.age
+                delete woman.hp
+                delete woman.atk
+                delete woman.children
+                console.log("wealth left behind:", woman.wealth, 'children:', woman.children);
+                clearInterval(lifeInterval);
+          });
+        },5000);
+
         person.addEventListener("click", (e) => {
          /*  e.stopPropagation(); */
           e.preventDefault();
@@ -253,12 +282,12 @@ export class Character {
 }
 
 
-function deathFunction(id) {
+function deathFunction(gender) {
   if (people.count > 0) {
-    id.classList[id.classList.length - 1] === "male"
+    gender === "male"
       ? $("#male-count").text(--male)
       : $("#female-count").text(--female);
-    id.remove();
+    
     people.count--;
     displayHTML(people.count, "#population", "h5");
     displayHTML(++deaths, "#deaths", "h5");
@@ -399,7 +428,7 @@ function createPerson(age, gender) {
 
 
 
-let adam = createPerson(70,10);
+let adam = createPerson(17,10);
 let eve = createPerson(30,60);
 
 
