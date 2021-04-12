@@ -87,7 +87,7 @@ export class Character {
         displayNoLongerChild();
         clearInterval(aging);
       }
-    },1000);
+    },3000);
 
 
 
@@ -210,7 +210,7 @@ export class Character {
         reproduction(age);
         if (age > 37) {
           clearInterval(fertile);
-          console.log("sterile Once");
+          //sterile
         }
       }, 3000);
 
@@ -287,6 +287,7 @@ function deathClick(e) {
   displayHTML(people.count, "#population", "h5");
   displayHTML(++deaths, "#deaths", "h5");
 }
+
 export function displayPerson(gender, id) {
   let color = [52, 58, 64, 1];
   let person_icon = `

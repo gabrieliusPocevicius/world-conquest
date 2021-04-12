@@ -88,7 +88,7 @@ var Character = function Character(agePassed, gender) {
       displayNoLongerChild();
       clearInterval(aging);
     }
-  }, 1000);
+  }, 3000);
   var skill = 0;
 
   function qaulities() {
@@ -206,8 +206,7 @@ var Character = function Character(agePassed, gender) {
       reproduction(age);
 
       if (age > 37) {
-        clearInterval(fertile);
-        console.log("sterile Once");
+        clearInterval(fertile); //sterile
       }
     }, 3000);
 
