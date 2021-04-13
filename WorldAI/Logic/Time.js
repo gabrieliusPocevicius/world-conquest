@@ -61,13 +61,6 @@ function pause() {
     });
       /* console.log('is playing?', play); */
 }
-
-
-
-
-
-
-
 //Util func
 export function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
