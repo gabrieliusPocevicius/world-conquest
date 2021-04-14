@@ -1,6 +1,7 @@
 // Characters are people with skills and attributes with names and habits.
 
 // module of names
+"use strict";
 
 import {
   names,
@@ -137,6 +138,8 @@ export class Character {
 
       let lifeInterval = setInterval(() => {
         if (play) {
+          searchValidMate(man.id);
+
           let dead = new Promise((resolve, reject) => {
             if (man.age >= Math.floor(Math.random() * 5 + 1) + 72) {
               resolve("died");
@@ -243,26 +246,14 @@ export class Character {
       person.addEventListener("click", (e) => {
         /*  e.stopPropagation(); */
         e.preventDefault();
-                console.log("Name:", woman.name);
-                console.log("gender:", woman.gender);
-                console.log("age:", woman.age);
-                console.log("hp:", woman.hp);
-                console.log("Strength:", woman.atk);
+        console.log("Name:", woman.name);
+        console.log("gender:", woman.gender);
+        console.log("age:", woman.age);
+        console.log("hp:", woman.hp);
+        console.log("Strength:", woman.atk);
       });
 
-/*       person.addEventListener("mousein", (e) => {
-        
-        e.preventDefault();
-        woman.age = age;
-        displayUserInfo.style.opacity = "1";
-        const keys = Object.keys(woman);
-        const props = Object.values(woman);
-        for (let i = 0; i < keys.length; i++) {
-          document.getElementById(`${keys[i]}`).innerHTML = props[i];
-        }
-      }); */
       person.addEventListener("mouseout", (e) => {
-        
         /* e.stopPropagation(); */
         e.preventDefault();
         woman.age = age;
@@ -275,16 +266,15 @@ export class Character {
       });
       qaulities();
     }
-    this.greet(this.id);
   }
 }
 
-Character.prototype.greet = (name) => {
+/* Character.prototype.greet = (name) => {
   let timer = setInterval(() => {
     console.log(name);
   }, 2000);
   return timer;
-};
+}; */
 
 function deathFunction(gender) {
   if (people.count > 0) {
@@ -298,6 +288,39 @@ function deathFunction(gender) {
   }
 }
 
+/**
+ *
+ * @param {Number} id id of the searcher
+ */
+const searchValidMate = (id) => {
+  let bias = Math.floor(Math.random() >= 0.5) ? true : false;
+  console.log(bias);
+  let searcherId = document
+    .getElementById(`person_${id}`)
+    .classList.contains("male"); //true if male else false
+
+  if (id === 1) {
+    let rightPerson = document.getElementById(`person_${id + 1}`);
+    if (rightPerson.classList.contains("female")) {
+      console.log("found female on the right");
+      leftPerson.style.opacity = 0.5;
+    }
+  } else {
+    let leftPerson = document.getElementById(`person_${id - 1}`);
+
+    if (searcherId) {
+      //male searches
+      if (leftPerson.classList.contains("female")) {
+        //found
+        leftPerson.style.opacity = 0.5;
+        console.log("found female on the left");
+      } else if (rightPerson.classList.contains("female")) {
+        console.log("found female on the right");
+        leftPerson.style.opacity = 0.5;
+      }
+    }
+  }
+};
 function deathClick(e) {
   e = e || window.event;
   e.currentTarget.classList[0] === "male"
@@ -336,7 +359,7 @@ export function displayPerson(gender, id) {
   $("people").append(`${person_icon}`); //Creates the icon figure of a person to the screen
 }
 
-function marriage(id) {
+function displayCouple(id) {
   //for it to happen both need to be adults male and female when this condition is met the reproduction method interval is triggered
   let color = [52, 58, 64, 1];
   let family_icon = `
@@ -362,7 +385,7 @@ function marriage(id) {
 
   $("people").append(`${family_icon}`);
 }
-marriage();
+
 function moveablePeople() {
   $("#people").sortable({
     revert: true,
