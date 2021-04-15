@@ -41,6 +41,11 @@
 .growth{
     transition: 0.1s all ease-in-out;
 };
+.size{
+    width:36px;
+    height:36px;
+}
+
 
 /* people{
   animation-name: example;
@@ -48,6 +53,7 @@
   animation-iteration-count: infinite;
   position: relative;
 }
+
 
 @keyframes example {
   0%   { left:0px; top:0px;}
