@@ -357,8 +357,6 @@ export function displayPerson(gender, id, size = 28) {
 
 
   let person_icon = `
-      
-        
         <div class="family_${0} rounded p-1 m-1 text-center size" style='background-color:rgba(${
     color[0]
   },${color[1]},${color[2]},${color[3]});width:36px; height:36px;'>
