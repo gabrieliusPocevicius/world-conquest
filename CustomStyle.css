@@ -45,6 +45,9 @@
     width:36px;
     height:36px;
 }
+#pause{
+    cursor: pointer;
+}
 
 
 /* people{

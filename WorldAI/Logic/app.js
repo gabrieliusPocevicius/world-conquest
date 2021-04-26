@@ -1,12 +1,12 @@
-const express = require('express');
+/* const express = require('express');
 const app = express();
-
+ */
 //Middlewares
 /* app.use('/post', ()=>{
     console.log('your on Post ');
 }); */
 //routes
-app.get('/', (req, res)=>{
+/* app.get('/', (req, res)=>{
     res.send('we are running')
 })
 app.get('/post', (req, res)=>{
@@ -14,4 +14,6 @@ app.get('/post', (req, res)=>{
 })
 //how do we start 
 app.listen(3000);
+ */
+
 

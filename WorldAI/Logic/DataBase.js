@@ -228,6 +228,7 @@ export const sickness = {
     ],
     "Liver Disease": -50,
 };
+
 export const monthNames = [
     "Jan",
     "Feb",
@@ -242,7 +243,6 @@ export const monthNames = [
     "Nov",
     "Dec",
 ];
-
 export const names = [
     "Noah",
     "Olive",
@@ -1048,6 +1048,8 @@ export const fnames = [
     "Skye",
 ];
 export const titles = [];
+
+
 
 /* let c = 0;
 for (let item of fnames) {
