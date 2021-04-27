@@ -140,16 +140,8 @@ function displayDate(){
      years.textContent = calender.yearC;
    
 };
-
-
-
-
-
-
 /* ... do things for a while ... */
     
-
-
 async function time(speed) {
     // Time loop
 

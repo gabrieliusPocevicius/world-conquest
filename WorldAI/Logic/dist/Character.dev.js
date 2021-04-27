@@ -374,14 +374,6 @@ function displayPerson(gender, id) {
   }
 }
 
-function displayCouple(id) {
-  //for it to happen both need to be adults male and female when this condition is met the reproduction method interval is triggered
-  var family_icon = "<div class='bg-primary'>\n  ".concat(male, "\n  ").concat(female, "\n  </div>");
-  $("people").append("".concat(family_icon));
-}
-
-displayCouple(1);
-
 function moveablePeople() {
   $("#people").sortable({
     revert: true

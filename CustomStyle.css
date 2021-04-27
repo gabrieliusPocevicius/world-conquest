@@ -33,7 +33,10 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-
+#chartdiv {
+  width: 100%;
+  height: 500px;
+}
 
 .bg-darker{
     background-color: var(--darker);

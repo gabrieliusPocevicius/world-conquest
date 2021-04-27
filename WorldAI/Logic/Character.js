@@ -218,7 +218,6 @@ export class Character {
       function wallet() {
         console.log(woman.name, "has", woman.wealth);
       }
-
       display(woman.gender, woman.id);
       getAttributes = woman;
 
@@ -354,8 +353,6 @@ export function displayPerson(gender, id, size = 28) {
   let randomNumber = () => Math.floor(Math.random() * 1).toFixed(0);
   let color = [nutral[0], nutral[1], nutral[2], 1];
 
-
-
   let person_icon = `
         <div class="family_${0} rounded p-1 m-1 text-center size" style='background-color:rgba(${
     color[0]
@@ -392,18 +389,6 @@ export function displayPerson(gender, id, size = 28) {
     person.setAttribute("height", `${size}px`);
   }
 }
-
-function displayCouple(id) {
-  
-
-  //for it to happen both need to be adults male and female when this condition is met the reproduction method interval is triggered
-  let family_icon = `<div class='bg-primary'>
-  ${male}
-  ${female}
-  </div>`;
-  $("people").append(`${family_icon}`);
-}
-displayCouple(1);
 
 
 
