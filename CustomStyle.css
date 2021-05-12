@@ -257,11 +257,19 @@ body {
     display: none;
 }
 
+.bg-background{
+ background-color: rgba(52, 58, 64, 1);
+
+}
+
 .grid{
     display: grid;
     height: 100%;
-}
 
+}
+.bg-lighter-dark{
+    background-color: #00000018;
+}
 .bottom-right{
   position: absolute;
   bottom: 0;

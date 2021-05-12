@@ -132,13 +132,11 @@ let months = document.getElementById("months")
 let years = document.getElementById("years")
 
 function displayDate(){
-    
     timeStruct();
     ++calender.dayC;
      days.textContent = "day " + calender.dayC;
      months.textContent = monthNames[calender.monthC];
      years.textContent = calender.yearC;
-   
 };
 /* ... do things for a while ... */
     

@@ -286,11 +286,14 @@ export class Character {
 }
 
 /* Character.prototype.greet = (name) => {
-  let timer = setInterval(() => {
-    console.log(name);
-  }, 2000);
-  return timer;
+
 }; */
+
+function work() {
+    
+}
+
+
 
 function deathFunction(gender) {
   if (people.count > 0) {
@@ -350,13 +353,14 @@ function deathClick(e) {
 
 export function displayPerson(gender, id, size = 28) {
   let nutral = [52, 58, 64, 1];
+
+
+
   let randomNumber = () => Math.floor(Math.random() * 1).toFixed(0);
   let color = [nutral[0], nutral[1], nutral[2], 1];
 
   let person_icon = `
-        <div class="family_${0} rounded p-1 m-1 text-center size" style='background-color:rgba(${
-    color[0]
-  },${color[1]},${color[2]},${color[3]});width:36px; height:36px;'>
+        <div class="family_${0} rounded p-1 m-1 text-center size bg-background" style= 'width:36px; height:36px;'>
               <svg id="person_${id}" width=${size} height=${size} viewBox="0 0 24 24" fill="none">
                   <path  d="M9.53524 21V14.5H9.02349C8.46057 14.5 8 14.05 8 13.5V9C8 7.9 8.92114 7 10.047 7H13.1175C14.2433 7 15.1644 7.9 15.1644 9V13.5C15.1644 14.05 14.7039 14.5 14.1409 14.5H13.6292V21C13.6292 21.55 13.1686 22 12.6057 22H10.5587C9.99581 22 9.53524 21.55 9.53524 21ZM11.5822 6C12.7183 6 13.6292 5.11 13.6292 4C13.6292 2.89 12.7183 2 11.5822 2C10.4461 2 9.53524 2.89 9.53524 4C9.53524 5.11 10.4461 6 11.5822 6Z" fill="#007bff"/>
               </svg>
@@ -371,6 +375,34 @@ export function displayPerson(gender, id, size = 28) {
               </svg>
           </div>
       `;
+let c = 0;
+
+  let blocks = []
+
+ 
+
+
+    setInterval(() => {
+      if(parentWidth(document.getElementById("people"))> c) 
+      for (let i = 0; i < 100; i++) {
+          blocks[i].style.backgroundColor = `rgb(${(c += 1)},${(c += 1)},${(c += 1)})`; 
+      }
+    }, 1000);
+
+    setTimeout(()=>{
+    for (let i = 0; i < 40; i++) {
+      let block = `<block id="block${i}" class="p-1 m-1 text-center bg-background rounded" style="width: 36px; height: 36px;"></block>
+        `;
+      $("people").append(block);
+      for (let i = 0; i < 100; i++) {
+        let ids = document.getElementById(`#block${i}`);
+        blocks.push(ids);
+console.log(blocks);
+      }
+    }
+},10)
+
+
 
   if (gender == "female") {
     person_icon = f_person_icon;
@@ -388,6 +420,10 @@ export function displayPerson(gender, id, size = 28) {
     person.setAttribute("width", `${size}px`);
     person.setAttribute("height", `${size}px`);
   }
+}
+
+function parentWidth(elem) {
+  return elem.parentElement.clientWidth;
 }
 
 
