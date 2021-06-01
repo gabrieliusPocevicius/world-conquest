@@ -9,7 +9,7 @@ export let calender = {
     months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     days: [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
     dayC: 1,
-    monthC: 1,
+    monthC: 0,
     yearC: 500,
 };
 
@@ -38,7 +38,7 @@ let pauseIcon = `
     </defs>
     </svg>
 `
-export const speed = 1; //birth speed
+export let speed = 1; //birth speed
 let pauseSwitch = 0;// Counter variable is used as a switch.
 export let play = false;
 
@@ -54,8 +54,9 @@ function pause() {
      
         play = true;
         
+//play
         if (pauseSwitch === 1) {
-            
+
             time(speed); //time goes on as normal
         }
     });
@@ -111,11 +112,16 @@ export function timeStruct() {
     lays out the structure of the calender
  */
     //if the current day is equal to the month day then current day plus 1
+
+    ++calender.dayC;
+
     if (calender.dayC === calender.days[calender.monthC]) {
         calender.dayC = 1;
          //let mn = monthNames;
          //console.log( String(mn[calender.monthC]))
-        calender.monthC++;
+        
+         calender.monthC++;   
+
         if (calender.monthC === 12) {
             //  console.log(String(monthNames[11]))
             calender.monthC = 1;
@@ -133,32 +139,72 @@ let years = document.getElementById("years")
 
 function displayDate(){
     timeStruct();
-    ++calender.dayC;
      days.textContent = "day " + calender.dayC;
      months.textContent = monthNames[calender.monthC];
      years.textContent = calender.yearC;
 };
 /* ... do things for a while ... */
     
+
+let timeSpeed = 1000;
+let speedModes = [100, 50, 0];
+
+let btn1 = document.getElementById("oneXSpeed");
+let btn2 = document.getElementById("twoXSpeed");
+let btn3 = document.getElementById("threeXSpeed");
+
+
+
+
+
 async function time(speed) {
     // Time loop
+    let date = setInterval(() => {
+      displayDate();
+    }, speedModes[0]);
+
+
+
+        btn1.addEventListener("click", () => {
+            clearTimeout(date)
+          date = setInterval(() => {
+            displayDate();
+          }, speedModes[0]);
+        });
+
+        btn2.addEventListener("click", () => {
+            clearTimeout(date);
+          date = setInterval(() => {
+            displayDate();
+          }, speedModes[1]);
+        });
+
+        btn3.addEventListener("click", () => {
+            clearTimeout(date);
+          date = setInterval(() => {
+            displayDate();
+          }, speedModes[2]);
+        });
+
+   
+
+
 
     while (play) {
         await sleep(speed); //wating time for a single day
-        
-        displayDate();
-        
+
         //maker(1);
-        pauseTime();
+        pauseTime(date);
     }
 }
 
-function pauseTime() {
+function pauseTime(date) {
         let paused = (pauseSwitch === 2);
             if (paused){
                 pauseSwitch = 0;
                 play = false;
                 $("#pause").html(playIcon);
+                clearInterval(date);
             }
 /* console.log('is playing?', play); */
 }

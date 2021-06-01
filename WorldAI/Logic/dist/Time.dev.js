@@ -15,7 +15,7 @@ var calender = {
   months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
   days: [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
   dayC: 1,
-  monthC: 1,
+  monthC: 0,
   yearC: 500
 };
 exports.calender = calender;
@@ -37,7 +37,7 @@ function pause() {
     ++pauseSwitch;
     /* timePaused = 0; */
 
-    exports.play = play = true;
+    exports.play = play = true; //play
 
     if (pauseSwitch === 1) {
       time(speed); //time goes on as normal
@@ -95,6 +95,8 @@ function timeStruct() {
   lays out the structure of the calender
   */
   //if the current day is equal to the month day then current day plus 1
+  ++calender.dayC;
+
   if (calender.dayC === calender.days[calender.monthC]) {
     calender.dayC = 1; //let mn = monthNames;
     //console.log( String(mn[calender.monthC]))
@@ -120,7 +122,6 @@ var years = document.getElementById("years");
 
 function displayDate() {
   timeStruct();
-  ++calender.dayC;
   days.textContent = "day " + calender.dayC;
   months.textContent = _DataBase.monthNames[calender.monthC];
   years.textContent = calender.yearC;
@@ -129,28 +130,58 @@ function displayDate() {
 ;
 /* ... do things for a while ... */
 
+var timeSpeed = 1000;
+var speedModes = [100, 50, 0];
+var btn1 = document.getElementById("oneXSpeed");
+var btn2 = document.getElementById("twoXSpeed");
+var btn3 = document.getElementById("threeXSpeed");
+
 function time(speed) {
+  var date;
   return regeneratorRuntime.async(function time$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          // Time loop
+          date = setInterval(function () {
+            displayDate();
+          }, speedModes[0]);
+          btn1.addEventListener("click", function () {
+            clearTimeout(date);
+            date = setInterval(function () {
+              displayDate();
+            }, speedModes[0]);
+          });
+          btn2.addEventListener("click", function () {
+            clearTimeout(date);
+            date = setInterval(function () {
+              displayDate();
+            }, speedModes[1]);
+          });
+          btn3.addEventListener("click", function () {
+            clearTimeout(date);
+            date = setInterval(function () {
+              displayDate();
+            }, speedModes[2]);
+          });
+
+        case 4:
           if (!play) {
-            _context.next = 7;
+            _context.next = 10;
             break;
           }
 
-          _context.next = 3;
+          _context.next = 7;
           return regeneratorRuntime.awrap(sleep(speed));
 
-        case 3:
+        case 7:
           //wating time for a single day
-          displayDate(); //maker(1);
-
-          pauseTime();
-          _context.next = 0;
+          //maker(1);
+          pauseTime(date);
+          _context.next = 4;
           break;
 
-        case 7:
+        case 10:
         case "end":
           return _context.stop();
       }
@@ -158,13 +189,14 @@ function time(speed) {
   });
 }
 
-function pauseTime() {
+function pauseTime(date) {
   var paused = pauseSwitch === 2;
 
   if (paused) {
     pauseSwitch = 0;
     exports.play = play = false;
     $("#pause").html(playIcon);
+    clearInterval(date);
   }
   /* console.log('is playing?', play); */
 
