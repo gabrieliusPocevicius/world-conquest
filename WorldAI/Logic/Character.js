@@ -55,6 +55,11 @@ displayUserInfo.style.opacity = "0";
  }, 1000);  */
 // expected output: seconds elapsed = 2
 
+let minAge = 60;
+
+
+
+
 export class Character {
   constructor(agePassed, gender) {
     const birthYear = calender.yearC - calender.years;
@@ -68,9 +73,7 @@ export class Character {
         /* console.log('Time ',time); */
         storeTime = time + agePassed;
         age = storeTime;
-
         //remove from child catagory
-
         return age;
       }
     }, 2000);
@@ -149,8 +152,6 @@ export class Character {
       display(man.gender, man.id);
 
       getAttributes = man;
-
-
             let person = document.getElementById(`person_${man.id}`);
             let livingSpace = document.getElementById(`space_${man.id}`);
       let lifeInterval = setInterval(() => {
@@ -158,7 +159,7 @@ export class Character {
           searchValidMate(man.id);
 
           let dead = new Promise((resolve, reject) => {
-            if (man.age >= Math.floor(Math.random() * 5 + 1) + 72) {
+            if (man.age >= Math.floor(Math.random() * 5 + 1) + minAge) {
               resolve("died");
             }
           });
@@ -168,7 +169,6 @@ export class Character {
             person.remove();
             livingSpace.remove();
             console.log("person Dead ", man.name, "at the age of ", man.age);
-            
             delete man.id;
             delete man.name;
             delete man.gender;
@@ -182,7 +182,7 @@ export class Character {
         }
       }, 5000);
 
-      person.addEventListener("click", (e) => {
+      livingSpace.addEventListener("click", (e) => {
         e.preventDefault();
         console.log("Name:", man.name);
         console.log("gender:", man.gender);
@@ -191,7 +191,7 @@ export class Character {
         console.log("Strength:", man.atk);
       });
 
-      person.addEventListener("mouseover", (e) => {
+      livingSpace.addEventListener("mouseover", (e) => {
         /* e.stopPropagation(); */
         e.preventDefault();
         man.age = age;
@@ -235,16 +235,18 @@ export class Character {
       }, 5000);
 
       let person = document.getElementById(`person_${woman.id}`);
+      let livingSpace = document.getElementById(`space_${woman.id}`);
 
       let lifeInterval = setInterval(() => {
         let dead = new Promise((resolve, reject) => {
-          if (woman.age >= Math.floor(Math.random() * 5 + 1) + 72) {
+          if (woman.age >= Math.floor(Math.random() * 5 + 1) + minAge) {
             resolve("died");
           }
         });
         dead.then(() => {
           deathFunction("female");
           person.remove();
+          livingSpace.remove();
           console.log("person Dead ", woman.name, "at the age of ", woman.age);
           delete woman.id;
           delete woman.name;
@@ -263,7 +265,7 @@ export class Character {
         });
       }, 1000);
 
-      person.addEventListener("click", (e) => {
+      livingSpace.addEventListener("click", (e) => {
         /*  e.stopPropagation(); */
         e.preventDefault();
         console.log("Name:", woman.name);
@@ -273,7 +275,7 @@ export class Character {
         console.log("Strength:", woman.atk);
       });
 
-      person.addEventListener("mouseout", (e) => {
+      livingSpace.addEventListener("mouseover", (e) => {
         /* e.stopPropagation(); */
         e.preventDefault();
         woman.age = age;

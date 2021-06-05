@@ -58,6 +58,8 @@ displayUserInfo.style.opacity = "0"; // removes the time from the people's age
  }, 1000);  */
 // expected output: seconds elapsed = 2
 
+var minAge = 60;
+
 var Character = function Character(agePassed, gender) {
   _classCallCheck(this, Character);
 
@@ -165,7 +167,7 @@ var Character = function Character(agePassed, gender) {
       if (_Time.play) {
         searchValidMate(man.id);
         var dead = new Promise(function (resolve, reject) {
-          if (man.age >= Math.floor(Math.random() * 5 + 1) + 72) {
+          if (man.age >= Math.floor(Math.random() * 5 + 1) + minAge) {
             resolve("died");
           }
         });
@@ -186,7 +188,7 @@ var Character = function Character(agePassed, gender) {
         });
       }
     }, 5000);
-    person.addEventListener("click", function (e) {
+    livingSpace.addEventListener("click", function (e) {
       e.preventDefault();
       console.log("Name:", man.name);
       console.log("gender:", man.gender);
@@ -194,7 +196,7 @@ var Character = function Character(agePassed, gender) {
       console.log("hp:", man.hp);
       console.log("Strength:", man.atk);
     });
-    person.addEventListener("mouseover", function (e) {
+    livingSpace.addEventListener("mouseover", function (e) {
       /* e.stopPropagation(); */
       e.preventDefault();
       man.age = age;
@@ -237,9 +239,11 @@ var Character = function Character(agePassed, gender) {
 
     var _person = document.getElementById("person_".concat(woman.id));
 
+    var _livingSpace = document.getElementById("space_".concat(woman.id));
+
     var _lifeInterval = setInterval(function () {
       var dead = new Promise(function (resolve, reject) {
-        if (woman.age >= Math.floor(Math.random() * 5 + 1) + 72) {
+        if (woman.age >= Math.floor(Math.random() * 5 + 1) + minAge) {
           resolve("died");
         }
       });
@@ -247,6 +251,8 @@ var Character = function Character(agePassed, gender) {
         deathFunction("female");
 
         _person.remove();
+
+        _livingSpace.remove();
 
         console.log("person Dead ", woman.name, "at the age of ", woman.age);
         delete woman.id;
@@ -261,7 +267,7 @@ var Character = function Character(agePassed, gender) {
       });
     }, 1000);
 
-    _person.addEventListener("click", function (e) {
+    _livingSpace.addEventListener("click", function (e) {
       /*  e.stopPropagation(); */
       e.preventDefault();
       console.log("Name:", woman.name);
@@ -271,7 +277,7 @@ var Character = function Character(agePassed, gender) {
       console.log("Strength:", woman.atk);
     });
 
-    _person.addEventListener("mouseout", function (e) {
+    _livingSpace.addEventListener("mouseover", function (e) {
       /* e.stopPropagation(); */
       e.preventDefault();
       woman.age = age;

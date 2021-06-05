@@ -1,9 +1,6 @@
 import { monthNames } from "./DataBase.js";
 
 
-
-
-
 export let calender = {
     years: 500,
     months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
