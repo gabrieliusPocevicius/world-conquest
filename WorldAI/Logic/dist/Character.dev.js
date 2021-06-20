@@ -359,15 +359,17 @@ function displayPerson(gender, id) {
 
   /* 
   document.getElementById("someElementId").className = "cssClass"; */
-  for (var i = 0; i < id; i++) {
-    var style = document.createElement("style");
-    var position = "\n      .grid-object".concat(id, "{\n        outline: 1px solid ghostwhite;\n        grid-column: 1 / span 4;\n        grid-row: 1 / span 4;\n\n      }\n    ");
-    style.innerHTML = position;
-    document.getElementsByTagName("head")[0].appendChild(style);
-  }
+  var style = document.createElement("style");
+  var i = 1;
+  /*  setInterval(()=>{ */
 
-  var person_icon = "\n        <div id=\"space_".concat(id, "\" class=\"grid-base grid-object").concat(id, "  rounded p-1 m-1 text-center  bg-background\" >\n              <svg id=\"person_").concat(id, "\" width=").concat(size, " height=").concat(size, " viewBox=\"0 0 24 24\" fill=\"none\">\n                  <path  d=\"M9.53524 21V14.5H9.02349C8.46057 14.5 8 14.05 8 13.5V9C8 7.9 8.92114 7 10.047 7H13.1175C14.2433 7 15.1644 7.9 15.1644 9V13.5C15.1644 14.05 14.7039 14.5 14.1409 14.5H13.6292V21C13.6292 21.55 13.1686 22 12.6057 22H10.5587C9.99581 22 9.53524 21.55 9.53524 21ZM11.5822 6C12.7183 6 13.6292 5.11 13.6292 4C13.6292 2.89 12.7183 2 11.5822 2C10.4461 2 9.53524 2.89 9.53524 4C9.53524 5.11 10.4461 6 11.5822 6Z\" fill=\"#007bff\"/>\n              </svg>\n          <div>\n      ");
-  var f_person_icon = "      \n          <div id=\"space_".concat(id, "\" class=\"grid-base grid-object").concat(id, "   rounded p-1 m-1 text-center  bg-background\" >\n              <svg id=\"person_").concat(id, "\"  width=").concat(size, " height=").concat(size, " viewBox=\"0 0 24 24\" fill=\"none\">\n              <path  d=\"M13.7458 21V16H15.3936C16.0896 16 16.5809 15.33 16.3659 14.68L14.2166 8.37C13.93 7.55 13.1522 7 12.272 7H12.1492C11.269 7 10.4809 7.55 10.2045 8.37L8.0552 14.68C7.83003 15.33 8.32131 16 9.02752 16H10.6753V21C10.6753 21.55 11.1359 22 11.6988 22H12.7223C13.2852 22 13.7458 21.55 13.7458 21ZM12.2106 6C13.3467 6 14.2576 5.11 14.2576 4C14.2576 2.89 13.3467 2 12.2106 2C11.0745 2 10.1636 2.89 10.1636 4C10.1636 5.11 11.0745 6 12.2106 6Z\" fill=\"rgb(255, 99, 132)\"/>\n              </svg>\n          </div>\n      ");
+  var position = "\n      #space_".concat(id, "{\n        outline: 1px solid ghostwhite;\n        grid-column: ", 1, " / ", 1, ";\n        grid-row: ", 1, " / ", 1, ";\n      }\n    ");
+  style.innerHTML = position;
+  /* },100); */
+
+  document.getElementsByTagName("head")[0].appendChild(style);
+  var person_icon = "\n        <div id=\"space_".concat(id, "\" class=\"grid-base rounded p-1 m-1 text-center  bg-background\" >\n              <svg id=\"person_").concat(id, "\" width=").concat(size, " height=").concat(size, " viewBox=\"0 0 24 24\" fill=\"none\">\n                  <path  d=\"M9.53524 21V14.5H9.02349C8.46057 14.5 8 14.05 8 13.5V9C8 7.9 8.92114 7 10.047 7H13.1175C14.2433 7 15.1644 7.9 15.1644 9V13.5C15.1644 14.05 14.7039 14.5 14.1409 14.5H13.6292V21C13.6292 21.55 13.1686 22 12.6057 22H10.5587C9.99581 22 9.53524 21.55 9.53524 21ZM11.5822 6C12.7183 6 13.6292 5.11 13.6292 4C13.6292 2.89 12.7183 2 11.5822 2C10.4461 2 9.53524 2.89 9.53524 4C9.53524 5.11 10.4461 6 11.5822 6Z\" fill=\"#007bff\"/>\n              </svg>\n          <div>\n      ");
+  var f_person_icon = "      \n          <div id=\"space_".concat(id, "\" class=\"grid-base rounded p-1 m-1 text-center  bg-background\" >\n              <svg id=\"person_").concat(id, "\"  width=").concat(size, " height=").concat(size, " viewBox=\"0 0 24 24\" fill=\"none\">\n              <path  d=\"M13.7458 21V16H15.3936C16.0896 16 16.5809 15.33 16.3659 14.68L14.2166 8.37C13.93 7.55 13.1522 7 12.272 7H12.1492C11.269 7 10.4809 7.55 10.2045 8.37L8.0552 14.68C7.83003 15.33 8.32131 16 9.02752 16H10.6753V21C10.6753 21.55 11.1359 22 11.6988 22H12.7223C13.2852 22 13.7458 21.55 13.7458 21ZM12.2106 6C13.3467 6 14.2576 5.11 14.2576 4C14.2576 2.89 13.3467 2 12.2106 2C11.0745 2 10.1636 2.89 10.1636 4C10.1636 5.11 11.0745 6 12.2106 6Z\" fill=\"rgb(255, 99, 132)\"/>\n              </svg>\n          </div>\n      ");
   var c = 0;
   /*     setInterval(() => {
         if(parentWidth(document.getElementById("people"))> c) 

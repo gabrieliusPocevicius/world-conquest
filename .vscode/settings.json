@@ -3,9 +3,7 @@
         "esversion": 9
     },
     "compile-hero.disable-compile-files-on-did-save-code": false,
-    "workbench.editorAssociations": [
-    
-    ],
+    "workbench.editorAssociations": {},
     "editor.autoIndent": "none",
     "editor.accessibilitySupport": "off",
     "editor.autoClosingOvertype": "never",
