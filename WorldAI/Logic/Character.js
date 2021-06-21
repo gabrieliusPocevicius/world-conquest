@@ -371,21 +371,29 @@ document.getElementById("someElementId").className = "cssClass"; */
 
 var style = document.createElement("style");
   let i = 1;
-     /*  setInterval(()=>{ */
-      let position = `
-      #space_${id}{
-        outline: 1px solid ghostwhite;
-        grid-column: ${1} / ${1};
-        grid-row: ${1} / ${1};
-      }
-    `;
-
-      style.innerHTML = position;
-
-/* },100); */      
+  let max = 6;
 
 
-      document.getElementsByTagName("head")[0].appendChild(style);
+         setInterval(() => {
+          let position
+          
+           position = `
+              #space_${id}{
+                outline: 1px solid white;
+                grid-column: ${id} / ${id};
+                grid-row: ${id} / ${id};
+              }
+            `;
+        
+
+           style.innerHTML = position;
+         }, 200);  
+
+
+    
+
+
+       document.getElementsByTagName("head")[0].appendChild(style); 
 
   let person_icon = `
         <div id="space_${id}" class="grid-base rounded p-1 m-1 text-center  bg-background" >
