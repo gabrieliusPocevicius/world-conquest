@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.displayPerson = displayPerson;
 exports.maker = maker;
-exports.Position = exports.Character = exports.people = void 0;
+exports.Character = exports.people = void 0;
 
 var _DataBase = require("./DataBase.js");
 
@@ -296,45 +296,6 @@ var Character = function Character(agePassed, gender) {
 
 exports.Character = Character;
 
-var Position =
-/*#__PURE__*/
-function () {
-  function Position(id, x, y) {
-    _classCallCheck(this, Position);
-
-    this.id = id;
-    this.x = x;
-    this.y = y;
-  }
-
-  _createClass(Position, [{
-    key: "getPos",
-    get: function get() {
-      return {
-        x: this.x,
-        y: this.y
-      };
-    }
-  }, {
-    key: "setPosX",
-    set: function set(x) {
-      this.x = x;
-      return this.x;
-    }
-  }, {
-    key: "setPosY",
-    set: function set(y) {
-      this.y = y;
-      return this.y;
-    }
-  }]);
-
-  return Position;
-}();
-
-exports.Position = Position;
-var position = new Position(1, 10, 10);
-
 function work() {}
 
 function deathFunction(gender) {
@@ -389,7 +350,9 @@ function deathClick(e) {
   (0, _DataBase.displayHTML)(++deaths, "#deaths", "h5");
 }
 
-function resources() {
+var resourceAmount = [];
+
+function resources(amount) {
   var size = 28;
   var id = 0;
 
@@ -397,40 +360,127 @@ function resources() {
     return Math.floor(Math.random() * 100);
   };
 
-  for (var i = 0, sizeLength = 100, amountOfResourceBlocks = new Array(100); i < sizeLength; i++) {
-    amountOfResourceBlocks[i] = valueAmount();
+  for (var i = 0, sizeLength = amount, resourceAmount = new Array(amount); i < sizeLength; i++) {
+    resourceAmount[i] = valueAmount();
   }
 
   var world = $("#people");
-  var current;
 
-  var _loop = function _loop(_i) {
+  for (var _i = 0; _i < amount; _i++) {
     id = _i;
-    var resource = "<div id=\"resource".concat(id, "\" class=\"rounded bg-background p-1 \" >\n        <div class=\"text-light text-center\">").concat(amountOfResourceBlocks[id], "<div>\n    </div>");
+    var resource = "<div id=\"resource".concat(id, "\" class=\"rounded bg-background p-1 \" >\n        <div class=\"text-light text-center\">").concat(resourceAmount[id], "<div>\n      </div>");
     world.append(resource);
-    setInterval(function () {
-      current = --amountOfResourceBlocks[_i];
-      /* if (current <= 0) { */
-
-      current = parseFloat($("#resource".concat(_i)).text());
-
-      if (current <= 0) {
-        $("#resource".concat(_i)).remove();
-      } else {
-        current--;
-        $("#resource".concat(_i)).text(current).addClass("text-light");
-      }
-      /* } */
-
-    }, 800);
-  };
-
-  for (var _i = 0; _i < 100; _i++) {
-    _loop(_i);
   }
 }
 
-resources();
+var Soldier =
+/*#__PURE__*/
+function () {
+  function Soldier() {
+    var strength = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 100;
+    var hp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
+    var team = arguments.length > 2 ? arguments[2] : undefined;
+    var location = arguments.length > 3 ? arguments[3] : undefined;
+
+    _classCallCheck(this, Soldier);
+
+    this.id = 0;
+    ++id;
+    this.strength = strength;
+    this.hp = hp;
+    this.team = team;
+    this.location = location;
+    this.wealth = 0;
+
+    if (this.team === "red") {
+      this.team = ["red-taking", "red-team"];
+    } else {
+      this.team = ["blue-taking", "blue-team"];
+    }
+  }
+
+  _createClass(Soldier, [{
+    key: "depleteResource",
+    value: function depleteResource(resourceId) {
+      var _this = this;
+
+      var miningSpeed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      /**
+      @param resourceId is the index of the resource.
+      @param miningSpeed speed at which resources are depleted.
+      */
+      try {
+        var mineFinished = function mineFinished(resourceId) {
+          //mineArea.remove();
+          clearInterval(mine);
+          var newMineArea = $("#resource".concat([++resourceId]));
+          return newMineArea;
+        };
+
+        var current;
+        var mine = setInterval(function () {
+          var mineArea = $("#resource".concat([resourceId]));
+          current = --resourceAmount[resourceId];
+          /* if (current <= 0) { */
+
+          current = parseFloat(mineArea.text());
+
+          if (current <= 0) {
+            var newDestination = mineFinished(resourceId);
+            mineArea.removeClass(_this.team[0]);
+            mineArea.addClass(_this.team[1]).text(current);
+            /*           return console.log(
+                        "Wealth gained from mine ",
+                        this.wealth,
+                        " for ",
+                        this.id,
+                        "new mine",
+                        newDestination
+                      ); */
+          } else {
+            current--;
+            ++_this.wealth;
+            mineArea.addClass(_this.team[0]).text(current);
+          }
+        }, miningSpeed);
+      } catch (error) {
+        console.log("no resource found there", error);
+      }
+    }
+  }, {
+    key: "attack",
+    value: function attack(strength, hp) {
+      hp = hp - strength;
+
+      if (hp <= 0) {
+        console.log('dead', id);
+      }
+    }
+  }]);
+
+  return Soldier;
+}();
+/* setTimeout(()=>{
+  document.getElementById("people").style.gridTemplateColumns =
+    "36px 36px 36px 36px 36px";
+},2000) */
+
+
+var armyNumber = 500;
+
+window.onload = function (e) {
+  e.preventDefault();
+  resources(armyNumber);
+
+  for (var i = 0; i < armyNumber; i++) {
+    if (i > armyNumber / 2) {
+      new Soldier(100, 100, "red").depleteResource(i);
+    } else {
+      new Soldier(100, 100, "blue").depleteResource(i);
+    }
+  }
+};
 
 function displayPerson(gender, id) {
   var size = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 28;

@@ -293,33 +293,6 @@ export class Character {
 }
 
 
-export class Position {
-  constructor(id, x, y){
-    this.id = id;
-    this.x = x;
-    this.y = y;
-  }
-
-  get getPos(){
-      return {x:this.x,y:this.y}
-  }
-  set setPosX(x){
-    this.x = x;
-    return this.x;
-  }
-  set setPosY(y){
-    this.y = y;
-    return this.y;
-  }
-
-
-
-
-
-}
-
-let position = new Position(1, 10, 10);
-
 
 
 function work() {
@@ -386,8 +359,8 @@ function deathClick(e) {
 
 
 
-
-function resources(){
+let resourceAmount = [];
+function resources(amount){
   let size = 28; 
   
   let id = 0;
@@ -397,35 +370,28 @@ function resources(){
   
   for (
     var i = 0,
-      sizeLength = 100,
-      amountOfResourceBlocks = new Array(100);
+      sizeLength = amount,
+      resourceAmount = new Array(amount);
     i < sizeLength;
     i++
   )
-    amountOfResourceBlocks[i] = valueAmount();
+    resourceAmount[i] = valueAmount();
 
 
   let world = $("#people");
-  let current;
-  for(let i = 0; i < 100; i++){
+
+  for(let i = 0; i < amount; i++){
       id = i;
         let resource = `<div id="resource${id}" class="rounded bg-background p-1 " >
-        <div class="text-light text-center">${amountOfResourceBlocks[id]}<div>
-    </div>`;
+        <div class="text-light text-center">${resourceAmount[id]}<div>
+      </div>`;
       world.append(resource);
-    setInterval(() => {
-      current = --amountOfResourceBlocks[i];
-      /* if (current <= 0) { */
-      current = parseFloat($(`#resource${i}`).text());
-      if(current <= 0){
-        $(`#resource${i}`).remove(); 
-      }else{
-        current--;
-        $(`#resource${i}`).text(current).addClass("text-light");
-      }
-      /* } */
-    }, 800);
+
   }
+
+
+
+        
 
 
 
@@ -433,7 +399,110 @@ function resources(){
 
 }
 
-resources();
+class Soldier {
+  
+  constructor(strength = 100, hp = 100, team, location) {
+    this.id = 0;
+    ++id;
+    this.strength = strength;
+    this.hp = hp;
+    this.team = team;
+    this.location = location;
+    this.wealth = 0;
+
+    if(this.team === "red"){
+      this.team = ["red-taking" ,"red-team"];
+    }else{
+      this.team = ["blue-taking", "blue-team"];
+    }
+
+  }
+
+  
+  depleteResource(resourceId, miningSpeed = 0) {
+    /**
+    @param resourceId is the index of the resource.
+    @param miningSpeed speed at which resources are depleted.
+  */
+    try {
+      let current;
+       function mineFinished(resourceId) {
+        //mineArea.remove();
+        clearInterval(mine);
+        let newMineArea = $(`#resource${[++resourceId]}`)
+        return newMineArea;
+      }
+      const mine = setInterval(() => {
+        let mineArea = $(`#resource${[resourceId]}`)
+        current = --resourceAmount[resourceId];
+        /* if (current <= 0) { */
+        current = parseFloat(mineArea.text());
+        if (current <= 0) {
+          let newDestination = mineFinished(resourceId);
+          mineArea.removeClass(this.team[0]);
+          mineArea.addClass(this.team[1]).text(current);
+/*           return console.log(
+            "Wealth gained from mine ",
+            this.wealth,
+            " for ",
+            this.id,
+            "new mine",
+            newDestination
+          ); */
+
+        } else {
+          current--;
+          ++this.wealth;
+          mineArea
+            .addClass(this.team[0])
+            .text(current)
+            
+        }
+      }, miningSpeed);
+    } catch (error) {
+      console.log("no resource found there", error);
+    }
+  }
+
+  attack(strength, hp) {
+   hp = hp - strength;
+    if(hp <= 0){
+      console.log('dead', id);
+    }
+  }
+  
+}
+
+
+
+/* setTimeout(()=>{
+  document.getElementById("people").style.gridTemplateColumns =
+    "36px 36px 36px 36px 36px";
+},2000) */
+
+
+
+
+
+let armyNumber = 500;
+
+window.onload = (e) => {
+  e.preventDefault();
+  
+   resources(armyNumber);
+ for(let i = 0 ; i < armyNumber; i++){
+  
+  if(i > armyNumber / 2){
+    new Soldier(100, 100, "red").depleteResource(i);
+  }else{
+    new Soldier(100, 100, "blue").depleteResource(i);
+  }  
+} 
+
+
+};
+
+
 
 export function displayPerson(gender, id, size = 28) {
 
