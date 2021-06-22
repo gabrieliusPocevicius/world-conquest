@@ -360,12 +360,12 @@ function deathClick(e) {
 
 
 let resourceAmount = [];
-function resources(amount){
+function resources(amount, amountOfResources=100){
   let size = 28; 
   
   let id = 0;
   let valueAmount = () => {
-    return Math.floor(Math.random() * 100);
+    return Math.floor(Math.random() * amountOfResources);
   };
   
   for (
@@ -427,7 +427,6 @@ class Soldier {
     try {
       let current;
        function mineFinished(resourceId) {
-        //mineArea.remove();
         clearInterval(mine);
         let newMineArea = $(`#resource${[++resourceId]}`)
         return newMineArea;
@@ -439,8 +438,10 @@ class Soldier {
         current = parseFloat(mineArea.text());
         if (current <= 0) {
           let newDestination = mineFinished(resourceId);
+          
           mineArea.removeClass(this.team[0]);
           mineArea.addClass(this.team[1]).text(current);
+
 /*           return console.log(
             "Wealth gained from mine ",
             this.wealth,
@@ -484,14 +485,13 @@ class Soldier {
 
 
 
-let armyNumber = 500;
+let armyNumber = 200;
 
 window.onload = (e) => {
   e.preventDefault();
-  
-   resources(armyNumber);
+   resources(armyNumber, 100);
+
  for(let i = 0 ; i < armyNumber; i++){
-  
   if(i > armyNumber / 2){
     new Soldier(100, 100, "red").depleteResource(i);
   }else{

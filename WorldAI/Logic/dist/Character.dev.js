@@ -353,11 +353,12 @@ function deathClick(e) {
 var resourceAmount = [];
 
 function resources(amount) {
+  var amountOfResources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100;
   var size = 28;
   var id = 0;
 
   var valueAmount = function valueAmount() {
-    return Math.floor(Math.random() * 100);
+    return Math.floor(Math.random() * amountOfResources);
   };
 
   for (var i = 0, sizeLength = amount, resourceAmount = new Array(amount); i < sizeLength; i++) {
@@ -412,7 +413,6 @@ function () {
       */
       try {
         var mineFinished = function mineFinished(resourceId) {
-          //mineArea.remove();
           clearInterval(mine);
           var newMineArea = $("#resource".concat([++resourceId]));
           return newMineArea;
@@ -467,11 +467,11 @@ function () {
 },2000) */
 
 
-var armyNumber = 500;
+var armyNumber = 200;
 
 window.onload = function (e) {
   e.preventDefault();
-  resources(armyNumber);
+  resources(armyNumber, 100);
 
   for (var i = 0; i < armyNumber; i++) {
     if (i > armyNumber / 2) {

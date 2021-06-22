@@ -281,30 +281,37 @@ body {
     justify-self: center;
     width: 100%;
     height: 100%; 
-    transition: 0.3s all cubic-bezier(0.55, 0.055, 0.675, 0.19) !important;
+   
 }
 
 .blue-team{
     background-color: #007bff;
     color: white;
     text-align: center;
-    
+    font-size: larger;
+    transition: 0.5s all cubic-bezier(0.55, 0.055, 0.675, 0.19) !important;
 }
 .blue-taking{
     border: #007bff solid 1px;
     color: white;
     text-align: center;
+    font-size: medium;
+    transition: 0.5s all cubic-bezier(0.55, 0.055, 0.675, 0.19) !important;
 }
 .red-taking{
     border: #dc3545 solid 1px;
     color: white;
     text-align: center;
+    font-size: medium;
+    transition: 0.5s all cubic-bezier(0.55, 0.055, 0.675, 0.19) !important;
 }
 
 .red-team{
     background-color: #dc3545;
     color: white;
     text-align: center;
+    font-size: larger;
+    transition: 0.3s all cubic-bezier(0.55, 0.055, 0.675, 0.19) !important;
 }
 
 
