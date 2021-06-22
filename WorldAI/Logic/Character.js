@@ -248,7 +248,7 @@ export class Character {
           deathFunction("female");
           person.remove();
           livingSpace.remove();
-          console.log("person Dead ", woman.name, "at the age of ", woman.age);
+          console.log("person Dead", woman.name, "at the age of ", woman.age);
           delete woman.id;
           delete woman.name;
           delete woman.gender;
@@ -387,40 +387,50 @@ function deathClick(e) {
 
 
 
+function resources(){
+  let size = 28; 
+  
+  let id = 0;
+  let valueAmount = () => {
+    return Math.floor(Math.random() * 100);
+  };
+  
+  for (
+    var i = 0,
+      eachBlockValue = 0,
+      sizeLength = 100,
+      amountOfResourceBlocks = new Array(100);
+    i < sizeLength;
+    i++
+  )
+    amountOfResourceBlocks[i] = valueAmount();
 
 
+console.log(amountOfResourceBlocks);
+
+
+  let world = $("#world");
+
+
+  for(let i = 0; i < 100; i++){
+      id = i;
+        let resource = `<div id="resource_${id}" class="grid-base rounded p-1 m-1 text-center  bg-background" >
+        <svg id="resource_amount_${id}" width=${size} height=${size} viewBox="0 0 24 24" fill="none">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 17H13V13H17V17ZM11 17H7V13H11V17ZM17 11H13V7H17V11ZM9 11C7.89543 11 7 10.1046 7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 9.53043 10.7893 10.0391 10.4142 10.4142C10.0391 10.7893 9.53043 11 9 11Z" fill="#fff"/>
+            </svg>
+        </svg>
+      <div class="text-light">${amountOfResourceBlocks[id]}<div>
+    <div></div>`;
+      world.append(resource);
+  }
+
+
+}
+
+resources();
 
 export function displayPerson(gender, id, size = 28) {
-  
-
-
-
-/* 
-document.getElementById("someElementId").className = "cssClass"; */
-
-
-var style = document.createElement("style");
-
-         setInterval(() => {
-          let position
-          
-           position = `
-              #space_${id}{
-                outline: 1px solid white;
-                grid-column: ${id} / ${id};
-                grid-row: ${0} / ${0};
-              }
-            `;
-        
-
-           style.innerHTML = position;
-         }, 200);  
-
-
-    
-
-
-       document.getElementsByTagName("head")[0].appendChild(style); 
 
   let person_icon = `
         <div id="space_${id}" class="grid-base rounded p-1 m-1 text-center  bg-background" >
@@ -576,13 +586,13 @@ for(let i = 0;i<10;i++){
 
 function reproduction(age, childrenCount) {
   if (play) {
-    console.log("her age: ", age);
-    if (age > 17 && age < 37) {
+    //console.log("her age: ", age);
+    if (age > 18 && age < 37) {
       //console.log("called at age: ", age);
       let chance = Math.round(Math.random() * 99 + 1);
       if (chance <= 25) {
         spawn();
-        console.log("had child", childrenCount);
+        //console.log("had child", childrenCount);
         return ++childrenCount;
       } else {
         if (childrenCount) {
