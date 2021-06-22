@@ -397,17 +397,36 @@ function resources() {
     return Math.floor(Math.random() * 100);
   };
 
-  for (var i = 0, eachBlockValue = 0, sizeLength = 100, amountOfResourceBlocks = new Array(100); i < sizeLength; i++) {
+  for (var i = 0, sizeLength = 100, amountOfResourceBlocks = new Array(100); i < sizeLength; i++) {
     amountOfResourceBlocks[i] = valueAmount();
   }
 
-  console.log(amountOfResourceBlocks);
-  var world = $("#world");
+  var world = $("#people");
+  var current;
+
+  var _loop = function _loop(_i) {
+    id = _i;
+    var resource = "<div id=\"resource".concat(id, "\" class=\"rounded bg-background p-1 \" >\n        <div class=\"text-light text-center\">").concat(amountOfResourceBlocks[id], "<div>\n    </div>");
+    world.append(resource);
+    setInterval(function () {
+      current = --amountOfResourceBlocks[_i];
+      /* if (current <= 0) { */
+
+      current = parseFloat($("#resource".concat(_i)).text());
+
+      if (current <= 0) {
+        $("#resource".concat(_i)).remove();
+      } else {
+        current--;
+        $("#resource".concat(_i)).text(current).addClass("text-light");
+      }
+      /* } */
+
+    }, 800);
+  };
 
   for (var _i = 0; _i < 100; _i++) {
-    id = _i;
-    var resource = "<div id=\"resource_".concat(id, "\" class=\"grid-base rounded p-1 m-1 text-center  bg-background\" >\n        <svg id=\"resource_amount_").concat(id, "\" width=").concat(size, " height=").concat(size, " viewBox=\"0 0 24 24\" fill=\"none\">\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M17 17H13V13H17V17ZM11 17H7V13H11V17ZM17 11H13V7H17V11ZM9 11C7.89543 11 7 10.1046 7 9C7 7.89543 7.89543 7 9 7C10.1046 7 11 7.89543 11 9C11 9.53043 10.7893 10.0391 10.4142 10.4142C10.0391 10.7893 9.53043 11 9 11Z\" fill=\"#fff\"/>\n            </svg>\n        </svg>\n      <div class=\"text-light\">").concat(amountOfResourceBlocks[id], "<div>\n    <div></div>");
-    world.append(resource);
+    _loop(_i);
   }
 }
 
@@ -539,14 +558,16 @@ function createPerson(age, gender) {
 
   return people.count;
 }
+/* let adam = createPerson(17, 10);
+let eve = createPerson(16, 60);
+ */
 
-var adam = createPerson(17, 10);
-var eve = createPerson(16, 60);
 /*
 for(let i = 0;i<10;i++){
   console.log(people.person[i]);
 };
  */
+
 
 function reproduction(age, childrenCount) {
   if (_Time.play) {

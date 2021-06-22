@@ -56,12 +56,9 @@
 
 
 
-/* people{
-  animation-name: example;
-  animation-duration: 4s;
-  animation-iteration-count: infinite;
-  position: relative;
-}
+
+
+
 
 
 @keyframes example {
@@ -267,9 +264,8 @@ body {
 
 .grid{
     display: grid;
-    /* background-color: #0ed83d; */ 
-    grid-template-columns: repeat(4, 36px);
-    grid-template-rows: repeat(4, 36px);
+    grid-template-columns: repeat(12, 36px);
+    grid-template-rows: repeat(12, 36px);
     grid-auto-rows: 36px;
     grid-auto-columns: 36px;
     outline: 1px solid ghostwhite;
