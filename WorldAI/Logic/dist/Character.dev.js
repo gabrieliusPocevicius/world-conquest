@@ -7,13 +7,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.displayPerson = displayPerson;
 exports.maker = maker;
-exports.Character = exports.people = void 0;
+exports.Position = exports.Character = exports.people = void 0;
 
 var _DataBase = require("./DataBase.js");
 
 var _Time = require("./Time.js");
 
 var _Util = require("./Util.js");
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -68,15 +72,11 @@ var Character = function Character(agePassed, gender) {
   var adult = false;
   var life = setInterval(function () {
     if (_Time.play) {
-      /* console.log('birth Year: ', birthYear); */
       var _time = _Time.calender.yearC - _Time.calender.years - birthYear;
 
       var storeTime = 0;
-      /* console.log('Time ',time); */
-
       storeTime = _time + agePassed;
-      age = storeTime; //remove from child catagory
-
+      age = storeTime;
       return age;
     }
   }, 2000);
@@ -293,12 +293,47 @@ var Character = function Character(agePassed, gender) {
     qaulities();
   }
 };
-/* Character.prototype.greet = (name) => {
-
-}; */
-
 
 exports.Character = Character;
+
+var Position =
+/*#__PURE__*/
+function () {
+  function Position(id, x, y) {
+    _classCallCheck(this, Position);
+
+    this.id = id;
+    this.x = x;
+    this.y = y;
+  }
+
+  _createClass(Position, [{
+    key: "getPos",
+    get: function get() {
+      return {
+        x: this.x,
+        y: this.y
+      };
+    }
+  }, {
+    key: "setPosX",
+    set: function set(x) {
+      this.x = x;
+      return this.x;
+    }
+  }, {
+    key: "setPosY",
+    set: function set(y) {
+      this.y = y;
+      return this.y;
+    }
+  }]);
+
+  return Position;
+}();
+
+exports.Position = Position;
+var position = new Position(1, 10, 10);
 
 function work() {}
 
@@ -360,11 +395,9 @@ function displayPerson(gender, id) {
   /* 
   document.getElementById("someElementId").className = "cssClass"; */
   var style = document.createElement("style");
-  var i = 1;
-  var max = 6;
   setInterval(function () {
     var position;
-    position = "\n              #space_".concat(id, "{\n                outline: 1px solid white;\n                grid-column: ").concat(id, " / ").concat(id, ";\n                grid-row: ").concat(id, " / ").concat(id, ";\n              }\n            ");
+    position = "\n              #space_".concat(id, "{\n                outline: 1px solid white;\n                grid-column: ").concat(id, " / ").concat(id, ";\n                grid-row: ", 0, " / ", 0, ";\n              }\n            ");
     style.innerHTML = position;
   }, 200);
   document.getElementsByTagName("head")[0].appendChild(style);
@@ -410,9 +443,9 @@ function moveablePeople() {
     revert: true
   });
   $("#people").disableSelection();
-}
+} //moveablePeople();
 
-moveablePeople();
+
 var nobles = []; //Lists all the nobles and their props
 
 var peasantsUnderNoble = []; //Lists all the peasants under the noble.

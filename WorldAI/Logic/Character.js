@@ -57,24 +57,21 @@ displayUserInfo.style.opacity = "0";
 
 let minAge = 60;
 
-
-
-
 export class Character {
   constructor(agePassed, gender) {
-
     const birthYear = calender.yearC - calender.years;
     let age = 0 + agePassed;
     let adult = false;
     let life = setInterval(() => {
       if (play) {
-        /* console.log('birth Year: ', birthYear); */
+
+        
+
         let time = calender.yearC - calender.years - birthYear;
         let storeTime = 0;
-        /* console.log('Time ',time); */
         storeTime = time + agePassed;
         age = storeTime;
-        //remove from child catagory
+
         return age;
       }
     }, 2000);
@@ -128,6 +125,9 @@ export class Character {
     //50% change of it being a boy for a girl.
     /* let dna = getRandom(0,1000);*/
     this.id = id += 1;
+
+    
+
     /* let random = getRandom(0,6); */
     /* this.title = `${job[random].name}`; */
     /* console.log(this.title); */
@@ -292,9 +292,35 @@ export class Character {
   }
 }
 
-/* Character.prototype.greet = (name) => {
 
-}; */
+export class Position {
+  constructor(id, x, y){
+    this.id = id;
+    this.x = x;
+    this.y = y;
+  }
+
+  get getPos(){
+      return {x:this.x,y:this.y}
+  }
+  set setPosX(x){
+    this.x = x;
+    return this.x;
+  }
+  set setPosY(y){
+    this.y = y;
+    return this.y;
+  }
+
+
+
+
+
+}
+
+let position = new Position(1, 10, 10);
+
+
 
 function work() {
     
@@ -360,6 +386,10 @@ function deathClick(e) {
 
 
 
+
+
+
+
 export function displayPerson(gender, id, size = 28) {
   
 
@@ -370,9 +400,6 @@ document.getElementById("someElementId").className = "cssClass"; */
 
 
 var style = document.createElement("style");
-  let i = 1;
-  let max = 6;
-
 
          setInterval(() => {
           let position
@@ -381,7 +408,7 @@ var style = document.createElement("style");
               #space_${id}{
                 outline: 1px solid white;
                 grid-column: ${id} / ${id};
-                grid-row: ${id} / ${id};
+                grid-row: ${0} / ${0};
               }
             `;
         
@@ -455,7 +482,7 @@ function moveablePeople() {
   });
   $("#people").disableSelection();
 }
-moveablePeople();
+//moveablePeople();
 
 let nobles = []; //Lists all the nobles and their props
 let peasantsUnderNoble = []; //Lists all the peasants under the noble.

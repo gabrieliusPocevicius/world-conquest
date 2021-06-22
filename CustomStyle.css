@@ -266,13 +266,15 @@ body {
 
 .grid{
     display: grid;
-   /*  background-color: #0ed83d; */
-    grid-template-columns: repeat(12, 36px);
-    grid-template-rows: repeat(12, 36px);
-    
+    /* background-color: #0ed83d; */ 
+    grid-template-columns: repeat(4, 36px);
+    grid-template-rows: repeat(4, 36px);
+    grid-auto-rows: 36px;
+    grid-auto-columns: 36px;
     outline: 1px solid ghostwhite;
     gap: 5px;
-    height: 90vh;
+     height: 100%; 
+    width: 100%;
 }
  /*  background-color: rgb(36, 156, 0); */
  .grid-base{
