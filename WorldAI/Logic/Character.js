@@ -359,120 +359,8 @@ function deathClick(e) {
 
 
 
-let resourceAmount = [];
-function resources(amount, amountOfResources=100){
-  let size = 28; 
-  
-  let id = 0;
-  let valueAmount = () => {
-    return Math.floor(Math.random() * amountOfResources);
-  };
-  
-  for (
-    var i = 0,
-      sizeLength = amount,
-      resourceAmount = new Array(amount);
-    i < sizeLength;
-    i++
-  )
-    resourceAmount[i] = valueAmount();
 
 
-  let world = $("#people");
-
-  for(let i = 0; i < amount; i++){
-      id = i;
-        let resource = `<div id="resource${id}" class="rounded bg-background p-1 " >
-        <div class="text-light text-center">${resourceAmount[id]}<div>
-      </div>`;
-      world.append(resource);
-
-  }
-
-
-
-        
-
-
-
-
-
-}
-
-class Soldier {
-  
-  constructor(strength = 100, hp = 100, team, location) {
-    this.id = 0;
-    ++id;
-    this.strength = strength;
-    this.hp = hp;
-    this.team = team;
-    this.location = location;
-    this.wealth = 0;
-
-    if(this.team === "red"){
-      this.team = ["red-taking" ,"red-team"];
-    }else{
-      this.team = ["blue-taking", "blue-team"];
-    }
-
-  }
-
-  
-  depleteResource(resourceId, miningSpeed = 0) {
-    /**
-    @param resourceId is the index of the resource.
-    @param miningSpeed speed at which resources are depleted.
-  */
-    try {
-      let current;
-       function mineFinished(resourceId) {
-        clearInterval(mine);
-        let newMineArea = $(`#resource${[++resourceId]}`)
-        return newMineArea;
-      }
-      const mine = setInterval(() => {
-        let mineArea = $(`#resource${[resourceId]}`)
-        current = --resourceAmount[resourceId];
-        /* if (current <= 0) { */
-        current = parseFloat(mineArea.text());
-        if (current <= 0) {
-          let newDestination = mineFinished(resourceId);
-          
-          mineArea.removeClass(this.team[0]);
-          mineArea.addClass(this.team[1]).text(current);
-
-/*           return console.log(
-            "Wealth gained from mine ",
-            this.wealth,
-            " for ",
-            this.id,
-            "new mine",
-            newDestination
-          ); */
-
-        } else {
-          current--;
-          ++this.wealth;
-          mineArea
-            .addClass(this.team[0])
-            .text(current)
-            
-        }
-      }, miningSpeed);
-    } catch (error) {
-      console.log("no resource found there", error);
-    }
-  }
-
-  attack(strength, hp) {
-   hp = hp - strength;
-    if(hp <= 0){
-      console.log('dead', id);
-    }
-  }
-  
-}
 
 
 
@@ -485,23 +373,7 @@ class Soldier {
 
 
 
-let armyNumber = 200;
-
-window.onload = (e) => {
-  e.preventDefault();
-   resources(armyNumber, 100);
-
- for(let i = 0 ; i < armyNumber; i++){
-  if(i > armyNumber / 2){
-    new Soldier(100, 100, "red").depleteResource(i);
-  }else{
-    new Soldier(100, 100, "blue").depleteResource(i);
-  }  
-} 
-
-
-};
-
+let armyNumber = 100;
 
 
 export function displayPerson(gender, id, size = 28) {
