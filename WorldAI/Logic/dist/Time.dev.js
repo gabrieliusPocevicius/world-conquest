@@ -128,10 +128,8 @@ function displayDate() {
 }
 
 ;
-/* ... do things for a while ... */
-
 var timeSpeed = 1000;
-var speedModes = [100, 50, 0];
+var speedModes = [1000, 50, 0];
 var btn1 = document.getElementById("oneXSpeed");
 var btn2 = document.getElementById("twoXSpeed");
 var btn3 = document.getElementById("threeXSpeed");
@@ -148,21 +146,36 @@ function time(speed) {
           }, speedModes[0]);
           btn1.addEventListener("click", function () {
             clearTimeout(date);
-            date = setInterval(function () {
-              displayDate();
-            }, speedModes[0]);
+
+            if (pauseSwitch === 1) {
+              date = setInterval(function () {
+                if (pauseSwitch === 1) {
+                  displayDate();
+                }
+              }, speedModes[0]);
+            }
           });
           btn2.addEventListener("click", function () {
             clearTimeout(date);
-            date = setInterval(function () {
-              displayDate();
-            }, speedModes[1]);
+
+            if (pauseSwitch === 1) {
+              date = setInterval(function () {
+                if (pauseSwitch === 1) {
+                  displayDate();
+                }
+              }, speedModes[1]);
+            }
           });
           btn3.addEventListener("click", function () {
             clearTimeout(date);
-            date = setInterval(function () {
-              displayDate();
-            }, speedModes[2]);
+
+            if (pauseSwitch === 1) {
+              date = setInterval(function () {
+                if (pauseSwitch === 1) {
+                  displayDate();
+                }
+              }, speedModes[2]);
+            }
           });
 
         case 4:

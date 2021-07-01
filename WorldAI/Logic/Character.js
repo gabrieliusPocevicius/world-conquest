@@ -75,7 +75,6 @@ export class Character {
         return age;
       }
     }, 2000);
-
     if (age == null) {
       console.log("stopped process");
       clearInterval(life);
@@ -91,7 +90,6 @@ export class Character {
       }
     }, 3000);
 
-    let skill = 0;
     function qaulities() {
       let work = getRandom(0, 100);
       if (work > 1) {
@@ -100,6 +98,7 @@ export class Character {
       }
       /* console.log('skills ', skill); */
     }
+
     function display(gender, id) {
       if (age < 18) {
         displayPerson(gender, id, 14);
@@ -116,6 +115,7 @@ export class Character {
         displayPerson(gender, id);
       }
     }
+
     let percent = 0;
     if (!gender) {
       percent = Math.floor(Math.random() * 99 + 1);
@@ -125,9 +125,6 @@ export class Character {
     //50% change of it being a boy for a girl.
     /* let dna = getRandom(0,1000);*/
     this.id = id += 1;
-
-    
-
     /* let random = getRandom(0,6); */
     /* this.title = `${job[random].name}`; */
     /* console.log(this.title); */
@@ -296,10 +293,8 @@ export class Character {
 
 
 function work() {
-    
+
 }
-
-
 
 function deathFunction(gender) {
   if (people.count > 0) {
@@ -312,7 +307,6 @@ function deathFunction(gender) {
     displayHTML(++deaths, "#deaths", "h5");
   }
 }
-
 /**
  *
  * @param {Number} id id of the searcher
@@ -357,25 +351,6 @@ function deathClick(e) {
   displayHTML(++deaths, "#deaths", "h5");
 }
 
-
-
-
-
-
-
-
-/* setTimeout(()=>{
-  document.getElementById("people").style.gridTemplateColumns =
-    "36px 36px 36px 36px 36px";
-},2000) */
-
-
-
-
-
-let armyNumber = 100;
-
-
 export function displayPerson(gender, id, size = 28) {
 
   let person_icon = `
@@ -392,26 +367,6 @@ export function displayPerson(gender, id, size = 28) {
               </svg>
           </div>
       `;
-let c = 0;
-
-
-
-/*     setInterval(() => {
-      if(parentWidth(document.getElementById("people"))> c) 
-
-    }, 1000);
- */
-/*     setTimeout(()=>{
-    for (let i = 0; i < 40; i++) {
-      let block = `<block id="block${i}" class="p-1 m-1 text-center bg-background rounded" style="width: 36px; height: 36px;"></block>
-        `;
-      $("people").append(block);
-    }
-
-},10) */
-
-
-
   if (gender == "female") {
     person_icon = f_person_icon;
   }
@@ -427,17 +382,9 @@ let c = 0;
   }
 }
 
-function parentWidth(elem) {
-  return elem.parentElement.clientWidth;
-}
 
 
-function moveablePeople() {
-  $("#people").sortable({
-    revert: true,
-  });
-  $("#people").disableSelection();
-}
+
 //moveablePeople();
 
 let nobles = []; //Lists all the nobles and their props

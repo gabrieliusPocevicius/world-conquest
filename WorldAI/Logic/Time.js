@@ -11,7 +11,6 @@ export let calender = {
 };
 
 
-
 let playIcon = `
     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" ">
     <path d="M13.5 19.875L19.3375 15.5C19.675 15.25 19.675 14.75 19.3375 14.5L13.5 10.125C13.0875 9.8125 12.5 10.1125 12.5 10.625V19.375C12.5 19.8875 13.0875 20.1875 13.5 19.875ZM15 2.5C8.1 2.5 2.5 8.1 2.5 15C2.5 21.9 8.1 27.5 15 27.5C21.9 27.5 27.5 21.9 27.5 15C27.5 8.1 21.9 2.5 15 2.5ZM15 25C9.4875 25 5 20.5125 5 15C5 9.4875 9.4875 5 15 5C20.5125 5 25 9.4875 25 15C25 20.5125 20.5125 25 15 25Z" fill="#FAFAFA"/>
@@ -53,7 +52,6 @@ function pause() {
         
 //play
         if (pauseSwitch === 1) {
-
             time(speed); //time goes on as normal
         }
     });
@@ -140,11 +138,11 @@ function displayDate(){
      months.textContent = monthNames[calender.monthC];
      years.textContent = calender.yearC;
 };
-/* ... do things for a while ... */
+
     
 
 let timeSpeed = 1000;
-let speedModes = [100, 50, 0];
+let speedModes = [1000, 50, 0];
 
 let btn1 = document.getElementById("oneXSpeed");
 let btn2 = document.getElementById("twoXSpeed");
@@ -160,30 +158,46 @@ async function time(speed) {
       displayDate();
     }, speedModes[0]);
 
+       
 
 
-        btn1.addEventListener("click", () => {
-            clearTimeout(date)
-          date = setInterval(() => {
-            displayDate();
-          }, speedModes[0]);
-        });
+          btn1.addEventListener("click", () => {
+              clearTimeout(date)
+              if(pauseSwitch === 1){
+            date = setInterval(() => {
 
-        btn2.addEventListener("click", () => {
-            clearTimeout(date);
-          date = setInterval(() => {
-            displayDate();
-          }, speedModes[1]);
-        });
+              if(pauseSwitch === 1){
+                displayDate();
+              }
+              
+            }, speedModes[0]);
+              }
+          });
 
-        btn3.addEventListener("click", () => {
-            clearTimeout(date);
-          date = setInterval(() => {
-            displayDate();
-          }, speedModes[2]);
-        });
+          btn2.addEventListener("click", () => {
+              clearTimeout(date);
+               if(pauseSwitch === 1){
+            date = setInterval(() => {
+if(pauseSwitch === 1){
+              displayDate();
+}
+            }, speedModes[1]);
+               }
+          });
 
-   
+          btn3.addEventListener("click", () => {
+              clearTimeout(date);
+            if(pauseSwitch === 1){
+              date = setInterval(() => {
+if(pauseSwitch === 1){
+displayDate();
+}
+                
+              }, speedModes[2]);
+            }
+          });
+
+        
 
 
 
