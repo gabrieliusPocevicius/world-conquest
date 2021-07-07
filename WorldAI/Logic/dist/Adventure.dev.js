@@ -2,11 +2,6 @@
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// map definition
-var Map = function Map() {
-  _classCallCheck(this, Map);
-};
-
 var Interaction = function Interaction(trade, besiege, recruit, train) {
   _classCallCheck(this, Interaction);
 

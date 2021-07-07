@@ -90,6 +90,7 @@ var Character = function Character(agePassed, gender) {
       clearInterval(aging);
     }
   }, 3000);
+  var skill = 0;
 
   function qaulities() {
     var work = (0, _Util.getRandom)(0, 100);
@@ -423,6 +424,9 @@ function displayNoLongerChild() {
   displayElement.html("<h5>" + --people.children + "</h5>");
 }
 
+var adam = new Character(20, 1);
+var eve = new Character(17, 100);
+
 function spawn() {
   ++people.count;
   people.person.push(new Character(0, Math.floor(Math.random() * 99 + 1)));
@@ -445,16 +449,6 @@ function createPerson(age, gender) {
 
   return people.count;
 }
-/* let adam = createPerson(17, 10);
-let eve = createPerson(16, 60);
- */
-
-/*
-for(let i = 0;i<10;i++){
-  console.log(people.person[i]);
-};
- */
-
 
 function reproduction(age, childrenCount) {
   if (_Time.play) {

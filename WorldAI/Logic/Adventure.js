@@ -1,15 +1,4 @@
 
-
-// map definition
-class Map {
-    constructor() {
-        
-    }
-}
-
-
-
-
 class Interaction {
     constructor(trade, besiege, recruit, train) {
         this.trade = trade;
@@ -141,3 +130,6 @@ class Settlement {
         }
     }
 }
+
+
+

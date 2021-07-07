@@ -156,7 +156,7 @@ async function time(speed) {
     // Time loop
     let date = setInterval(() => {
       displayDate();
-    }, speedModes[0]);
+  }, speedModes[0]);
 
        
 

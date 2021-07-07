@@ -89,6 +89,7 @@ export class Character {
         clearInterval(aging);
       }
     }, 3000);
+    let skill = 0;
 
     function qaulities() {
       let work = getRandom(0, 100);
@@ -373,6 +374,8 @@ export function displayPerson(gender, id, size = 28) {
 
   const person = document.getElementById(`person_${id}`);
 
+
+
   if (!person) {
     $("people").append(`${person_icon}`); //Creates the icon figure of a person to the screen
   } else {
@@ -381,9 +384,6 @@ export function displayPerson(gender, id, size = 28) {
     person.setAttribute("height", `${size}px`);
   }
 }
-
-
-
 
 //moveablePeople();
 
@@ -447,6 +447,11 @@ function displayNoLongerChild() {
   displayElement.html("<h5>" + --people.children + "</h5>");
 }
 
+
+let adam = new Character(20, 1);
+let eve = new Character(17, 100);
+
+
 function spawn() {
   ++people.count;
   people.person.push(new Character(0, Math.floor(Math.random() * 99 + 1)));
@@ -467,15 +472,6 @@ function createPerson(age, gender) {
   }
   return people.count;
 }
-
-/* let adam = createPerson(17, 10);
-let eve = createPerson(16, 60);
- */
-/*
-for(let i = 0;i<10;i++){
-  console.log(people.person[i]);
-};
- */
 
 function reproduction(age, childrenCount) {
   if (play) {
@@ -524,3 +520,7 @@ export function maker(n) {
     n--;
   }
 }
+
+
+
+
