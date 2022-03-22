@@ -9,8 +9,6 @@ import { Character, people } from "./Character.js";
     There are four main leader positions available
     if there is no one to lead the army disbands.
     To qualify to become a general of an army one 
-    
-
  */
 
     var armyLeaders = [1];
