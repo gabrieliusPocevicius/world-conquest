@@ -1,6 +1,4 @@
 import { monthNames } from "./DataBase.js";
-
-
 export let calender = {
     years: 500,
     months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -9,7 +7,6 @@ export let calender = {
     monthC: 0,
     yearC: 500,
 };
-
 
 let playIcon = `
     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" ">
@@ -61,7 +58,6 @@ function pause() {
 export function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
 function getRandom(min, max) {
     console.log(Math.floor(Math.random() * (max - min)) + min);
 }

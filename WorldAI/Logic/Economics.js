@@ -71,3 +71,4 @@ function transfer(wealth, from, to){
 
 
 
+

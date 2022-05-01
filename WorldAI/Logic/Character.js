@@ -1,5 +1,4 @@
 // Characters are people with skills and attributes with names and habits.
-
 // module of names
 "use strict";
 
@@ -28,13 +27,36 @@ export let people = {
   families: 0,
   person: [],
 };
-/*
 
+/*
     We need Four kingdoms and therefore four kings.
     North, East, West, and South.
-
-
 */
+
+
+
+function displayPopulationCount() {
+  let displayElement = $("#population");
+  displayElement.html("<h5>" + people.count + "</h5>");
+}
+
+
+function displayChildrenCount() {
+  let displayElement = $("#children-count");
+  displayElement.html("<h5>" + ++people.children + "</h5>");
+}
+
+function displayNoLongerChild() {
+  let displayElement = $("#children-count");
+  if(people.children > 0){
+    --people.children;
+    displayElement.html("<h5>" + people.children + "</h5>");
+  }
+  
+}
+
+
+
 let deaths = 0;
 let male = 0;
 let female = 0;
@@ -58,20 +80,20 @@ displayUserInfo.style.opacity = "0";
 let minAge = 60;
 
 export class Character {
+  
   constructor(agePassed, gender) {
+    people.count++;
+    displayPopulationCount();
     const birthYear = calender.yearC - calender.years;
     let age = 0 + agePassed;
     let adult = false;
     let life = setInterval(() => {
       if (play) {
 
-        
-
         let time = calender.yearC - calender.years - birthYear;
         let storeTime = 0;
         storeTime = time + agePassed;
         age = storeTime;
-
         return age;
       }
     }, 2000);
@@ -117,19 +139,19 @@ export class Character {
       }
     }
 
-    let percent = 0;
+    let genderChance = 0;
     if (!gender) {
-      percent = Math.floor(Math.random() * 99 + 1);
+      genderChance = Math.floor(Math.random() * 99 + 1);
     } else {
-      percent = gender;
+      genderChance = gender;
     }
-    //50% change of it being a boy for a girl.
+
     /* let dna = getRandom(0,1000);*/
     this.id = id += 1;
     /* let random = getRandom(0,6); */
     /* this.title = `${job[random].name}`; */
     /* console.log(this.title); */
-    if (percent <= 50) {
+    if (genderChance <= 50) {
       ++male;
       $("#male-count").text(male);
 
@@ -288,6 +310,8 @@ export class Character {
       qaulities();
     }
   }
+
+  
 }
 
 
@@ -314,7 +338,7 @@ function deathFunction(gender) {
  */
 const searchValidMate = (id) => {
   let bias = Math.floor(Math.random() >= 0.5) ? true : false;
-  console.log(bias);
+  
   let searcherId = document
     .getElementById(`person_${id}`)
     .classList.contains("male"); //true if male else false
@@ -341,6 +365,7 @@ const searchValidMate = (id) => {
     }
   }
 };
+
 function deathClick(e) {
   e = e || window.event;
   e.currentTarget.classList[0] === "male"
@@ -353,7 +378,6 @@ function deathClick(e) {
 }
 
 export function displayPerson(gender, id, size = 28) {
-
   let person_icon = `
         <div id="space_${id}" class="grid-base rounded p-1 m-1 text-center  bg-background" >
               <svg id="person_${id}" width=${size} height=${size} viewBox="0 0 24 24" fill="none">
@@ -373,7 +397,6 @@ export function displayPerson(gender, id, size = 28) {
   }
 
   const person = document.getElementById(`person_${id}`);
-
 
 
   if (!person) {
@@ -427,35 +450,15 @@ function becomeNoble() {
 
   //console.log(people);
 }
-//console.log(p.children);
-//console.log((militaryRanks.rank[3].armor += p.children));
-function randomN(x) {
-  return Math.floor(Math.random() * x);
-}
-
-function displayPopulationCount() {
-  let displayElement = $("#population");
-  displayElement.html("<h5>" + people.count + "</h5>");
-}
-
-function displayChildrenCount() {
-  let displayElement = $("#children-count");
-  displayElement.html("<h5>" + ++people.children + "</h5>");
-}
-function displayNoLongerChild() {
-  let displayElement = $("#children-count");
-  displayElement.html("<h5>" + --people.children + "</h5>");
-}
 
 
-let adam = new Character(20, 1);
-let eve = new Character(17, 100);
+
+
+
 
 
 function spawn() {
-  ++people.count;
   people.person.push(new Character(0, Math.floor(Math.random() * 99 + 1)));
-  displayPopulationCount();
   displayChildrenCount();
   return people.count;
 }
@@ -504,15 +507,9 @@ function reproduction(age, childrenCount) {
 
 //makes people appear
 
-let pairs = [];
 export function maker(n) {
   for (let i = 1; i < people.count; i++) {
     let x = $(`#person_${i}`).attr("id");
-
-    /* if($('#people').children().length % 2 === 0){
-
-      $(`#${x}`).remove();
-  };  */
   }
   //spawns peeps
   while (n > 0) {
@@ -523,4 +520,5 @@ export function maker(n) {
 
 
 
-
+new Character(20, 1);
+new Character(18, 100);

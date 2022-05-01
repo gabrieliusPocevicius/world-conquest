@@ -74,3 +74,7 @@ function getRandom(min, max) {
     var value = Math.floor(Math.random() * (max - min)) + min;
     return value;
 }
+
+function randomN(x) {
+  return Math.floor(Math.random() * x);
+}

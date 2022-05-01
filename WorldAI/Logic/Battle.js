@@ -5,7 +5,7 @@ import { Character, people } from "./Character.js";
 (function() {
     /* The rules for creating an army
     The people can't have an organized group like the army
-    Without Leaders
+    without Leaders
     There are four main leader positions available
     if there is no one to lead the army disbands.
     To qualify to become a general of an army one 

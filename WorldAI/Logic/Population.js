@@ -10,17 +10,8 @@ function random(num) {
     return random;
 }
 
-let r,
-    births,
-    deaths,
-    population = 0;
 
-/* 
-var rate = function(births, deaths, population) {
-    return r = (births - deaths) / population;
-} */
 
-var pop = 0;
 var age = 0;
 
 //30* years is roughly one generation
