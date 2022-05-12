@@ -259,8 +259,7 @@ body {
 }
 
 .bg-background{
- background-color: rgba(52, 58, 64, 1);
-
+ background-color: rgb(47, 51, 57);
 }
 
 .grid{
@@ -337,4 +336,5 @@ svg:hover {
   transition: 0.2s all ease-in-out !important;
 }
  */
+
 

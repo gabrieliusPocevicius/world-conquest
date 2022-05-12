@@ -379,7 +379,7 @@ function deathClick(e) {
 
 export function displayPerson(gender, id, size = 28) {
   let person_icon = `
-        <div id="space_${id}" class="grid-base rounded p-1 m-1 text-center  bg-background" >
+        <div id="space_${id}" class="grid-base rounded p-1 m-1 text-center bg-background" >
               <svg id="person_${id}" width=${size} height=${size} viewBox="0 0 24 24" fill="none">
                   <path  d="M9.53524 21V14.5H9.02349C8.46057 14.5 8 14.05 8 13.5V9C8 7.9 8.92114 7 10.047 7H13.1175C14.2433 7 15.1644 7.9 15.1644 9V13.5C15.1644 14.05 14.7039 14.5 14.1409 14.5H13.6292V21C13.6292 21.55 13.1686 22 12.6057 22H10.5587C9.99581 22 9.53524 21.55 9.53524 21ZM11.5822 6C12.7183 6 13.6292 5.11 13.6292 4C13.6292 2.89 12.7183 2 11.5822 2C10.4461 2 9.53524 2.89 9.53524 4C9.53524 5.11 10.4461 6 11.5822 6Z" fill="#007bff"/>
               </svg>
@@ -409,53 +409,6 @@ export function displayPerson(gender, id, size = 28) {
 }
 
 //moveablePeople();
-
-let nobles = []; //Lists all the nobles and their props
-let peasantsUnderNoble = []; //Lists all the peasants under the noble.
-///////////////////////////////////////////////////////////////////////////////////
-let skills = [];
-
-//var c = new Character();
-//var c2 = new Character();
-//befriend(c, c2);
-
-let members = 0; //peasants the noble is assigned as levies and farmers.
-//becomeNoble();
-function becomeNoble() {
-  let theNoble = {};
-
-  for (let i = 0; i < 100; i++) {
-    var percent = Math.round(Math.random() * 99 + 1);
-
-    // percent of becoming noble
-    if (percent === 100) {
-      theNoble = new Character();
-      people.person.push(theNoble);
-      console.log(
-        "Peasants under the noble " + theNoble.name + " " + members + " Levies"
-      );
-      break;
-    } else {
-      //var peasants = people.person.push(new Character());
-
-      ++members;
-    }
-  }
-
-  nobles.push(theNoble);
-  //console.log(theNoble);
-  nobles.forEach((_element, i) => {
-    nobles[i].title = "Noble";
-  });
-
-  //console.log(people);
-}
-
-
-
-
-
-
 
 function spawn() {
   people.person.push(new Character(0, Math.floor(Math.random() * 99 + 1)));
@@ -522,3 +475,53 @@ export function maker(n) {
 
 new Character(20, 1);
 new Character(18, 100);
+
+
+
+
+
+
+/* not implemented */
+
+let nobles = []; //Lists all the nobles and their props
+let peasantsUnderNoble = []; //Lists all the peasants under the noble.
+///////////////////////////////////////////////////////////////////////////////////
+let skills = [];
+
+//var c = new Character();
+//var c2 = new Character();
+//befriend(c, c2);
+
+let members = 0; //peasants the noble is assigned as levies and farmers.
+//becomeNoble();
+
+
+function becomeNoble() {
+  let theNoble = {};
+
+  for (let i = 0; i < 100; i++) {
+    var percent = Math.round(Math.random() * 99 + 1);
+
+    // percent of becoming noble
+    if (percent === 100) {
+      theNoble = new Character();
+      people.person.push(theNoble);
+      console.log(
+        "Peasants under the noble " + theNoble.name + " " + members + " Levies"
+      );
+      break;
+    } else {
+      //var peasants = people.person.push(new Character());
+
+      ++members;
+    }
+  }
+
+  nobles.push(theNoble);
+  //console.log(theNoble);
+  nobles.forEach((_element, i) => {
+    nobles[i].title = "Noble";
+  });
+
+  //console.log(people);
+}
