@@ -317,9 +317,6 @@ export class Character {
 
 
 
-function work() {
-
-}
 
 function deathFunction(gender) {
   if (people.count > 0) {
